@@ -457,4 +457,12 @@ export const en = {
   },
 } as const;
 
-export type Dict = typeof en;
+type DeepWritable<T> = T extends readonly (infer U)[]
+  ? DeepWritable<U>[]
+  : T extends object
+    ? { -readonly [K in keyof T]: DeepWritable<T[K]> }
+    : T extends string
+      ? string
+      : T;
+
+export type Dict = DeepWritable<typeof en>;
