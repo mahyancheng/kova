@@ -4,7 +4,7 @@ import { ms } from "./ms";
 
 export type Lang = "en" | "ms";
 
-const dictionaries: Record<Lang, Dict> = { en, ms };
+const dictionaries: Record<Lang, Dict> = { en: en as unknown as Dict, ms };
 
 const LangContext = createContext<{
   lang: Lang;
