@@ -59,7 +59,7 @@ export function Compare() {
                       {row.label}
                     </div>
                     {row.values.map((v, j) => {
-                      const accent = row.clay?.includes(j);
+                      const accent = (row as { clay?: number[] }).clay?.includes(j);
                       return (
                         <div
                           key={j}
