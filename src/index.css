@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@theme {
+  /* Neutral palette: warm white (cream), black (ink), brown (clay). No coral, no green. */
+  --color-cream: #f1ede3;
+  --color-cream-light: #f7f4eb;
+  --color-cream-dark: #e6e0d0;
+  --color-paper: #fbf9f1;
+  --color-ink: #1a1714;
+  --color-ink-soft: #2d2924;
+  --color-muted: #6f6a60;
+  --color-line: #d6cfbb;
+  --color-line-soft: #e3dccc;
+  /* Brown accent — replaces the previous coral. */
+  --color-clay: #8b5a3c;
+  --color-clay-deep: #5d3a1f;
+  --color-clay-light: #c9986b; /* used on dark/ink backgrounds where #8b5a3c lacks contrast */
+  --color-sand: #c9b392;
+
+  --font-serif: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --tracking-tightest: -0.04em;
+  --tracking-tighter: -0.02em;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-clay);
+    color: var(--color-cream);
+  }
+  .font-serif {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    font-variation-settings: "SOFT" 50, "WONK" 0;
+  }
+}
+
+@layer utilities {
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--color-muted);
+  }
+  .grain {
+    background-image:
+      radial-gradient(rgba(26, 26, 25, 0.025) 1px, transparent 1px);
+    background-size: 3px 3px;
+  }
+  .hairline {
+    border-color: var(--color-line);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.animate-fade-in {
+  animation: fadeIn 1.2s ease both;
+}
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+/* Apple-ish reveal: hidden until in-view, then translate + fade in */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 1s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Apple-style oversized headline tracking */
+.headline {
+  font-family: var(--font-serif);
+  letter-spacing: -0.045em;
+  line-height: 0.96;
+  font-optical-sizing: auto;
+}
+
+/* Subtle hatched placeholder pattern for image slots */
+.hatch {
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(26, 26, 25, 0.04) 0,
+      rgba(26, 26, 25, 0.04) 1px,
+      transparent 1px,
+      transparent 8px
+    );
+}
+
+/* horizontal snap scrolling */
+.snap-x-strong {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.snap-start {
+  scroll-snap-align: start;
+}
+
+/* hide scrollbars (used by horizontal carousel) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
