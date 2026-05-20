@@ -16,7 +16,7 @@ export function FactoryDirect() {
   return (
     <section
       id="factory-direct"
-      className="relative border-y border-[var(--color-line)] bg-[var(--color-cream-light)] py-20 lg:py-32 overflow-hidden"
+      className="relative border-y border-[var(--color-line)] bg-[var(--color-cream-light)] py-12 lg:py-28 overflow-hidden"
     >
       <div
         aria-hidden
@@ -27,14 +27,14 @@ export function FactoryDirect() {
         }}
       />
 
-      <div className="relative max-w-[1240px] mx-auto px-6 lg:px-10">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-end mb-16 lg:mb-24">
+      <div className="relative max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-12 items-end mb-10 lg:mb-20">
           <div className="lg:col-span-7">
             <Reveal>
               <p className="eyebrow">{t.factory.eyebrow}</p>
             </Reveal>
             <Reveal delay={80}>
-              <h2 className="mt-5 headline text-[2.6rem] sm:text-[3.4rem] lg:text-[4.6rem] text-[var(--color-ink)]">
+              <h2 className="mt-3 lg:mt-5 headline text-[2.1rem] sm:text-[3rem] lg:text-[4.4rem] text-[var(--color-ink)]">
                 {t.factory.titleA}
                 <span className="block italic font-light text-[var(--color-clay-deep)]">
                   {t.factory.titleB}
@@ -44,20 +44,20 @@ export function FactoryDirect() {
           </div>
           <div className="lg:col-span-5">
             <Reveal delay={150}>
-              <p className="text-[1.05rem] leading-[1.65] text-[var(--color-ink-soft)] max-w-md">
+              <p className="text-[0.95rem] lg:text-[1.05rem] leading-[1.55] lg:leading-[1.65] text-[var(--color-ink-soft)] max-w-md">
                 {t.factory.body}
               </p>
-              <div className="mt-7 flex flex-wrap items-center gap-3">
+              <div className="mt-5 lg:mt-7 flex flex-wrap items-center gap-2 lg:gap-3">
                 <a
                   href="#contact"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.9rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.86rem] lg:text-[0.9rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors"
                 >
                   {t.factory.ctaA}
                   <span aria-hidden>→</span>
                 </a>
                 <a
                   href="#compare"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[0.9rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full text-[0.86rem] lg:text-[0.9rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors"
                 >
                   {t.factory.ctaB}
                 </a>
@@ -68,13 +68,13 @@ export function FactoryDirect() {
 
         <Reveal>
           <div className="rounded-md border border-[var(--color-line)] bg-[var(--color-paper)] overflow-hidden">
-            <div className="px-5 lg:px-10 py-8 lg:py-10 border-b border-[var(--color-line)]">
-              <div className="flex flex-col lg:flex-row lg:items-center gap-6">
+            <div className="px-4 lg:px-10 py-5 lg:py-10 border-b border-[var(--color-line)]">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
                 <div className="lg:w-56 shrink-0">
-                  <p className="text-[0.74rem] tracking-widest uppercase text-[var(--color-muted)]">
+                  <p className="text-[0.7rem] lg:text-[0.74rem] tracking-widest uppercase text-[var(--color-muted)]">
                     {t.factory.chain1Label}
                   </p>
-                  <p className="mt-1 font-serif text-[1.5rem] lg:text-[1.7rem] text-[var(--color-ink)] leading-tight">
+                  <p className="mt-0.5 lg:mt-1 font-serif text-[1.2rem] lg:text-[1.7rem] text-[var(--color-ink)] leading-tight">
                     {t.factory.chain1Title}
                   </p>
                 </div>
@@ -82,13 +82,13 @@ export function FactoryDirect() {
               </div>
             </div>
 
-            <div className="px-5 lg:px-10 py-8 lg:py-10 bg-[var(--color-cream-light)]">
-              <div className="flex flex-col lg:flex-row lg:items-center gap-6">
+            <div className="px-4 lg:px-10 py-5 lg:py-10 bg-[var(--color-cream-light)]">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
                 <div className="lg:w-56 shrink-0">
-                  <p className="text-[0.74rem] tracking-widest uppercase text-[var(--color-clay)]">
+                  <p className="text-[0.7rem] lg:text-[0.74rem] tracking-widest uppercase text-[var(--color-clay)]">
                     {t.factory.chain2Label}
                   </p>
-                  <p className="mt-1 font-serif text-[1.5rem] lg:text-[1.7rem] text-[var(--color-ink)] leading-tight">
+                  <p className="mt-0.5 lg:mt-1 font-serif text-[1.2rem] lg:text-[1.7rem] text-[var(--color-ink)] leading-tight">
                     {t.factory.chain2Title}
                   </p>
                 </div>
@@ -99,13 +99,13 @@ export function FactoryDirect() {
         </Reveal>
 
         <Reveal>
-          <dl className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--color-line)] border border-[var(--color-line)] rounded-md overflow-hidden">
+          <dl className="mt-8 lg:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--color-line)] border border-[var(--color-line)] rounded-md overflow-hidden">
             {t.factory.stats.map(([value, label]) => (
-              <div key={label} className="bg-[var(--color-cream-light)] p-6 lg:p-8">
-                <dt className="headline text-[2.1rem] lg:text-[2.6rem] text-[var(--color-ink)]">
+              <div key={label} className="bg-[var(--color-cream-light)] p-4 lg:p-8">
+                <dt className="headline text-[1.65rem] lg:text-[2.6rem] text-[var(--color-ink)]">
                   {value}
                 </dt>
-                <dd className="mt-2 text-[0.9rem] leading-snug text-[var(--color-muted)] max-w-[24ch]">
+                <dd className="mt-1 lg:mt-2 text-[0.78rem] lg:text-[0.9rem] leading-snug text-[var(--color-muted)] max-w-[24ch]">
                   {label}
                 </dd>
               </div>
@@ -114,14 +114,14 @@ export function FactoryDirect() {
         </Reveal>
 
         <Reveal>
-          <div className="mt-12 lg:mt-16 flex flex-col lg:flex-row lg:items-center justify-between gap-6 pt-8 border-t border-[var(--color-line)]">
-            <p className="font-serif text-[1.4rem] lg:text-[1.7rem] tracking-tight text-[var(--color-ink)] max-w-2xl">
+          <div className="mt-8 lg:mt-16 flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-6 pt-6 lg:pt-8 border-t border-[var(--color-line)]">
+            <p className="font-serif text-[1.15rem] lg:text-[1.7rem] tracking-tight text-[var(--color-ink)] max-w-2xl leading-snug">
               {t.factory.closerA}
               <span className="italic font-light text-[var(--color-clay-deep)]"> {t.factory.closerB}</span>
             </p>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 text-[0.92rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors shrink-0"
+              className="inline-flex items-center gap-2 text-[0.88rem] lg:text-[0.92rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors shrink-0"
             >
               {t.factory.closerCta}
               <span aria-hidden>→</span>

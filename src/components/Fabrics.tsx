@@ -27,18 +27,18 @@ export function Fabrics() {
   };
 
   return (
-    <section className="relative py-20 lg:py-28 bg-[var(--color-cream-light)] border-y border-[var(--color-line)] overflow-hidden">
-      <div className="max-w-[1240px] mx-auto px-6 lg:px-10">
+    <section className="relative py-12 lg:py-24 bg-[var(--color-cream-light)] border-y border-[var(--color-line)] overflow-hidden">
+      <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10">
         <Reveal>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-10 lg:mb-14">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-7 lg:mb-12">
             <div>
               <p className="eyebrow">{t.fabrics.eyebrow}</p>
-              <h2 className="mt-4 headline text-[2.2rem] sm:text-[2.8rem] lg:text-[3.4rem] text-[var(--color-ink)] max-w-2xl">
+              <h2 className="mt-3 lg:mt-4 headline text-[1.85rem] sm:text-[2.4rem] lg:text-[3.2rem] text-[var(--color-ink)] max-w-2xl">
                 {t.fabrics.titleA}
                 <span className="italic font-light text-[var(--color-clay-deep)]"> {t.fabrics.titleB}</span>
               </h2>
             </div>
-            <p className="max-w-md text-[var(--color-ink-soft)] leading-relaxed">
+            <p className="max-w-md text-[0.95rem] lg:text-[1rem] text-[var(--color-ink-soft)] leading-relaxed">
               {t.fabrics.intro}
             </p>
           </div>

@@ -4,8 +4,8 @@ export function Footer() {
   const t = useT();
   return (
     <footer className="bg-[var(--color-cream)] border-t border-[var(--color-line)]">
-      <div className="max-w-[1240px] mx-auto px-6 lg:px-10 py-16 lg:py-20">
-        <div className="grid lg:grid-cols-12 gap-12">
+      <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 py-10 lg:py-16">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
           <div className="lg:col-span-5">
             <a href="#top" className="inline-flex items-center gap-2.5">
               <span className="inline-block h-7 w-7">
@@ -29,21 +29,21 @@ export function Footer() {
                 Kova<span className="text-[var(--color-clay)]">·</span>Sun Shade
               </span>
             </a>
-            <p className="mt-6 max-w-sm text-[var(--color-ink-soft)] leading-relaxed text-[0.95rem]">
+            <p className="mt-4 lg:mt-6 max-w-sm text-[var(--color-ink-soft)] leading-relaxed text-[0.88rem] lg:text-[0.95rem]">
               {t.footer.tagline}
             </p>
           </div>
 
-          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-6 lg:gap-8">
             {t.footer.cols.map((col) => (
               <div key={col.title}>
                 <p className="eyebrow">{col.title}</p>
-                <ul className="mt-4 space-y-2.5">
+                <ul className="mt-3 lg:mt-4 space-y-2">
                   {col.items.map(([label, href]) => (
                     <li key={label}>
                       <a
                         href={href}
-                        className="text-[0.95rem] text-[var(--color-ink-soft)] hover:text-[var(--color-clay-deep)] transition-colors"
+                        className="text-[0.88rem] lg:text-[0.95rem] text-[var(--color-ink-soft)] hover:text-[var(--color-clay-deep)] transition-colors"
                       >
                         {label}
                       </a>
@@ -55,7 +55,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 pt-6 border-t border-[var(--color-line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-[0.82rem] text-[var(--color-muted)]">
+        <div className="mt-10 lg:mt-14 pt-5 lg:pt-6 border-t border-[var(--color-line)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 lg:gap-4 text-[0.78rem] lg:text-[0.82rem] text-[var(--color-muted)]">
           <p>© {new Date().getFullYear()} Kova Sun Shade. {t.footer.copyA}</p>
           <p>
             {t.footer.copyB}

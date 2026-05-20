@@ -32,19 +32,19 @@ export function Configurator() {
   return (
     <section
       id="configurator"
-      className="py-14 lg:py-20 border-t border-[var(--color-line)] bg-[var(--color-paper)]"
+      className="py-10 lg:py-20 border-t border-[var(--color-line)] bg-[var(--color-paper)]"
     >
       <div className="max-w-[1380px] mx-auto px-5 sm:px-6 lg:px-10">
         <Reveal>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 lg:mb-12">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-6 lg:mb-10">
             <div>
               <p className="eyebrow">{t.configurator.eyebrow}</p>
-              <h2 className="mt-3 headline text-[2rem] sm:text-[2.6rem] lg:text-[3.4rem] text-[var(--color-ink)] max-w-2xl">
+              <h2 className="mt-2.5 lg:mt-3 headline text-[1.7rem] sm:text-[2.4rem] lg:text-[3.2rem] text-[var(--color-ink)] max-w-2xl">
                 {t.configurator.titleA}
                 <span className="italic font-light text-[var(--color-clay-deep)]"> {t.configurator.titleB}</span>
               </h2>
             </div>
-            <p className="max-w-md text-[0.95rem] lg:text-[1rem] text-[var(--color-ink-soft)] leading-relaxed">
+            <p className="max-w-md text-[0.92rem] lg:text-[1rem] text-[var(--color-ink-soft)] leading-relaxed">
               {t.configurator.intro}
             </p>
           </div>
