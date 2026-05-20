@@ -54,11 +54,13 @@ export const FABRICS: Fabric[] = [
  */
 export const VENETIAN_FABRICS: Fabric[] = [
   {
+    // W101: swatch circle is generated (SVG) because user didn't supply one.
+    // Scene photo IS the user's — they have a W101 Alpine White room shot.
     name: "W101 Alpine White",
     hex: "#F1ECE3",
     shadowHex: "#D8D2C2",
     highlightHex: "#FBF9F2",
-    image: "/textures/venetian/w101-alpine-white.png",
+    image: "/textures/venetian/w101-alpine-white.svg",
     sceneImage: "/scenes/venetian/w101-alpine-white.png",
   },
   {
