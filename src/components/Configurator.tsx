@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useEffect, useId, useState } from "react";
 import { Reveal } from "./Reveal";
 import { useT } from "@/lib/i18n";
 import { useConfigurator } from "@/lib/configurator/context";
@@ -24,11 +24,16 @@ export function Configurator() {
   const fabricsForProduct = getFabricsForProduct(product);
 
   /**
-   * When the selected fabric has a `sceneImage`, the preview area renders
-   * a photograph of that material installed in a room — replacing the
-   * illustrative SVG scene entirely. Used today for Venetian samples.
+   * Try a photo preview first (if the fabric has a sceneImage). If the
+   * file doesn't exist (404), fall back automatically to the SVG room
+   * with that fabric's wood texture rendered into the slats — so the
+   * user still sees a fabric-specific preview no matter what.
    */
-  const usePhotoPreview = Boolean(fabric.sceneImage);
+  const [photoFailed, setPhotoFailed] = useState(false);
+  useEffect(() => {
+    setPhotoFailed(false);
+  }, [fabric.name]);
+  const usePhotoPreview = Boolean(fabric.sceneImage) && !photoFailed;
 
   const handleSubmit = () => {
     submit();
@@ -70,6 +75,7 @@ export function Configurator() {
                   key={fabric.sceneImage}
                   src={fabric.sceneImage}
                   alt={`${t.configurator.products[product]} — ${fabric.name}`}
+                  onError={() => setPhotoFailed(true)}
                   className="block w-full h-auto max-h-[38vh] sm:max-h-[60vh] lg:max-h-[calc(100vh-14rem)] object-cover animate-fade-in"
                   loading="lazy"
                 />
