@@ -6,7 +6,7 @@ import {
   FABRICS,
   OPACITY_LEVEL,
   OPACITY_OPTIONS,
-  type OpacityId,
+  
   type ProductId,
 } from "@/lib/configurator/types";
 import { PreviewScene } from "./configurator/PreviewScene";
