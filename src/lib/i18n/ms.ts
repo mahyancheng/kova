@@ -434,6 +434,31 @@ export const ms: Dict = {
     en: "EN",
     ms: "BM",
   },
+  venetianSystem: {
+    eyebrow: "Sistem di dalamnya",
+    titleA: "Rantai, miring,",
+    titleB: "dan angkat.",
+    intro:
+      "Setiap Bidai Venetian kami berkongsi satu mekanisme yang tenang. Tarik rantai, miringkan bilah, angkat keseluruhannya — dikalibrasi supaya kekal lancar selepas sedekad.",
+    stages: [
+      {
+        label: "Rantai",
+        title: "Tarik",
+        body: "Rantai gelung berterusan yang mengoperasikan bilah dengan dua jari.",
+      },
+      {
+        label: "Miring",
+        title: "Sudut",
+        body: "Setiap bilah berputar pada pangsi keluli — buka sepenuhnya, tutup sepenuhnya, atau di mana-mana antaranya.",
+      },
+      {
+        label: "Angkat",
+        title: "Naikkan",
+        body: "Pengunci tali angkat supaya bidai kekal di tempat anda berhenti menarik.",
+      },
+    ],
+    caption: "Semua Bidai Venetian Kova menggunakan sistem rantai · miring · angkat yang sama.",
+  },
   configurator: {
     eyebrow: "Reka anda sendiri",
     titleA: "Bina bidai anda.",

@@ -460,6 +460,31 @@ export const en = {
     en: "EN",
     ms: "BM",
   },
+  venetianSystem: {
+    eyebrow: "The system inside",
+    titleA: "Chain, tilt,",
+    titleB: "and lift.",
+    intro:
+      "Every Venetian blind we make shares one quiet mechanism. Pull the chain, tilt the slats, lift the whole thing — calibrated so it stays smooth a decade in.",
+    stages: [
+      {
+        label: "Chain",
+        title: "Pull",
+        body: "A continuous loop chain that operates the slats with two fingers.",
+      },
+      {
+        label: "Tilt",
+        title: "Angle",
+        body: "Each slat rotates on a steel pivot — full open, full closed, anywhere between.",
+      },
+      {
+        label: "Lift",
+        title: "Raise",
+        body: "Cord-locked lift so the blind stays exactly where you stop pulling.",
+      },
+    ],
+    caption: "All Kova Venetian Blinds use the same chain · tilt · lift system.",
+  },
   configurator: {
     eyebrow: "Design yours",
     titleA: "Build the blind.",

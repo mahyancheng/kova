@@ -9,6 +9,7 @@ import { Collection } from "./components/Collection";
 import { Configurator } from "./components/Configurator";
 import { Marquee } from "./components/Marquee";
 import { ProductSpotlight } from "./components/ProductSpotlight";
+import { VenetianSystem } from "./components/VenetianSystem";
 import { Fabrics } from "./components/Fabrics";
 import { Compare } from "./components/Compare";
 import { Spaces } from "./components/Spaces";
@@ -49,6 +50,8 @@ function Site() {
           Detail={VenetianBlind}
           reverse
         />
+
+        <VenetianSystem />
 
         <ProductSpotlight
           id="vertisheer"
