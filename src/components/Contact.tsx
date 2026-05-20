@@ -14,12 +14,11 @@ export function Contact() {
   useEffect(() => {
     if (submissionToken === 0) return;
     const productLabel = t.configurator.products[configuration.product];
-    const opacityLabel = t.configurator.opacityNames[configuration.opacity];
     const fabricLabel = configuration.fabric.name;
 
-    const summary = `${productLabel} · ${fabricLabel} · ${opacityLabel}`;
+    const summary = `${productLabel} · ${fabricLabel}`;
     const intro = t.configurator.contactPrefillIntro;
-    const body = `${intro}\n• ${t.configurator.productLabel}: ${productLabel}\n• ${t.configurator.fabricLabel}: ${fabricLabel} (${configuration.fabric.hex.toUpperCase()})\n• ${t.configurator.opacityLabel}: ${opacityLabel}`;
+    const body = `${intro}\n• ${t.configurator.productLabel}: ${productLabel}\n• ${t.configurator.fabricLabel}: ${fabricLabel} (${configuration.fabric.hex.toUpperCase()})`;
 
     if (messageRef.current) {
       messageRef.current.value = body;

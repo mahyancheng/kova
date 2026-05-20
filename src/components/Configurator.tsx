@@ -4,7 +4,6 @@ import { useT } from "@/lib/i18n";
 import { useConfigurator } from "@/lib/configurator/context";
 import {
   OPACITY_LEVEL,
-  OPACITY_OPTIONS,
   getFabricsForProduct,
   type ProductId,
 } from "@/lib/configurator/types";
@@ -18,11 +17,18 @@ const PRODUCT_IDS: ProductId[] = ["roller", "venetian", "vertisheer"];
 
 export function Configurator() {
   const t = useT();
-  const { configuration, setProduct, setFabric, setOpacity, submit } = useConfigurator();
+  const { configuration, setProduct, setFabric, submit } = useConfigurator();
   const { product, fabric, opacity } = configuration;
   const opacityLevel = OPACITY_LEVEL[opacity];
   const uid = useId().replace(/[:]/g, "");
   const fabricsForProduct = getFabricsForProduct(product);
+
+  /**
+   * When the selected fabric has a `sceneImage`, the preview area renders
+   * a photograph of that material installed in a room — replacing the
+   * illustrative SVG scene entirely. Used today for Venetian samples.
+   */
+  const usePhotoPreview = Boolean(fabric.sceneImage);
 
   const handleSubmit = () => {
     submit();
@@ -58,18 +64,29 @@ export function Configurator() {
                 <span className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-[var(--color-clay)] animate-pulse" />
                 {t.configurator.badge}
               </span>
-              <PreviewScene
-                className="w-full h-auto max-h-[38vh] sm:max-h-[60vh] lg:max-h-[calc(100vh-14rem)]"
-                blind={
-                  product === "roller" ? (
-                    <RollerOverlay fabric={fabric} opacity={opacityLevel} uniqueId={uid} />
-                  ) : product === "venetian" ? (
-                    <VenetianOverlay fabric={fabric} opacity={opacityLevel} uniqueId={uid} />
-                  ) : (
-                    <VertiSheerOverlay fabric={fabric} opacity={opacityLevel} uniqueId={uid} />
-                  )
-                }
-              />
+
+              {usePhotoPreview ? (
+                <img
+                  key={fabric.sceneImage}
+                  src={fabric.sceneImage}
+                  alt={`${t.configurator.products[product]} — ${fabric.name}`}
+                  className="block w-full h-auto max-h-[38vh] sm:max-h-[60vh] lg:max-h-[calc(100vh-14rem)] object-cover animate-fade-in"
+                  loading="lazy"
+                />
+              ) : (
+                <PreviewScene
+                  className="w-full h-auto max-h-[38vh] sm:max-h-[60vh] lg:max-h-[calc(100vh-14rem)]"
+                  blind={
+                    product === "roller" ? (
+                      <RollerOverlay fabric={fabric} opacity={opacityLevel} uniqueId={uid} />
+                    ) : product === "venetian" ? (
+                      <VenetianOverlay fabric={fabric} opacity={opacityLevel} uniqueId={uid} />
+                    ) : (
+                      <VertiSheerOverlay fabric={fabric} opacity={opacityLevel} uniqueId={uid} />
+                    )
+                  }
+                />
+              )}
             </div>
             <p className="hidden sm:block mt-2 lg:mt-3 text-[0.74rem] lg:text-[0.78rem] text-[var(--color-muted)]">
               {t.configurator.figureCaption}
@@ -157,78 +174,12 @@ export function Configurator() {
               </div>
             </div>
 
-            {/* Opacity — compact horizontal pill row on mobile, expanded cards on desktop */}
-            <div>
-              <div className="flex items-baseline justify-between gap-2">
-                <p className="eyebrow text-[0.66rem] sm:text-[0.72rem]">{t.configurator.opacityLabel}</p>
-                <p className="lg:hidden text-[0.72rem] text-[var(--color-muted)] truncate font-serif text-[var(--color-ink)]">
-                  {t.configurator.opacityNames[opacity]}
-                </p>
-              </div>
-
-              {/* Mobile: compact pill row, no descriptions */}
-              <div className="lg:hidden mt-1.5 flex flex-wrap gap-1.5">
-                {OPACITY_OPTIONS[product].map((o) => {
-                  const active = opacity === o;
-                  return (
-                    <button
-                      key={o}
-                      type="button"
-                      onClick={() => setOpacity(o)}
-                      aria-pressed={active}
-                      className={cn(
-                        "px-3 py-1.5 rounded-full text-[0.82rem] border transition-colors min-h-[34px]",
-                        active
-                          ? "bg-[var(--color-ink)] border-[var(--color-ink)] text-[var(--color-cream)]"
-                          : "bg-[var(--color-paper)] border-[var(--color-line)] text-[var(--color-ink-soft)] active:bg-[var(--color-cream-light)]",
-                      )}
-                    >
-                      {t.configurator.opacityNames[o]}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Desktop: full cards with descriptions */}
-              <div className="hidden lg:grid mt-2.5 grid-cols-2 gap-2">
-                {OPACITY_OPTIONS[product].map((o) => {
-                  const active = opacity === o;
-                  return (
-                    <button
-                      key={o}
-                      type="button"
-                      onClick={() => setOpacity(o)}
-                      aria-pressed={active}
-                      className={cn(
-                        "text-left min-h-[60px] px-3.5 py-2.5 rounded-md border transition-colors",
-                        active
-                          ? "bg-[var(--color-cream)] border-[var(--color-ink)]"
-                          : "bg-[var(--color-paper)] border-[var(--color-line)] hover:border-[var(--color-ink-soft)]",
-                      )}
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="font-serif text-[1.05rem] text-[var(--color-ink)] leading-tight">
-                          {t.configurator.opacityNames[o]}
-                        </span>
-                        {active && (
-                          <span className="text-[var(--color-clay)] text-[0.78rem] font-medium">●</span>
-                        )}
-                      </div>
-                      <p className="mt-1 text-[0.78rem] text-[var(--color-muted)] leading-snug">
-                        {t.configurator.opacityHint[o]}
-                      </p>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
             {/* Summary + CTA — compact inline on mobile, full card on desktop */}
             <div className="lg:sticky lg:bottom-4 lg:z-10 lg:mt-2">
               {/* Mobile: tight inline row */}
               <div className="lg:hidden flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-cream-light)] pl-3 pr-1 py-1">
                 <span className="flex-1 min-w-0 truncate font-serif text-[0.86rem] text-[var(--color-ink)]">
-                  {t.configurator.products[product]} · {fabric.name} · {t.configurator.opacityNames[opacity]}
+                  {t.configurator.products[product]} · {fabric.name}
                 </span>
                 <button
                   type="button"
@@ -247,7 +198,7 @@ export function Configurator() {
                   <div className="min-w-0 flex-1">
                     <p className="eyebrow">{t.configurator.summaryLabel}</p>
                     <p className="mt-1.5 font-serif text-[1.2rem] tracking-tight text-[var(--color-ink)] leading-snug">
-                      {t.configurator.products[product]} · {fabric.name} · {t.configurator.opacityNames[opacity]}
+                      {t.configurator.products[product]} · {fabric.name}
                     </p>
                   </div>
                 </div>

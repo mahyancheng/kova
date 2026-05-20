@@ -14,12 +14,17 @@ export type Fabric = {
   /** Hex of the lighter highlight colour. */
   highlightHex: string;
   /**
-   * Optional texture image (URL relative to /public) — if set, the swatch
-   * button and the slat fill in the preview will use the photographic
-   * texture instead of a flat colour gradient. Used for Venetian wood/
-   * faux-wood samples where the real material has visible grain.
+   * Optional swatch image (URL relative to /public) — the circular fabric
+   * sample photo that fills the swatch button. Falls back to flat hex if
+   * the file is missing.
    */
   image?: string;
+  /**
+   * Optional full scene photo (URL relative to /public) — replaces the
+   * illustrative SVG preview with a photograph of the actual material
+   * installed in a room. Used for Venetian wood/faux-wood samples.
+   */
+  sceneImage?: string;
 };
 
 export type Configuration = {
@@ -53,28 +58,32 @@ export const VENETIAN_FABRICS: Fabric[] = [
     hex: "#F1ECE3",
     shadowHex: "#D8D2C2",
     highlightHex: "#FBF9F2",
-    image: "/textures/venetian/w101-alpine-white.svg",
+    image: "/textures/venetian/w101-alpine-white.png",
+    sceneImage: "/scenes/venetian/w101-alpine-white.jpg",
   },
   {
     name: "W301 Pearl River",
     hex: "#D6CFC2",
     shadowHex: "#B5AC9C",
     highlightHex: "#EAE4D6",
-    image: "/textures/venetian/w301-pearl-river.svg",
+    image: "/textures/venetian/w301-pearl-river.png",
+    sceneImage: "/scenes/venetian/w301-pearl-river.jpg",
   },
   {
     name: "W302 Agate Grey",
     hex: "#C9BFA8",
     shadowHex: "#A89D87",
     highlightHex: "#E0D8C5",
-    image: "/textures/venetian/w302-agate-grey.svg",
+    image: "/textures/venetian/w302-agate-grey.png",
+    sceneImage: "/scenes/venetian/w302-agate-grey.jpg",
   },
   {
     name: "W206 Mahogany Teak",
     hex: "#5B2E1F",
     shadowHex: "#3A1C12",
     highlightHex: "#7E4732",
-    image: "/textures/venetian/w206-mahogany-teak.svg",
+    image: "/textures/venetian/w206-mahogany-teak.png",
+    sceneImage: "/scenes/venetian/w206-mahogany-teak.jpg",
   },
 ];
 
