@@ -21,7 +21,10 @@ export type Configuration = {
   opacity: OpacityId;
 };
 
-/** Default fabrics available for the configurator. Brown-neutral palette. */
+/**
+ * Roller / VertiSheer fabric library — these are dyed fabric panels, mostly
+ * neutral browns and warm whites for the brand palette.
+ */
 export const FABRICS: Fabric[] = [
   { name: "Linen Wheat", hex: "#D9C9A2", shadowHex: "#BFAA7C", highlightHex: "#EFE5CB" },
   { name: "Stone Mist", hex: "#C4BCA8", shadowHex: "#9F977F", highlightHex: "#E0D9C5" },
@@ -32,6 +35,23 @@ export const FABRICS: Fabric[] = [
   { name: "Char", hex: "#3A382F", shadowHex: "#1F1E18", highlightHex: "#5C594D" },
   { name: "Inkwell", hex: "#2D2D2A", shadowHex: "#13130F", highlightHex: "#4A4A45" },
 ];
+
+/**
+ * Venetian wood / faux-wood finish library — physical W-coded samples from
+ * the Kova catalogue. Photographed and colour-matched.
+ */
+export const VENETIAN_FABRICS: Fabric[] = [
+  { name: "W101 Alpine White", hex: "#F1ECE3", shadowHex: "#D8D2C2", highlightHex: "#FBF9F2" },
+  { name: "W301 Pearl River", hex: "#D6CFC2", shadowHex: "#B5AC9C", highlightHex: "#EAE4D6" },
+  { name: "W302 Agate Grey", hex: "#C9BFA8", shadowHex: "#A89D87", highlightHex: "#E0D8C5" },
+  { name: "W206 Mahogany Teak", hex: "#5B2E1F", shadowHex: "#3A1C12", highlightHex: "#7E4732" },
+];
+
+/** Fabric set for a given product. Defaults to the general FABRICS list. */
+export function getFabricsForProduct(p: ProductId): Fabric[] {
+  if (p === "venetian") return VENETIAN_FABRICS;
+  return FABRICS;
+}
 
 /** Per-product opacity options. Indexed by product. */
 export const OPACITY_OPTIONS: Record<ProductId, OpacityId[]> = {

@@ -9,6 +9,7 @@ import {
 import {
   DEFAULT_CONFIGURATION,
   OPACITY_OPTIONS,
+  getFabricsForProduct,
   type Configuration,
   type Fabric,
   type OpacityId,
@@ -38,7 +39,17 @@ export function ConfiguratorProvider({ children }: { children: ReactNode }) {
       // to the first opacity option for that product.
       const allowed = OPACITY_OPTIONS[product];
       const opacity = allowed.includes(prev.opacity) ? prev.opacity : allowed[0]!;
-      return { ...prev, product, opacity };
+
+      // If the current fabric isn't in the new product's fabric set, fall
+      // back to the first fabric of that set (so Venetian's wood finishes
+      // don't render against a Roller-only fabric, etc).
+      const fabricsForProduct = getFabricsForProduct(product);
+      const fabric =
+        fabricsForProduct.some((f) => f.name === prev.fabric.name)
+          ? prev.fabric
+          : fabricsForProduct[0]!;
+
+      return { ...prev, product, opacity, fabric };
     });
   }, []);
 

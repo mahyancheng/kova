@@ -3,10 +3,9 @@ import { Reveal } from "./Reveal";
 import { useT } from "@/lib/i18n";
 import { useConfigurator } from "@/lib/configurator/context";
 import {
-  FABRICS,
   OPACITY_LEVEL,
   OPACITY_OPTIONS,
-  
+  getFabricsForProduct,
   type ProductId,
 } from "@/lib/configurator/types";
 import { PreviewScene } from "./configurator/PreviewScene";
@@ -23,6 +22,7 @@ export function Configurator() {
   const { product, fabric, opacity } = configuration;
   const opacityLevel = OPACITY_LEVEL[opacity];
   const uid = useId().replace(/[:]/g, "");
+  const fabricsForProduct = getFabricsForProduct(product);
 
   const handleSubmit = () => {
     submit();
@@ -113,8 +113,17 @@ export function Configurator() {
                   <span className="ml-1.5 text-[var(--color-muted)]">{fabric.hex.toUpperCase()}</span>
                 </p>
               </div>
-              <div className="mt-1.5 lg:mt-2.5 grid grid-cols-8 gap-1.5 sm:gap-2.5">
-                {FABRICS.map((f) => {
+              <div
+                className={cn(
+                  "mt-1.5 lg:mt-2.5 grid gap-1.5 sm:gap-2.5",
+                  fabricsForProduct.length <= 4
+                    ? "grid-cols-4"
+                    : fabricsForProduct.length <= 6
+                    ? "grid-cols-6"
+                    : "grid-cols-8",
+                )}
+              >
+                {fabricsForProduct.map((f) => {
                   const active = f.name === fabric.name;
                   return (
                     <button
