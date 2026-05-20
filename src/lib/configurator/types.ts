@@ -59,7 +59,7 @@ export const VENETIAN_FABRICS: Fabric[] = [
     shadowHex: "#D8D2C2",
     highlightHex: "#FBF9F2",
     image: "/textures/venetian/w101-alpine-white.png",
-    sceneImage: "/scenes/venetian/w101-alpine-white.jpg",
+    sceneImage: "/scenes/venetian/w101-alpine-white.png",
   },
   {
     name: "W301 Pearl River",
@@ -67,7 +67,7 @@ export const VENETIAN_FABRICS: Fabric[] = [
     shadowHex: "#B5AC9C",
     highlightHex: "#EAE4D6",
     image: "/textures/venetian/w301-pearl-river.png",
-    sceneImage: "/scenes/venetian/w301-pearl-river.jpg",
+    sceneImage: "/scenes/venetian/w301-pearl-river.png",
   },
   {
     name: "W302 Agate Grey",
@@ -75,7 +75,7 @@ export const VENETIAN_FABRICS: Fabric[] = [
     shadowHex: "#A89D87",
     highlightHex: "#E0D8C5",
     image: "/textures/venetian/w302-agate-grey.png",
-    sceneImage: "/scenes/venetian/w302-agate-grey.jpg",
+    sceneImage: "/scenes/venetian/w302-agate-grey.png",
   },
   {
     name: "W206 Mahogany Teak",
@@ -83,7 +83,7 @@ export const VENETIAN_FABRICS: Fabric[] = [
     shadowHex: "#3A1C12",
     highlightHex: "#7E4732",
     image: "/textures/venetian/w206-mahogany-teak.png",
-    sceneImage: "/scenes/venetian/w206-mahogany-teak.jpg",
+    sceneImage: "/scenes/venetian/w206-mahogany-teak.png",
   },
 ];
 
