@@ -11,6 +11,7 @@ import { PreviewScene } from "./configurator/PreviewScene";
 import { RollerOverlay } from "./configurator/RollerOverlay";
 import { VenetianOverlay } from "./configurator/VenetianOverlay";
 import { VertiSheerOverlay } from "./configurator/VertiSheerOverlay";
+import { ScenePhoto } from "./configurator/ScenePhoto";
 import { cn } from "@/lib/utils";
 
 const PRODUCT_IDS: ProductId[] = ["roller", "venetian", "vertisheer"];
@@ -22,6 +23,16 @@ export function Configurator() {
   const opacityLevel = OPACITY_LEVEL[opacity];
   const uid = useId().replace(/[:]/g, "");
   const fabricsForProduct = getFabricsForProduct(product);
+
+  /**
+   * Every scene URL in the current product's fabric set, used by the
+   * ScenePhoto component to preload all photos on mount so subsequent
+   * fabric swaps don't trigger a network fetch (and therefore no white
+   * flash while the next image decodes).
+   */
+  const sceneUrls = fabricsForProduct
+    .map((f) => f.sceneImage)
+    .filter((u): u is string => Boolean(u));
 
   /**
    * If the selected fabric has a sceneImage (real room photo), show it as
@@ -70,14 +81,13 @@ export function Configurator() {
                 <span className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-[var(--color-clay)] animate-pulse" />
                 {t.configurator.badge}
               </span>
-              {usePhotoPreview ? (
-                <img
-                  key={fabric.sceneImage}
+              {usePhotoPreview && fabric.sceneImage ? (
+                <ScenePhoto
                   src={fabric.sceneImage}
                   alt={`${t.configurator.products[product]} — ${fabric.name}`}
+                  preload={sceneUrls}
                   onError={() => setPhotoFailed(true)}
-                  className="block w-full h-auto max-h-[38vh] sm:max-h-[60vh] lg:max-h-[calc(100vh-14rem)] object-cover animate-fade-in"
-                  loading="lazy"
+                  className="w-full max-h-[38vh] sm:max-h-[60vh] lg:max-h-[calc(100vh-14rem)] overflow-hidden"
                 />
               ) : (
                 <PreviewScene
