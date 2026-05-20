@@ -1,0 +1,34 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <filter id="vgrain-noise" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.55 0.012" numOctaves="3" seed="9" />
+      <feColorMatrix values="0 0 0 0 0.28  0 0 0 0 0.14  0 0 0 0 0.07  0 0 0 0.55 0" />
+    </filter>
+    <linearGradient id="mt-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6E3923" />
+      <stop offset="50%" stop-color="#5B2E1F" />
+      <stop offset="100%" stop-color="#3D1E13" />
+    </linearGradient>
+    <filter id="mt-sheen" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7 0.005" numOctaves="2" seed="13" />
+      <feColorMatrix values="0 0 0 0 0.66  0 0 0 0 0.4  0 0 0 0 0.24  0 0 0 0.35 0" />
+    </filter>
+  </defs>
+  <rect width="400" height="400" fill="url(#mt-base)" />
+  <!-- vertical grain (dark) -->
+  <rect width="400" height="400" filter="url(#vgrain-noise)" opacity="0.95" />
+  <!-- vertical sheen / highlights -->
+  <rect width="400" height="400" filter="url(#mt-sheen)" opacity="0.55" />
+  <!-- vertical plank seams -->
+  <g opacity="0.6" stroke="#2A150C">
+    <line x1="100" y1="0" x2="100" y2="400" stroke-width="0.8" />
+    <line x1="200" y1="0" x2="200" y2="400" stroke-width="0.8" />
+    <line x1="300" y1="0" x2="300" y2="400" stroke-width="0.8" />
+  </g>
+  <!-- subtle highlight along plank edges -->
+  <g opacity="0.18" stroke="#A05B38">
+    <line x1="102" y1="0" x2="102" y2="400" stroke-width="0.6" />
+    <line x1="202" y1="0" x2="202" y2="400" stroke-width="0.6" />
+    <line x1="302" y1="0" x2="302" y2="400" stroke-width="0.6" />
+  </g>
+</svg>

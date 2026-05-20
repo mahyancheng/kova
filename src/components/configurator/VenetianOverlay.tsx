@@ -11,21 +11,56 @@ export function VenetianOverlay({
   opacity: number; // 0 (blackout/closed) → 1 (sheer/open)
   uniqueId: string;
 }) {
-  // Slats are 14px tall with a 4px gap between them when "open". When the
-  // slats are "closed" (blackout), the visible gap shrinks to nearly zero.
   const slatHeight = 11;
   const baseGap = 4;
   const gap = baseGap * (0.2 + opacity * 1.4);
   const rowHeight = slatHeight + gap;
   const slats = Math.ceil(APERTURE.h / rowHeight);
 
+  const gradientId = `ve-grad-${uniqueId}`;
+  const patternId = `ve-tex-${uniqueId}`;
+  const shadeId = `ve-shade-${uniqueId}`;
+  const slatFill = fabric.image ? `url(#${patternId})` : `url(#${gradientId})`;
+
   return (
     <g style={{ transition: "opacity 220ms ease" }}>
       <defs>
-        <linearGradient id={`ve-${uniqueId}`} x1="0" y1="0" x2="0" y2="1">
+        {/* Solid fallback gradient (used when no texture image is provided) */}
+        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={fabric.highlightHex} />
           <stop offset="55%" stopColor={fabric.hex} />
           <stop offset="100%" stopColor={fabric.shadowHex} />
+        </linearGradient>
+
+        {/* Continuous wood texture across the whole aperture — every slat
+            samples from this pattern in user-space coords, so the grain
+            reads like one solid piece of wood sliced into strips. */}
+        {fabric.image && (
+          <pattern
+            id={patternId}
+            patternUnits="userSpaceOnUse"
+            x={APERTURE.x}
+            y={APERTURE.y}
+            width={APERTURE.w}
+            height={APERTURE.h}
+          >
+            <image
+              href={fabric.image}
+              x="0"
+              y="0"
+              width={APERTURE.w}
+              height={APERTURE.h}
+              preserveAspectRatio="xMidYMid slice"
+            />
+          </pattern>
+        )}
+
+        {/* Top-to-bottom shade overlay applied per-slat to give that
+            curved 3D feel even with the photographic wood texture. */}
+        <linearGradient id={shadeId} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.22" />
+          <stop offset="55%" stopColor="#FFFFFF" stopOpacity="0" />
+          <stop offset="100%" stopColor="#1A1714" stopOpacity="0.28" />
         </linearGradient>
       </defs>
 
@@ -38,22 +73,33 @@ export function VenetianOverlay({
         if (y + slatHeight > APERTURE.y + APERTURE.h) return null;
         return (
           <g key={i}>
+            {/* texture / colour base */}
             <rect
               x={APERTURE.x + 4}
               y={y}
               width={APERTURE.w - 8}
               height={slatHeight}
               rx="1.5"
-              fill={`url(#ve-${uniqueId})`}
+              fill={slatFill}
               style={{ transition: "y 220ms ease" }}
             />
+            {/* per-slat curvature shade */}
+            <rect
+              x={APERTURE.x + 4}
+              y={y}
+              width={APERTURE.w - 8}
+              height={slatHeight}
+              rx="1.5"
+              fill={`url(#${shadeId})`}
+            />
+            {/* slat bottom edge shadow */}
             <line
               x1={APERTURE.x + 4}
               x2={APERTURE.x + APERTURE.w - 4}
               y1={y + slatHeight}
               y2={y + slatHeight}
               stroke="#1A1714"
-              strokeOpacity="0.22"
+              strokeOpacity="0.32"
               strokeWidth="0.6"
             />
           </g>

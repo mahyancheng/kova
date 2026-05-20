@@ -134,12 +134,17 @@ export function Configurator() {
                       aria-pressed={active}
                       title={f.name}
                       className={cn(
-                        "relative aspect-square min-h-[32px] lg:min-h-[36px] rounded-full border-2 transition-all touch-manipulation",
+                        "relative aspect-square min-h-[32px] lg:min-h-[36px] rounded-full border-2 overflow-hidden transition-all touch-manipulation",
                         active
                           ? "border-[var(--color-ink)] scale-[1.08] shadow-sm"
                           : "border-[var(--color-line)] hover:border-[var(--color-ink-soft)] active:scale-95",
                       )}
-                      style={{ backgroundColor: f.hex }}
+                      style={{
+                        backgroundColor: f.hex,
+                        backgroundImage: f.image ? `url(${f.image})` : undefined,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
                     >
                       {active && (
                         <span className="absolute inset-0 flex items-center justify-center">
