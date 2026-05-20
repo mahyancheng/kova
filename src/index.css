@@ -48,6 +48,44 @@
 }
 
 @layer utilities {
+  /*
+   * Fluid type scale — clamp(min, fluid, max)
+   * Each step scales smoothly with viewport instead of jumping at
+   * Tailwind breakpoints. Used for headlines and section labels.
+   */
+  .fluid-h1 {
+    font-size: clamp(2.1rem, 1rem + 6.5vw, 7rem);
+    line-height: 1;
+  }
+  .fluid-h2 {
+    font-size: clamp(1.8rem, 1rem + 5vw, 4.4rem);
+    line-height: 1.04;
+  }
+  .fluid-h3 {
+    font-size: clamp(1.5rem, 0.9rem + 3.5vw, 3.2rem);
+    line-height: 1.06;
+  }
+  .fluid-h4 {
+    font-size: clamp(1.25rem, 0.9rem + 2vw, 2.4rem);
+    line-height: 1.1;
+  }
+  .fluid-stat {
+    font-size: clamp(1.6rem, 0.8rem + 3vw, 3.2rem);
+    line-height: 1;
+  }
+  .fluid-body {
+    font-size: clamp(0.94rem, 0.86rem + 0.45vw, 1.15rem);
+    line-height: 1.55;
+  }
+  .fluid-section-y {
+    padding-top: clamp(2.5rem, 1.5rem + 4.5vw, 6rem);
+    padding-bottom: clamp(2.5rem, 1.5rem + 4.5vw, 6rem);
+  }
+  .fluid-section-y-tight {
+    padding-top: clamp(2rem, 1rem + 3vw, 4.5rem);
+    padding-bottom: clamp(2rem, 1rem + 3vw, 4.5rem);
+  }
+
   .eyebrow {
     font-family: var(--font-sans);
     font-size: 0.72rem;

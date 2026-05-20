@@ -6,7 +6,7 @@ import { useT } from "@/lib/i18n";
 export function Hero() {
   const t = useT();
   return (
-    <section id="top" className="relative pt-14 lg:pt-28 pb-10 lg:pb-20">
+    <section id="top" className="relative pt-[clamp(3rem,2rem+4vw,7rem)] pb-[clamp(2rem,1rem+3.5vw,5rem)]">
       <div className="max-w-[1380px] mx-auto px-5 sm:px-6 lg:px-10">
         <div className="text-center max-w-5xl mx-auto pt-4 lg:pt-12">
           <Reveal>
@@ -23,13 +23,13 @@ export function Hero() {
             <p className="eyebrow mt-4 lg:mt-5">{t.hero.eyebrow}</p>
           </Reveal>
           <Reveal delay={80}>
-            <h1 className="mt-4 lg:mt-6 headline text-[2.7rem] sm:text-[4.2rem] lg:text-[6.4rem] xl:text-[7.4rem] text-[var(--color-ink)]">
+            <h1 className="mt-4 lg:mt-6 headline fluid-h1 text-[var(--color-ink)]">
               {t.hero.titleA}
               <span className="italic font-light text-[var(--color-clay-deep)]"> {t.hero.titleB}</span>
             </h1>
           </Reveal>
           <Reveal delay={150}>
-            <p className="mt-5 lg:mt-7 max-w-2xl mx-auto text-[0.98rem] sm:text-[1.15rem] lg:text-[1.2rem] leading-[1.5] text-[var(--color-ink-soft)]">
+            <p className="mt-5 lg:mt-7 max-w-2xl mx-auto fluid-body text-[var(--color-ink-soft)]">
               {t.hero.body}
             </p>
           </Reveal>
@@ -64,11 +64,11 @@ export function Hero() {
         </Reveal>
 
         <Reveal delay={400}>
-          <dl className="mt-12 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--color-line)] border border-[var(--color-line)] rounded-md overflow-hidden">
+          <dl className="mt-[clamp(2.5rem,1rem+5vw,7rem)] grid grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--color-line)] border border-[var(--color-line)] rounded-md overflow-hidden">
             {t.hero.stats.map(([n, body]) => (
-              <div key={n} className="bg-[var(--color-cream-light)] p-4 lg:p-8">
-                <dt className="headline text-[2rem] lg:text-[3.2rem] text-[var(--color-ink)]">{n}</dt>
-                <dd className="mt-1.5 lg:mt-2 text-[0.82rem] lg:text-[0.92rem] leading-snug text-[var(--color-muted)] max-w-[18ch]">
+              <div key={n} className="bg-[var(--color-cream-light)] p-[clamp(1rem,0.5rem+1.5vw,2rem)]">
+                <dt className="headline fluid-stat text-[var(--color-ink)]">{n}</dt>
+                <dd className="mt-[clamp(0.35rem,0.25rem+0.3vw,0.6rem)] text-[clamp(0.78rem,0.74rem+0.2vw,0.92rem)] leading-snug text-[var(--color-muted)] max-w-[18ch]">
                   {body}
                 </dd>
               </div>

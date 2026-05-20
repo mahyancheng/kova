@@ -16,7 +16,7 @@ export function FactoryDirect() {
   return (
     <section
       id="factory-direct"
-      className="relative border-y border-[var(--color-line)] bg-[var(--color-cream-light)] py-12 lg:py-28 overflow-hidden"
+      className="relative border-y border-[var(--color-line)] bg-[var(--color-cream-light)] fluid-section-y overflow-hidden"
     >
       <div
         aria-hidden
@@ -34,7 +34,7 @@ export function FactoryDirect() {
               <p className="eyebrow">{t.factory.eyebrow}</p>
             </Reveal>
             <Reveal delay={80}>
-              <h2 className="mt-3 lg:mt-5 headline text-[2.1rem] sm:text-[3rem] lg:text-[4.4rem] text-[var(--color-ink)]">
+              <h2 className="mt-3 lg:mt-5 headline fluid-h2 text-[var(--color-ink)]">
                 {t.factory.titleA}
                 <span className="block italic font-light text-[var(--color-clay-deep)]">
                   {t.factory.titleB}
@@ -44,7 +44,7 @@ export function FactoryDirect() {
           </div>
           <div className="lg:col-span-5">
             <Reveal delay={150}>
-              <p className="text-[0.95rem] lg:text-[1.05rem] leading-[1.55] lg:leading-[1.65] text-[var(--color-ink-soft)] max-w-md">
+              <p className="fluid-body text-[var(--color-ink-soft)] max-w-md">
                 {t.factory.body}
               </p>
               <div className="mt-5 lg:mt-7 flex flex-wrap items-center gap-2 lg:gap-3">
@@ -101,11 +101,11 @@ export function FactoryDirect() {
         <Reveal>
           <dl className="mt-8 lg:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--color-line)] border border-[var(--color-line)] rounded-md overflow-hidden">
             {t.factory.stats.map(([value, label]) => (
-              <div key={label} className="bg-[var(--color-cream-light)] p-4 lg:p-8">
-                <dt className="headline text-[1.65rem] lg:text-[2.6rem] text-[var(--color-ink)]">
+              <div key={label} className="bg-[var(--color-cream-light)] p-[clamp(1rem,0.5rem+1.5vw,2rem)]">
+                <dt className="headline fluid-stat text-[var(--color-ink)]">
                   {value}
                 </dt>
-                <dd className="mt-1 lg:mt-2 text-[0.78rem] lg:text-[0.9rem] leading-snug text-[var(--color-muted)] max-w-[24ch]">
+                <dd className="mt-[clamp(0.25rem,0.2rem+0.25vw,0.5rem)] text-[clamp(0.76rem,0.72rem+0.18vw,0.9rem)] leading-snug text-[var(--color-muted)] max-w-[24ch]">
                   {label}
                 </dd>
               </div>
@@ -115,7 +115,7 @@ export function FactoryDirect() {
 
         <Reveal>
           <div className="mt-8 lg:mt-16 flex flex-col lg:flex-row lg:items-center justify-between gap-4 lg:gap-6 pt-6 lg:pt-8 border-t border-[var(--color-line)]">
-            <p className="font-serif text-[1.15rem] lg:text-[1.7rem] tracking-tight text-[var(--color-ink)] max-w-2xl leading-snug">
+            <p className="font-serif text-[clamp(1.1rem,0.9rem+1vw,1.7rem)] tracking-tight text-[var(--color-ink)] max-w-2xl leading-snug">
               {t.factory.closerA}
               <span className="italic font-light text-[var(--color-clay-deep)]"> {t.factory.closerB}</span>
             </p>

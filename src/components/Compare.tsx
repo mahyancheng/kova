@@ -7,17 +7,17 @@ const colWidths =
 export function Compare() {
   const t = useT();
   return (
-    <section id="compare" className="py-12 lg:py-24 border-t border-[var(--color-line)]">
+    <section id="compare" className="fluid-section-y border-t border-[var(--color-line)]">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10">
         <Reveal>
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-7 lg:mb-12">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-[clamp(1.5rem,1rem+1.5vw,3rem)]">
             <div>
               <p className="eyebrow">{t.compare.eyebrow}</p>
-              <h2 className="mt-3 lg:mt-4 headline text-[1.85rem] sm:text-[2.4rem] lg:text-[3.2rem] text-[var(--color-ink)] max-w-2xl">
+              <h2 className="mt-3 lg:mt-4 headline fluid-h3 text-[var(--color-ink)] max-w-2xl">
                 {t.compare.title}
               </h2>
             </div>
-            <p className="max-w-sm text-[0.95rem] lg:text-[1rem] text-[var(--color-ink-soft)] leading-relaxed">
+            <p className="max-w-sm fluid-body text-[var(--color-ink-soft)]">
               {t.compare.intro}
             </p>
           </div>

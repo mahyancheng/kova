@@ -56,7 +56,7 @@ export function ProductSpotlight({
         sectionBg,
       )}
     >
-      <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 pt-10 lg:pt-20">
+      <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 pt-[clamp(2.5rem,1.5rem+4vw,5rem)]">
         <Reveal>
           <p className={cn("eyebrow", isInk && "!text-[var(--color-sand)]")}>
             <span className={isInk ? "text-[var(--color-clay-light)]" : "text-[var(--color-clay)]"}>{number}</span>
@@ -66,11 +66,11 @@ export function ProductSpotlight({
         </Reveal>
       </div>
 
-      <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 pt-4 lg:pt-10 pb-6 lg:pb-12">
+      <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 pt-[clamp(1rem,0.5rem+1.5vw,2.5rem)] pb-[clamp(1.5rem,1rem+2.5vw,3rem)]">
         <div className={cn("grid lg:grid-cols-12 gap-5 lg:gap-12 items-end", reverse && "lg:[&>div:first-child]:order-2")}>
           <div className="lg:col-span-7">
             <Reveal>
-              <h2 className={cn("headline text-[2.15rem] sm:text-[3rem] lg:text-[4.5rem]", isInk ? "text-[var(--color-cream)]" : "text-[var(--color-ink)]")}>
+              <h2 className={cn("headline fluid-h2", isInk ? "text-[var(--color-cream)]" : "text-[var(--color-ink)]")}>
                 {taglineA}
                 <span className={cn("block italic font-light", isInk ? "text-[var(--color-clay-light)]" : "text-[var(--color-clay-deep)]")}>
                   {taglineB}
@@ -80,7 +80,7 @@ export function ProductSpotlight({
           </div>
           <div className="lg:col-span-5">
             <Reveal delay={100}>
-              <div className={cn("space-y-3 lg:space-y-4 text-[0.94rem] lg:text-[1.02rem] leading-[1.55] lg:leading-[1.65]", isInk ? "text-[var(--color-cream)]/80" : "text-[var(--color-ink-soft)]")}>
+              <div className={cn("space-y-3 lg:space-y-4 fluid-body", isInk ? "text-[var(--color-cream)]/80" : "text-[var(--color-ink-soft)]")}>
                 {body.map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
@@ -115,7 +115,7 @@ export function ProductSpotlight({
         </div>
       </div>
 
-      <div id={`${id}-spec`} className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 pb-12 lg:pb-24">
+      <div id={`${id}-spec`} className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 pb-[clamp(2.5rem,1.5rem+4vw,6rem)]">
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-16">
           <div className="lg:col-span-5 lg:sticky lg:top-28 self-start">
             <Reveal>
@@ -135,7 +135,7 @@ export function ProductSpotlight({
           <div className="lg:col-span-7">
             <Reveal>
               <p className={cn("eyebrow", isInk && "!text-[var(--color-sand)]")}>{c.whyEyebrow}</p>
-              <h3 className={cn("mt-3 lg:mt-4 headline text-[1.55rem] sm:text-[2rem] lg:text-[2.6rem]", isInk ? "text-[var(--color-cream)]" : "text-[var(--color-ink)]")}>
+              <h3 className={cn("mt-3 lg:mt-4 headline fluid-h4", isInk ? "text-[var(--color-cream)]" : "text-[var(--color-ink)]")}>
                 {c.whyTitle}
               </h3>
             </Reveal>
