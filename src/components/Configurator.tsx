@@ -39,13 +39,6 @@ export function Configurator() {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  /**
-   * For Venetian, prominent close-up "material showcase" tiles replace the
-   * small circular swatches — bigger, easier to read the actual wood grain.
-   * Roller / VertiSheer keep the compact circle grid because their fabric
-   * differences are colour-led, not texture-led.
-   */
-  const useShowcaseTiles = product === "venetian";
 
   return (
     <section
@@ -144,93 +137,48 @@ export function Configurator() {
                 </p>
               </div>
 
-              {useShowcaseTiles ? (
-                <div className="mt-2 lg:mt-3 grid grid-cols-2 gap-2 lg:gap-3">
-                  {fabricsForProduct.map((f) => {
-                    const active = f.name === fabric.name;
-                    // Split "W101 Alpine White" → code "W101" + name "Alpine White"
-                    const match = f.name.match(/^(W\d+)\s+(.+)$/);
-                    const code = match?.[1] ?? "";
-                    const label = match?.[2] ?? f.name;
-                    return (
-                      <button
-                        key={f.name}
-                        type="button"
-                        onClick={() => setFabric(f)}
-                        aria-label={f.name}
-                        aria-pressed={active}
-                        className={cn(
-                          "group relative aspect-[5/4] rounded-md overflow-hidden border-2 text-left transition-all touch-manipulation",
-                          active
-                            ? "border-[var(--color-ink)] shadow-[0_8px_20px_-12px_rgba(26,23,20,0.35)]"
-                            : "border-[var(--color-line)] hover:border-[var(--color-ink-soft)] active:scale-[0.98]",
-                        )}
-                        style={{
-                          backgroundColor: f.hex,
-                          backgroundImage: f.image ? `url(${f.image})` : undefined,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }}
-                      >
-                        {/* selected indicator dot */}
-                        {active && (
-                          <span className="absolute top-2 right-2 h-5 w-5 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.7rem] inline-flex items-center justify-center font-medium">
-                            ✓
-                          </span>
-                        )}
-                        {/* label strip at the bottom */}
-                        <span className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[var(--color-ink)]/85 via-[var(--color-ink)]/55 to-transparent text-[var(--color-cream)] px-2.5 py-2">
-                          <span className="block text-[0.62rem] tracking-widest uppercase text-[var(--color-sand)]">
-                            {code}
-                          </span>
-                          <span className="block font-serif text-[0.92rem] leading-tight tracking-tight">
-                            {label}
-                          </span>
+              <div
+                className={cn(
+                  "mt-1.5 lg:mt-2.5 grid gap-1.5 sm:gap-2.5",
+                  fabricsForProduct.length <= 4
+                    ? "grid-cols-4"
+                    : fabricsForProduct.length <= 6
+                    ? "grid-cols-6"
+                    : "grid-cols-8",
+                )}
+              >
+                {fabricsForProduct.map((f) => {
+                  const active = f.name === fabric.name;
+                  return (
+                    <button
+                      key={f.name}
+                      type="button"
+                      onClick={() => setFabric(f)}
+                      aria-label={f.name}
+                      aria-pressed={active}
+                      title={f.name}
+                      className={cn(
+                        "relative aspect-square min-h-[32px] lg:min-h-[36px] rounded-full border-2 overflow-hidden transition-all touch-manipulation",
+                        active
+                          ? "border-[var(--color-ink)] scale-[1.08] shadow-sm"
+                          : "border-[var(--color-line)] hover:border-[var(--color-ink-soft)] active:scale-95",
+                      )}
+                      style={{
+                        backgroundColor: f.hex,
+                        backgroundImage: f.image ? `url(${f.image})` : undefined,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      {active && (
+                        <span className="absolute inset-0 flex items-center justify-center">
+                          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-cream)] mix-blend-difference" />
                         </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              ) : (
-                <div
-                  className={cn(
-                    "mt-1.5 lg:mt-2.5 grid gap-1.5 sm:gap-2.5",
-                    fabricsForProduct.length <= 6 ? "grid-cols-6" : "grid-cols-8",
-                  )}
-                >
-                  {fabricsForProduct.map((f) => {
-                    const active = f.name === fabric.name;
-                    return (
-                      <button
-                        key={f.name}
-                        type="button"
-                        onClick={() => setFabric(f)}
-                        aria-label={f.name}
-                        aria-pressed={active}
-                        title={f.name}
-                        className={cn(
-                          "relative aspect-square min-h-[32px] lg:min-h-[36px] rounded-full border-2 overflow-hidden transition-all touch-manipulation",
-                          active
-                            ? "border-[var(--color-ink)] scale-[1.08] shadow-sm"
-                            : "border-[var(--color-line)] hover:border-[var(--color-ink-soft)] active:scale-95",
-                        )}
-                        style={{
-                          backgroundColor: f.hex,
-                          backgroundImage: f.image ? `url(${f.image})` : undefined,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }}
-                      >
-                        {active && (
-                          <span className="absolute inset-0 flex items-center justify-center">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-cream)] mix-blend-difference" />
-                          </span>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Summary + CTA — compact inline on mobile, full card on desktop */}
