@@ -142,17 +142,17 @@ function Chain({
 }) {
   const isOurs = variant === "ours";
   return (
-    <div className="flex-1 overflow-x-auto no-scrollbar">
-      <div className="flex items-center gap-2 sm:gap-3 min-w-max">
+    <div className="flex-1 min-w-0">
+      <div className="flex flex-wrap items-center gap-y-2 gap-x-1.5 sm:gap-x-3">
         {nodes.map((node, i) => {
           const isFirst = i === 0;
           const isLast = i === nodes.length - 1;
           const isMiddleman = !isOurs && !isFirst && !isLast;
           return (
-            <div key={node + i} className="flex items-center gap-2 sm:gap-3">
+            <div key={node + i} className="flex items-center gap-1.5 sm:gap-3">
               <div
                 className={
-                  "px-3.5 py-2 rounded-full border text-[0.82rem] sm:text-[0.86rem] whitespace-nowrap transition-colors " +
+                  "px-2.5 sm:px-3.5 py-1 sm:py-2 rounded-full border text-[0.74rem] sm:text-[0.86rem] whitespace-nowrap transition-colors " +
                   (isOurs
                     ? isFirst || isLast
                       ? "bg-[var(--color-cream)] border-[var(--color-line)] text-[var(--color-ink)]"
@@ -168,7 +168,7 @@ function Chain({
                 <span
                   aria-hidden
                   className={
-                    "text-[0.95rem] " +
+                    "text-[0.85rem] sm:text-[0.95rem] " +
                     (isOurs ? "text-[var(--color-clay)]" : "text-[var(--color-line)]")
                   }
                 >
