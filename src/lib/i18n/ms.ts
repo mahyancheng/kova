@@ -421,6 +421,7 @@ export const ms: Dict = {
   },
   sticky: {
     label: "Lihat harga terus dari kilang?",
+    designCta: "Reka sendiri",
     cta: "Dapatkan sebut harga",
     dismiss: "Tutup",
   },

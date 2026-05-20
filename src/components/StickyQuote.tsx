@@ -33,17 +33,24 @@ export function StickyQuote() {
           : "opacity-0 translate-y-6 pointer-events-none")
       }
     >
-      <div className="flex items-center gap-1.5 bg-[var(--color-ink)] text-[var(--color-cream)] rounded-full pl-5 pr-1.5 py-1.5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.45)] border border-white/5">
-        <span className="hidden sm:inline text-[0.86rem] mr-2 text-[var(--color-cream)]/85">
-          {t.sticky.label}
-        </span>
+      <div className="flex items-center gap-1 bg-[var(--color-ink)] text-[var(--color-cream)] rounded-full pl-1.5 pr-1.5 py-1.5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.45)] border border-white/5">
+        {/* Design yours — secondary, ghost style */}
+        <a
+          href="#configurator"
+          className="inline-flex items-center gap-1.5 text-[var(--color-cream)]/85 hover:text-[var(--color-cream)] hover:bg-white/[0.06] text-[0.86rem] font-medium rounded-full px-3.5 sm:px-4 py-2 transition-colors whitespace-nowrap"
+        >
+          {t.sticky.designCta}
+        </a>
+
+        {/* Get a quote — primary, clay filled */}
         <a
           href="#contact"
-          className="inline-flex items-center gap-1.5 bg-[var(--color-clay)] hover:bg-[var(--color-clay-deep)] text-[var(--color-cream)] text-[0.86rem] font-medium rounded-full px-4 py-2 transition-colors"
+          className="inline-flex items-center gap-1.5 bg-[var(--color-clay)] hover:bg-[var(--color-clay-deep)] text-[var(--color-cream)] text-[0.86rem] font-medium rounded-full px-3.5 sm:px-4 py-2 transition-colors whitespace-nowrap"
         >
           {t.sticky.cta}
           <span aria-hidden>→</span>
         </a>
+
         <button
           type="button"
           onClick={() => {
@@ -51,7 +58,7 @@ export function StickyQuote() {
             sessionStorage.setItem("kova-sticky-dismissed", "1");
           }}
           aria-label={t.sticky.dismiss}
-          className="ml-1 mr-1 h-7 w-7 inline-flex items-center justify-center rounded-full text-[var(--color-cream)]/60 hover:text-[var(--color-cream)] hover:bg-white/5 transition-colors text-base"
+          className="ml-0.5 h-7 w-7 inline-flex items-center justify-center rounded-full text-[var(--color-cream)]/60 hover:text-[var(--color-cream)] hover:bg-white/5 transition-colors text-base shrink-0"
         >
           ×
         </button>

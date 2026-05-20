@@ -447,6 +447,7 @@ export const en = {
   },
   sticky: {
     label: "See factory-direct prices?",
+    designCta: "Design yours",
     cta: "Get a quote",
     dismiss: "Dismiss",
   },
