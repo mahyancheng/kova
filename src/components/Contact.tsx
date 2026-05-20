@@ -41,14 +41,25 @@ export function Contact() {
       className="relative py-16 lg:py-20 border-t border-[var(--color-line)] bg-[var(--color-ink)] text-[var(--color-cream)] overflow-hidden"
     >
       <div className="absolute inset-0 grain opacity-[0.12] pointer-events-none" />
+
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-10">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 lg:items-start">
-          <div className="lg:col-span-6">
+        {/*
+          Mobile order (single column):
+            1. Heading  → 2. Form  → 3. Studio info
+          Desktop order (2 cols, explicit row/col placement):
+            Left col, row 1: Heading
+            Left col, row 2: Studio info
+            Right col, spans rows 1–2: Form
+        */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-16 lg:items-start">
+          {/* HEADING — mobile row 1 / desktop col 1 row 1 */}
+          <div className="lg:col-span-6 lg:row-start-1 lg:col-start-1">
             <p className="eyebrow !text-[var(--color-sand)]">{t.contact.eyebrow}</p>
-            <h2 className="mt-5 font-serif text-[2.2rem] sm:text-[2.8rem] lg:text-[3.4rem] leading-[1.04] tracking-tightest text-[var(--color-cream)]">
-              {t.contact.titleA} <span className="italic font-light text-[var(--color-clay-light)]">{t.contact.titleB}</span>
+            <h2 className="mt-4 font-serif text-[2.2rem] sm:text-[2.6rem] lg:text-[3.2rem] leading-[1.04] tracking-tightest text-[var(--color-cream)]">
+              {t.contact.titleA}{" "}
+              <span className="italic font-light text-[var(--color-clay-light)]">{t.contact.titleB}</span>
             </h2>
-            <p className="mt-6 max-w-md text-[1rem] leading-[1.6] text-[var(--color-cream)]/75">
+            <p className="mt-5 max-w-md text-[0.98rem] sm:text-[1rem] leading-[1.6] text-[var(--color-cream)]/75">
               {t.contact.intro}
             </p>
             <div className="mt-5 inline-flex items-center gap-2.5 px-3.5 py-2 rounded-full border border-[var(--color-cream)]/20 bg-white/[0.04]">
@@ -58,39 +69,13 @@ export function Contact() {
                 <span className="text-[var(--color-clay-light)]">{t.contact.pricingChipB}</span>
               </span>
             </div>
-
-            <dl className="mt-10 grid grid-cols-2 gap-y-5 gap-x-10 max-w-md text-[0.9rem]">
-              <div>
-                <dt className="text-[var(--color-sand)] text-[0.74rem] tracking-widest uppercase">{t.contact.studio}</dt>
-                <dd className="mt-1 text-[var(--color-cream)]/85 leading-relaxed whitespace-pre-line">
-                  {t.contact.studioAddr}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[var(--color-sand)] text-[0.74rem] tracking-widest uppercase">{t.contact.direct}</dt>
-                <dd className="mt-1 text-[var(--color-cream)]/85 leading-relaxed whitespace-pre-line">
-                  {t.contact.directInfo}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[var(--color-sand)] text-[0.74rem] tracking-widest uppercase">{t.contact.hours}</dt>
-                <dd className="mt-1 text-[var(--color-cream)]/85 leading-relaxed whitespace-pre-line">
-                  {t.contact.hoursInfo}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[var(--color-sand)] text-[0.74rem] tracking-widest uppercase">{t.contact.service}</dt>
-                <dd className="mt-1 text-[var(--color-cream)]/85 leading-relaxed whitespace-pre-line">
-                  {t.contact.serviceInfo}
-                </dd>
-              </div>
-            </dl>
           </div>
 
-          <div className="lg:col-span-6 lg:pl-10 lg:border-l lg:border-[var(--color-cream)]/15">
+          {/* FORM — mobile row 2 / desktop col 2 rows 1–2 */}
+          <div className="row-start-2 lg:row-start-1 lg:row-span-2 lg:col-start-7 lg:col-span-6 lg:pl-10 lg:border-l lg:border-[var(--color-cream)]/15">
             {sent ? (
-              <div className="rounded-sm border border-[var(--color-cream)]/20 p-10 bg-[var(--color-cream)]/5">
-                <p className="font-serif text-[1.8rem] leading-tight">{t.contact.sentTitle}</p>
+              <div className="rounded-md border border-[var(--color-cream)]/20 p-8 bg-[var(--color-cream)]/5">
+                <p className="font-serif text-[1.6rem] sm:text-[1.8rem] leading-tight">{t.contact.sentTitle}</p>
                 <p className="mt-4 text-[var(--color-cream)]/75 leading-relaxed max-w-sm">
                   {t.contact.sentBody}
                 </p>
@@ -102,7 +87,7 @@ export function Contact() {
                   setSent(true);
                 }}
               >
-                {/* Configuration summary chip (visible after configurator submit) */}
+                {/* Configuration summary chip */}
                 {prefilled && lastSummary && (
                   <div className="mb-5 flex items-start gap-3 rounded-md border border-[var(--color-clay-light)]/40 bg-[var(--color-clay)]/10 p-3.5">
                     <span aria-hidden className="mt-1 h-2 w-2 rounded-full bg-[var(--color-clay-light)] shrink-0" />
@@ -123,7 +108,8 @@ export function Contact() {
                   </div>
                 )}
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+                {/* Essentials — Name + Phone live large at the top, easy to reach */}
+                <div className="grid grid-cols-1 gap-y-4">
                   <Field
                     label={t.contact.nameLabel}
                     name="name"
@@ -140,6 +126,10 @@ export function Contact() {
                     required
                     primary
                   />
+                </div>
+
+                {/* Secondary contact fields — paired so they don't dominate the form */}
+                <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
                   <Field
                     label={t.contact.emailLabel}
                     optionalLabel={t.contact.emailOptional}
@@ -154,8 +144,9 @@ export function Contact() {
                   />
                 </div>
 
-                <div className="mt-4">
-                  <label className="block text-[0.74rem] tracking-widest uppercase text-[var(--color-sand)] mb-1.5">
+                {/* Message */}
+                <div className="mt-5">
+                  <label className="block text-[0.74rem] tracking-widest uppercase text-[var(--color-sand)] mb-2">
                     {t.contact.messageLabel}
                   </label>
                   <textarea
@@ -167,7 +158,8 @@ export function Contact() {
                   />
                 </div>
 
-                <fieldset ref={interestRef} className="mt-4 pt-1">
+                {/* Interest */}
+                <fieldset ref={interestRef} className="mt-5">
                   <legend className="block text-[0.74rem] tracking-widest uppercase text-[var(--color-sand)] mb-2">
                     {t.contact.interestLabel}
                   </legend>
@@ -184,10 +176,11 @@ export function Contact() {
                   </div>
                 </fieldset>
 
-                <div className="mt-5">
+                {/* Submit */}
+                <div className="mt-6">
                   <button
                     type="submit"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[var(--color-clay)] text-[var(--color-cream)] font-medium text-[0.92rem] hover:bg-[var(--color-clay-deep)] active:bg-[var(--color-clay-deep)] transition-colors"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-3 rounded-full bg-[var(--color-clay)] text-[var(--color-cream)] font-medium text-[0.95rem] sm:text-[0.92rem] hover:bg-[var(--color-clay-deep)] active:bg-[var(--color-clay-deep)] transition-colors"
                   >
                     {t.contact.submit}
                     <span aria-hidden>→</span>
@@ -195,6 +188,47 @@ export function Contact() {
                 </div>
               </form>
             )}
+          </div>
+
+          {/* STUDIO INFO — mobile row 3 / desktop col 1 row 2 */}
+          <div className="row-start-3 lg:row-start-2 lg:col-start-1 lg:col-span-6">
+            <p className="eyebrow !text-[var(--color-sand)] mb-5 lg:mb-6">
+              {t.contact.studio} · {t.contact.direct}
+            </p>
+            <dl className="grid grid-cols-2 gap-y-5 gap-x-8 max-w-md text-[0.92rem]">
+              <div>
+                <dt className="text-[var(--color-sand)] text-[0.7rem] tracking-widest uppercase">
+                  {t.contact.studio}
+                </dt>
+                <dd className="mt-1 text-[var(--color-cream)]/85 leading-relaxed whitespace-pre-line">
+                  {t.contact.studioAddr}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[var(--color-sand)] text-[0.7rem] tracking-widest uppercase">
+                  {t.contact.direct}
+                </dt>
+                <dd className="mt-1 text-[var(--color-cream)]/85 leading-relaxed whitespace-pre-line">
+                  {t.contact.directInfo}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[var(--color-sand)] text-[0.7rem] tracking-widest uppercase">
+                  {t.contact.hours}
+                </dt>
+                <dd className="mt-1 text-[var(--color-cream)]/85 leading-relaxed whitespace-pre-line">
+                  {t.contact.hoursInfo}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[var(--color-sand)] text-[0.7rem] tracking-widest uppercase">
+                  {t.contact.service}
+                </dt>
+                <dd className="mt-1 text-[var(--color-cream)]/85 leading-relaxed whitespace-pre-line">
+                  {t.contact.serviceInfo}
+                </dd>
+              </div>
+            </dl>
           </div>
         </div>
       </div>
@@ -232,7 +266,10 @@ function Field({
         >
           {label}
           {primary && (
-            <span className="ml-1.5 inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-clay-light)] align-middle" aria-hidden />
+            <span
+              className="ml-1.5 inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-clay-light)] align-middle"
+              aria-hidden
+            />
           )}
         </label>
         {optionalLabel && (
@@ -248,10 +285,10 @@ function Field({
         inputMode={inputMode}
         placeholder={placeholder}
         required={required}
-        className="mt-1.5 w-full bg-transparent border-b border-[var(--color-cream)]/25 focus:border-[var(--color-clay-light)] outline-none py-2.5 text-[0.98rem] text-[var(--color-cream)] placeholder:text-[var(--color-cream)]/35 transition-colors"
+        className="mt-1.5 w-full bg-transparent border-b border-[var(--color-cream)]/25 focus:border-[var(--color-clay-light)] outline-none py-2.5 text-[1rem] sm:text-[0.98rem] text-[var(--color-cream)] placeholder:text-[var(--color-cream)]/35 transition-colors"
       />
       {hint && (
-        <p className="mt-1 text-[0.72rem] text-[var(--color-cream)]/55 leading-snug">{hint}</p>
+        <p className="mt-1.5 text-[0.74rem] text-[var(--color-cream)]/55 leading-snug">{hint}</p>
       )}
     </div>
   );
