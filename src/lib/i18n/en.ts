@@ -3,11 +3,11 @@ export const en = {
   nav: {
     links: [
       { href: "#collection", label: "Collection" },
+      { href: "#configurator", label: "Design yours" },
       { href: "#roller", label: "Roller" },
       { href: "#venetian", label: "Venetian" },
       { href: "#vertisheer", label: "VertiSheer" },
       { href: "#factory-direct", label: "Pricing" },
-      { href: "#spaces", label: "Spaces" },
     ],
     quote: "Get a quote",
   },
@@ -454,6 +454,40 @@ export const en = {
     label: "Language",
     en: "EN",
     ms: "BM",
+  },
+  configurator: {
+    eyebrow: "Design yours",
+    titleA: "Build the blind.",
+    titleB: "See it in the room.",
+    intro:
+      "Pick the type, pick a fabric, pick the opacity. The preview updates live — when it looks right, send it to us as a quote.",
+    productLabel: "Type",
+    products: {
+      roller: "Roller",
+      venetian: "Venetian",
+      vertisheer: "VertiSheer",
+    },
+    fabricLabel: "Fabric",
+    opacityLabel: "Opacity",
+    opacityNames: {
+      blackout: "Blackout",
+      "dim-out": "Dim-out",
+      sunscreen: "Sunscreen",
+      "light-filtering": "Light-filtering",
+    },
+    opacityHint: {
+      blackout: "Total privacy. Zero light through the fabric.",
+      "dim-out": "Reduces light without sealing the room dark.",
+      sunscreen: "Cuts glare, keeps the view.",
+      "light-filtering": "A soft, even daylight wash.",
+    },
+    summaryLabel: "Your configuration",
+    cta: "Quote this configuration",
+    badge: "Live preview",
+    figureCaption: "Preview is illustrative. Final fabric varies with light and weave.",
+    contactPrefillIntro: "I'd like a quote for this configuration:",
+    contactSummaryLabel: "Configured in the preview",
+    contactSummaryEdit: "Edit configuration",
   },
 } as const;
 

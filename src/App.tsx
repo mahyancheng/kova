@@ -1,10 +1,12 @@
 import { LangProvider, useT } from "@/lib/i18n";
+import { ConfiguratorProvider } from "@/lib/configurator/context";
 import { PromoBar } from "./components/PromoBar";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { FactoryDirect } from "./components/FactoryDirect";
 import { Philosophy } from "./components/Philosophy";
 import { Collection } from "./components/Collection";
+import { Configurator } from "./components/Configurator";
 import { Marquee } from "./components/Marquee";
 import { ProductSpotlight } from "./components/ProductSpotlight";
 import { Fabrics } from "./components/Fabrics";
@@ -31,6 +33,7 @@ function Site() {
         <FactoryDirect />
         <Philosophy />
         <Collection />
+        <Configurator />
         <Marquee />
 
         <ProductSpotlight
@@ -76,7 +79,9 @@ function Site() {
 export default function App() {
   return (
     <LangProvider>
-      <Site />
+      <ConfiguratorProvider>
+        <Site />
+      </ConfiguratorProvider>
     </LangProvider>
   );
 }

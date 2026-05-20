@@ -5,11 +5,11 @@ export const ms: Dict = {
   nav: {
     links: [
       { href: "#collection", label: "Koleksi" },
+      { href: "#configurator", label: "Reka sendiri" },
       { href: "#roller", label: "Roller" },
       { href: "#venetian", label: "Venetian" },
       { href: "#vertisheer", label: "VertiSheer" },
       { href: "#factory-direct", label: "Harga" },
-      { href: "#spaces", label: "Ruang" },
     ],
     quote: "Dapatkan sebut harga",
   },
@@ -428,5 +428,40 @@ export const ms: Dict = {
     label: "Bahasa",
     en: "EN",
     ms: "BM",
+  },
+  configurator: {
+    eyebrow: "Reka anda sendiri",
+    titleA: "Bina bidai anda.",
+    titleB: "Lihat ia dalam bilik.",
+    intro:
+      "Pilih jenis, pilih kain, pilih kelegapan. Pratonton akan dikemas kini secara langsung — bila ia kelihatan tepat, hantar kepada kami untuk sebut harga.",
+    productLabel: "Jenis",
+    products: {
+      roller: "Roller",
+      venetian: "Venetian",
+      vertisheer: "VertiSheer",
+    },
+    fabricLabel: "Kain",
+    opacityLabel: "Kelegapan",
+    opacityNames: {
+      blackout: "Blackout",
+      "dim-out": "Dim-out",
+      sunscreen: "Sunscreen",
+      "light-filtering": "Penapis cahaya",
+    },
+    opacityHint: {
+      blackout: "Privasi penuh. Tiada cahaya menembus kain.",
+      "dim-out": "Mengurangkan cahaya tanpa menggelapkan bilik sepenuhnya.",
+      sunscreen: "Mengurangkan silau, mengekalkan pemandangan.",
+      "light-filtering": "Basuhan cahaya siang yang lembut dan sekata.",
+    },
+    summaryLabel: "Konfigurasi anda",
+    cta: "Dapatkan sebut harga untuk konfigurasi ini",
+    badge: "Pratonton langsung",
+    figureCaption:
+      "Pratonton adalah ilustrasi. Kain sebenar berbeza mengikut cahaya dan tenunan.",
+    contactPrefillIntro: "Saya ingin sebut harga untuk konfigurasi ini:",
+    contactSummaryLabel: "Dikonfigurasi dalam pratonton",
+    contactSummaryEdit: "Tukar konfigurasi",
   },
 };
