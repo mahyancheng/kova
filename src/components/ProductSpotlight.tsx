@@ -13,14 +13,13 @@ export type ProductSpotlightProps = {
   body: string[];
   features: { title: string; detail: string }[];
   perfectFor: string[];
-  figureCaption: string;
   detailCaption: string;
-  visualSrc?: string;
-  Visual?: (props: { className?: string }) => ReactNode;
   detailSrc?: string;
   Detail?: (props: { className?: string }) => ReactNode;
   reverse?: boolean;
   tone?: "cream" | "paper" | "ink";
+  /** Accepted for backward compatibility with App.tsx prop spread — no longer rendered. */
+  figureCaption?: string;
 };
 
 export function ProductSpotlight({
@@ -32,10 +31,7 @@ export function ProductSpotlight({
   body,
   features,
   perfectFor,
-  figureCaption: _figureCaption,
   detailCaption,
-  visualSrc,
-  Visual,
   detailSrc,
   Detail,
   reverse,
@@ -70,7 +66,7 @@ export function ProductSpotlight({
         </Reveal>
       </div>
 
-      <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 pt-4 lg:pt-10 pb-10 lg:pb-20">
+      <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 pt-4 lg:pt-10 pb-6 lg:pb-12">
         <div className={cn("grid lg:grid-cols-12 gap-5 lg:gap-12 items-end", reverse && "lg:[&>div:first-child]:order-2")}>
           <div className="lg:col-span-7">
             <Reveal>
@@ -119,21 +115,7 @@ export function ProductSpotlight({
         </div>
       </div>
 
-      <div className="max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-10">
-        <Reveal>
-          <ImageSlot
-            ratio="21/9"
-            label={`${number} · ${name}`}
-            tone={isInk ? "ink" : "sand"}
-            src={visualSrc}
-            alt={`${name}`}
-          >
-            {Visual ? <Visual className="w-full h-full" /> : undefined}
-          </ImageSlot>
-        </Reveal>
-      </div>
-
-      <div id={`${id}-spec`} className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 py-12 lg:py-24">
+      <div id={`${id}-spec`} className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 pb-12 lg:pb-24">
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-16">
           <div className="lg:col-span-5 lg:sticky lg:top-28 self-start">
             <Reveal>

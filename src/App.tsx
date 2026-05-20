@@ -19,7 +19,6 @@ import { StickyQuote } from "./components/StickyQuote";
 import { RollerBlind } from "./components/visuals/RollerBlind";
 import { VenetianBlind } from "./components/visuals/VenetianBlind";
 import { VertiSheer } from "./components/visuals/VertiSheer";
-import { HeroVisual } from "./components/visuals/HeroVisual";
 
 function Site() {
   const t = useT();
@@ -40,7 +39,6 @@ function Site() {
           id="roller"
           tone="cream"
           {...t.products.roller}
-          Visual={HeroVisual}
           Detail={RollerBlind}
         />
 
@@ -48,7 +46,6 @@ function Site() {
           id="venetian"
           tone="paper"
           {...t.products.venetian}
-          Visual={VenetianBlind}
           Detail={VenetianBlind}
           reverse
         />
@@ -57,7 +54,6 @@ function Site() {
           id="vertisheer"
           tone="ink"
           {...t.products.vertisheer}
-          Visual={VertiSheer}
           Detail={VertiSheer}
         />
 
