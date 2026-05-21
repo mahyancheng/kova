@@ -34,8 +34,8 @@ export type Configuration = {
 };
 
 /**
- * Roller / VertiSheer fabric library — these are dyed fabric panels, mostly
- * neutral browns and warm whites for the brand palette.
+ * VertiSheer fabric library — dyed fabric panels, mostly neutral browns
+ * and warm whites. Also acts as the generic fallback set.
  */
 export const FABRICS: Fabric[] = [
   { name: "Linen Wheat", hex: "#D9C9A2", shadowHex: "#BFAA7C", highlightHex: "#EFE5CB" },
@@ -46,6 +46,46 @@ export const FABRICS: Fabric[] = [
   { name: "Tobacco", hex: "#A89072", shadowHex: "#7C684F", highlightHex: "#C5B49A" },
   { name: "Char", hex: "#3A382F", shadowHex: "#1F1E18", highlightHex: "#5C594D" },
   { name: "Inkwell", hex: "#2D2D2A", shadowHex: "#13130F", highlightHex: "#4A4A45" },
+];
+
+/**
+ * Roller blind fabric library — banded roller fabric in the same W-coded
+ * colour family as the Venetian wood finishes (so customers can pair them
+ * across a room). Each has a real Kova room shot with the fabric installed.
+ */
+export const ROLLER_FABRICS: Fabric[] = [
+  {
+    name: "W101 Alpine White",
+    hex: "#F1ECE3",
+    shadowHex: "#D8D2C2",
+    highlightHex: "#FBF9F2",
+    image: "/textures/roller/w101-alpine-white.svg",
+    sceneImage: "/scenes/roller/w101-alpine-white.png",
+  },
+  {
+    name: "W301 Pearl River",
+    hex: "#D6CFC2",
+    shadowHex: "#B5AC9C",
+    highlightHex: "#EAE4D6",
+    image: "/textures/roller/w301-pearl-river.png",
+    sceneImage: "/scenes/roller/w301-pearl-river.png",
+  },
+  {
+    name: "W302 Agate Grey",
+    hex: "#C9BFA8",
+    shadowHex: "#A89D87",
+    highlightHex: "#E0D8C5",
+    image: "/textures/roller/w302-agate-grey.png",
+    sceneImage: "/scenes/roller/w302-agate-grey.png",
+  },
+  {
+    name: "W206 Mahogany Teak",
+    hex: "#5B2E1F",
+    shadowHex: "#3A1C12",
+    highlightHex: "#7E4732",
+    image: "/textures/roller/w206-mahogany-teak.png",
+    sceneImage: "/scenes/roller/w206-mahogany-teak.png",
+  },
 ];
 
 /**
@@ -92,6 +132,7 @@ export const VENETIAN_FABRICS: Fabric[] = [
 /** Fabric set for a given product. Defaults to the general FABRICS list. */
 export function getFabricsForProduct(p: ProductId): Fabric[] {
   if (p === "venetian") return VENETIAN_FABRICS;
+  if (p === "roller") return ROLLER_FABRICS;
   return FABRICS;
 }
 
@@ -112,6 +153,6 @@ export const OPACITY_LEVEL: Record<OpacityId, number> = {
 
 export const DEFAULT_CONFIGURATION: Configuration = {
   product: "roller",
-  fabric: FABRICS[0]!,
+  fabric: ROLLER_FABRICS[0]!,
   opacity: "sunscreen",
 };
