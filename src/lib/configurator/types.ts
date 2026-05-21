@@ -57,37 +57,50 @@ export const FABRICS: Fabric[] = [
 export const ROLLER_FABRICS: Fabric[] = [
   // Cenza — patterned weave
   { name: "Cenza Charcoal Grey", hex: "#4A4E55", shadowHex: "#2C2F34", highlightHex: "#6B6F76",
-    image: "/textures/roller/cenza-charcoal-grey.png" },
+    image: "/textures/roller/cenza-charcoal-grey.png",
+    sceneImage: "/scenes/roller/cenza-charcoal-grey.png" },
   { name: "Cenza Linen Stone",   hex: "#9A938A", shadowHex: "#736C63", highlightHex: "#B6AFA6",
-    image: "/textures/roller/cenza-linen-stone.png" },
+    image: "/textures/roller/cenza-linen-stone.png",
+    sceneImage: "/scenes/roller/cenza-linen-stone.png" },
   { name: "Cenza Pale Yellow",   hex: "#DCC36A", shadowHex: "#B19A48", highlightHex: "#EBD995",
-    image: "/textures/roller/cenza-pale-yellow.png" },
+    image: "/textures/roller/cenza-pale-yellow.png",
+    sceneImage: "/scenes/roller/cenza-pale-yellow.png" },
   { name: "Cenza Red Apricot",   hex: "#BC4F36", shadowHex: "#8C3520", highlightHex: "#D27358",
-    image: "/textures/roller/cenza-red-apricot.png" },
+    image: "/textures/roller/cenza-red-apricot.png",
+    sceneImage: "/scenes/roller/cenza-red-apricot.png" },
 
   // Denver — woven plain
   { name: "Denver Cream",        hex: "#DCC9A8", shadowHex: "#B5A282", highlightHex: "#EEDFC2",
-    image: "/textures/roller/denver-cream.png" },
+    image: "/textures/roller/denver-cream.png",
+    sceneImage: "/scenes/roller/denver-cream.png" },
   { name: "Denver Beige",        hex: "#C0AC91", shadowHex: "#988568", highlightHex: "#D6C5AD",
-    image: "/textures/roller/denver-beige.png" },
+    image: "/textures/roller/denver-beige.png",
+    sceneImage: "/scenes/roller/denver-beige.png" },
   { name: "Denver Grey",         hex: "#82827D", shadowHex: "#5E5E5A", highlightHex: "#9F9F9A",
-    image: "/textures/roller/denver-grey.png" },
+    image: "/textures/roller/denver-grey.png",
+    sceneImage: "/scenes/roller/denver-grey.png" },
   { name: "Denver Graphite",     hex: "#4A4843", shadowHex: "#2C2A26", highlightHex: "#6B6963",
-    image: "/textures/roller/denver-graphite.png" },
+    image: "/textures/roller/denver-graphite.png",
+    sceneImage: "/scenes/roller/denver-graphite.png" },
 
   // Shiro — soft texture
   { name: "Shiro Champagne",     hex: "#CFB789", shadowHex: "#A48E64", highlightHex: "#E1CDA8",
-    image: "/textures/roller/shiro-champagne.png" },
+    image: "/textures/roller/shiro-champagne.png",
+    sceneImage: "/scenes/roller/shiro-champagne.png" },
   { name: "Shiro Mink",          hex: "#A0907E", shadowHex: "#776A5C", highlightHex: "#BBAC98",
-    image: "/textures/roller/shiro-mink.png" },
+    image: "/textures/roller/shiro-mink.png",
+    sceneImage: "/scenes/roller/shiro-mink.png" },
   { name: "Shiro Burgundy",      hex: "#6B2D2A", shadowHex: "#451A18", highlightHex: "#894542",
-    image: "/textures/roller/shiro-burgundy.png" },
+    image: "/textures/roller/shiro-burgundy.png",
+    sceneImage: "/scenes/roller/shiro-burgundy.png" },
 
   // Blackout
   { name: "Moma Blackout Charcoal", hex: "#2F2D2A", shadowHex: "#181715", highlightHex: "#4A4844",
-    image: "/textures/roller/moma-blackout-charcoal.png" },
+    image: "/textures/roller/moma-blackout-charcoal.png",
+    sceneImage: "/scenes/roller/moma-blackout-charcoal.png" },
   { name: "Dernise Black",       hex: "#1F1E1B", shadowHex: "#0D0D0B", highlightHex: "#383631",
-    image: "/textures/roller/dernise-black.png" },
+    image: "/textures/roller/dernise-black.png",
+    sceneImage: "/scenes/roller/dernise-black.png" },
 ];
 
 /**
