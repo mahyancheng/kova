@@ -49,43 +49,45 @@ export const FABRICS: Fabric[] = [
 ];
 
 /**
- * Roller blind fabric library — banded roller fabric in the same W-coded
- * colour family as the Venetian wood finishes (so customers can pair them
- * across a room). Each has a real Kova room shot with the fabric installed.
+ * Roller blind fabric library — 13 named fabrics from the Kova catalogue
+ * spanning the Cenza, Denver, Dernise, Moma and Shiro lines. Each entry
+ * carries the close-up swatch photo; scene previews will be added later
+ * (until then the configurator falls back to the SVG room rendering).
  */
 export const ROLLER_FABRICS: Fabric[] = [
-  {
-    name: "W101 Alpine White",
-    hex: "#F1ECE3",
-    shadowHex: "#D8D2C2",
-    highlightHex: "#FBF9F2",
-    image: "/textures/roller/w101-alpine-white.svg",
-    sceneImage: "/scenes/roller/w101-alpine-white.png",
-  },
-  {
-    name: "W301 Pearl River",
-    hex: "#D6CFC2",
-    shadowHex: "#B5AC9C",
-    highlightHex: "#EAE4D6",
-    image: "/textures/roller/w301-pearl-river.png",
-    sceneImage: "/scenes/roller/w301-pearl-river.png",
-  },
-  {
-    name: "W302 Agate Grey",
-    hex: "#C9BFA8",
-    shadowHex: "#A89D87",
-    highlightHex: "#E0D8C5",
-    image: "/textures/roller/w302-agate-grey.png",
-    sceneImage: "/scenes/roller/w302-agate-grey.png",
-  },
-  {
-    name: "W206 Mahogany Teak",
-    hex: "#5B2E1F",
-    shadowHex: "#3A1C12",
-    highlightHex: "#7E4732",
-    image: "/textures/roller/w206-mahogany-teak.png",
-    sceneImage: "/scenes/roller/w206-mahogany-teak.png",
-  },
+  // Cenza — patterned weave
+  { name: "Cenza Charcoal Grey", hex: "#4A4E55", shadowHex: "#2C2F34", highlightHex: "#6B6F76",
+    image: "/textures/roller/cenza-charcoal-grey.png" },
+  { name: "Cenza Linen Stone",   hex: "#9A938A", shadowHex: "#736C63", highlightHex: "#B6AFA6",
+    image: "/textures/roller/cenza-linen-stone.png" },
+  { name: "Cenza Pale Yellow",   hex: "#DCC36A", shadowHex: "#B19A48", highlightHex: "#EBD995",
+    image: "/textures/roller/cenza-pale-yellow.png" },
+  { name: "Cenza Red Apricot",   hex: "#BC4F36", shadowHex: "#8C3520", highlightHex: "#D27358",
+    image: "/textures/roller/cenza-red-apricot.png" },
+
+  // Denver — woven plain
+  { name: "Denver Cream",        hex: "#DCC9A8", shadowHex: "#B5A282", highlightHex: "#EEDFC2",
+    image: "/textures/roller/denver-cream.png" },
+  { name: "Denver Beige",        hex: "#C0AC91", shadowHex: "#988568", highlightHex: "#D6C5AD",
+    image: "/textures/roller/denver-beige.png" },
+  { name: "Denver Grey",         hex: "#82827D", shadowHex: "#5E5E5A", highlightHex: "#9F9F9A",
+    image: "/textures/roller/denver-grey.png" },
+  { name: "Denver Graphite",     hex: "#4A4843", shadowHex: "#2C2A26", highlightHex: "#6B6963",
+    image: "/textures/roller/denver-graphite.png" },
+
+  // Shiro — soft texture
+  { name: "Shiro Champagne",     hex: "#CFB789", shadowHex: "#A48E64", highlightHex: "#E1CDA8",
+    image: "/textures/roller/shiro-champagne.png" },
+  { name: "Shiro Mink",          hex: "#A0907E", shadowHex: "#776A5C", highlightHex: "#BBAC98",
+    image: "/textures/roller/shiro-mink.png" },
+  { name: "Shiro Burgundy",      hex: "#6B2D2A", shadowHex: "#451A18", highlightHex: "#894542",
+    image: "/textures/roller/shiro-burgundy.png" },
+
+  // Blackout
+  { name: "Moma Blackout Charcoal", hex: "#2F2D2A", shadowHex: "#181715", highlightHex: "#4A4844",
+    image: "/textures/roller/moma-blackout-charcoal.png" },
+  { name: "Dernise Black",       hex: "#1F1E1B", shadowHex: "#0D0D0B", highlightHex: "#383631",
+    image: "/textures/roller/dernise-black.png" },
 ];
 
 /**
