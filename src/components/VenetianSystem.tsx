@@ -29,42 +29,59 @@ export function VenetianSystem() {
 
     let raf = 0;
     let cancelled = false;
-    let lastProgress = -1;
+    /** target progress driven by scroll position (0..1) */
+    let targetProgress = 0;
+    /** smoothly interpolated, eased progress that drives the video */
+    let smoothProgress = 0;
+    let lastWritten = -1;
 
-    const measure = () => {
+    const readTarget = () => {
       const rect = section.getBoundingClientRect();
       const vh = window.innerHeight;
       const range = Math.max(1, section.offsetHeight - vh);
       const scrolled = -rect.top;
-      const p = Math.max(0, Math.min(1, scrolled / range));
+      targetProgress = Math.max(0, Math.min(1, scrolled / range));
+    };
 
-      if (Math.abs(p - lastProgress) > 0.001) {
-        lastProgress = p;
-        setProgress(p);
+    // Every animation frame, ease smoothProgress toward targetProgress.
+    // The factor 0.18 ≈ "reach 95% of target in ~15 frames" — smooth
+    // enough that fast scrolls play through intermediate frames rather
+    // than jumping, fast enough that it never feels laggy.
+    const tick = () => {
+      if (cancelled) return;
+      const diff = targetProgress - smoothProgress;
+      if (Math.abs(diff) < 0.0005) {
+        smoothProgress = targetProgress;
+      } else {
+        smoothProgress += diff * 0.18;
+      }
+
+      if (Math.abs(smoothProgress - lastWritten) > 0.0005) {
+        lastWritten = smoothProgress;
+        setProgress(smoothProgress);
         const video = videoRef.current;
         if (video && Number.isFinite(video.duration) && video.duration > 0) {
-          video.currentTime = p * video.duration;
+          video.currentTime = smoothProgress * video.duration;
         }
       }
+
+      raf = requestAnimationFrame(tick);
     };
 
-    const schedule = () => {
-      if (cancelled || raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        measure();
-      });
-    };
+    readTarget();
+    smoothProgress = targetProgress; // start at the right place, no flash
+    raf = requestAnimationFrame(tick);
 
-    measure();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    const fallback = window.setInterval(measure, 250);
+    window.addEventListener("scroll", readTarget, { passive: true });
+    window.addEventListener("resize", readTarget);
+    // Re-read target periodically as a safety net for environments where
+    // scroll events get throttled (some embedded iframes).
+    const fallback = window.setInterval(readTarget, 200);
 
     return () => {
       cancelled = true;
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
+      window.removeEventListener("scroll", readTarget);
+      window.removeEventListener("resize", readTarget);
       window.clearInterval(fallback);
       if (raf) cancelAnimationFrame(raf);
     };
@@ -76,9 +93,11 @@ export function VenetianSystem() {
     <section
       ref={sectionRef}
       className="relative bg-[var(--color-ink)] text-[var(--color-cream)]"
-      // Less runway than before — keeps the scrub natural without a long
-      // empty section. ~1.8 viewport heights is enough to pace 4s of video.
-      style={{ minHeight: "180vh" }}
+      // ~4 viewport heights of runway so that each pixel of scroll
+      // equates to a tiny slice of the 4-second video — the user has
+      // time to actually *see* each frame of the chain/tilt/lift
+      // animation instead of jumping past it.
+      style={{ minHeight: "400vh" }}
       aria-label="Venetian system: chain, tilt and lift"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
