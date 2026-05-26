@@ -104,6 +104,30 @@ export const ROLLER_FABRICS: Fabric[] = [
 ];
 
 /**
+ * VertiSheer Pivot fabric library — five vertical-louvre fabrics from the
+ * Kova catalogue, ranging from warm whites through silver and beige to
+ * ginger and dark anchor grey. Each entry carries the close-up swatch
+ * photo plus the room scene preview.
+ */
+export const VERTISHEER_FABRICS: Fabric[] = [
+  { name: "Pivot White",   hex: "#DED9D4", shadowHex: "#908D89", highlightHex: "#E9E6E3",
+    image: "/textures/vertisheer/pivot-white.jpg",
+    sceneImage: "/scenes/vertisheer/pivot-white.jpg" },
+  { name: "Pivot Silver",  hex: "#AEA9A5", shadowHex: "#716D6B", highlightHex: "#CAC7C4",
+    image: "/textures/vertisheer/pivot-silver.jpg",
+    sceneImage: "/scenes/vertisheer/pivot-silver.jpg" },
+  { name: "Pivot Beige",   hex: "#D5C6B4", shadowHex: "#8A8075", highlightHex: "#E3D9CE",
+    image: "/textures/vertisheer/pivot-beige.jpg",
+    sceneImage: "/scenes/vertisheer/pivot-beige.jpg" },
+  { name: "Pivot Ginger",  hex: "#BBA38D", shadowHex: "#79695B", highlightHex: "#D2C3B4",
+    image: "/textures/vertisheer/pivot-ginger.jpg",
+    sceneImage: "/scenes/vertisheer/pivot-ginger.jpg" },
+  { name: "Pivot Anchor",  hex: "#636164", shadowHex: "#403F41", highlightHex: "#99989A",
+    image: "/textures/vertisheer/pivot-anchor.jpg",
+    sceneImage: "/scenes/vertisheer/pivot-anchor.jpg" },
+];
+
+/**
  * Venetian wood / faux-wood finish library — physical W-coded samples from
  * the Kova catalogue. Photographed and colour-matched.
  */
@@ -148,6 +172,7 @@ export const VENETIAN_FABRICS: Fabric[] = [
 export function getFabricsForProduct(p: ProductId): Fabric[] {
   if (p === "venetian") return VENETIAN_FABRICS;
   if (p === "roller") return ROLLER_FABRICS;
+  if (p === "vertisheer") return VERTISHEER_FABRICS;
   return FABRICS;
 }
 
