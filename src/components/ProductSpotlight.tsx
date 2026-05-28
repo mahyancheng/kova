@@ -121,7 +121,6 @@ export function ProductSpotlight({
             <Reveal>
               <ImageSlot
                 ratio="4/5"
-                label={c.detailLabel}
                 tone={isInk ? "ink" : "cream"}
                 src={detailSrc}
                 alt={`${name}`}

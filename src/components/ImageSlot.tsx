@@ -17,7 +17,6 @@ const ratioClass: Record<Ratio, string> = {
 
 export function ImageSlot({
   ratio = "4/5",
-  label,
   caption,
   tone = "cream",
   src,
@@ -26,7 +25,6 @@ export function ImageSlot({
   children,
 }: {
   ratio?: Ratio;
-  label?: string;
   caption?: string;
   tone?: "cream" | "paper" | "sand" | "ink";
   src?: string;
@@ -103,12 +101,6 @@ export function ImageSlot({
           </>
         )}
 
-        {label && (
-          <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-[var(--color-cream)]/85 backdrop-blur-sm text-[var(--color-ink)] text-[0.7rem] tracking-widest uppercase px-2.5 py-1 rounded-full border border-[var(--color-line)]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-clay)]" />
-            {label}
-          </span>
-        )}
       </div>
 
       {caption && (

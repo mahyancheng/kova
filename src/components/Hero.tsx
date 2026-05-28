@@ -56,7 +56,6 @@ export function Hero() {
           <div className="mt-10 lg:mt-20 relative">
             <ImageSlot
               ratio="21/9"
-              label={t.hero.figureLabel}
               tone="sand"
               src="/showcase/hero-living.jpg"
               alt={t.hero.figureLabel}

@@ -48,7 +48,7 @@ export function Collection() {
                   className="group relative flex flex-col bg-[var(--color-paper)] border border-[var(--color-line)] rounded-md overflow-hidden hover:border-[var(--color-ink)] transition-colors h-full"
                 >
                   <div className="overflow-hidden">
-                    <ImageSlot ratio="4/5" tone="sand" label={item.accent} src={scenes[item.id]} alt={item.name}>
+                    <ImageSlot ratio="4/5" tone="sand" src={scenes[item.id]} alt={item.name}>
                       <Visual className="w-full h-full transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]" />
                     </ImageSlot>
                   </div>
