@@ -46,14 +46,14 @@ export function Fabrics() {
       </div>
 
       <div ref={scrollRef} className="snap-x-strong no-scrollbar overflow-x-auto">
-        <div className="flex gap-5 lg:gap-7 px-6 lg:px-10 pb-3">
+        <div className="flex gap-3 lg:gap-4 px-6 lg:px-10 pb-3">
           {swatches.map((s) => (
             <article
               key={s.name}
-              className="snap-start shrink-0 w-[260px] sm:w-[300px] lg:w-[340px] group"
+              className="snap-start shrink-0 w-[78px] sm:w-[90px] lg:w-[102px] group"
             >
               <div
-                className="relative aspect-[4/5] rounded-md border border-[var(--color-line)] overflow-hidden"
+                className="relative aspect-[4/5] rounded border border-[var(--color-line)] overflow-hidden"
                 style={{ backgroundColor: s.hex }}
               >
                 <div
@@ -72,21 +72,19 @@ export function Fabrics() {
                       "radial-gradient(120% 60% at 50% 0%, rgba(255,233,179,0.35) 0%, transparent 70%)",
                   }}
                 />
-                <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 bg-[var(--color-cream)]/85 backdrop-blur-sm text-[var(--color-ink)] text-[0.68rem] tracking-widest uppercase px-2.5 py-1 rounded-full">
-                  <span
-                    className="h-1.5 w-1.5 rounded-full"
-                    style={{ backgroundColor: s.hex, border: "1px solid rgba(0,0,0,0.15)" }}
-                  />
-                  {s.type}
-                </div>
               </div>
-              <div className="mt-4 flex items-baseline justify-between">
-                <h3 className="font-serif text-[1.25rem] text-[var(--color-ink)] tracking-tight">
+              <div className="mt-2">
+                <h3 className="font-serif text-[0.74rem] leading-tight tracking-tight text-[var(--color-ink)] truncate">
                   {s.name}
                 </h3>
-                <span className="text-[0.78rem] text-[var(--color-muted)]">{s.hex.toUpperCase()}</span>
+                <div className="mt-0.5 flex items-center justify-between gap-1">
+                  <span className="text-[0.52rem] tracking-wide uppercase text-[var(--color-clay-deep)] truncate">
+                    {s.type}
+                  </span>
+                  <span className="text-[0.52rem] text-[var(--color-muted)] shrink-0">{s.hex.toUpperCase()}</span>
+                </div>
+                <p className="text-[0.52rem] leading-tight text-[var(--color-muted)] truncate">{s.opacity}</p>
               </div>
-              <p className="mt-1 text-[0.86rem] text-[var(--color-muted)]">{s.opacity}</p>
             </article>
           ))}
         </div>
