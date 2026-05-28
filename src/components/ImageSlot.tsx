@@ -68,7 +68,7 @@ export function ImageSlot({
           <img
             src={src}
             alt={alt ?? ""}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
             loading="lazy"
           />
         )}

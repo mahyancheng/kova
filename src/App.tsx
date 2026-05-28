@@ -41,6 +41,7 @@ function Site() {
           tone="cream"
           {...t.products.roller}
           Detail={RollerBlind}
+          detailSrc="/showcase/greige-roller.jpg"
         />
 
         <ProductSpotlight
@@ -48,6 +49,7 @@ function Site() {
           tone="paper"
           {...t.products.venetian}
           Detail={VenetianBlind}
+          detailSrc="/showcase/white-venetian.jpg"
           reverse
         />
 
@@ -58,6 +60,7 @@ function Site() {
           tone="ink"
           {...t.products.vertisheer}
           Detail={VertiSheer}
+          detailSrc="/showcase/pivot-silver-vertisheer.jpg"
         />
 
         <Compare />
