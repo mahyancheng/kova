@@ -54,12 +54,15 @@ export function Hero() {
 
         <Reveal delay={300}>
           <div className="mt-10 lg:mt-20 relative">
-            <ImageSlot ratio="21/9" label={t.hero.figureLabel} tone="sand">
+            <ImageSlot
+              ratio="21/9"
+              label={t.hero.figureLabel}
+              tone="sand"
+              src="/showcase/hero-living.jpg"
+              alt={t.hero.figureLabel}
+            >
               <HeroVisual className="w-full h-full" />
             </ImageSlot>
-            <div className="absolute -bottom-3 lg:-bottom-4 left-1/2 -translate-x-1/2 px-2.5 lg:px-3 py-1 lg:py-1.5 rounded-full bg-[var(--color-cream)] border border-[var(--color-line)] text-[0.62rem] lg:text-[0.72rem] tracking-widest uppercase text-[var(--color-muted)] whitespace-nowrap">
-              {t.hero.photoHint}
-            </div>
           </div>
         </Reveal>
 
