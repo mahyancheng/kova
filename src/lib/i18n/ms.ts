@@ -12,6 +12,7 @@ export const ms: Dict = {
       { href: "#factory-direct", label: "Harga" },
     ],
     quote: "Dapatkan sebut harga",
+    journal: "Jurnal",
   },
   promo: {
     tag: "Terus dari kilang —",
@@ -442,6 +443,24 @@ export const ms: Dict = {
   imageSlot: {
     photo: "Foto",
     coming: "Akan datang",
+  },
+  blog: {
+    eyebrow: "Jurnal",
+    titleA: "Nota dari",
+    titleB: "atelier kami.",
+    intro:
+      "Catatan lapangan, kajian fabrik, dan rekod kerja yang kami hantar dari bengkel kami di Lembah Klang.",
+    readMore: "Baca",
+    loading: "Memuatkan…",
+    emptyTitle: "Belum ada penerbitan.",
+    emptyBody:
+      "Kami sedang menyiapkan siri pertama. Singgah semula sebentar lagi — atau minta sebut harga dan kami akan beritahu apabila ia tersedia.",
+    emptyUnconfigured:
+      "Jurnal ini disambungkan ke Supabase, tetapi projek belum bersambung. Setelah VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY ditetapkan, catatan akan muncul di sini secara automatik.",
+    notFoundTitle: "Catatan ini tidak dijumpai.",
+    notFoundBody:
+      "Ia mungkin telah dipindahkan atau dinyahterbit. Kembali ke indeks jurnal untuk lihat yang lain.",
+    backToIndex: "Kembali ke jurnal",
   },
   langToggle: {
     label: "Bahasa",

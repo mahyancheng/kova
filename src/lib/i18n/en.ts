@@ -10,6 +10,7 @@ export const en = {
       { href: "#factory-direct", label: "Pricing" },
     ],
     quote: "Get a quote",
+    journal: "Journal",
   },
   promo: {
     tag: "Factory-direct —",
@@ -468,6 +469,24 @@ export const en = {
   imageSlot: {
     photo: "Photo",
     coming: "Coming soon",
+  },
+  blog: {
+    eyebrow: "Journal",
+    titleA: "Notes from the",
+    titleB: "atelier.",
+    intro:
+      "Field notes, fabric studies and a quiet running record of what we ship from our Klang Valley workshop.",
+    readMore: "Read",
+    loading: "Loading…",
+    emptyTitle: "Nothing published yet.",
+    emptyBody:
+      "We're drafting the first set. Check back shortly — or sign up for a quote and we'll let you know when it's live.",
+    emptyUnconfigured:
+      "The journal is wired to Supabase but the project isn't connected yet. Once VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set, posts appear here automatically.",
+    notFoundTitle: "We couldn't find that entry.",
+    notFoundBody:
+      "It might have been moved or unpublished. Head back to the journal index to see what's there.",
+    backToIndex: "Back to the journal",
   },
   langToggle: {
     label: "Language",
