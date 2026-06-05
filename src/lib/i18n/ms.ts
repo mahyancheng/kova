@@ -32,8 +32,8 @@ export const ms: Dict = {
   hero: {
     chip: "Harga terus dari kilang — sampai 40% lebih murah dari runcit",
     eyebrow: "Kova Sun Shade · Koleksi 2026",
-    titleA: "Cahaya,",
-    titleB: "yang difikirkan.",
+    titleA: "Bidai dan langsir tingkap",
+    titleB: "untuk rumah anda.",
     body: "Bidai Roller, Bidai Venetian, dan VertiSheer — bidai dan langsir tingkap yang dibuat dengan teliti untuk rumah, pejabat, dan ruang-ruang tenang di antaranya.",
     ctaA: "Terokai koleksi",
     ctaB: "Tempah pengukuran",
