@@ -2,6 +2,14 @@ import type { Dict } from "./en";
 
 export const ms: Dict = {
   meta: { htmlLang: "ms", langLabel: "Bahasa Malaysia" },
+  seo: {
+    title:
+      "Kova Sun Shade — Bidai & Langsir Tingkap Malaysia · Bidai Roller, Venetian, VertiSheer",
+    description:
+      "Bidai dan langsir tingkap dibuat ikut ukuran rumah anda. Bidai Roller, Bidai Venetian dan VertiSheer terus dari kilang di Petaling Jaya — sehingga 40% lebih murah dari harga runcit.",
+    keywords:
+      "bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian, vertisheer, bidai dibuat ikut ukuran, bidai murah, bidai bermotor, bidai motor, bidai Petaling Jaya, bidai Klang Valley, bidai Selangor, roller blinds Malaysia, venetian blinds Malaysia",
+  },
   nav: {
     links: [
       { href: "#collection", label: "Koleksi" },
@@ -26,7 +34,7 @@ export const ms: Dict = {
     eyebrow: "Kova Sun Shade · Koleksi 2026",
     titleA: "Cahaya,",
     titleB: "yang difikirkan.",
-    body: "Bidai Roller, Bidai Venetian, dan VertiSheer — kemasan tingkap yang dibuat dengan teliti untuk rumah, pejabat, dan ruang-ruang tenang di antaranya.",
+    body: "Bidai Roller, Bidai Venetian, dan VertiSheer — bidai dan langsir tingkap yang dibuat dengan teliti untuk rumah, pejabat, dan ruang-ruang tenang di antaranya.",
     ctaA: "Terokai koleksi",
     ctaB: "Tempah pengukuran",
     figureLabel: "Hero · Roller dalam Linen Wheat",
@@ -403,7 +411,7 @@ export const ms: Dict = {
   },
   footer: {
     tagline:
-      "Bidai untuk ruang yang difikirkan. Direka, dibuat dan dipasang sendiri di Petaling Jaya, Malaysia.",
+      "Bidai dan langsir tingkap untuk rumah anda — direka, dibuat dan dipasang sendiri di Petaling Jaya, Malaysia.",
     cols: [
       {
         title: "Koleksi",

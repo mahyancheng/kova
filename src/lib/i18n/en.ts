@@ -1,5 +1,13 @@
 export const en = {
   meta: { htmlLang: "en", langLabel: "English" },
+  seo: {
+    title:
+      "Kova Sun Shade — Window Blinds Malaysia · Roller, Venetian & VertiSheer",
+    description:
+      "Factory-direct roller blinds, venetian blinds and VertiSheer made to measure in Petaling Jaya. Bidai dan langsir tingkap untuk rumah anda — up to 40% less than retail.",
+    keywords:
+      "roller blinds Malaysia, venetian blinds Malaysia, vertisheer, factory direct blinds, motorised blinds, made to measure blinds, KL blinds, Petaling Jaya, Klang Valley, bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian",
+  },
   nav: {
     links: [
       { href: "#collection", label: "Collection" },
