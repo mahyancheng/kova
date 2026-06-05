@@ -405,7 +405,7 @@ export const en = {
     hours: "Hours",
     service: "Service",
     studioAddr: "No. 14, Jalan Bayu 4\nPetaling Jaya, Malaysia",
-    directInfo: "hello@kovasunshade.com\n+60 12 345 6789",
+    directInfo: "info@kovasunshade.com\n+60 12 345 6789",
     hoursInfo: "Mon — Fri, 9 to 6\nSaturday by appointment",
     serviceInfo: "Klang Valley & beyond\nTrade & residential",
     nameLabel: "Your name",
@@ -452,7 +452,7 @@ export const en = {
         items: [
           ["Mon — Fri, 9 to 6", "#contact"],
           ["Sat by appointment", "#contact"],
-          ["hello@kovasunshade.com", "mailto:hello@kovasunshade.com"],
+          ["info@kovasunshade.com", "mailto:info@kovasunshade.com"],
         ] as [string, string][],
       },
     ],

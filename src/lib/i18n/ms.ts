@@ -17,38 +17,38 @@ export const ms: Dict = {
   promo: {
     tag: "Terus dari kilang —",
     title: "Tiada orang tengah, tiada caj bilik pameran.",
-    note: " · Dapatkan harga sehingga 40% lebih rendah daripada harga runcit.",
-    cta: "Bagaimana ia berfungsi",
+    note: " · Harga sampai 40% lebih murah dari runcit.",
+    cta: "Macam mana ia berfungsi",
     dismiss: "Tutup pengumuman",
   },
   hero: {
-    chip: "Harga terus dari kilang — sehingga 40% lebih rendah daripada runcit",
+    chip: "Harga terus dari kilang — sampai 40% lebih murah dari runcit",
     eyebrow: "Kova Sun Shade · Koleksi 2026",
     titleA: "Cahaya,",
-    titleB: "dengan pertimbangan.",
-    body: "Bidai Roller, Bidai Venetian dan VertiSheer — perabot tingkap yang dibuat dengan teliti untuk rumah, pejabat dan ruang-ruang tenang di antaranya.",
+    titleB: "yang difikirkan.",
+    body: "Bidai Roller, Bidai Venetian, dan VertiSheer — kemasan tingkap yang dibuat dengan teliti untuk rumah, pejabat, dan ruang-ruang tenang di antaranya.",
     ctaA: "Terokai koleksi",
     ctaB: "Tempah pengukuran",
     figureLabel: "Hero · Roller dalam Linen Wheat",
     photoHint: "Letakkan foto hero anda di sini ✺",
     stats: [
-      ["12 thn", "Mereka perabot tingkap sejak 2014."],
-      ["3", "Produk pilihan, dibuat untuk bertahan."],
+      ["12 thn", "Mereka bidai sejak 2014."],
+      ["3", "Produk pilihan, dibuat untuk tahan lama."],
       ["120+", "Kain, kemasan & tahap kelegapan."],
-      ["48 jam", "Balasan studio, untuk setiap pertanyaan."],
+      ["48 jam", "Studio balas — setiap pertanyaan."],
     ],
   },
   factory: {
     eyebrow: "Mengapa harga kami begitu rendah",
     titleA: "Terus dari mesin tenun.",
     titleB: "Bukan bilik pameran.",
-    body: "Kebanyakan bidai yang anda lihat menanggung empat lapisan caj tambahan — pengedar, pemborong, peruncit, bilik pameran. Kami mereka, membuat dan memasang sendiri. Kerja yang sama. Harga yang berbeza.",
+    body: "Kebanyakan bidai yang anda jumpa di luar sana kena empat lapis caj tambahan — pengedar, pemborong, peruncit, bilik pameran. Kami reka, buat dan pasang sendiri. Kerja yang sama; harga yang lain.",
     ctaA: "Dapatkan sebut harga terus dari kilang",
     ctaB: "Bagaimana ia berfungsi",
-    chain1Label: "Kebanyakan bidai sampai kepada anda melalui",
+    chain1Label: "Kebanyakan bidai sampai ke rumah anda melalui",
     chain1Title: "Empat tangan tambahan.",
-    chain2Label: "Kova sampai kepada anda melalui",
-    chain2Title: "Satu bengkel.",
+    chain2Label: "Kova sampai ke rumah anda melalui",
+    chain2Title: "Satu bengkel sahaja.",
     nodes: {
       mill: "Kilang Tenun",
       distributor: "Pengedar",
@@ -59,42 +59,42 @@ export const ms: Dict = {
       kova: "Bengkel Kova",
     },
     stats: [
-      ["Sehingga 40%", "Lebih rendah daripada harga bilik pameran biasa."],
+      ["Sampai 40%", "Lebih murah dari harga bilik pameran biasa."],
       ["0", "Pengedar, pemborong, atau yuran francais."],
       ["1", "Bengkel — kami buat dan pasang sendiri."],
       ["Sama", "Kilang, kain dan perkakas yang sama seperti jenama premium."],
     ],
     closerA: "Kain yang sama. Perkakas yang sama.",
-    closerB: "Lebih sedikit tangan. Harga yang lebih baik.",
+    closerB: "Kurang tangan tengah, harga yang lebih jujur.",
     closerCta: "Minta senarai harga kami",
   },
   philosophy: {
-    eyebrow: "Sepatah kata tentang apa yang kami buat",
+    eyebrow: "Sepatah kata tentang kerja kami",
     statement:
-      "Kami melayan cahaya sebagai bahan — sesuatu yang boleh dibentuk, dilembutkan, dan dibenarkan masuk mengikut terma anda. Bidai kami direka untuk lenyap ke dalam ruang, meninggalkan hanya perasaan yang terbentuk.",
+      "Kami anggap cahaya sebagai bahan — sesuatu yang boleh dibentuk, dilembutkan, dan dibenarkan masuk ikut terma anda. Bidai kami direka untuk hilang ke dalam ruang, tinggalkan cuma rasa yang terbentuk.",
     points: [
       {
         n: "01",
-        title: "Kain yang teliti",
-        body: "Tekstil sunscreen, dim-out, dan blackout dipilih kerana cara ia mengekalkan warna dan bertahan di bawah cahaya matahari sebenar.",
+        title: "Kain yang dipilih teliti",
+        body: "Kain sunscreen, dim-out, dan blackout dipilih kerana cara warnanya tahan di bawah matahari Malaysia yang sebenar — bukan dalam katalog studio.",
       },
       {
         n: "02",
-        title: "Mekanisme yang senyap",
-        body: "Operasi lancar yang lenyap ke latar belakang. Pilihan motorisasi, dibuat untuk didengar hanya bila anda mahu.",
+        title: "Mekanisma yang senyap",
+        body: "Operasi yang lenyap ke latar belakang. Ada pilihan bermotor — bunyi cuma keluar bila anda nak ia keluar.",
       },
       {
         n: "03",
         title: "Diukur dengan tepat",
-        body: "Setiap tingkap diukur dengan tangan. Dipotong dan dipasang untuk muat dengan bukaan anda, bukan sebaliknya.",
+        body: "Setiap tingkap kami ukur sendiri. Dipotong dan dipasang supaya muat bukaan rumah anda, bukan sebaliknya.",
       },
     ],
   },
   collection: {
     eyebrow: "Koleksi",
-    titleA: "Tiga rangkaian.",
+    titleA: "Tiga jenis bidai.",
     titleB: "Satu idea yang tenang.",
-    body: "Setiap satu dibuat mengikut spesifikasi — mulakan dengan jenis, kemudian pilih kain, kelegapan dan mekanisme yang sesuai dengan ruang anda.",
+    body: "Setiap satu dibuat ikut ukuran — mulakan dengan jenis, kemudian pilih kain, kelegapan dan mekanisma yang sesuai dengan ruang anda.",
     badge: "Terus dari kilang",
     learnMore: "Ketahui lanjut",
     items: [
@@ -103,7 +103,7 @@ export const ms: Dict = {
         eyebrow: "01 — Roller",
         name: "Bidai Roller",
         blurb:
-          "Satu helaian kain yang dipilih dengan teliti. Blackout, dim-out, atau sunscreen — pilihan anda.",
+          "Satu helai kain dipilih teliti. Blackout, dim-out atau sunscreen — ikut anda.",
         accent: "Linen Wheat",
       },
       {
@@ -111,7 +111,7 @@ export const ms: Dict = {
         eyebrow: "02 — Venetian",
         name: "Bidai Venetian",
         blurb:
-          "Bilah mendatar yang memiringkan cahaya dari matahari penuh kepada bayang lembut.",
+          "Bilah mendatar yang boleh diatur — dari matahari penuh kepada bayang lembut.",
         accent: "Smoked Oak",
       },
       {
@@ -119,7 +119,7 @@ export const ms: Dict = {
         eyebrow: "03 — VertiSheer",
         name: "VertiSheer",
         blurb:
-          "Bilah kain yang mengubah cahaya siang menjadi sesuatu yang lebih hampir kepada suasana.",
+          "Bilah kain yang ubah cahaya siang jadi suasana — bukan cuma cahaya kasar.",
         accent: "Bone Sheer",
       },
     ],
@@ -129,15 +129,15 @@ export const ms: Dict = {
     "Dim-out",
     "Sunscreen",
     "Penapis cahaya",
-    "Motorisasi",
+    "Bermotor",
     "Tanpa tali",
     "Standard profesional",
-    "Dibuat ikut ukuran",
+    "Ikut ukuran tingkap anda",
   ],
   productCommon: {
     ctaA: "Dapatkan sebut harga",
     ctaB: "Spesifikasi & kain",
-    whyEyebrow: "Sebab orang memilihnya",
+    whyEyebrow: "Sebab orang pilih kami",
     whyTitle: "Dibuat untuk lenyap ke dalam bilik.",
     perfectForLabel: "Sesuai untuk",
     detailLabel: "Perincian",
@@ -147,40 +147,40 @@ export const ms: Dict = {
       number: "01",
       name: "Bidai Roller",
       figureCaption:
-        "Bidai Roller — kajian ilustrasi. Kemasan akhir berbeza mengikut kain dan kelegapan.",
+        "Bidai Roller — lakaran ilustrasi. Kemasan akhir berbeza mengikut kain dan kelegapan.",
       detailCaption:
-        "Bidai Roller — kajian perincian. Pilihan kain, tenunan dan kemasan tersedia.",
+        "Bidai Roller — lakaran perincian. Pilihan kain, tenunan dan kemasan tersedia.",
       taglineA: "Ringkas, moden,",
-      taglineB: "praktikal dengan senyap.",
+      taglineB: "praktikal tanpa banyak cerita.",
       body: [
-        "Salah satu pilihan penutup tingkap paling popular untuk rumah dan ruang komersial — bersih, minimum, dan direka untuk masuk ke hampir mana-mana interior tanpa kekecohan.",
-        "Tersedia dalam kain blackout, dim-out, sunscreen dan penapis cahaya — supaya ruang anda kelihatan seperti yang anda mahukan.",
+        "Antara pilihan bidai paling banyak digunakan untuk rumah dan ruang komersial — bersih, minimum, dan mudah masuk ke hampir mana-mana gaya interior tanpa menonjol sangat.",
+        "Ada pilihan kain blackout, dim-out, sunscreen, dan penapis cahaya — bilik anda kekal nampak macam yang anda mahu, ikut waktu.",
       ],
       features: [
         {
-          title: "Rupa yang bersih dan moden",
+          title: "Rupa bersih, moden",
           detail:
-            "Satu helaian kain yang dipilih dengan teliti. Tiada bilah, tiada lipatan, tiada gangguan visual — hanya warna yang anda pilih, duduk di tempat yang anda mahu.",
+            "Satu helai kain yang dipilih dengan teliti. Tiada bilah, tiada lipatan, tiada gangguan visual — cuma warna yang anda pilih, di tempat yang anda mahu.",
         },
         {
-          title: "Operasi yang lancar dan mudah",
+          title: "Operasi senang, lancar",
           detail:
-            "Rantai, spring, atau motorisasi. Mekanismenya lenyap ke latar belakang — anda hanya perasan apabila ia tiada.",
+            "Rantai, spring, atau bermotor. Mekanisma menghilang ke latar — anda cuma perasan bila ia tak ada.",
         },
         {
-          title: "Kawalan cahaya & haba yang sangat baik",
+          title: "Kawalan cahaya dan haba yang betul-betul berkesan",
           detail:
-            "Daripada blackout sepenuhnya kepada percikan cahaya siang yang lembut. Kain berlapis membenarkan anda menapis UV tanpa kehilangan pemandangan.",
+            "Dari blackout penuh sampailah cahaya siang yang lembut. Kain berlapis bantu tapis sinaran UV tanpa hilangkan pemandangan luar.",
         },
         {
           title: "Sesuai untuk mana-mana bilik",
           detail:
-            "Rumah, pejabat, kafe, runcit. Ketenangan yang sama dibaca berbeza dalam setiap ruang, tetapi sentiasa kekal tenang.",
+            "Rumah, pejabat, kafe, kedai. Bidai yang sama, tapi rasa berbeza di setiap ruang — yang penting, ia kekal tenang.",
         },
         {
-          title: "Tahan lama & senang dijaga",
+          title: "Tahan lama, senang dijaga",
           detail:
-            "Kain yang dipilih untuk mengekalkan warna di bawah cahaya matahari sebenar. Cukup sapu, tahun demi tahun.",
+            "Kain dipilih supaya warnanya tahan lama walaupun terdedah pada matahari langsung. Cukup sapu dengan kain — tahun demi tahun.",
         },
       ],
       perfectFor: [
@@ -195,39 +195,39 @@ export const ms: Dict = {
       number: "02",
       name: "Bidai Venetian",
       figureCaption:
-        "Bidai Venetian — kajian ilustrasi. Kemasan akhir berbeza mengikut kain dan kelegapan.",
-      detailCaption: "Bidai Venetian — kajian perincian.",
+        "Bidai Venetian — lakaran ilustrasi. Kemasan akhir berbeza mengikut kain dan kelegapan.",
+      detailCaption: "Bidai Venetian — lakaran perincian.",
       taglineA: "Bilah yang anggun,",
-      taglineB: "cahaya tepat yang anda mahu.",
+      taglineB: "cahaya tepat ikut kemahuan anda.",
       body: [
-        "Penutup tingkap klasik yang menggabungkan keanggunan dengan kawalan cahaya yang tepat. Bilah mendatar boleh dimiringkan ke mana-mana sudut — cahaya matahari dan privasi menjadi pilihan anda, bukan sesuatu yang berlaku kepada anda.",
-        "Bahan moden, klasik, atau industri. Silhouette yang sama tenang itu sesuai di ketiga-tiganya.",
+        "Bidai klasik yang menggabungkan keanggunan dengan kawalan cahaya yang tepat. Bilah mendatar boleh dimiringkan pada mana-mana sudut — cahaya matahari dan privasi jadi pilihan anda, bukan kejadian terpaksa.",
+        "Pilihan bahan moden, klasik, atau industri — bentuk yang sama tenang itu sesuai untuk ketiga-tiganya.",
       ],
       features: [
         {
-          title: "Boleh dilaras sehingga ke darjah",
+          title: "Boleh dilaras ikut darjah",
           detail:
-            "Miringkan bilah dengan rasa: kurangkan silau tanpa menutup bilik gelap sepenuhnya. Dikalibrasi dengan tangan semasa pemasangan.",
+            "Miringkan bilah ikut rasa — kurangkan silau matahari petang tanpa terus gelapkan bilik. Setiap set dikalibrasi tangan masa pemasangan.",
         },
         {
-          title: "Anggun & klasik",
+          title: "Anggun dan tak lapuk dek zaman",
           detail:
-            "Silhouette yang telah berkhidmat selama beberapa dekad. Ia tidak akan menjadikan bilik anda kelihatan ketinggalan zaman.",
+            "Bentuk yang sudah pakai puluhan tahun dan tak pernah jadi outdated. Bilik anda takkan kelihatan ketinggalan zaman walau sepuluh tahun lagi.",
         },
         {
-          title: "Privasi + pengaliran udara",
+          title: "Privasi + udara segar",
           detail:
-            "Dimiringkan tertutup, bilik adalah milik anda. Dimiringkan terbuka, udara bergerak. Hanya sedikit penutup tingkap yang melakukan kedua-duanya dengan bersih.",
+            "Miringkan tutup — bilik jadi milik anda. Miringkan buka — angin lalu, cahaya masih masuk. Bidai jenis lain susah nak buat dua-dua sekali gus.",
         },
         {
-          title: "Mudah untuk hidup bersama",
+          title: "Senang dijaga",
           detail:
-            "Sapu bilah, tidak perlu seterika semula. Aluminium, kayu dan kayu palsu yang jujur.",
+            "Cukup sapu bilah — tak payah basuh atau seterika macam langsir. Aluminium, kayu dan kayu palsu yang jujur.",
         },
         {
-          title: "Interior moden & klasik",
+          title: "Sesuai moden, sesuai klasik",
           detail:
-            "Smoked oak dalam ruang belajar klasik; aloi berus dalam studio berdinding kaca. Keluarga yang sama. Perangai yang berbeza.",
+            "Smoked oak dalam ruang baca klasik; aloi berus untuk studio berdinding kaca. Keluarga yang sama — cuma perangai berbeza ikut rumah.",
         },
       ],
       perfectFor: [
@@ -242,39 +242,39 @@ export const ms: Dict = {
       number: "03",
       name: "VertiSheer",
       figureCaption:
-        "VertiSheer — kajian ilustrasi. Kemasan akhir berbeza mengikut kain dan kelegapan.",
-      detailCaption: "VertiSheer — kajian perincian.",
+        "VertiSheer — lakaran ilustrasi. Kemasan akhir berbeza mengikut kain dan kelegapan.",
+      detailCaption: "VertiSheer — lakaran perincian.",
       taglineA: "Lembut seperti langsir.",
       taglineB: "Tepat seperti bidai.",
       body: [
-        "Perabot tingkap premium dan moden yang menggabungkan kelembutan langsir dengan fungsi bidai. Bilah kain dan bahan sheer mengimbangi cahaya semula jadi, privasi dan keanggunan yang tenang.",
-        "Sangat menawan untuk tingkap besar, pintu gelongsor dan ruang hidup terbuka yang tidak benar-benar sesuai dengan langsir.",
+        "Kemasan tingkap premium yang gabungkan kelembutan langsir dengan fungsi bidai. Bilah kain dan bahan sheer imbangkan cahaya, privasi dan keanggunan tanpa banyak hal.",
+        "Sangat sesuai untuk tingkap besar, pintu gelongsor dan ruang tamu konsep terbuka — tempat-tempat yang langsir biasa selalunya tak cukup muat.",
       ],
       features: [
         {
-          title: "Rupa seperti langsir",
+          title: "Nampak macam langsir",
           detail:
-            "Aliran kain tanpa beratnya. Dari seberang bilik, ia kelihatan lembut — tanpa kehilangan ketepatan di sebaliknya.",
+            "Aliran kain tanpa berat langsir biasa. Dari seberang bilik, ia nampak lembut — tapi ketepatan bidai tetap ada di belakang.",
         },
         {
-          title: "Penapisan cahaya semula jadi yang lembut",
+          title: "Tapisan cahaya yang lembut",
           detail:
-            "Panel sheer mengubah cahaya matahari terus menjadi sesuatu yang lebih menyerupai suasana. Bilik kekal cerah. Kekerasannya hilang.",
+            "Panel sheer ubah cahaya matahari yang kuat jadi suasana yang lebih sejuk mata. Bilik kekal cerah, cuma kekerasan cahaya itu hilang.",
         },
         {
-          title: "Reka bentuk moden dan elegan",
+          title: "Reka bentuk moden, elegan",
           detail:
-            "Irama menegak yang tenang. Komposisi yang anda boleh tentukan sekali dan hidup bersamanya selama satu dekad.",
+            "Irama menegak yang tenang. Komposisi yang anda set sekali dan boleh duduk dengannya bertahun-tahun lamanya.",
         },
         {
-          title: "Dibuat untuk bukaan besar",
+          title: "Memang untuk bukaan besar",
           detail:
-            "Pintu gelongsor, dinding kaca, tingkap dua tingkat. Trek dibina untuk jarak sehingga 6m.",
+            "Pintu gelongsor, dinding kaca, tingkap dua tingkat. Trek dibina untuk jarak sehingga 6 meter.",
         },
         {
-          title: "Tekstur & kontemporari",
+          title: "Tekstur dan rasa kontemporari",
           detail:
-            "Bilah campuran linen yang mengekalkan sentuhannya. Tersedia dalam lima warna tenang untuk 2026.",
+            "Bilah campuran linen yang kekal kemas walau ditarik ribuan kali. Ada lima warna tenang untuk koleksi 2026.",
         },
       ],
       perfectFor: [
@@ -303,7 +303,7 @@ export const ms: Dict = {
     ],
     swipeHint: "Leret untuk bandingkan →",
     footer:
-      "Ketiga-tiga rangkaian dibuat sepenuhnya mengikut ukuran. Motorisasi adalah pilihan pada setiap model — bateri, wayar tetap, atau serasi HomeKit.",
+      "Ketiga-tiga jenis bidai dibuat sepenuhnya ikut ukuran. Pilihan bermotor ada untuk setiap model — bateri, wayar tetap, atau serasi HomeKit.",
   },
   fabrics: {
     eyebrow: "Perpustakaan kain",
@@ -345,12 +345,12 @@ export const ms: Dict = {
       "Peta ringkas padanan yang kami cadangkan cukup kerap untuk tahu ia berkesan. Anggap sebagai titik permulaan.",
     pairLabel: "Padanan",
     items: [
-      { title: "Ruang tamu", note: "Cahaya siang lembut untuk bahagian hari semua orang berada di rumah.", pair: "Roller · Sunscreen 5%" },
-      { title: "Bilik tidur", note: "Blackout penuh apabila anda mahukannya. Tiada apa yang menghalang apabila anda tidak mahu.", pair: "Roller · Blackout" },
-      { title: "Pejabat", note: "Kurangkan silau, kekalkan pemandangan. Palet neutral untuk mengekalkan tumpuan.", pair: "Venetian · Aluminium" },
-      { title: "Bilik mesyuarat", note: "Miring bilah, malapkan bilik — tanpa menjadikannya satu produksi.", pair: "Venetian · Kayu" },
-      { title: "Kafe & kedai", note: "Menarik dari luar, selesa di dalam. Sepanjang hari.", pair: "Roller · Sunscreen 3%" },
-      { title: "Pintu gelongsor & dinding kaca", note: "Kain lembut seperti langsir yang bergerak seperti bangunan itu sendiri.", pair: "VertiSheer" },
+      { title: "Ruang tamu", note: "Cahaya siang lembut untuk waktu petang masa semua orang balik rumah.", pair: "Roller · Sunscreen 5%" },
+      { title: "Bilik tidur", note: "Blackout penuh bila anda mahu. Tak menghalang apa-apa bila anda tak mahu.", pair: "Roller · Blackout" },
+      { title: "Pejabat", note: "Kurangkan silau, kekalkan pemandangan. Palet neutral supaya fokus kerja tak terganggu.", pair: "Venetian · Aluminium" },
+      { title: "Bilik mesyuarat", note: "Miringkan bilah, malapkan bilik — tanpa banyak hal masa presentation.", pair: "Venetian · Kayu" },
+      { title: "Kafe & kedai", note: "Menarik dari luar, selesa di dalam — sepanjang hari.", pair: "Roller · Sunscreen 3%" },
+      { title: "Pintu gelongsor & dinding kaca", note: "Kain lembut macam langsir, gerakan kemas macam bangunan itu sendiri.", pair: "VertiSheer" },
     ],
   },
   process: {
@@ -360,18 +360,18 @@ export const ms: Dict = {
     intro:
       "Proses yang ringkas dan teliti — sama ada untuk satu tingkap atau projek tiga puluh unit.",
     steps: [
-      { n: "01", title: "Perbualan", body: "Kami mulakan dengan apa fungsi bilik dan bagaimana cahaya masuk. Belum perlu katalog lagi." },
-      { n: "02", title: "Pengukuran", body: "Di lokasi, dengan tangan. Setiap tingkap dicatat dengan foto dan nota." },
-      { n: "03", title: "Spesifikasi", body: "Set kecil kain dan mekanisme yang dipilih untuk bilik anda — bukan semuanya." },
-      { n: "04", title: "Pemasangan", body: "Dipasang dalam satu lawatan. Kami kemaskan. Anda kembali ke bilik yang lebih tenang." },
+      { n: "01", title: "Perbualan", body: "Kami mulakan dengan apa fungsi bilik anda dan bagaimana cahaya masuk. Belum perlu lihat katalog lagi." },
+      { n: "02", title: "Pengukuran", body: "Di lokasi, ukur tangan-tangan. Setiap tingkap dicatat dengan foto dan nota." },
+      { n: "03", title: "Spesifikasi", body: "Set kecil kain dan mekanisma yang dipilih khas untuk bilik anda — bukan terus tunjuk semua." },
+      { n: "04", title: "Pemasangan", body: "Dipasang dalam satu lawatan. Kami kemaskan, anda balik masuk ke bilik yang lebih tenang." },
     ],
   },
   contact: {
     eyebrow: "Beritahu kami tentang tingkap anda",
-    titleA: "Kami ingin",
-    titleB: "melihat ruang anda.",
+    titleA: "Kami nak lihat",
+    titleB: "ruang anda.",
     intro:
-      "Hantar kami beberapa ayat — orientasi, apa yang menyusahkan tentang cahaya, bagaimana anda mahu bilik itu terasa. Kami akan balas dengan beberapa pilihan.",
+      "Hantar beberapa ayat — orientasi tingkap, masalah cahaya yang anda rasa, dan bagaimana anda nak bilik itu terasa. Kami balas dengan beberapa pilihan dalam masa 48 jam.",
     pricingChipA: "Sebut harga datang dengan harga terus dari kilang —",
     pricingChipB: "tiada caj bilik pameran.",
     studio: "Studio",
@@ -379,14 +379,14 @@ export const ms: Dict = {
     hours: "Waktu",
     service: "Khidmat",
     studioAddr: "No. 14, Jalan Bayu 4\nPetaling Jaya, Malaysia",
-    directInfo: "hello@kovasunshade.com\n+60 12 345 6789",
+    directInfo: "info@kovasunshade.com\n+60 12 345 6789",
     hoursInfo: "Isnin — Jumaat, 9 hingga 6\nSabtu dengan janji temu",
     serviceInfo: "Lembah Klang & sekitarnya\nProfesional & kediaman",
     nameLabel: "Nama anda",
     namePh: "cth. Aisha Rahman",
     phoneLabel: "Nombor telefon",
     phonePh: "cth. +60 12 345 6789",
-    phoneHint: "WhatsApp atau panggilan — cara terpantas untuk dihubungi",
+    phoneHint: "WhatsApp atau panggilan — cara paling cepat kami sampai kepada anda",
     emailLabel: "Emel",
     emailOptional: "pilihan",
     emailPh: "anda@contoh.com",
@@ -399,11 +399,11 @@ export const ms: Dict = {
     submit: "Hantar pertanyaan",
     sentTitle: "Terima kasih — kami terima.",
     sentBody:
-      "Seseorang dari studio akan menghubungi anda dalam satu hari bekerja untuk mengatur pengukuran.",
+      "Orang studio kami akan hubungi anda dalam satu hari bekerja untuk atur tarikh pengukuran.",
   },
   footer: {
     tagline:
-      "Perabot tingkap untuk ruang yang dipertimbangkan. Direka dan dipasang dengan teliti di Petaling Jaya, Malaysia.",
+      "Bidai untuk ruang yang difikirkan. Direka, dibuat dan dipasang sendiri di Petaling Jaya, Malaysia.",
     cols: [
       {
         title: "Koleksi",
@@ -426,7 +426,7 @@ export const ms: Dict = {
         items: [
           ["Isn — Jum, 9 hingga 6", "#contact"],
           ["Sab dengan janji", "#contact"],
-          ["hello@kovasunshade.com", "mailto:hello@kovasunshade.com"],
+          ["info@kovasunshade.com", "mailto:info@kovasunshade.com"],
         ],
       },
     ],
@@ -472,32 +472,32 @@ export const ms: Dict = {
     titleA: "Rantai, miring,",
     titleB: "dan angkat.",
     intro:
-      "Setiap Bidai Venetian kami berkongsi satu mekanisme yang tenang. Tarik rantai, miringkan bilah, angkat keseluruhannya — dikalibrasi supaya kekal lancar selepas sedekad.",
+      "Setiap Bidai Venetian kami kongsi satu mekanisma yang tenang. Tarik rantai, miringkan bilah, angkat semuanya — dikalibrasi supaya kekal lancar walaupun selepas bertahun-tahun.",
     stages: [
       {
         label: "Rantai",
         title: "Tarik",
-        body: "Rantai gelung berterusan yang mengoperasikan bilah dengan dua jari.",
+        body: "Rantai gelungan berterusan — operasi bilah cukup dengan dua jari.",
       },
       {
         label: "Miring",
         title: "Sudut",
-        body: "Setiap bilah berputar pada pangsi keluli — buka sepenuhnya, tutup sepenuhnya, atau di mana-mana antaranya.",
+        body: "Setiap bilah pusing pada pangsi keluli — buka penuh, tutup penuh, atau di mana-mana antaranya.",
       },
       {
         label: "Angkat",
         title: "Naikkan",
-        body: "Pengunci tali angkat supaya bidai kekal di tempat anda berhenti menarik.",
+        body: "Pengunci tali angkat — bidai kekal di tempat anda berhenti menarik. Tak akan jatuh sendiri.",
       },
     ],
-    caption: "Semua Bidai Venetian Kova menggunakan sistem rantai · miring · angkat yang sama.",
+    caption: "Semua Bidai Venetian Kova guna sistem rantai · miring · angkat yang sama.",
   },
   configurator: {
-    eyebrow: "Reka anda sendiri",
+    eyebrow: "Reka sendiri",
     titleA: "Bina bidai anda.",
-    titleB: "Lihat ia dalam bilik.",
+    titleB: "Lihat dalam bilik betul.",
     intro:
-      "Pilih jenis, pilih kain, pilih kelegapan. Pratonton akan dikemas kini secara langsung — bila ia kelihatan tepat, hantar kepada kami untuk sebut harga.",
+      "Pilih jenis, pilih kain, pilih kelegapan. Pratonton akan dikemas kini terus — bila ia nampak betul, hantar kepada kami untuk sebut harga.",
     productLabel: "Jenis",
     products: {
       roller: "Roller",
@@ -513,10 +513,10 @@ export const ms: Dict = {
       "light-filtering": "Penapis cahaya",
     },
     opacityHint: {
-      blackout: "Privasi penuh. Tiada cahaya menembus kain.",
-      "dim-out": "Mengurangkan cahaya tanpa menggelapkan bilik sepenuhnya.",
-      sunscreen: "Mengurangkan silau, mengekalkan pemandangan.",
-      "light-filtering": "Basuhan cahaya siang yang lembut dan sekata.",
+      blackout: "Privasi penuh — cahaya luar langsung tak masuk.",
+      "dim-out": "Kurangkan cahaya tanpa gelapkan bilik sepenuhnya.",
+      sunscreen: "Kurangkan silau, pemandangan luar masih nampak.",
+      "light-filtering": "Cahaya siang yang lembut dan sekata, masuk perlahan.",
     },
     summaryLabel: "Konfigurasi anda",
     cta: "Dapatkan sebut harga untuk konfigurasi ini",
