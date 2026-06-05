@@ -70,10 +70,10 @@ export function Nav() {
             </Link>
           ))}
           <Link
-            to="/blog"
+            to={pathname.startsWith("/bidai") ? "/bidai/jurnal" : "/blog"}
             className={
               "text-[0.875rem] transition-colors whitespace-nowrap " +
-              (pathname.startsWith("/blog")
+              (pathname.startsWith("/blog") || pathname.startsWith("/bidai/jurnal")
                 ? "text-[var(--color-clay)]"
                 : "text-[var(--color-ink-soft)] hover:text-[var(--color-clay)]")
             }

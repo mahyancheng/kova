@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Nav } from "@/components/Nav";
@@ -16,7 +16,10 @@ import { getPost, formatPostDate, type Post } from "@/lib/blog";
  */
 export function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
+  const { pathname } = useLocation();
   const t = useT();
+  // Back link returns to the index in the matching language.
+  const blogIndex = pathname.startsWith("/bidai") ? "/bidai/jurnal" : "/blog";
   const [post, setPost] = useState<Post | null | "missing">(null);
 
   useEffect(() => {
@@ -45,7 +48,7 @@ export function BlogPost() {
       <main className="pt-28 pb-24">
         <div className="max-w-[760px] mx-auto px-5 sm:px-6 lg:px-10">
           <Link
-            to="/blog"
+            to={blogIndex}
             className="inline-flex items-center gap-1.5 text-[0.78rem] tracking-widest uppercase text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors"
           >
             <span aria-hidden>←</span>

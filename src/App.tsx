@@ -23,6 +23,9 @@ export default function App() {
             <Route path="/bidai" element={<Home />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            {/* BM blog counterparts — same components, language follows URL. */}
+            <Route path="/bidai/jurnal" element={<Blog />} />
+            <Route path="/bidai/jurnal/:slug" element={<BlogPost />} />
             {/* Unknown path → land on home rather than a hard 404. */}
             <Route path="*" element={<Home />} />
           </Routes>

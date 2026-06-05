@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
@@ -14,6 +14,10 @@ import { isSupabaseConfigured } from "@/lib/supabase";
  */
 export function Blog() {
   const t = useT();
+  const { pathname } = useLocation();
+  // Keep post links on the language-matched URL prefix so a BM visitor
+  // who opens a post lands on /bidai/jurnal/<slug>, not /blog/<slug>.
+  const blogBase = pathname.startsWith("/bidai") ? "/bidai/jurnal" : "/blog";
   const [posts, setPosts] = useState<PostSummary[] | null>(null);
 
   useEffect(() => {
@@ -68,7 +72,7 @@ export function Blog() {
                   <Reveal key={p.slug} delay={i * 80}>
                     <li>
                       <Link
-                        to={`/blog/${p.slug}`}
+                        to={`${blogBase}/${p.slug}`}
                         className="group flex flex-col h-full bg-[var(--color-paper)] border border-[var(--color-line)] rounded-md overflow-hidden hover:border-[var(--color-ink)] transition-colors"
                       >
                         {p.cover_image_url ? (

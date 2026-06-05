@@ -50,20 +50,33 @@ export function SeoHead() {
 
     // --- Canonical + hreflang pair (route-driven) ------------------
     const origin = window.location.origin;
-    const enHref = `${origin}/`;
-    const msHref = `${origin}/bidai`;
 
-    // Canonical: the URL the visitor is actually on. For /blog/* we keep
-    // the path; everything that ultimately renders Home maps onto either
-    // / (EN) or /bidai (BM).
-    const canonicalPath =
-      pathname === "/" || pathname === "/bidai" || pathname.startsWith("/blog")
-        ? pathname
-        : "/";
+    // Compute the EN and BM versions of the *current* page so the
+    // hreflang pair points at the matching localised URL. Blog posts
+    // share a slug across languages; only the prefix differs.
+    let enHref = `${origin}/`;
+    let msHref = `${origin}/bidai`;
+    let canonicalPath: string = pathname;
+
+    if (pathname === "/" || pathname === "/bidai") {
+      // Home — defaults above already correct.
+    } else if (pathname === "/blog" || pathname === "/bidai/jurnal") {
+      enHref = `${origin}/blog`;
+      msHref = `${origin}/bidai/jurnal`;
+    } else if (pathname.startsWith("/blog/")) {
+      const slug = pathname.slice("/blog/".length);
+      enHref = `${origin}/blog/${slug}`;
+      msHref = `${origin}/bidai/jurnal/${slug}`;
+    } else if (pathname.startsWith("/bidai/jurnal/")) {
+      const slug = pathname.slice("/bidai/jurnal/".length);
+      enHref = `${origin}/blog/${slug}`;
+      msHref = `${origin}/bidai/jurnal/${slug}`;
+    } else {
+      // Unknown route → canonical to EN home.
+      canonicalPath = "/";
+    }
+
     setLink("canonical", `${origin}${canonicalPath}`);
-
-    // hreflang pair — same on every route so Google always sees the
-    // EN/BM relationship for the brand's primary landing.
     setLink("alternate", enHref, "en");
     setLink("alternate", msHref, "ms");
     setLink("alternate", enHref, "x-default");
