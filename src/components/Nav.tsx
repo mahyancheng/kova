@@ -6,7 +6,10 @@ import { LanguageToggle } from "./LanguageToggle";
 export function Nav() {
   const t = useT();
   const { pathname } = useLocation();
-  const onHome = pathname === "/";
+  // Both / and /bidai render <Home/>, so they're both "on home" for
+  // anchor purposes — section IDs exist on the current page.
+  const onHome = pathname === "/" || pathname.startsWith("/bidai");
+  const homePath = pathname.startsWith("/bidai") ? "/bidai" : "/";
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -17,11 +20,11 @@ export function Nav() {
   }, []);
 
   /**
-   * On the home page, hash links (#contact) scroll natively. On other
-   * routes, the anchor doesn't exist — so route to "/#contact" and let
-   * ScrollManager handle scrolling once Home mounts.
+   * On a home route (/ or /bidai), hash links (#contact) scroll natively
+   * within the current page. Elsewhere, route to the language-matched
+   * home with the hash, and let ScrollManager scroll once Home mounts.
    */
-  const hashHref = (hash: string) => (onHome ? hash : `/${hash}`);
+  const hashHref = (hash: string) => (onHome ? hash : `${homePath}${hash}`);
 
   return (
     <header
@@ -33,7 +36,7 @@ export function Nav() {
       }
     >
       <div className="max-w-[1240px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2.5 group shrink-0">
+        <Link to={homePath} className="flex items-center gap-2.5 group shrink-0">
           <span className="inline-block h-7 w-7">
             <svg viewBox="0 0 32 32" className="h-full w-full">
               <rect
