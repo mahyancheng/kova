@@ -13,9 +13,9 @@ const visuals = {
 
 /** Showcase scene photo per product (falls back to the SVG visual if absent). */
 const scenes: Record<string, string> = {
-  roller: "/showcase/greige-roller.jpg",
-  venetian: "/showcase/white-venetian.jpg",
-  vertisheer: "/showcase/pivot-anchor-vertisheer.jpg",
+  roller: "/showcase/greige-roller.webp",
+  venetian: "/showcase/white-venetian.webp",
+  vertisheer: "/showcase/pivot-anchor-vertisheer.webp",
 };
 
 export function Collection() {

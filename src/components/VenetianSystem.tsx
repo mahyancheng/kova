@@ -101,9 +101,17 @@ export function VenetianSystem() {
       aria-label="Venetian system: chain, tilt and lift"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        <div className="max-w-[1240px] mx-auto h-full px-5 sm:px-6 lg:px-10 flex flex-col lg:grid lg:grid-cols-2 gap-4 lg:gap-10 lg:items-center justify-center py-[clamp(2rem,1rem+3vw,4rem)]">
+        {/*
+          On phones/portrait the video is the whole point — putting the
+          text column above it pushes the animation off-screen on common
+          handset heights. `flex-col-reverse` keeps the JSX order (text
+          first → easier to read) but renders the video on top in mobile
+          flex layout, then the layout switches to a 2-column grid at lg+
+          where source order is fine.
+        */}
+        <div className="max-w-[1240px] mx-auto h-full px-5 sm:px-6 lg:px-10 flex flex-col-reverse lg:grid lg:grid-cols-2 gap-3 lg:gap-10 lg:items-center justify-center py-[clamp(1.25rem,0.5rem+2vw,4rem)]">
           {/* Text column */}
-          <div className="flex flex-col gap-3 lg:gap-5 min-w-0">
+          <div className="flex flex-col gap-2.5 lg:gap-5 min-w-0">
             <div>
               <p className="eyebrow !text-[var(--color-sand)]">{t.venetianSystem.eyebrow}</p>
               <h2 className="mt-2 lg:mt-3 headline text-[clamp(1.5rem,1rem+3vw,3rem)] leading-[1.05]">

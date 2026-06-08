@@ -27,6 +27,15 @@ export function Nav() {
   const hashHref = (hash: string) => (onHome ? hash : `${homePath}${hash}`);
 
   return (
+    <>
+      {/* Visually hidden until keyboard focus — lets screen-reader and
+          keyboard users jump past the nav directly to the page content. */}
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-[var(--color-ink)] focus:text-[var(--color-cream)] focus:px-4 focus:py-2 focus:rounded-full focus:text-[0.85rem] focus:outline-2 focus:outline-[var(--color-clay)]"
+      >
+        Skip to content
+      </a>
     <header
       className={
         "fixed top-0 inset-x-0 z-50 transition-all duration-500 " +
@@ -94,5 +103,6 @@ export function Nav() {
         </div>
       </div>
     </header>
+    </>
   );
 }

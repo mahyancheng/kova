@@ -37,7 +37,7 @@ export function Blog() {
     <div className="min-h-screen bg-[var(--color-cream)]">
       <Nav />
 
-      <main className="pt-28 pb-24">
+      <main id="main" className="pt-28 pb-24">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10">
           <Reveal>
             <p className="eyebrow">{t.blog.eyebrow}</p>

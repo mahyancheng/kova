@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
+import { setArticleJsonLd } from "@/components/JsonLd";
 import { useT } from "@/lib/i18n";
 import { getPost, formatPostDate, type Post } from "@/lib/blog";
 
@@ -32,11 +33,12 @@ export function BlogPost() {
     getPost(slug).then((row) => {
       if (cancelled) return;
       setPost(row ?? "missing");
+      if (row) setArticleJsonLd(row, pathname, t.meta.htmlLang);
     });
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, pathname, t.meta.htmlLang]);
 
   const loading = post === null;
   const missing = post === "missing";
@@ -45,7 +47,7 @@ export function BlogPost() {
     <div className="min-h-screen bg-[var(--color-cream)]">
       <Nav />
 
-      <main className="pt-28 pb-24">
+      <main id="main" className="pt-28 pb-24">
         <div className="max-w-[760px] mx-auto px-5 sm:px-6 lg:px-10">
           <Link
             to={blogIndex}

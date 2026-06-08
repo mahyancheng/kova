@@ -32,7 +32,7 @@ export function Home() {
       <PromoBar />
       <Nav />
 
-      <main>
+      <main id="main">
         <Hero />
         <FactoryDirect />
         <Philosophy />
@@ -45,7 +45,7 @@ export function Home() {
           tone="cream"
           {...t.products.roller}
           Detail={RollerBlind}
-          detailSrc="/showcase/greige-roller.jpg"
+          detailSrc="/showcase/greige-roller.webp"
         />
 
         <ProductSpotlight
@@ -53,7 +53,7 @@ export function Home() {
           tone="paper"
           {...t.products.venetian}
           Detail={VenetianBlind}
-          detailSrc="/showcase/white-venetian.jpg"
+          detailSrc="/showcase/white-venetian.webp"
           reverse
         />
 
@@ -64,7 +64,7 @@ export function Home() {
           tone="ink"
           {...t.products.vertisheer}
           Detail={VertiSheer}
-          detailSrc="/showcase/pivot-silver-vertisheer.jpg"
+          detailSrc="/showcase/pivot-silver-vertisheer.webp"
         />
 
         <Compare />

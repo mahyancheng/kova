@@ -1,0 +1,70 @@
+# Kova Sun Shade
+
+> Factory-direct roller blinds, venetian blinds and VertiSheer made to measure
+> in Petaling Jaya, Malaysia. Bidai dan langsir tingkap untuk rumah anda —
+> sehingga 40% lebih murah dari harga runcit.
+
+Kova Sun Shade is a Malaysian window-furnishings brand based in Petaling Jaya,
+Selangor. We design, manufacture and install three product lines — Roller
+Blinds, Venetian Blinds and VertiSheer (vertical fabric vanes) — directly
+from our workshop to the customer. No distributor, wholesaler, retailer or
+showroom mark-up sits in between, which is why our pricing lands roughly 40%
+below conventional showroom quotes for equivalent fabric and hardware.
+
+Languages: English and Bahasa Malaysia (the Malay landing lives at
+`/bidai`, with a sibling journal at `/bidai/jurnal`).
+Service area: Klang Valley, Greater Kuala Lumpur, Selangor.
+Founded: 2014.
+Contact: info@kovasunshade.com.
+
+## Pages
+
+- [Home — English](https://kovasunshade.com/): brand intro, product overview, configurator, contact.
+- [Bidai dan Langsir Tingkap — Malay](https://kovasunshade.com/bidai): the Bahasa Malaysia counterpart of `/`.
+- [Roller Blinds section](https://kovasunshade.com/#roller)
+- [Venetian Blinds section](https://kovasunshade.com/#venetian)
+- [VertiSheer section](https://kovasunshade.com/#vertisheer)
+- [Compare](https://kovasunshade.com/#compare): side-by-side feature table.
+- [Process](https://kovasunshade.com/#process): how a project is run, end to end.
+- [Configurator](https://kovasunshade.com/#configurator): interactive product builder with live scene preview.
+- [Contact](https://kovasunshade.com/#contact): quote form, studio details.
+- [Journal — English](https://kovasunshade.com/blog)
+- [Jurnal — Malay](https://kovasunshade.com/bidai/jurnal)
+
+## Products
+
+### Roller Blinds (Bidai Roller)
+A single sheet of fabric on a roller. Available in blackout, dim-out,
+sunscreen and light-filtering opacities. 13 fabric options across the Cenza,
+Denver, Shiro, Moma and Dernise lines. Operation: chain, spring, or
+motorised. Fits homes, offices, cafés, retail.
+
+### Venetian Blinds (Bidai Venetian)
+Horizontal slats that tilt to any angle. Materials: aluminium, timber and
+faux-timber. 4 finishes including W101 Alpine White, W301 Pearl River,
+W302 Agate Grey, W206 Mahogany Teak. Mechanism is chain (tilt) + lift cord;
+optional motorisation.
+
+### VertiSheer
+Vertical fabric vanes that combine the softness of a curtain with the
+precision of a blind. Tracks engineered for spans up to 6 metres — designed
+for sliding doors, glass walls, and open-plan living rooms. 5 Pivot
+fabrics: White, Silver, Beige, Ginger, Anchor.
+
+## Brand specifics
+
+- **Pricing positioning:** factory-direct; typically 30–40% below retail
+  showroom quotes for equivalent fabric and hardware.
+- **Made-to-measure:** every blind is cut and fitted to the customer's window.
+- **Motorisation:** available on every model — battery, hardwired, or
+  HomeKit-compatible.
+- **Studio:** Petaling Jaya, Selangor. Mon–Fri 9–6, Sat by appointment.
+- **Response SLA:** every enquiry answered within 48 working hours.
+
+## Search keywords (Malay / English)
+
+bidai · langsir · bidai tingkap · langsir tingkap · bidai Malaysia ·
+langsir Malaysia · bidai dan langsir rumah anda · bidai Roller ·
+bidai Venetian · VertiSheer · bidai bermotor · bidai dibuat ikut ukuran ·
+roller blinds Malaysia · venetian blinds Malaysia · factory direct blinds ·
+motorised blinds · made to measure blinds · Petaling Jaya · Klang Valley.

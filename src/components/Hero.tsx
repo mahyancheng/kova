@@ -57,7 +57,7 @@ export function Hero() {
             <ImageSlot
               ratio="21/9"
               tone="sand"
-              src="/showcase/hero-living.jpg"
+              src="/showcase/hero-living.webp"
               alt={t.hero.figureLabel}
             >
               <HeroVisual className="w-full h-full" />
