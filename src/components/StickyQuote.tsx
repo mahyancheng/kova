@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useT } from "@/lib/i18n";
+import { useRoutes } from "@/lib/routes";
 
 export function StickyQuote() {
   const t = useT();
+  const r = useRoutes();
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
@@ -35,8 +38,8 @@ export function StickyQuote() {
     >
       <div className="flex items-center gap-1 bg-[var(--color-ink)] text-[var(--color-cream)] rounded-full pl-1.5 pr-1.5 py-1.5 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.45)] border border-white/5">
         {/* Design yours — secondary, outlined with brand sparkle */}
-        <a
-          href="#configurator"
+        <Link
+          to={r.configurator}
           className="group inline-flex items-center gap-1.5 sm:gap-2 text-[var(--color-cream)] hover:text-[var(--color-clay-light)] bg-white/[0.04] hover:bg-[var(--color-clay)]/15 border border-[var(--color-cream)]/30 hover:border-[var(--color-clay-light)] text-[0.86rem] font-medium rounded-full px-3.5 sm:px-4 py-2 transition-colors whitespace-nowrap"
         >
           <span
@@ -46,16 +49,16 @@ export function StickyQuote() {
             ✺
           </span>
           {t.sticky.designCta}
-        </a>
+        </Link>
 
         {/* Get a quote — primary, clay filled */}
-        <a
-          href="#contact"
+        <Link
+          to={r.contact}
           className="inline-flex items-center gap-1.5 bg-[var(--color-clay)] hover:bg-[var(--color-clay-deep)] text-[var(--color-cream)] text-[0.86rem] font-medium rounded-full px-3.5 sm:px-4 py-2 transition-colors whitespace-nowrap"
         >
           {t.sticky.cta}
           <span aria-hidden>→</span>
-        </a>
+        </Link>
 
         <button
           type="button"

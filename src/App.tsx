@@ -7,24 +7,23 @@ import { SeoHead } from "./components/SeoHead";
 import { JsonLd } from "./components/JsonLd";
 import { Home } from "./pages/Home";
 
-// Code-split the journal — visitors who only browse the landing never
-// pay the cost of react-markdown + remark-gfm. ~45 KB gz off the home
-// LCP path.
-const Blog = lazy(() => import("./pages/Blog").then((m) => ({ default: m.Blog })));
-const BlogPost = lazy(() =>
-  import("./pages/BlogPost").then((m) => ({ default: m.BlogPost })),
-);
+// Brochure pages — each is its own bundle so the visitor only pays for
+// what they actually open. Home stays eager (every visitor lands there).
+const RollerPage      = lazy(() => import("./pages/Roller").then((m) => ({ default: m.RollerPage })));
+const VenetianPage    = lazy(() => import("./pages/Venetian").then((m) => ({ default: m.VenetianPage })));
+const VertiSheerPage  = lazy(() => import("./pages/VertiSheer").then((m) => ({ default: m.VertiSheerPage })));
+const ProcessPage     = lazy(() => import("./pages/ProcessPage").then((m) => ({ default: m.ProcessPage })));
+const ConfiguratorPage = lazy(() => import("./pages/ConfiguratorPage").then((m) => ({ default: m.ConfiguratorPage })));
+const ContactPage     = lazy(() => import("./pages/ContactPage").then((m) => ({ default: m.ContactPage })));
+const Blog            = lazy(() => import("./pages/Blog").then((m) => ({ default: m.Blog })));
+const BlogPost        = lazy(() => import("./pages/BlogPost").then((m) => ({ default: m.BlogPost })));
 
 function PageFallback() {
-  // Cream wash that matches the brand background so the swap is silent.
   return <div className="min-h-screen bg-[var(--color-cream)]" />;
 }
 
 export default function App() {
   return (
-    // Router is the outermost wrapper so LangProvider can derive the
-    // active language from the URL (`/` → EN, `/bidai` → BM) and the
-    // SeoHead can emit a per-route canonical + hreflang.
     <BrowserRouter>
       <LangProvider>
         <SeoHead />
@@ -33,14 +32,28 @@ export default function App() {
           <ScrollManager />
           <Suspense fallback={<PageFallback />}>
             <Routes>
+              {/* ----- English ------------------------------------- */}
               <Route path="/" element={<Home />} />
-              {/* Malay landing — Google-friendly URL for the BM keyword set. */}
-              <Route path="/bidai" element={<Home />} />
+              <Route path="/roller" element={<RollerPage />} />
+              <Route path="/venetian" element={<VenetianPage />} />
+              <Route path="/vertisheer" element={<VertiSheerPage />} />
+              <Route path="/process" element={<ProcessPage />} />
+              <Route path="/configurator" element={<ConfiguratorPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
-              {/* BM blog counterparts — same components, language follows URL. */}
+
+              {/* ----- Bahasa Malaysia mirrors --------------------- */}
+              <Route path="/bidai" element={<Home />} />
+              <Route path="/bidai/roller" element={<RollerPage />} />
+              <Route path="/bidai/venetian" element={<VenetianPage />} />
+              <Route path="/bidai/vertisheer" element={<VertiSheerPage />} />
+              <Route path="/bidai/proses" element={<ProcessPage />} />
+              <Route path="/bidai/reka" element={<ConfiguratorPage />} />
+              <Route path="/bidai/hubungi" element={<ContactPage />} />
               <Route path="/bidai/jurnal" element={<Blog />} />
               <Route path="/bidai/jurnal/:slug" element={<BlogPost />} />
+
               {/* Unknown path → land on home rather than a hard 404. */}
               <Route path="*" element={<Home />} />
             </Routes>

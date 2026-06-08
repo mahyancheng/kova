@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useT } from "@/lib/i18n";
+import { useRoutes } from "@/lib/routes";
 
 export function PromoBar() {
   const t = useT();
+  const r = useRoutes();
   const [closed, setClosed] = useState(false);
   const [ready, setReady] = useState(false);
 
@@ -25,13 +28,13 @@ export function PromoBar() {
           </span>
         </p>
         <div className="flex items-center gap-4 shrink-0">
-          <a
-            href="#factory-direct"
+          <Link
+            to={r.process}
             className="text-[0.82rem] font-medium text-[var(--color-clay-light)] hover:text-[var(--color-cream)] transition-colors inline-flex items-center gap-1"
           >
             {t.promo.cta}
             <span aria-hidden>→</span>
-          </a>
+          </Link>
           <button
             type="button"
             onClick={() => {

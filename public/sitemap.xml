@@ -3,6 +3,7 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
+  <!-- ===== Home ===== -->
   <url>
     <loc>https://kovasunshade.com/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/"/>
@@ -11,7 +12,6 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
   <url>
     <loc>https://kovasunshade.com/bidai</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/"/>
@@ -21,22 +21,126 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- ===== Product brochure pages ===== -->
+  <url>
+    <loc>https://kovasunshade.com/roller</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/roller"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/roller"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/roller"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kovasunshade.com/bidai/roller</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/roller"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/roller"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/roller"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/venetian</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/venetian"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/venetian"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/venetian"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kovasunshade.com/bidai/venetian</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/venetian"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/venetian"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/venetian"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/vertisheer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/vertisheer"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/vertisheer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/vertisheer"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kovasunshade.com/bidai/vertisheer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/vertisheer"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/vertisheer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/vertisheer"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ===== Supporting pages ===== -->
+  <url>
+    <loc>https://kovasunshade.com/process</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/process"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/proses"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/process"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kovasunshade.com/bidai/proses</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/process"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/proses"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/process"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/configurator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/configurator"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/reka"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/configurator"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kovasunshade.com/bidai/reka</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/configurator"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/reka"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/configurator"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/hubungi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/contact"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kovasunshade.com/bidai/hubungi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/hubungi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/contact"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ===== Journal ===== -->
   <url>
     <loc>https://kovasunshade.com/blog</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/blog"/>
     <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/jurnal"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/blog"/>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
-
   <url>
     <loc>https://kovasunshade.com/bidai/jurnal</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/blog"/>
     <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/jurnal"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/blog"/>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
 
 </urlset>

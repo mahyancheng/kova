@@ -1,23 +1,26 @@
+import { Link } from "react-router-dom";
 import { HeroVisual } from "./visuals/HeroVisual";
 import { ImageSlot } from "./ImageSlot";
 import { Reveal } from "./Reveal";
 import { useT } from "@/lib/i18n";
+import { useRoutes } from "@/lib/routes";
 
 export function Hero() {
   const t = useT();
+  const r = useRoutes();
   return (
     <section id="top" className="relative pt-[clamp(3rem,2rem+4vw,7rem)] pb-[clamp(2rem,1rem+3.5vw,5rem)]">
       <div className="max-w-[1380px] mx-auto px-5 sm:px-6 lg:px-10">
         <div className="text-center max-w-5xl mx-auto pt-4 lg:pt-12">
           <Reveal>
-            <a
-              href="#factory-direct"
+            <Link
+              to={r.process}
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--color-line)] bg-[var(--color-paper)] text-[0.74rem] sm:text-[0.78rem] tracking-tight text-[var(--color-ink-soft)] hover:border-[var(--color-ink)] hover:text-[var(--color-ink)] transition-colors"
             >
               <span className="inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-clay)]" />
               {t.hero.chip}
               <span aria-hidden className="text-[var(--color-clay)]">→</span>
-            </a>
+            </Link>
           </Reveal>
           <Reveal delay={60}>
             <p className="eyebrow mt-4 lg:mt-5">{t.hero.eyebrow}</p>
@@ -35,19 +38,19 @@ export function Hero() {
           </Reveal>
           <Reveal delay={220}>
             <div className="mt-6 lg:mt-9 flex flex-wrap items-center justify-center gap-2 lg:gap-3">
-              <a
-                href="#collection"
+              <Link
+                to={r.configurator}
                 className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.9rem] lg:text-[0.95rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors"
               >
                 {t.hero.ctaA}
                 <span aria-hidden>→</span>
-              </a>
-              <a
-                href="#contact"
+              </Link>
+              <Link
+                to={r.contact}
                 className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full text-[0.9rem] lg:text-[0.95rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors"
               >
                 {t.hero.ctaB}
-              </a>
+              </Link>
             </div>
           </Reveal>
         </div>

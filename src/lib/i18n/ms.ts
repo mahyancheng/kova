@@ -416,24 +416,24 @@ export const ms: Dict = {
       {
         title: "Koleksi",
         items: [
-          ["Bidai Roller", "#roller"],
-          ["Bidai Venetian", "#venetian"],
-          ["VertiSheer", "#vertisheer"],
+          ["Bidai Roller", "/bidai/roller"],
+          ["Bidai Venetian", "/bidai/venetian"],
+          ["VertiSheer", "/bidai/vertisheer"],
         ],
       },
       {
         title: "Studio",
         items: [
-          ["Proses kami", "#process"],
-          ["Ruang", "#spaces"],
-          ["Hubungi", "#contact"],
+          ["Proses kami", "/bidai/proses"],
+          ["Reka sendiri", "/bidai/reka"],
+          ["Hubungi", "/bidai/hubungi"],
         ],
       },
       {
         title: "Waktu studio",
         items: [
-          ["Isn — Jum, 9 hingga 6", "#contact"],
-          ["Sab dengan janji", "#contact"],
+          ["Isn — Jum, 9 hingga 6", "/bidai/hubungi"],
+          ["Sab dengan janji", "/bidai/hubungi"],
           ["info@kovasunshade.com", "mailto:info@kovasunshade.com"],
         ],
       },

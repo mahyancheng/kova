@@ -115,41 +115,46 @@ export function JsonLd() {
     setJsonLd("business", business);
     setJsonLd("website", website);
 
-    // --- Product trio (home routes only) ----------------------------
-    const onHomeRoute = pathname === "/" || pathname === "/bidai";
-    if (onHomeRoute) {
-      const products = [
-        {
-          "@type": "Product",
+    // --- Per-product schema (dedicated product pages) ----------------
+    const productMatch = pathname.match(
+      /^(?:\/bidai)?\/(roller|venetian|vertisheer)$/,
+    );
+    if (productMatch) {
+      const key = productMatch[1] as "roller" | "venetian" | "vertisheer";
+      const meta = {
+        roller: {
           name: isMalay ? "Bidai Roller" : "Roller Blinds",
-          category: "Window Blinds",
+          category: "Roller Blinds",
           description: t.products.roller.body[0],
           image: `${SITE_URL}/showcase/greige-roller.webp`,
-          brand: { "@type": "Brand", name: "Kova Sun Shade" },
-          url: `${SITE_URL}${isMalay ? "/bidai" : "/"}#roller`,
         },
-        {
-          "@type": "Product",
+        venetian: {
           name: isMalay ? "Bidai Venetian" : "Venetian Blinds",
-          category: "Window Blinds",
+          category: "Venetian Blinds",
           description: t.products.venetian.body[0],
           image: `${SITE_URL}/showcase/white-venetian.webp`,
-          brand: { "@type": "Brand", name: "Kova Sun Shade" },
-          url: `${SITE_URL}${isMalay ? "/bidai" : "/"}#venetian`,
         },
-        {
-          "@type": "Product",
+        vertisheer: {
           name: "VertiSheer",
           category: "Vertical Sheer Blinds",
           description: t.products.vertisheer.body[0],
           image: `${SITE_URL}/showcase/pivot-silver-vertisheer.webp`,
-          brand: { "@type": "Brand", name: "Kova Sun Shade" },
-          url: `${SITE_URL}${isMalay ? "/bidai" : "/"}#vertisheer`,
         },
-      ];
+      }[key];
       setJsonLd("products", {
         "@context": "https://schema.org",
-        "@graph": products,
+        "@type": "Product",
+        ...meta,
+        brand: { "@type": "Brand", name: "Kova Sun Shade" },
+        url: `${SITE_URL}${pathname}`,
+        areaServed: "Klang Valley, Malaysia",
+        offers: {
+          "@type": "Offer",
+          availability: "https://schema.org/InStock",
+          priceCurrency: "MYR",
+          url: `${SITE_URL}${isMalay ? "/bidai/hubungi" : "/contact"}`,
+          seller: { "@id": `${SITE_URL}/#business` },
+        },
       });
     } else {
       clearJsonLd("products");

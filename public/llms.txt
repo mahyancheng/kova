@@ -11,45 +11,53 @@ from our workshop to the customer. No distributor, wholesaler, retailer or
 showroom mark-up sits in between, which is why our pricing lands roughly 40%
 below conventional showroom quotes for equivalent fabric and hardware.
 
-Languages: English and Bahasa Malaysia (the Malay landing lives at
-`/bidai`, with a sibling journal at `/bidai/jurnal`).
+Languages: English and Bahasa Malaysia. The Malay site is a full mirror at
+`/bidai`, with every brochure page having a Bahasa Malaysia counterpart.
 Service area: Klang Valley, Greater Kuala Lumpur, Selangor.
 Founded: 2014.
 Contact: info@kovasunshade.com.
 
-## Pages
+## English pages
 
-- [Home — English](https://kovasunshade.com/): brand intro, product overview, configurator, contact.
-- [Bidai dan Langsir Tingkap — Malay](https://kovasunshade.com/bidai): the Bahasa Malaysia counterpart of `/`.
-- [Roller Blinds section](https://kovasunshade.com/#roller)
-- [Venetian Blinds section](https://kovasunshade.com/#venetian)
-- [VertiSheer section](https://kovasunshade.com/#vertisheer)
-- [Compare](https://kovasunshade.com/#compare): side-by-side feature table.
-- [Process](https://kovasunshade.com/#process): how a project is run, end to end.
-- [Configurator](https://kovasunshade.com/#configurator): interactive product builder with live scene preview.
-- [Contact](https://kovasunshade.com/#contact): quote form, studio details.
-- [Journal — English](https://kovasunshade.com/blog)
-- [Jurnal — Malay](https://kovasunshade.com/bidai/jurnal)
+- [Home](https://kovasunshade.com/) — brand intro, hero, philosophy, collection cards.
+- [Roller Blinds](https://kovasunshade.com/roller) — Roller spotlight, 13 fabrics, perfect-for, quote CTA.
+- [Venetian Blinds](https://kovasunshade.com/venetian) — Venetian spotlight, scroll-driven chain·tilt·lift video, 4 finishes.
+- [VertiSheer](https://kovasunshade.com/vertisheer) — VertiSheer spotlight, 5 Pivot fabrics.
+- [Process](https://kovasunshade.com/process) — factory-direct narrative, philosophy, 4-step process.
+- [Design yours (Configurator)](https://kovasunshade.com/configurator) — interactive product builder + side-by-side compare table + fabric library + rooms.
+- [Contact](https://kovasunshade.com/contact) — quote form, studio details, hours.
+- [Journal](https://kovasunshade.com/blog) — field notes, fabric studies.
+
+## Bahasa Malaysia pages
+
+- [Laman utama](https://kovasunshade.com/bidai)
+- [Bidai Roller](https://kovasunshade.com/bidai/roller)
+- [Bidai Venetian](https://kovasunshade.com/bidai/venetian)
+- [VertiSheer](https://kovasunshade.com/bidai/vertisheer)
+- [Proses kami](https://kovasunshade.com/bidai/proses)
+- [Reka sendiri](https://kovasunshade.com/bidai/reka)
+- [Hubungi](https://kovasunshade.com/bidai/hubungi)
+- [Jurnal](https://kovasunshade.com/bidai/jurnal)
 
 ## Products
 
 ### Roller Blinds (Bidai Roller)
-A single sheet of fabric on a roller. Available in blackout, dim-out,
-sunscreen and light-filtering opacities. 13 fabric options across the Cenza,
-Denver, Shiro, Moma and Dernise lines. Operation: chain, spring, or
-motorised. Fits homes, offices, cafés, retail.
+A single sheet of fabric on a roller. Blackout, dim-out, sunscreen or
+light-filtering. 13 fabric options across Cenza, Denver, Shiro, Moma and
+Dernise lines. Chain / spring / motorised. Fits homes, offices, cafés,
+retail.
 
 ### Venetian Blinds (Bidai Venetian)
-Horizontal slats that tilt to any angle. Materials: aluminium, timber and
-faux-timber. 4 finishes including W101 Alpine White, W301 Pearl River,
-W302 Agate Grey, W206 Mahogany Teak. Mechanism is chain (tilt) + lift cord;
+Horizontal slats that tilt to any angle. Aluminium, timber and faux-timber
+finishes. 4 W-coded options including W101 Alpine White, W301 Pearl River,
+W302 Agate Grey, W206 Mahogany Teak. Mechanism: chain (tilt) + lift cord;
 optional motorisation.
 
 ### VertiSheer
-Vertical fabric vanes that combine the softness of a curtain with the
-precision of a blind. Tracks engineered for spans up to 6 metres — designed
-for sliding doors, glass walls, and open-plan living rooms. 5 Pivot
-fabrics: White, Silver, Beige, Ginger, Anchor.
+Vertical fabric vanes combining the softness of a curtain with the precision
+of a blind. Tracks engineered for spans up to 6 metres — designed for
+sliding doors, glass walls, and open-plan living rooms. 5 Pivot fabrics:
+White, Silver, Beige, Ginger, Anchor.
 
 ## Brand specifics
 

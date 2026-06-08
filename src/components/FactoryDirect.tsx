@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
 import { Reveal } from "./Reveal";
 import { useT } from "@/lib/i18n";
+import { useRoutes } from "@/lib/routes";
 
 export function FactoryDirect() {
   const t = useT();
+  const r = useRoutes();
   const traditional = [
     t.factory.nodes.mill,
     t.factory.nodes.distributor,
@@ -48,19 +51,19 @@ export function FactoryDirect() {
                 {t.factory.body}
               </p>
               <div className="mt-5 lg:mt-7 flex flex-wrap items-center gap-2 lg:gap-3">
-                <a
-                  href="#contact"
+                <Link
+                  to={r.contact}
                   className="inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.86rem] lg:text-[0.9rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors"
                 >
                   {t.factory.ctaA}
                   <span aria-hidden>→</span>
-                </a>
-                <a
-                  href="#compare"
+                </Link>
+                <Link
+                  to={r.configurator}
                   className="inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full text-[0.86rem] lg:text-[0.9rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors"
                 >
                   {t.factory.ctaB}
-                </a>
+                </Link>
               </div>
             </Reveal>
           </div>
@@ -119,13 +122,13 @@ export function FactoryDirect() {
               {t.factory.closerA}
               <span className="italic font-light text-[var(--color-clay-deep)]"> {t.factory.closerB}</span>
             </p>
-            <a
-              href="#contact"
+            <Link
+              to={r.contact}
               className="inline-flex items-center gap-2 text-[0.88rem] lg:text-[0.92rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors shrink-0"
             >
               {t.factory.closerCta}
               <span aria-hidden>→</span>
-            </a>
+            </Link>
           </div>
         </Reveal>
       </div>

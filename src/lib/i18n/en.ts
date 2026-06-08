@@ -442,24 +442,24 @@ export const en = {
       {
         title: "Collection",
         items: [
-          ["Roller Blinds", "#roller"],
-          ["Venetian Blinds", "#venetian"],
-          ["VertiSheer", "#vertisheer"],
+          ["Roller Blinds", "/roller"],
+          ["Venetian Blinds", "/venetian"],
+          ["VertiSheer", "/vertisheer"],
         ] as [string, string][],
       },
       {
         title: "Studio",
         items: [
-          ["Our process", "#process"],
-          ["Spaces", "#spaces"],
-          ["Contact", "#contact"],
+          ["Our process", "/process"],
+          ["Design yours", "/configurator"],
+          ["Contact", "/contact"],
         ] as [string, string][],
       },
       {
         title: "Studio hours",
         items: [
-          ["Mon — Fri, 9 to 6", "#contact"],
-          ["Sat by appointment", "#contact"],
+          ["Mon — Fri, 9 to 6", "/contact"],
+          ["Sat by appointment", "/contact"],
           ["info@kovasunshade.com", "mailto:info@kovasunshade.com"],
         ] as [string, string][],
       },

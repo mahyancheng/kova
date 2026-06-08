@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useT } from "@/lib/i18n";
 import { useConfigurator } from "@/lib/configurator/context";
+import { useRoutes } from "@/lib/routes";
 
 export function Contact() {
   const t = useT();
+  const r = useRoutes();
   const { configuration, submissionToken } = useConfigurator();
   const [sent, setSent] = useState(false);
   const [prefilled, setPrefilled] = useState(false);
@@ -98,12 +101,12 @@ export function Contact() {
                         {lastSummary}
                       </p>
                     </div>
-                    <a
-                      href="#configurator"
+                    <Link
+                      to={r.configurator}
                       className="shrink-0 text-[0.78rem] text-[var(--color-clay-light)] hover:text-[var(--color-cream)] transition-colors whitespace-nowrap"
                     >
                       {t.configurator.contactSummaryEdit} →
-                    </a>
+                    </Link>
                   </div>
                 )}
 

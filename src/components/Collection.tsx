@@ -1,3 +1,4 @@
+import { Link, useLocation } from "react-router-dom";
 import { RollerBlind } from "./visuals/RollerBlind";
 import { VenetianBlind } from "./visuals/VenetianBlind";
 import { VertiSheer } from "./visuals/VertiSheer";
@@ -20,6 +21,9 @@ const scenes: Record<string, string> = {
 
 export function Collection() {
   const t = useT();
+  const { pathname } = useLocation();
+  // On the BM landing the cards link to /bidai/<id>; on EN they link to /<id>.
+  const langPrefix = pathname.startsWith("/bidai") ? "/bidai" : "";
   return (
     <section id="collection" className="relative fluid-section-y">
       <div className="max-w-[1380px] mx-auto px-5 sm:px-6 lg:px-10">
@@ -43,8 +47,8 @@ export function Collection() {
             const Visual = visuals[item.id as keyof typeof visuals];
             return (
               <Reveal key={item.id} delay={i * 100}>
-                <a
-                  href={`#${item.id}`}
+                <Link
+                  to={`${langPrefix}/${item.id}`}
                   className="group relative flex flex-col bg-[var(--color-paper)] border border-[var(--color-line)] rounded-md overflow-hidden hover:border-[var(--color-ink)] transition-colors h-full"
                 >
                   <div className="overflow-hidden">
@@ -71,7 +75,7 @@ export function Collection() {
                       <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
                     </span>
                   </div>
-                </a>
+                </Link>
               </Reveal>
             );
           })}

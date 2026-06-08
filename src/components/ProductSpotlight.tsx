@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { ImageSlot } from "./ImageSlot";
 import { Reveal } from "./Reveal";
 import { useT } from "@/lib/i18n";
+import { useRoutes } from "@/lib/routes";
 
 export type ProductSpotlightProps = {
   id: string;
@@ -38,6 +40,7 @@ export function ProductSpotlight({
   tone = "cream",
 }: ProductSpotlightProps) {
   const t = useT();
+  const r = useRoutes();
   const c = t.productCommon;
   const isInk = tone === "ink";
   const sectionBg =
@@ -86,8 +89,8 @@ export function ProductSpotlight({
                 ))}
               </div>
               <div className="mt-5 lg:mt-7 flex flex-wrap items-center gap-2 lg:gap-3">
-                <a
-                  href="#contact"
+                <Link
+                  to={r.contact}
                   className={cn(
                     "inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full text-[0.86rem] lg:text-[0.9rem] font-medium transition-colors",
                     isInk
@@ -97,7 +100,7 @@ export function ProductSpotlight({
                 >
                   {c.ctaA}
                   <span aria-hidden>→</span>
-                </a>
+                </Link>
                 <a
                   href={`#${id}-spec`}
                   className={cn(

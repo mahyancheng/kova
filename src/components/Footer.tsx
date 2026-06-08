@@ -1,13 +1,16 @@
+import { Link } from "react-router-dom";
 import { useT } from "@/lib/i18n";
+import { useRoutes } from "@/lib/routes";
 
 export function Footer() {
   const t = useT();
+  const r = useRoutes();
   return (
     <footer className="bg-[var(--color-cream)] border-t border-[var(--color-line)]">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10 py-10 lg:py-16">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
           <div className="lg:col-span-5">
-            <a href="#top" className="inline-flex items-center gap-2.5">
+            <Link to={r.home} className="inline-flex items-center gap-2.5">
               <span className="inline-block h-7 w-7">
                 <svg viewBox="0 0 32 32" className="h-full w-full">
                   <rect
@@ -28,7 +31,7 @@ export function Footer() {
               <span className="font-serif text-[1.05rem] tracking-tight">
                 Kova<span className="text-[var(--color-clay)]">·</span>Sun Shade
               </span>
-            </a>
+            </Link>
             <p className="mt-4 lg:mt-6 max-w-sm text-[var(--color-ink-soft)] leading-relaxed text-[0.88rem] lg:text-[0.95rem]">
               {t.footer.tagline}
             </p>
@@ -39,16 +42,28 @@ export function Footer() {
               <div key={col.title}>
                 <p className="eyebrow">{col.title}</p>
                 <ul className="mt-3 lg:mt-4 space-y-2">
-                  {col.items.map(([label, href]) => (
-                    <li key={label}>
-                      <a
-                        href={href}
-                        className="text-[0.88rem] lg:text-[0.95rem] text-[var(--color-ink-soft)] hover:text-[var(--color-clay-deep)] transition-colors"
-                      >
-                        {label}
-                      </a>
-                    </li>
-                  ))}
+                  {col.items.map(([label, href]) => {
+                    const isExternal = href.startsWith("mailto:") || href.startsWith("http") || href.startsWith("tel:");
+                    return (
+                      <li key={label}>
+                        {isExternal ? (
+                          <a
+                            href={href}
+                            className="text-[0.88rem] lg:text-[0.95rem] text-[var(--color-ink-soft)] hover:text-[var(--color-clay-deep)] transition-colors"
+                          >
+                            {label}
+                          </a>
+                        ) : (
+                          <Link
+                            to={href}
+                            className="text-[0.88rem] lg:text-[0.95rem] text-[var(--color-ink-soft)] hover:text-[var(--color-clay-deep)] transition-colors"
+                          >
+                            {label}
+                          </Link>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
