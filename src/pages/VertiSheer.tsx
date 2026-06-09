@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useT } from "@/lib/i18n";
 import { PromoBar } from "@/components/PromoBar";
 import { Nav } from "@/components/Nav";
@@ -5,11 +6,19 @@ import { Footer } from "@/components/Footer";
 import { StickyQuote } from "@/components/StickyQuote";
 import { ProductSpotlight } from "@/components/ProductSpotlight";
 import { ProductFabricStrip } from "@/components/ProductFabricStrip";
+import { Configurator } from "@/components/Configurator";
 import { VertiSheer as VertiSheerVisual } from "@/components/visuals/VertiSheer";
 import { VERTISHEER_FABRICS } from "@/lib/configurator/types";
+import { useConfigurator } from "@/lib/configurator/context";
 
 export function VertiSheerPage() {
   const t = useT();
+  const { setProduct } = useConfigurator();
+
+  useEffect(() => {
+    setProduct("vertisheer");
+  }, [setProduct]);
+
   return (
     <div className="min-h-screen bg-[var(--color-cream)]">
       <PromoBar />
@@ -28,6 +37,7 @@ export function VertiSheerPage() {
           title={`VertiSheer · ${t.fabrics.titleA} ${t.fabrics.titleB}`}
           body={t.fabrics.intro}
         />
+        <Configurator />
       </main>
       <Footer />
       <StickyQuote />

@@ -5,6 +5,7 @@ import { StickyQuote } from "@/components/StickyQuote";
 import { FactoryDirect } from "@/components/FactoryDirect";
 import { Philosophy } from "@/components/Philosophy";
 import { Process } from "@/components/Process";
+import { Configurator } from "@/components/Configurator";
 
 export function ProcessPage() {
   return (
@@ -17,6 +18,7 @@ export function ProcessPage() {
         <div id="process">
           <Process />
         </div>
+        <Configurator />
       </main>
       <Footer />
       <StickyQuote />

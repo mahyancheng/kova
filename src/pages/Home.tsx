@@ -4,17 +4,25 @@ import { Hero } from "@/components/Hero";
 import { Marquee } from "@/components/Marquee";
 import { Philosophy } from "@/components/Philosophy";
 import { Collection } from "@/components/Collection";
+import { FactoryDirect } from "@/components/FactoryDirect";
+import { Configurator } from "@/components/Configurator";
 import { Footer } from "@/components/Footer";
 import { StickyQuote } from "@/components/StickyQuote";
 
 /**
- * Landing page — slim brochure cover.
+ * Landing page — brochure cover.
  *
- * Each product / process / configurator block lives on its own page
- * (see `pages/Roller.tsx`, `pages/ProcessPage.tsx`, etc.). The home is
- * here to set tone (hero + brand atmosphere + philosophy snippet) and
- * lead visitors into the Collection cards, which link to the dedicated
- * product pages.
+ * Detailed enough to close a lead in one screenful of scrolling, brief
+ * enough that visitors hungry for depth go to the dedicated brochure
+ * pages (`/roller`, `/process`, `/configurator`, …).
+ *
+ * Order is deliberate:
+ *  1. Hero          — brand promise + primary CTAs
+ *  2. Marquee       — visual atmosphere strip
+ *  3. Philosophy    — three short pillars
+ *  4. Collection    — three product cards, each linking out to its page
+ *  5. FactoryDirect — the "why us" argument (40% lower) for closing
+ *  6. Configurator  — the live preview, the marquee feature
  */
 export function Home() {
   return (
@@ -26,6 +34,8 @@ export function Home() {
         <Marquee />
         <Philosophy />
         <Collection />
+        <FactoryDirect />
+        <Configurator />
       </main>
       <Footer />
       <StickyQuote />
