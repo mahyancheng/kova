@@ -7,6 +7,67 @@ export const en = {
       "Factory-direct roller blinds, venetian blinds and VertiSheer made to measure in Petaling Jaya. Bidai dan langsir tingkap untuk rumah anda — up to 40% less than retail.",
     keywords:
       "roller blinds Malaysia, venetian blinds Malaysia, vertisheer, factory direct blinds, motorised blinds, made to measure blinds, KL blinds, Petaling Jaya, Klang Valley, bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian",
+    pages: {
+      home: {
+        title:
+          "Kova Sun Shade — Roller, Venetian & VertiSheer Blinds Malaysia",
+        description:
+          "Factory-direct made-to-measure window blinds in Klang Valley. Roller, Venetian and VertiSheer up to 40% less than retail. Bidai dan langsir tingkap untuk rumah anda.",
+        keywords:
+          "roller blinds Malaysia, venetian blinds Malaysia, vertisheer, factory direct blinds, motorised blinds, made to measure blinds, Petaling Jaya, Klang Valley, bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, bidai dan langsir rumah anda",
+      },
+      roller: {
+        title: "Roller Blinds Malaysia · Made to Measure · Kova Sun Shade",
+        description:
+          "Factory-direct roller blinds in 13 fabric options — blackout, dim-out, sunscreen, light-filtering. Cut and fitted to your windows in Klang Valley. Up to 40% less than retail.",
+        keywords:
+          "roller blinds Malaysia, made to measure roller blinds, blackout roller blinds, sunscreen blinds, dim-out blinds, bidai Roller, bidai Roller Malaysia, Cenza, Denver, Shiro, Petaling Jaya",
+      },
+      venetian: {
+        title: "Venetian Blinds Malaysia · Aluminium, Wood, Faux-Wood · Kova",
+        description:
+          "Venetian blinds with a smooth chain · tilt · lift mechanism. W101 Alpine White, W301 Pearl River, W302 Agate Grey and W206 Mahogany Teak finishes. Factory-direct from Petaling Jaya.",
+        keywords:
+          "venetian blinds Malaysia, aluminium venetian blinds, wood venetian blinds, faux wood blinds, bidai Venetian, W101, W301, W302, W206, Petaling Jaya",
+      },
+      vertisheer: {
+        title:
+          "VertiSheer — Curtain-Soft, Blind-Precise · Kova Sun Shade Malaysia",
+        description:
+          "Vertical sheer fabric vanes for sliding doors and glass walls. Tracks engineered up to 6m. Five Pivot fabrics from White to Anchor. Curtain-soft, blind-precise.",
+        keywords:
+          "vertisheer Malaysia, vertical sheer blinds, sliding door blinds, glass wall blinds, langsir tingkap besar, Pivot, Klang Valley",
+      },
+      process: {
+        title:
+          "How We Work — Factory-Direct Blinds, Klang Valley · Kova Sun Shade",
+        description:
+          "We measure, manufacture and install every blind ourselves from our Petaling Jaya workshop. No distributor, wholesaler or showroom mark-up — pricing about 40% below retail.",
+        keywords:
+          "factory direct blinds Malaysia, made to measure blinds Klang Valley, blinds installation Petaling Jaya, custom window blinds, on-site measure",
+      },
+      configurator: {
+        title: "Design Your Blind — Live Preview · Kova Sun Shade",
+        description:
+          "Pick a product, fabric and opacity. Watch the live room preview cross-fade as you choose. Send your configuration straight to us for a factory-direct quote.",
+        keywords:
+          "blinds configurator, design your blinds, blind fabric chooser, live preview, made to measure blinds, Kova Sun Shade",
+      },
+      contact: {
+        title: "Get a Quote — Blinds Klang Valley · Kova Sun Shade Malaysia",
+        description:
+          "Tell us about your windows. We respond within 48 working hours with a measure date and a factory-direct quote. Bidai dibuat ikut ukuran rumah anda.",
+        keywords:
+          "blinds quote Malaysia, blinds Klang Valley, measure blinds Petaling Jaya, bidai dibuat ikut ukuran, get a quote, Kova Sun Shade contact",
+      },
+      blog: {
+        title: "Journal — Notes from the Kova Atelier",
+        description:
+          "Field notes, fabric studies and a quiet running record of what we ship from our Klang Valley workshop.",
+        keywords:
+          "Kova journal, window blinds blog Malaysia, fabric notes, install reports, Petaling Jaya workshop",
+      },
+    },
   },
   nav: {
     links: [
@@ -477,6 +538,35 @@ export const en = {
   imageSlot: {
     photo: "Photo",
     coming: "Coming soon",
+  },
+  faq: {
+    eyebrow: "Common questions",
+    titleA: "Answers, before",
+    titleB: "you ask.",
+    intro:
+      "Five things visitors ask most often before they reach out. Anything missing? Send us a note — we'll add it.",
+    items: [
+      {
+        q: "How much do made-to-measure blinds cost in Malaysia?",
+        a: "Pricing depends on size, fabric and mechanism. Because we sell factory-direct — no distributor, wholesaler or showroom mark-up — our quotes typically land 30–40% below conventional showroom pricing for the same fabric and hardware. Send a quick photo and rough dimensions and we'll quote within 48 working hours.",
+      },
+      {
+        q: "Do you measure on-site?",
+        a: "Yes. After we agree on direction over WhatsApp or email, we visit, measure every window by hand, take photos, and walk you through fabric samples. There's no cost, no obligation, no showroom pressure.",
+      },
+      {
+        q: "How long from quote to installation?",
+        a: "Once specifications are confirmed, most projects take 10–14 working days from order to install — depending on fabric availability and motorisation choice. Rush jobs by arrangement.",
+      },
+      {
+        q: "Are your blinds available motorised?",
+        a: "Yes — every product line (Roller, Venetian, VertiSheer) is available motorised. Choose between battery (no wiring), hardwired, or HomeKit-compatible. We program and test on the day of install.",
+      },
+      {
+        q: "Which blind type works best for sliding doors and glass walls?",
+        a: "VertiSheer is purpose-built for sliding doors and glass walls — vertical fabric vanes track smoothly up to 6m span without sagging. Roller and Venetian work too, but VertiSheer is the cleanest fit for big openings.",
+      },
+    ],
   },
   blog: {
     eyebrow: "Journal",

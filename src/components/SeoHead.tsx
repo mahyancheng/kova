@@ -33,20 +33,64 @@ function setLink(rel: string, href: string, hreflang?: string) {
   el.href = href;
 }
 
+/** Map a pathname to a logical page key for SEO lookup. */
+function pathnameToPageKey(pathname: string): keyof typeof PAGE_KEY_FALLBACK {
+  const m: Record<string, keyof typeof PAGE_KEY_FALLBACK> = {
+    "/": "home",
+    "/bidai": "home",
+    "/roller": "roller",
+    "/bidai/roller": "roller",
+    "/venetian": "venetian",
+    "/bidai/venetian": "venetian",
+    "/vertisheer": "vertisheer",
+    "/bidai/vertisheer": "vertisheer",
+    "/process": "process",
+    "/bidai/proses": "process",
+    "/configurator": "configurator",
+    "/bidai/reka": "configurator",
+    "/contact": "contact",
+    "/bidai/hubungi": "contact",
+    "/blog": "blog",
+    "/bidai/jurnal": "blog",
+  };
+  if (m[pathname]) return m[pathname];
+  if (pathname.startsWith("/blog/") || pathname.startsWith("/bidai/jurnal/")) return "blog";
+  return "home";
+}
+
+/** Sentinel object used only to constrain the keys of pathnameToPageKey. */
+const PAGE_KEY_FALLBACK = {
+  home: 1,
+  roller: 1,
+  venetian: 1,
+  vertisheer: 1,
+  process: 1,
+  configurator: 1,
+  contact: 1,
+  blog: 1,
+} as const;
+
 export function SeoHead() {
   const t = useT();
   const { pathname } = useLocation();
-  const seo = t.seo;
+
+  // Resolve per-page SEO (title / description / keywords) with the
+  // global block as fallback for fields a page doesn't override.
+  const pageKey = pathnameToPageKey(pathname);
+  const pageSeo = t.seo.pages[pageKey];
+  const title = pageSeo.title;
+  const description = pageSeo.description;
+  const keywords = pageSeo.keywords ?? t.seo.keywords;
 
   useEffect(() => {
     // --- Title + description / OG / Twitter (language-driven) ------
-    document.title = seo.title;
-    setMeta('meta[name="description"]', seo.description);
-    setMeta('meta[name="keywords"]', seo.keywords);
-    setMeta('meta[property="og:title"]', seo.title);
-    setMeta('meta[property="og:description"]', seo.description);
-    setMeta('meta[name="twitter:title"]', seo.title);
-    setMeta('meta[name="twitter:description"]', seo.description);
+    document.title = title;
+    setMeta('meta[name="description"]', description);
+    setMeta('meta[name="keywords"]', keywords);
+    setMeta('meta[property="og:title"]', title);
+    setMeta('meta[property="og:description"]', description);
+    setMeta('meta[name="twitter:title"]', title);
+    setMeta('meta[name="twitter:description"]', description);
 
     // --- Canonical + hreflang pair (route-driven) ------------------
     const origin = window.location.origin;
@@ -96,7 +140,7 @@ export function SeoHead() {
 
     // og:locale matches the current page's language.
     setMeta('meta[property="og:locale"]', t.meta.htmlLang === "ms" ? "ms_MY" : "en_MY");
-  }, [seo, pathname, t.meta.htmlLang]);
+  }, [title, description, keywords, pathname, t.meta.htmlLang]);
 
   return null;
 }

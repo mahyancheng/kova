@@ -9,6 +9,70 @@ export const ms: Dict = {
       "Bidai dan langsir tingkap dibuat ikut ukuran rumah anda. Bidai Roller, Bidai Venetian dan VertiSheer terus dari kilang di Petaling Jaya — sehingga 40% lebih murah dari harga runcit.",
     keywords:
       "bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian, vertisheer, bidai dibuat ikut ukuran, bidai murah, bidai bermotor, bidai motor, bidai Petaling Jaya, bidai Klang Valley, bidai Selangor, roller blinds Malaysia, venetian blinds Malaysia",
+    pages: {
+      home: {
+        title:
+          "Kova Sun Shade — Bidai & Langsir Tingkap untuk Rumah Anda",
+        description:
+          "Bidai dibuat ikut ukuran tingkap rumah anda. Bidai Roller, Bidai Venetian dan VertiSheer terus dari kilang di Petaling Jaya — sehingga 40% lebih murah dari runcit.",
+        keywords:
+          "bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian, vertisheer, bidai dibuat ikut ukuran, bidai murah, bidai bermotor, Petaling Jaya, Lembah Klang, Selangor",
+      },
+      roller: {
+        title:
+          "Bidai Roller — Dibuat Ikut Ukuran · Kova Sun Shade Malaysia",
+        description:
+          "Bidai Roller terus dari kilang. 13 pilihan kain — blackout, dim-out, sunscreen, penapis cahaya. Dipasang sendiri di Lembah Klang. Sehingga 40% lebih murah dari runcit.",
+        keywords:
+          "bidai roller, bidai roller Malaysia, bidai blackout, bidai dim-out, bidai sunscreen, bidai dibuat ikut ukuran, Cenza, Denver, Shiro, Petaling Jaya, Lembah Klang",
+      },
+      venetian: {
+        title:
+          "Bidai Venetian — Aluminium, Kayu, Kayu Palsu · Kova Sun Shade",
+        description:
+          "Bidai Venetian dengan mekanisma rantai · miring · angkat yang lancar. Kemasan W101 Alpine White, W301 Pearl River, W302 Agate Grey, W206 Mahogany Teak. Terus dari kilang.",
+        keywords:
+          "bidai venetian, bidai venetian Malaysia, bidai aluminium, bidai kayu, bidai kayu palsu, W101, W301, W302, W206, Petaling Jaya",
+      },
+      vertisheer: {
+        title:
+          "VertiSheer — Lembut Seperti Langsir, Tepat Seperti Bidai · Kova Sun Shade",
+        description:
+          "Bilah kain sheer menegak untuk pintu gelongsor dan dinding kaca. Trek sampai 6 meter. Lima kain Pivot dari White hingga Anchor. Lembut macam langsir, tepat macam bidai.",
+        keywords:
+          "vertisheer Malaysia, bidai sheer menegak, bidai pintu gelongsor, bidai dinding kaca, langsir tingkap besar, Pivot, Lembah Klang",
+      },
+      process: {
+        title:
+          "Cara Kami Bekerja — Bidai Terus Dari Kilang · Kova Sun Shade",
+        description:
+          "Kami ukur, buat dan pasang sendiri dari bengkel di Petaling Jaya. Tiada caj orang tengah — harga sehingga 40% lebih murah dari runcit. Proses empat langkah, tanpa jualan keras.",
+        keywords:
+          "bidai terus dari kilang, bidai dibuat ikut ukuran Lembah Klang, pemasangan bidai Petaling Jaya, bidai khas, ukuran tingkap di lokasi",
+      },
+      configurator: {
+        title: "Reka Bidai Anda — Pratonton Langsung · Kova Sun Shade",
+        description:
+          "Pilih jenis bidai, kain dan kelegapan. Pratonton ruang akan kemas kini terus. Hantar konfigurasi anda untuk sebut harga terus dari kilang.",
+        keywords:
+          "konfigurator bidai, reka bidai sendiri, pemilih kain bidai, pratonton langsung, bidai dibuat ikut ukuran, Kova Sun Shade",
+      },
+      contact: {
+        title:
+          "Dapatkan Sebut Harga — Bidai Lembah Klang · Kova Sun Shade",
+        description:
+          "Beritahu kami tentang tingkap anda. Kami balas dalam 48 jam bekerja dengan tarikh pengukuran dan sebut harga terus dari kilang. Bidai dibuat ikut ukuran rumah anda.",
+        keywords:
+          "sebut harga bidai Malaysia, bidai Lembah Klang, ukur bidai Petaling Jaya, bidai dibuat ikut ukuran, dapatkan sebut harga, hubungi Kova Sun Shade",
+      },
+      blog: {
+        title: "Jurnal — Catatan dari Atelier Kova",
+        description:
+          "Catatan lapangan, kajian fabrik, laporan pemasangan dari bengkel kami di Lembah Klang.",
+        keywords:
+          "jurnal Kova, blog bidai Malaysia, nota kain, laporan pemasangan, bengkel Petaling Jaya",
+      },
+    },
   },
   nav: {
     links: [
@@ -451,6 +515,35 @@ export const ms: Dict = {
   imageSlot: {
     photo: "Foto",
     coming: "Akan datang",
+  },
+  faq: {
+    eyebrow: "Soalan lazim",
+    titleA: "Jawapan, sebelum",
+    titleB: "anda bertanya.",
+    intro:
+      "Lima perkara yang pelanggan paling kerap tanya sebelum mereka hubungi. Ada yang tertinggal? Bagi tahu kami — kami akan tambah.",
+    items: [
+      {
+        q: "Berapa harga bidai dibuat ikut ukuran di Malaysia?",
+        a: "Harga bergantung pada saiz, kain dan mekanisma. Kerana kami jual terus dari kilang — tiada caj pengedar, pemborong atau bilik pameran — sebut harga kami biasanya 30–40% lebih murah dari harga bilik pameran untuk kain dan perkakas yang sama. Hantar foto dan ukuran kasar, kami balas dalam 48 jam bekerja.",
+      },
+      {
+        q: "Adakah anda akan datang ukur di lokasi?",
+        a: "Ya. Selepas kita setuju arah melalui WhatsApp atau emel, kami akan lawat, ukur setiap tingkap dengan tangan, ambil gambar dan tunjuk sampel kain. Tiada bayaran, tiada paksaan, tiada drama bilik pameran.",
+      },
+      {
+        q: "Berapa lama dari sebut harga hingga pemasangan?",
+        a: "Selepas spesifikasi disahkan, kebanyakan projek mengambil masa 10–14 hari bekerja dari pesanan ke pemasangan — bergantung pada ketersediaan kain dan pilihan bermotor. Kerja segera boleh diatur.",
+      },
+      {
+        q: "Adakah bidai anda boleh bermotor?",
+        a: "Ya — setiap jenis (Roller, Venetian, VertiSheer) ada pilihan bermotor. Pilih bateri (tanpa wayar), wayar tetap, atau serasi HomeKit. Kami program dan uji pada hari pemasangan.",
+      },
+      {
+        q: "Bidai jenis mana paling sesuai untuk pintu gelongsor dan dinding kaca?",
+        a: "VertiSheer direka khas untuk pintu gelongsor dan dinding kaca — bilah kain menegak yang trek lancar sampai 6 meter tanpa kendur. Roller dan Venetian boleh juga, tapi VertiSheer paling kemas untuk bukaan besar.",
+      },
+    ],
   },
   blog: {
     eyebrow: "Jurnal",

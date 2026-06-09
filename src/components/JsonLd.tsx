@@ -112,8 +112,35 @@ export function JsonLd() {
       },
     };
 
+    // Service — what the business actually offers, with area + language.
+    const service = {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${SITE_URL}/#service`,
+      name: isMalay
+        ? "Bidai dibuat ikut ukuran — pengukuran, pembuatan dan pemasangan"
+        : "Made-to-measure window blinds — measure, manufacture and install",
+      serviceType: isMalay
+        ? "Pembuatan dan pemasangan bidai tingkap"
+        : "Window blind manufacture and installation",
+      provider: { "@id": `${SITE_URL}/#business` },
+      areaServed: [
+        { "@type": "AdministrativeArea", name: "Klang Valley" },
+        { "@type": "AdministrativeArea", name: "Greater Kuala Lumpur" },
+        { "@type": "AdministrativeArea", name: "Selangor" },
+      ],
+      availableLanguage: ["en", "ms"],
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "MYR",
+        availability: "https://schema.org/InStock",
+        url: `${SITE_URL}${isMalay ? "/bidai/hubungi" : "/contact"}`,
+      },
+    };
+
     setJsonLd("business", business);
     setJsonLd("website", website);
+    setJsonLd("service", service);
 
     // --- Per-product schema (dedicated product pages) ----------------
     const productMatch = pathname.match(
@@ -160,31 +187,88 @@ export function JsonLd() {
       clearJsonLd("products");
     }
 
-    // --- Blog breadcrumbs ------------------------------------------
+    // --- HowTo (process page) --------------------------------------
+    const onProcess = pathname === "/process" || pathname === "/bidai/proses";
+    if (onProcess) {
+      setJsonLd("howto", {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: isMalay
+          ? "Cara kami pasang bidai anda — empat langkah"
+          : "How Kova Sun Shade installs your blinds — four steps",
+        description: t.process.intro,
+        step: t.process.steps.map((s, i) => ({
+          "@type": "HowToStep",
+          position: i + 1,
+          name: s.title,
+          text: s.body,
+        })),
+        totalTime: "P14D",
+        inLanguage: isMalay ? "ms-MY" : "en-MY",
+      });
+    } else {
+      clearJsonLd("howto");
+    }
+
+    // --- Breadcrumbs (every brochure + blog page) ------------------
+    const homeUrl = isMalay ? `${SITE_URL}/bidai` : `${SITE_URL}/`;
+    const blogUrl = isMalay ? `${SITE_URL}/bidai/jurnal` : `${SITE_URL}/blog`;
     const onBlogIndex = pathname === "/blog" || pathname === "/bidai/jurnal";
     const onBlogPost =
       pathname.startsWith("/blog/") || pathname.startsWith("/bidai/jurnal/");
 
+    /** Maps the current pathname to its breadcrumb chain. */
+    const breadcrumbItems: Array<{ "@type": string; position: number; name: string; item: string }> = [];
+    breadcrumbItems.push({ "@type": "ListItem", position: 1, name: "Home", item: homeUrl });
+
     if (onBlogIndex || onBlogPost) {
-      const homeUrl = isMalay ? `${SITE_URL}/bidai` : `${SITE_URL}/`;
-      const blogUrl = isMalay ? `${SITE_URL}/bidai/jurnal` : `${SITE_URL}/blog`;
-      const items: Array<{ "@type": string; position: number; name: string; item: string }> = [
-        { "@type": "ListItem", position: 1, name: "Home", item: homeUrl },
-        { "@type": "ListItem", position: 2, name: t.nav.journal, item: blogUrl },
-      ];
+      breadcrumbItems.push({ "@type": "ListItem", position: 2, name: t.nav.journal, item: blogUrl });
       if (onBlogPost) {
         const slug = pathname.split("/").pop() || "";
-        items.push({
+        breadcrumbItems.push({
           "@type": "ListItem",
           position: 3,
           name: slug.replace(/-/g, " "),
           item: `${SITE_URL}${pathname}`,
         });
       }
+    } else if (productMatch) {
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        position: 2,
+        name: productMatch[1] === "roller" ? (isMalay ? "Bidai Roller" : "Roller Blinds")
+            : productMatch[1] === "venetian" ? (isMalay ? "Bidai Venetian" : "Venetian Blinds")
+            : "VertiSheer",
+        item: `${SITE_URL}${pathname}`,
+      });
+    } else if (onProcess) {
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        position: 2,
+        name: isMalay ? "Proses" : "Process",
+        item: `${SITE_URL}${pathname}`,
+      });
+    } else if (pathname === "/configurator" || pathname === "/bidai/reka") {
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        position: 2,
+        name: isMalay ? "Reka sendiri" : "Design yours",
+        item: `${SITE_URL}${pathname}`,
+      });
+    } else if (pathname === "/contact" || pathname === "/bidai/hubungi") {
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        position: 2,
+        name: isMalay ? "Hubungi" : "Contact",
+        item: `${SITE_URL}${pathname}`,
+      });
+    }
+
+    if (breadcrumbItems.length > 1) {
       setJsonLd("breadcrumbs", {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        itemListElement: items,
+        itemListElement: breadcrumbItems,
       });
     } else {
       clearJsonLd("breadcrumbs");

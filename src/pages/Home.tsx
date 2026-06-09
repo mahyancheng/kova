@@ -5,7 +5,9 @@ import { Marquee } from "@/components/Marquee";
 import { Philosophy } from "@/components/Philosophy";
 import { Collection } from "@/components/Collection";
 import { FactoryDirect } from "@/components/FactoryDirect";
+import { Fabrics } from "@/components/Fabrics";
 import { Configurator } from "@/components/Configurator";
+import { FaqSection } from "@/components/FaqSection";
 import { Footer } from "@/components/Footer";
 import { StickyQuote } from "@/components/StickyQuote";
 
@@ -35,7 +37,9 @@ export function Home() {
         <Philosophy />
         <Collection />
         <FactoryDirect />
+        <Fabrics />
         <Configurator />
+        <FaqSection />
       </main>
       <Footer />
       <StickyQuote />
