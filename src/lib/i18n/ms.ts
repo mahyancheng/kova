@@ -469,6 +469,7 @@ export const ms: Dict = {
     interestLabel: "Berminat dengan",
     interests: ["Roller", "Venetian", "VertiSheer", "Belum pasti"],
     submit: "Hantar pertanyaan",
+    submitting: "Menghantar…",
     sentTitle: "Terima kasih — kami terima.",
     sentBody:
       "Orang studio kami akan hubungi anda dalam satu hari bekerja untuk atur tarikh pengukuran.",

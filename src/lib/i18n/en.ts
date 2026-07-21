@@ -492,6 +492,7 @@ export const en = {
     interestLabel: "Interested in",
     interests: ["Roller", "Venetian", "VertiSheer", "Not sure yet"],
     submit: "Send enquiry",
+    submitting: "Sending…",
     sentTitle: "Thanks — we have it.",
     sentBody:
       "Someone from the studio will reach out within one working day to arrange a measure.",

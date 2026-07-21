@@ -1,18 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { useT } from "@/lib/i18n";
+import { useT, useLang } from "@/lib/i18n";
 import { useConfigurator } from "@/lib/configurator/context";
 import { useRoutes } from "@/lib/routes";
+import { submitLead } from "@/lib/leads";
 
 export function Contact() {
   const t = useT();
   const r = useRoutes();
   const { configuration, submissionToken } = useConfigurator();
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [prefilled, setPrefilled] = useState(false);
   const [lastSummary, setLastSummary] = useState<string | null>(null);
   const messageRef = useRef<HTMLTextAreaElement | null>(null);
   const interestRef = useRef<HTMLFieldSetElement | null>(null);
+  const { lang } = useLang();
 
   useEffect(() => {
     if (submissionToken === 0) return;
@@ -86,7 +89,29 @@ export function Contact() {
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  setSent(true);
+                  if (submitting) return;
+                  const form = e.currentTarget;
+                  const data = new FormData(form);
+                  const interests = data
+                    .getAll("interest")
+                    .map((v) => String(v))
+                    .join(", ");
+                  setSubmitting(true);
+                  // Fire the lead to the agency Supabase, then always thank the
+                  // visitor (submitLead never throws — it stashes on failure).
+                  submitLead({
+                    name: String(data.get("name") || ""),
+                    phone: String(data.get("phone") || ""),
+                    email: String(data.get("email") || ""),
+                    location: String(data.get("location") || ""),
+                    message: String(data.get("message") || ""),
+                    interest: interests,
+                    configSummary: lastSummary,
+                    lang,
+                  }).finally(() => {
+                    setSubmitting(false);
+                    setSent(true);
+                  });
                 }}
               >
                 {/* Configuration summary chip */}
@@ -182,9 +207,10 @@ export function Contact() {
                 <div className="mt-6">
                   <button
                     type="submit"
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-3 rounded-full bg-[var(--color-clay)] text-[var(--color-cream)] font-medium text-[0.95rem] sm:text-[0.92rem] hover:bg-[var(--color-clay-deep)] active:bg-[var(--color-clay-deep)] transition-colors"
+                    disabled={submitting}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-3 rounded-full bg-[var(--color-clay)] text-[var(--color-cream)] font-medium text-[0.95rem] sm:text-[0.92rem] hover:bg-[var(--color-clay-deep)] active:bg-[var(--color-clay-deep)] transition-colors disabled:opacity-60 disabled:cursor-wait"
                   >
-                    {t.contact.submit}
+                    {submitting ? t.contact.submitting : t.contact.submit}
                     <span aria-hidden>→</span>
                   </button>
                 </div>
