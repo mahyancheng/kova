@@ -59,7 +59,7 @@ export function JsonLd() {
       description: t.seo.description,
       url: SITE_URL,
       email: "info@kovasunshade.com",
-      telephone: "+60123456789",
+      telephone: "+60179778289",
       logo: LOGO_URL,
       image: `${SITE_URL}/showcase/greige-roller.webp`,
       address: {
