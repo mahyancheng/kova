@@ -64,8 +64,9 @@ export function JsonLd() {
       image: `${SITE_URL}/showcase/greige-roller.webp`,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "No. 14, Jalan Bayu 4",
-        addressLocality: "Petaling Jaya",
+        streetAddress: "No 3, Jalan Tpk 1/6, Taman Perindustrian Kinrara",
+        addressLocality: "Puchong",
+        postalCode: "47180",
         addressRegion: "Selangor",
         addressCountry: "MY",
       },

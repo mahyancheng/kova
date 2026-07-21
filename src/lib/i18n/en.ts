@@ -473,7 +473,7 @@ export const en = {
     direct: "Direct",
     hours: "Hours",
     service: "Service",
-    studioAddr: "No. 14, Jalan Bayu 4\nPetaling Jaya, Malaysia",
+    studioAddr: "No 3, Jalan Tpk 1/6\nTaman Perindustrian Kinrara\n47180 Puchong, Selangor",
     directInfo: "info@kovasunshade.com\n+60 17-977 8289",
     hoursInfo: "Mon — Fri, 9 to 6\nSaturday by appointment",
     serviceInfo: "Klang Valley & beyond\nTrade & residential",

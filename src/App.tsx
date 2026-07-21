@@ -5,6 +5,7 @@ import { ConfiguratorProvider } from "@/lib/configurator/context";
 import { ScrollManager } from "./components/ScrollManager";
 import { SeoHead } from "./components/SeoHead";
 import { JsonLd } from "./components/JsonLd";
+import { WhatsAppFab } from "./components/WhatsAppFab";
 import { Home } from "./pages/Home";
 
 // Brochure pages — each is its own bundle so the visitor only pays for
@@ -58,6 +59,7 @@ export default function App() {
               <Route path="*" element={<Home />} />
             </Routes>
           </Suspense>
+          <WhatsAppFab />
         </ConfiguratorProvider>
       </LangProvider>
     </BrowserRouter>
