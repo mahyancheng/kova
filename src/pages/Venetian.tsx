@@ -25,6 +25,7 @@ export function VenetianPage() {
       <PromoBar />
       <Nav />
       <main id="main" className="pt-16">
+        <h1 className="sr-only">{t.seo.pages.venetian.title}</h1>
         <ProductSpotlight
           id="venetian"
           tone="paper"

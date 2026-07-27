@@ -26,6 +26,7 @@ export function RollerPage() {
       <PromoBar />
       <Nav />
       <main id="main" className="pt-16">
+        <h1 className="sr-only">{t.seo.pages.roller.title}</h1>
         <ProductSpotlight
           id="roller"
           tone="cream"

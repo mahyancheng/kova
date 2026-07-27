@@ -24,6 +24,7 @@ export function VertiSheerPage() {
       <PromoBar />
       <Nav />
       <main id="main" className="pt-16">
+        <h1 className="sr-only">{t.seo.pages.vertisheer.title}</h1>
         <ProductSpotlight
           id="vertisheer"
           tone="ink"
