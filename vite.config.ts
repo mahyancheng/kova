@@ -108,6 +108,15 @@ function renderRoute(
     // Function replacer so `$` in a value is never treated as a group ref.
     html = html.replace(re, () => replacement);
   }
+
+  // The audit reads first-byte HTML, while React replaces #root at startup.
+  // Seed one route-specific H1 into the static shell; createRoot removes it
+  // before rendering the page's matching runtime H1, so neither view has zero
+  // or duplicate primary headings.
+  html = html.replace(
+    '<div id="root"></div>',
+    `<div id="root"><h1 class="sr-only" data-static-seo="h1">${escText(title)}</h1></div>`,
+  );
   return html;
 }
 
