@@ -32,32 +32,35 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
 
   const isMalayUrl = pathname === "/bidai" || pathname.startsWith("/bidai/");
+  const isEnglishUrl =
+    pathname === "/" ||
+    ["/roller", "/venetian", "/vertisheer", "/process", "/configurator", "/contact", "/blog"].includes(pathname) ||
+    pathname.startsWith("/blog/");
 
-  // Stored preference — used as the fallback on language-neutral routes.
+  // Canonical language routes are authoritative. A saved preference must not
+  // turn an English URL into Malay after hydration (or vice versa), because
+  // that makes the rendered title/content disagree with the static metadata.
   const [storedLang, setStoredLang] = useState<Lang>("en");
   useEffect(() => {
     const saved = localStorage.getItem("kova-lang");
     if (saved === "en" || saved === "ms") setStoredLang(saved);
   }, []);
+  const routeLang: Lang | null = isMalayUrl ? "ms" : isEnglishUrl ? "en" : null;
+  const lang: Lang = routeLang ?? storedLang;
 
-  const lang: Lang = isMalayUrl ? "ms" : pathname === "/" ? "en" : storedLang;
-
-  // Mirror the active language to <html lang> for accessibility and SEO.
+  // Mirror the active language to <html lang> and remember explicit language
+  // routes for any genuinely language-neutral fallback URL.
   useEffect(() => {
     document.documentElement.lang = dictionaries[lang].meta.htmlLang;
-  }, [lang]);
-
-  // Visiting /bidai becomes a vote for Malay on subsequent neutral routes.
-  useEffect(() => {
-    if (isMalayUrl && storedLang !== "ms") {
-      setStoredLang("ms");
+    if (routeLang && routeLang !== storedLang) {
+      setStoredLang(routeLang);
       try {
-        localStorage.setItem("kova-lang", "ms");
+        localStorage.setItem("kova-lang", routeLang);
       } catch {
         /* ignore quota / private-mode errors */
       }
     }
-  }, [isMalayUrl, storedLang]);
+  }, [lang, routeLang, storedLang]);
 
   const setLang = (l: Lang) => {
     setStoredLang(l);
@@ -67,10 +70,21 @@ export function LangProvider({ children }: { children: ReactNode }) {
       /* ignore */
     }
 
-    // Navigate between the canonical EN/BM URLs when on the home route.
-    // Anywhere else, just persist the preference — the URL stays put.
-    if (l === "ms" && pathname === "/") navigate("/bidai");
-    else if (l === "en" && isMalayUrl) navigate("/");
+    const pairs: Record<string, string> = {
+      "/": "/bidai",
+      "/roller": "/bidai/roller",
+      "/venetian": "/bidai/venetian",
+      "/vertisheer": "/bidai/vertisheer",
+      "/process": "/bidai/proses",
+      "/configurator": "/bidai/reka",
+      "/contact": "/bidai/hubungi",
+      "/blog": "/bidai/jurnal",
+    };
+    const reverse = Object.fromEntries(Object.entries(pairs).map(([enPath, msPath]) => [msPath, enPath]));
+    let target = l === "ms" ? pairs[pathname] : reverse[pathname];
+    if (l === "ms" && pathname.startsWith("/blog/")) target = pathname.replace("/blog/", "/bidai/jurnal/");
+    if (l === "en" && pathname.startsWith("/bidai/jurnal/")) target = pathname.replace("/bidai/jurnal/", "/blog/");
+    if (target) navigate(target);
   };
 
   return (
