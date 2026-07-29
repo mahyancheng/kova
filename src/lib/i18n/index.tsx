@@ -30,12 +30,13 @@ const LangContext = createContext<{
 export function LangProvider({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const routePath = pathname === "/" ? pathname : pathname.replace(/\/+$/, "");
 
-  const isMalayUrl = pathname === "/bidai" || pathname.startsWith("/bidai/");
+  const isMalayUrl = routePath === "/bidai" || routePath.startsWith("/bidai/");
   const isEnglishUrl =
-    pathname === "/" ||
-    ["/roller", "/venetian", "/vertisheer", "/process", "/configurator", "/contact", "/blog"].includes(pathname) ||
-    pathname.startsWith("/blog/");
+    routePath === "/" ||
+    ["/roller", "/venetian", "/vertisheer", "/process", "/configurator", "/contact", "/blog"].includes(routePath) ||
+    routePath.startsWith("/blog/");
 
   // Canonical language routes are authoritative. A saved preference must not
   // turn an English URL into Malay after hydration (or vice versa), because
@@ -81,9 +82,9 @@ export function LangProvider({ children }: { children: ReactNode }) {
       "/blog": "/bidai/jurnal",
     };
     const reverse = Object.fromEntries(Object.entries(pairs).map(([enPath, msPath]) => [msPath, enPath]));
-    let target = l === "ms" ? pairs[pathname] : reverse[pathname];
-    if (l === "ms" && pathname.startsWith("/blog/")) target = pathname.replace("/blog/", "/bidai/jurnal/");
-    if (l === "en" && pathname.startsWith("/bidai/jurnal/")) target = pathname.replace("/bidai/jurnal/", "/blog/");
+    let target = l === "ms" ? pairs[routePath] : reverse[routePath];
+    if (l === "ms" && routePath.startsWith("/blog/")) target = routePath.replace("/blog/", "/bidai/jurnal/");
+    if (l === "en" && routePath.startsWith("/bidai/jurnal/")) target = routePath.replace("/bidai/jurnal/", "/blog/");
     if (target) navigate(target);
   };
 

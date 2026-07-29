@@ -73,10 +73,11 @@ const PAGE_KEY_FALLBACK = {
 export function SeoHead() {
   const t = useT();
   const { pathname } = useLocation();
+  const routePath = pathname === "/" ? pathname : pathname.replace(/\/+$/, "");
 
   // Resolve per-page SEO (title / description / keywords) with the
   // global block as fallback for fields a page doesn't override.
-  const pageKey = pathnameToPageKey(pathname);
+  const pageKey = pathnameToPageKey(routePath);
   const pageSeo = t.seo.pages[pageKey];
   const title = pageSeo.title;
   const description = pageSeo.description;
@@ -112,20 +113,20 @@ export function SeoHead() {
 
     let enHref = `${origin}/`;
     let msHref = `${origin}/bidai`;
-    let canonicalPath: string = pathname;
+    let canonicalPath: string = routePath;
 
-    if (PAIRS[pathname]) {
-      enHref = `${origin}${pathname}`;
-      msHref = `${origin}${PAIRS[pathname]}`;
-    } else if (EN_FROM_BM[pathname]) {
-      enHref = `${origin}${EN_FROM_BM[pathname]}`;
-      msHref = `${origin}${pathname}`;
-    } else if (pathname.startsWith("/blog/")) {
-      const slug = pathname.slice("/blog/".length);
+    if (PAIRS[routePath]) {
+      enHref = `${origin}${routePath}`;
+      msHref = `${origin}${PAIRS[routePath]}`;
+    } else if (EN_FROM_BM[routePath]) {
+      enHref = `${origin}${EN_FROM_BM[routePath]}`;
+      msHref = `${origin}${routePath}`;
+    } else if (routePath.startsWith("/blog/")) {
+      const slug = routePath.slice("/blog/".length);
       enHref = `${origin}/blog/${slug}`;
       msHref = `${origin}/bidai/jurnal/${slug}`;
-    } else if (pathname.startsWith("/bidai/jurnal/")) {
-      const slug = pathname.slice("/bidai/jurnal/".length);
+    } else if (routePath.startsWith("/bidai/jurnal/")) {
+      const slug = routePath.slice("/bidai/jurnal/".length);
       enHref = `${origin}/blog/${slug}`;
       msHref = `${origin}/bidai/jurnal/${slug}`;
     } else {
@@ -140,7 +141,7 @@ export function SeoHead() {
 
     // og:locale matches the current page's language.
     setMeta('meta[property="og:locale"]', t.meta.htmlLang === "ms" ? "ms_MY" : "en_MY");
-  }, [title, description, keywords, pathname, t.meta.htmlLang]);
+  }, [title, description, keywords, routePath, t.meta.htmlLang]);
 
   return null;
 }
