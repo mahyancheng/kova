@@ -7,6 +7,8 @@
  * as WhatsApp instantly, but sized/positioned to sit below the sticky quote
  * bar without colliding.
  */
+import { trackWhatsAppClick } from "@/lib/analytics";
+
 const WA_NUMBER = "60179778289";
 const WA_PREFILL = encodeURIComponent(
   "Hi Kova Sun Shade, I'd like a quote for blinds.",
@@ -18,6 +20,7 @@ export function WhatsAppFab() {
       href={`https://wa.me/${WA_NUMBER}?text=${WA_PREFILL}`}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={trackWhatsAppClick}
       aria-label="Chat with us on WhatsApp"
       className="group fixed bottom-5 right-5 z-[60] inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-[0_10px_30px_-8px_rgba(0,0,0,0.5)] transition-transform hover:scale-105 active:scale-95"
     >

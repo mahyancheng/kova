@@ -4,6 +4,7 @@ import { useT, useLang } from "@/lib/i18n";
 import { useConfigurator } from "@/lib/configurator/context";
 import { useRoutes } from "@/lib/routes";
 import { submitLead } from "@/lib/leads";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export function Contact() {
   const t = useT();
@@ -247,6 +248,7 @@ export function Contact() {
                     href="https://wa.me/60179778289"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={trackWhatsAppClick}
                     className="inline-flex items-center gap-1.5 hover:text-[var(--color-clay-light)] transition-colors"
                   >
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden className="shrink-0">
