@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useT } from "@/lib/i18n";
 import { useRoutes } from "@/lib/routes";
 import { LanguageToggle } from "./LanguageToggle";
+import { PROMO_RESIZE_EVENT } from "./PromoBar";
 
 export function Nav() {
   const t = useT();
@@ -11,6 +12,7 @@ export function Nav() {
   const homePath = r.home;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   /** Brochure menu items, in display order. */
   const menu: Array<{ href: string; label: string }> = [
@@ -22,11 +24,43 @@ export function Nav() {
   ];
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
+  /**
+   * The header is fixed, but the PromoBar sits above it in normal flow. Park
+   * the header directly below the bar and let it ride up to the top edge as
+   * the bar scrolls away — otherwise the bar (z-60) paints over it at rest.
+   * Written straight to the node so scrolling doesn't re-render the tree.
+   */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    let promoH = 0;
+    const readPromoH = () => {
+      promoH =
+        parseFloat(
+          getComputedStyle(document.documentElement).getPropertyValue("--promo-h"),
+        ) || 0;
+    };
+    const place = () => {
+      const el = headerRef.current;
+      if (el) el.style.top = `${Math.max(0, promoH - window.scrollY)}px`;
+    };
+    const onScroll = () => {
+      setScrolled(window.scrollY > 12);
+      place();
+    };
+    const onPromoChange = () => {
+      readPromoH();
+      place();
+    };
+
+    onPromoChange();
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onPromoChange);
+    window.addEventListener(PROMO_RESIZE_EVENT, onPromoChange);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onPromoChange);
+      window.removeEventListener(PROMO_RESIZE_EVENT, onPromoChange);
+    };
   }, []);
 
   // Close the mobile drawer whenever the route changes.
@@ -59,8 +93,10 @@ export function Nav() {
         Skip to content
       </a>
       <header
+        ref={headerRef}
+        style={{ top: "var(--promo-h, 0px)" }}
         className={
-          "fixed top-0 inset-x-0 z-50 transition-all duration-500 " +
+          "fixed inset-x-0 z-50 transition-colors duration-500 " +
           (scrolled || mobileOpen
             ? "bg-[var(--color-cream)]/95 backdrop-blur-md border-b border-[var(--color-line-soft)]"
             : "bg-transparent border-b border-transparent")

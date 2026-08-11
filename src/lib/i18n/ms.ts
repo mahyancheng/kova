@@ -11,10 +11,11 @@ export const ms: Dict = {
       "bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian, vertisheer, bidai dibuat ikut ukuran, bidai murah, bidai bermotor, bidai motor, bidai Petaling Jaya, bidai Klang Valley, bidai Selangor, roller blinds Malaysia, venetian blinds Malaysia",
     pages: {
       home: {
+        // Kekal pada "bidai" — sepadan dengan H1 BM.
         title:
-          "Kova Sun Shade — Bidai & Langsir Tingkap untuk Rumah Anda",
+          "Bidai & Langsir Tingkap Malaysia · Terus dari Kilang | Kova",
         description:
-          "Bidai dibuat ikut ukuran tingkap rumah anda. Bidai Roller, Bidai Venetian dan VertiSheer terus dari kilang di Petaling Jaya — sehingga 40% lebih murah dari runcit.",
+          "Bidai dan langsir tingkap dalam kain blackout, dim-out dan sunscreen. Dibuat ikut ukuran, terus dari kilang — sehingga 40% lebih murah dari runcit.",
         keywords:
           "bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian, vertisheer, bidai dibuat ikut ukuran, bidai murah, bidai bermotor, Petaling Jaya, Lembah Klang, Selangor",
       },

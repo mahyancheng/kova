@@ -9,10 +9,12 @@ export const en = {
       "roller blinds Malaysia, venetian blinds Malaysia, vertisheer, factory direct blinds, motorised blinds, made to measure blinds, KL blinds, Petaling Jaya, Klang Valley, bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian",
     pages: {
       home: {
+        // Leads with the H1's target term; the price angle keeps it distinct
+        // from /roller, which leads on "made to measure".
         title:
-          "Kova Sun Shade — Roller, Venetian & VertiSheer Blinds Malaysia",
+          "Roller Blinds Malaysia · Factory-Direct, Up to 40% Less | Kova",
         description:
-          "Factory-direct made-to-measure window blinds in Klang Valley. Roller, Venetian and VertiSheer up to 40% less than retail. Bidai dan langsir tingkap untuk rumah anda.",
+          "Factory-direct roller blinds in blackout, dim-out and sunscreen — up to 40% less than retail. Venetian and VertiSheer too, made to measure in Klang Valley.",
         keywords:
           "roller blinds Malaysia, venetian blinds Malaysia, vertisheer, factory direct blinds, motorised blinds, made to measure blinds, Petaling Jaya, Klang Valley, bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, bidai dan langsir rumah anda",
       },
