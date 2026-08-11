@@ -89,20 +89,21 @@ export const en = {
     dismiss: "Dismiss announcement",
   },
   hero: {
-    chip: "Factory-direct pricing — up to 40% less than retail",
     eyebrow: "Kova Sun Shade · 2026 Collection",
-    titleA: "Light,",
-    titleB: "considered.",
-    body: "Roller Blinds, Venetian Blinds and VertiSheer — thoughtfully made window furnishings for homes, offices and the quiet rooms in between.",
-    ctaA: "Explore the collection",
-    ctaB: "Book a measure",
-    figureLabel: "Hero · Roller in Linen Wheat",
+    // Split H1: `titleA` is the target term, set large; `titleB` qualifies it.
+    titleA: "Roller blinds",
+    titleB: "in blackout, dim-out and sunscreen fabrics",
+    body: "A single, considered sheet of fabric. No slats, no folds, no visual noise — just the colour you chose, sitting where you want it. Measured, made and installed by us, from our own workshop.",
+    ctaA: "Get a factory-direct quote",
+    ctaB: "Book a free measure",
+    figureLabel: "Sunscreen roller blind in greige linen — home office",
+    figureAlt:
+      "Greige linen sunscreen roller blind lowered over a home-office window, desk and chair below",
     photoHint: "Drop your hero photo here ✺",
-    stats: [
-      ["12y", "Designing furnishings since 2014."],
-      ["3", "Considered product lines, made to last."],
-      ["120+", "Fabrics, finishes & opacities."],
-      ["48h", "Studio reply, on every enquiry."],
+    trust: [
+      ["Up to 40%", "below retail pricing"],
+      ["13", "roller blind fabrics"],
+      ["Free", "on-site measure"],
     ] as [string, string][],
   },
   factory: {

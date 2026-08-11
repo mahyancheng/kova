@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { useT } from "@/lib/i18n";
 
-type Ratio = "4/5" | "3/4" | "1/1" | "16/9" | "4/3" | "5/7" | "21/9" | "9/16";
+type Ratio = "4/5" | "3/4" | "1/1" | "16/9" | "4/3" | "5/4" | "5/7" | "21/9" | "9/16";
 
 const ratioClass: Record<Ratio, string> = {
   "4/5": "aspect-[4/5]",
@@ -10,6 +10,7 @@ const ratioClass: Record<Ratio, string> = {
   "1/1": "aspect-square",
   "16/9": "aspect-video",
   "4/3": "aspect-[4/3]",
+  "5/4": "aspect-[5/4]",
   "5/7": "aspect-[5/7]",
   "21/9": "aspect-[21/9]",
   "9/16": "aspect-[9/16]",
@@ -23,6 +24,7 @@ export function ImageSlot({
   alt,
   className,
   children,
+  priority = false,
 }: {
   ratio?: Ratio;
   caption?: string;
@@ -31,6 +33,8 @@ export function ImageSlot({
   alt?: string;
   className?: string;
   children?: ReactNode;
+  /** Above-the-fold image — load eagerly so it isn't a deferred LCP. */
+  priority?: boolean;
 }) {
   const t = useT();
   const toneClass =
@@ -67,7 +71,9 @@ export function ImageSlot({
             src={src}
             alt={alt ?? ""}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
-            loading="lazy"
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : undefined}
+            decoding={priority ? "sync" : "async"}
           />
         )}
 

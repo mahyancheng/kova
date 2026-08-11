@@ -94,21 +94,22 @@ export const ms: Dict = {
     dismiss: "Tutup pengumuman",
   },
   hero: {
-    chip: "Harga terus dari kilang — sampai 40% lebih murah dari runcit",
     eyebrow: "Kova Sun Shade · Koleksi 2026",
+    // H1 kekal pada "bidai" — istilah itu yang membawa trafik carian BM.
     titleA: "Bidai dan langsir tingkap",
-    titleB: "untuk rumah anda.",
-    body: "Bidai Roller, Bidai Venetian, dan VertiSheer — bidai dan langsir tingkap yang dibuat dengan teliti untuk rumah, pejabat, dan ruang-ruang tenang di antaranya.",
-    ctaA: "Terokai koleksi",
-    ctaB: "Tempah pengukuran",
-    figureLabel: "Hero · Roller dalam Linen Wheat",
+    titleB: "dalam kain blackout, dim-out dan sunscreen",
+    body: "Satu helai kain yang dipilih teliti. Tiada bilah, tiada lipatan, tiada gangguan mata — hanya warna pilihan anda, betul-betul di tempat yang anda mahu. Diukur, dibuat dan dipasang sendiri oleh kami, dari bengkel kami.",
+    ctaA: "Dapatkan sebut harga terus dari kilang",
+    ctaB: "Tempah pengukuran percuma",
+    figureLabel: "Bidai roller sunscreen dalam linen greige — ruang kerja",
+    figureAlt:
+      "Bidai roller sunscreen linen greige diturunkan di tingkap ruang kerja, dengan meja dan kerusi di bawahnya",
     photoHint: "Letakkan foto hero anda di sini ✺",
-    stats: [
-      ["12 thn", "Mereka bidai sejak 2014."],
-      ["3", "Produk pilihan, dibuat untuk tahan lama."],
-      ["120+", "Kain, kemasan & tahap kelegapan."],
-      ["48 jam", "Studio balas — setiap pertanyaan."],
-    ],
+    trust: [
+      ["Sehingga 40%", "lebih murah dari harga runcit"],
+      ["13", "kain bidai roller"],
+      ["Percuma", "pengukuran di rumah"],
+    ] as [string, string][],
   },
   factory: {
     eyebrow: "Mengapa harga kami begitu rendah",
