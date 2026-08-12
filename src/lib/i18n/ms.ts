@@ -144,6 +144,9 @@ export const ms: Dict = {
   },
   philosophy: {
     eyebrow: "Sepatah kata tentang kerja kami",
+    figureLabel: "Bilah VertiSheer di tingkap taman — ruang tamu",
+    figureAlt:
+      "Bilah menegak VertiSheer putih lut sinar ditarik merentangi tingkap lebar menghadap taman di ruang tamu, dengan sofa dan meja kopi di hadapan",
     statement:
       "Kami anggap cahaya sebagai bahan — sesuatu yang boleh dibentuk, dilembutkan, dan dibenarkan masuk ikut terma anda. Bidai kami direka untuk hilang ke dalam ruang, tinggalkan cuma rasa yang terbentuk.",
     points: [

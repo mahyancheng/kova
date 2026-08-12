@@ -1,3 +1,4 @@
+import { ImageSlot } from "./ImageSlot";
 import { useT } from "@/lib/i18n";
 
 export function Philosophy() {
@@ -8,6 +9,20 @@ export function Philosophy() {
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-12">
           <div className="lg:col-span-4">
             <p className="eyebrow">{t.philosophy.eyebrow}</p>
+            {/* Same paper frame as the hero. Portrait crop: the subject is
+                floor-to-ceiling vertical vanes, which suit a tall frame, and
+                it fills the column beside the statement. */}
+            <figure className="mt-6 lg:mt-8 m-0 bg-[var(--color-paper)] border border-[var(--color-line)] rounded-lg p-3.5 pb-0 shadow-[0_1px_2px_rgba(34,32,28,.04),0_12px_28px_-18px_rgba(34,32,28,.28)]">
+              <ImageSlot
+                ratio="4/5"
+                tone="sand"
+                src="/showcase/philosophy-vertisheer.webp"
+                alt={t.philosophy.figureAlt}
+              />
+              <figcaption className="px-0.5 pt-3 pb-3.5 text-[0.68rem] tracking-[0.12em] uppercase text-[var(--color-muted)]">
+                {t.philosophy.figureLabel}
+              </figcaption>
+            </figure>
           </div>
           <div className="lg:col-span-8">
             <p className="font-serif text-[clamp(1.3rem,0.9rem+2.2vw,2.4rem)] leading-[1.18] tracking-tighter text-[var(--color-ink)]">

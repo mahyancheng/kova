@@ -140,6 +140,9 @@ export const en = {
   },
   philosophy: {
     eyebrow: "A few words on what we make",
+    figureLabel: "VertiSheer vanes across a garden window — living room",
+    figureAlt:
+      "Sheer white VertiSheer vertical vanes drawn across a wide garden-facing window in a living room, sofa and coffee table in the foreground",
     statement:
       "We treat light as a material — something to be shaped, softened, and let in on your terms. Our blinds are made to disappear into the room and leave only the feeling behind.",
     points: [
