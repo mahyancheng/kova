@@ -1,4 +1,4 @@
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useState, useRef } from "react";
 import { Reveal } from "./Reveal";
 import { useT } from "@/lib/i18n";
 import { useConfigurator } from "@/lib/configurator/context";
@@ -13,58 +13,82 @@ import { VenetianOverlay } from "./configurator/VenetianOverlay";
 import { VertiSheerOverlay } from "./configurator/VertiSheerOverlay";
 import { ScenePhoto } from "./configurator/ScenePhoto";
 import { cn } from "@/lib/utils";
-
+import { useNavigate } from "react-router-dom"; 
+import { useRoutes } from "@/lib/routes";
 const PRODUCT_IDS: ProductId[] = ["roller", "venetian", "vertisheer"];
 
-export function Configurator() {
+// headingLevel: 在 /configurator 页面它是页面主标题 (h1)，其他页面维持 h2
+export function Configurator({ headingLevel: H = "h2" }: { headingLevel?: "h1" | "h2" } = {}) {
   const t = useT();
   const { configuration, setProduct, setFabric, submit } = useConfigurator();
   const { product, fabric, opacity } = configuration;
+  const navigate = useNavigate();
+  const r = useRoutes();
   const opacityLevel = OPACITY_LEVEL[opacity];
   const uid = useId().replace(/[:]/g, "");
   const fabricsForProduct = getFabricsForProduct(product);
+  
+  const sectionRef = useRef<HTMLElement>(null);
+  const [shouldPreload, setShouldPreload] = useState(false);
 
-  /**
-   * Every scene URL in the current product's fabric set, used by the
-   * ScenePhoto component to preload all photos on mount so subsequent
-   * fabric swaps don't trigger a network fetch (and therefore no white
-   * flash while the next image decodes).
-   */
+  useEffect(() => {
+    if (!("IntersectionObserver" in window) || shouldPreload) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldPreload(true); 
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px" }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [shouldPreload]);
+
   const sceneUrls = fabricsForProduct
     .map((f) => f.sceneImage)
     .filter((u): u is string => Boolean(u));
 
-  /**
-   * If the selected fabric has a sceneImage (real room photo), show it as
-   * the live preview. Falls back to the SVG room with the fabric's texture
-   * if the photo is missing or 404s.
-   */
   const [photoFailed, setPhotoFailed] = useState(false);
   useEffect(() => {
     setPhotoFailed(false);
   }, [fabric.name]);
   const usePhotoPreview = Boolean(fabric.sceneImage) && !photoFailed;
 
+  // 🌟 核心修复 1：利用 setTimeout 将滚动操作放到下一个微任务队列，避开 React 状态更新的死锁
   const handleSubmit = () => {
-    submit();
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    submit(); // 1. 提交并填写数据
+    navigate(r.contact); // 2. 直接带用户跳转到 /contact 页面（如果是马来文版，它会自动跳去 /bidai/hubungi）
+    setTimeout(() => {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        // 2. 完美的平滑定位跳转
+        contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 60); // 留出 60ms 让 React 完成 DOM 状态更新
   };
-
 
   return (
     <section
       id="configurator"
+      ref={sectionRef}
       className="fluid-section-y-tight border-t border-[var(--color-line)] bg-[var(--color-paper)]"
     >
-      <div className="max-w-[1380px] mx-auto px-5 sm:px-6 lg:px-10">
+      <div className="max-w-[1380px] mx-auto px-10 sm:px-6 lg:px-10">
         <Reveal>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-3 lg:gap-5 mb-[clamp(1rem,0.5rem+1.5vw,2.5rem)]">
             <div>
               <p className="eyebrow">{t.configurator.eyebrow}</p>
-              <h2 className="mt-1.5 lg:mt-3 headline fluid-h3 text-[var(--color-ink)] max-w-2xl">
+              <H className="mt-1.5 lg:mt-3 headline fluid-h3 text-[var(--color-ink)] max-w-2xl">
                 {t.configurator.titleA}
                 <span className="italic font-light text-[var(--color-clay-deep)]"> {t.configurator.titleB}</span>
-              </h2>
+              </H>
             </div>
             <p className="hidden sm:block max-w-md fluid-body text-[var(--color-ink-soft)]">
               {t.configurator.intro}
@@ -73,8 +97,6 @@ export function Configurator() {
         </Reveal>
 
         <div className="grid lg:grid-cols-12 gap-3 lg:gap-10 lg:items-start">
-          {/* Preview canvas — always the same SVG room. Only the slats inside
-              change material when the user picks a different fabric. */}
           <Reveal className="lg:col-span-7 lg:sticky lg:top-24">
             <div className="relative rounded-lg border border-[var(--color-line)] overflow-hidden bg-[var(--color-cream-light)]">
               <span className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10 inline-flex items-center gap-1 sm:gap-1.5 bg-[var(--color-cream)]/90 backdrop-blur-sm text-[var(--color-ink)] text-[0.58rem] sm:text-[0.7rem] tracking-widest uppercase px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-full border border-[var(--color-line)]">
@@ -85,7 +107,7 @@ export function Configurator() {
                 <ScenePhoto
                   src={fabric.sceneImage}
                   alt={`${t.configurator.products[product]} — ${fabric.name}`}
-                  preload={sceneUrls}
+                  preload={shouldPreload ? sceneUrls : []} 
                   onError={() => setPhotoFailed(true)}
                   className="w-full max-h-[38vh] sm:max-h-[60vh] lg:max-h-[calc(100vh-14rem)] overflow-hidden"
                 />
@@ -109,7 +131,7 @@ export function Configurator() {
             </p>
           </Reveal>
 
-          {/* Controls */}
+          {/* 右侧控制区 */}
           <Reveal className="lg:col-span-5 flex flex-col gap-3 lg:gap-5" delay={120}>
             {/* Product tabs */}
             <div>
@@ -137,7 +159,7 @@ export function Configurator() {
               </div>
             </div>
 
-            {/* Fabric — either close-up showcase tiles (Venetian) or circle swatches */}
+            {/* Fabric */}
             <div>
               <div className="flex items-baseline justify-between gap-2">
                 <p className="eyebrow text-[0.66rem] sm:text-[0.72rem]">{t.configurator.fabricLabel}</p>
@@ -191,9 +213,10 @@ export function Configurator() {
               </div>
             </div>
 
-            {/* Summary + CTA — compact inline on mobile, full card on desktop */}
-            <div className="lg:sticky lg:bottom-4 lg:z-10 lg:mt-2">
-              {/* Mobile: tight inline row */}
+            {/* Summary + CTA */}
+            {/* 🌟 核心修复 2：彻底重构这个卡片容器的类名，去掉外层无意义的粘性定位（它曾会导致框跟随滚动时拉伸变形），让内层卡片平滑地贴在底部而绝不影响其容器框 */}
+            <div className="relative mt-2 lg:mt-4">
+              {/* Mobile CTA */}
               <div className="lg:hidden flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-cream-light)] pl-3 pr-1 py-1">
                 <span className="flex-1 min-w-0 truncate font-serif text-[0.86rem] text-[var(--color-ink)]">
                   {t.configurator.products[product]} · {fabric.name}
@@ -209,8 +232,8 @@ export function Configurator() {
                 </button>
               </div>
 
-              {/* Desktop: full card */}
-              <div className="hidden lg:block rounded-md border border-[var(--color-line)] bg-[var(--color-cream-light)]/95 backdrop-blur-sm p-5 shadow-[0_8px_24px_-12px_rgba(26,23,20,0.18)]">
+              {/* Desktop Sticky Summary Card */}
+              <div className="hidden lg:block sticky bottom-6 z-20 rounded-md border border-[var(--color-line)] bg-[var(--color-cream-light)]/95 backdrop-blur-sm p-5 shadow-[0_12px_32px_-12px_rgba(26,23,20,0.22)] transition-shadow duration-300">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
                     <p className="eyebrow">{t.configurator.summaryLabel}</p>
@@ -222,7 +245,7 @@ export function Configurator() {
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="mt-4 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.92rem] font-medium hover:bg-[var(--color-clay-deep)] active:bg-[var(--color-clay-deep)] transition-colors"
+                  className="mt-4 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.92rem] font-medium hover:bg-[var(--color-clay-deep)] active:bg-[var(--color-clay-deep)] transition-colors shadow-sm"
                 >
                   {t.configurator.cta}
                   <span aria-hidden>→</span>
@@ -234,4 +257,4 @@ export function Configurator() {
       </div>
     </section>
   );
-}
+} 

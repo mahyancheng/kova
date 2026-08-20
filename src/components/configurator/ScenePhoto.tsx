@@ -73,6 +73,9 @@ export function ScenePhoto({
           src={fadingSrc}
           alt=""
           aria-hidden
+          loading="lazy" 
+          width={1100} 
+          height={880}
           className="absolute inset-0 w-full h-full object-cover animate-fade-out"
           draggable={false}
         />

@@ -44,7 +44,9 @@ function clearJsonLd(id: string) {
 
 export function JsonLd() {
   const t = useT();
-  const { pathname } = useLocation();
+  const { pathname: rawPathname } = useLocation();
+  // 与 SeoHead 一致：去掉尾部斜杠再做路由匹配（线上主机会 301 到带斜杠的 URL）
+  const pathname = rawPathname.length > 1 ? rawPathname.replace(/\/+$/, "") : rawPathname;
   const lang = t.meta.htmlLang;
   const isMalay = lang === "ms";
 
@@ -56,7 +58,8 @@ export function JsonLd() {
       "@id": `${SITE_URL}/#business`,
       name: "Kova Sun Shade",
       alternateName: isMalay ? "Kova — Bidai dan Langsir Tingkap" : undefined,
-      description: t.seo.description,
+      // 修复 1：加上 ?. 并提供默认描述防崩溃
+      description: t.seo?.description || "Premium Window Blinds and Shades",
       url: SITE_URL,
       email: "info@kovasunshade.com",
       telephone: "+60179778289",
@@ -134,7 +137,8 @@ export function JsonLd() {
       offers: {
         "@type": "Offer",
         priceCurrency: "MYR",
-        availability: "https://schema.org/InStock",
+        "price": "0.00",
+
         url: `${SITE_URL}${isMalay ? "/bidai/hubungi" : "/contact"}`,
       },
     };
@@ -152,20 +156,20 @@ export function JsonLd() {
       const meta = {
         roller: {
           name: isMalay ? "Bidai Roller" : "Roller Blinds",
-          category: "Roller Blinds",
+          category: "Window Blinds",
           description: t.products.roller.body[0],
           image: `${SITE_URL}/showcase/greige-roller.webp`,
         },
         venetian: {
           name: isMalay ? "Bidai Venetian" : "Venetian Blinds",
-          category: "Venetian Blinds",
+          category: "Window Blinds",
           description: t.products.venetian.body[0],
           image: `${SITE_URL}/showcase/white-venetian.webp`,
         },
         vertisheer: {
           name: "VertiSheer",
           category: "Vertical Sheer Blinds",
-          description: t.products.vertisheer.body[0],
+          description: t.products?.vertisheer?.body?.[0] || "Modern vertical sheer blinds.",
           image: `${SITE_URL}/showcase/pivot-silver-vertisheer.webp`,
         },
       }[key];
@@ -180,6 +184,7 @@ export function JsonLd() {
           "@type": "Offer",
           availability: "https://schema.org/InStock",
           priceCurrency: "MYR",
+          "price": "0.00",
           url: `${SITE_URL}${isMalay ? "/bidai/hubungi" : "/contact"}`,
           seller: { "@id": `${SITE_URL}/#business` },
         },
@@ -223,7 +228,14 @@ export function JsonLd() {
     breadcrumbItems.push({ "@type": "ListItem", position: 1, name: "Home", item: homeUrl });
 
     if (onBlogIndex || onBlogPost) {
-      breadcrumbItems.push({ "@type": "ListItem", position: 2, name: t.nav.journal, item: blogUrl });
+      // 之前这里 push 到一个从未使用的本地 items 数组，导致 Journal 这一层
+      // 从面包屑里消失（文章页出现 position 1 → 3 跳号，属于无效 BreadcrumbList）
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        position: 2,
+        name: t.nav.journal,
+        item: blogUrl,
+      });
       if (onBlogPost) {
         const slug = pathname.split("/").pop() || "";
         breadcrumbItems.push({
@@ -238,7 +250,7 @@ export function JsonLd() {
         "@type": "ListItem",
         position: 2,
         name: productMatch[1] === "roller" ? (isMalay ? "Bidai Roller" : "Roller Blinds")
-            : productMatch[1] === "venetian" ? (isMalay ? "Bidai Venetian" : "Venetian Blinds")
+          : productMatch[1] === "venetian" ? (isMalay ? "Bidai Venetian" : "Venetian Blinds")
             : "VertiSheer",
         item: `${SITE_URL}${pathname}`,
       });
@@ -275,11 +287,9 @@ export function JsonLd() {
       clearJsonLd("breadcrumbs");
     }
 
-    // --- Single blog post Article (filled in by BlogPost via window
-    //     event so we don't double-fetch — see BlogPost.tsx). -------
+    // --- Single blog post Article -----------------------------------
     if (!onBlogPost) clearJsonLd("article");
   }, [pathname, lang, isMalay, t]);
-
   return null;
 }
 
@@ -288,22 +298,22 @@ export function JsonLd() {
  * loaded. Centralised here so the JSON shape stays consistent.
  */
 export function setArticleJsonLd(post: {
-  title: string;
-  excerpt: string | null;
-  body_md: string;
-  cover_image_url: string | null;
-  author: string | null;
-  published_at: string | null;
-  slug: string;
+  title?: string;
+  excerpt?: string;
+  content?: string;
+  image?: string;
+  author?: string;
+  publishedAt?: string;
+  slug?: string;
 }, pathname: string, lang: string) {
   setJsonLd("article", {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
     description: post.excerpt ?? post.title,
-    image: post.cover_image_url ? [post.cover_image_url] : undefined,
-    datePublished: post.published_at,
-    dateModified: post.published_at,
+    image: post.image ? [post.image] : undefined,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
     inLanguage: lang === "ms" ? "ms-MY" : "en-MY",
     author: { "@type": "Organization", name: post.author ?? "Kova Sun Shade" },
     publisher: { "@id": `${SITE_URL}/#business` },

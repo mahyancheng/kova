@@ -3,7 +3,6 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- ===== Home ===== -->
   <url>
     <loc>https://kovasunshade.com/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/"/>
@@ -12,6 +11,7 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
   <url>
     <loc>https://kovasunshade.com/bidai</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/"/>
@@ -21,7 +21,6 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- ===== Product brochure pages ===== -->
   <url>
     <loc>https://kovasunshade.com/roller</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/roller"/>
@@ -30,6 +29,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://kovasunshade.com/bidai/roller</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/roller"/>
@@ -47,6 +47,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://kovasunshade.com/bidai/venetian</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/venetian"/>
@@ -64,6 +65,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
   <url>
     <loc>https://kovasunshade.com/bidai/vertisheer</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/vertisheer"/>
@@ -73,7 +75,6 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- ===== Supporting pages ===== -->
   <url>
     <loc>https://kovasunshade.com/process</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/process"/>
@@ -82,6 +83,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
   <url>
     <loc>https://kovasunshade.com/bidai/proses</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/process"/>
@@ -99,6 +101,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://kovasunshade.com/bidai/reka</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/configurator"/>
@@ -116,6 +119,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
   <url>
     <loc>https://kovasunshade.com/bidai/hubungi</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/contact"/>
@@ -125,7 +129,6 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- ===== Journal ===== -->
   <url>
     <loc>https://kovasunshade.com/blog</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/blog"/>
@@ -134,12 +137,85 @@
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
+
   <url>
     <loc>https://kovasunshade.com/bidai/jurnal</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/blog"/>
     <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/jurnal"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/blog"/>
     <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/bidai/jurnal/memilih-bidai-dan-langsir-rumah</loc>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/jurnal/memilih-bidai-dan-langsir-rumah"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/bidai/jurnal/memilih-bidai-dan-langsir-rumah"/>
+    <lastmod>2026-07-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/blog/roller-blinds-for-your-house</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/blog/roller-blinds-for-your-house"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/blog/roller-blinds-for-your-house"/>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/bidai/jurnal/bidai-malaysia</loc>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/jurnal/bidai-malaysia"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/bidai/jurnal/bidai-malaysia"/>
+    <lastmod>2026-07-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/blog/roller-blinds-you-need</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/blog/roller-blinds-you-need"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/blog/roller-blinds-you-need"/>
+    <lastmod>2026-07-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/blog/factory-direct-blinds-malaysia</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/blog/factory-direct-blinds-malaysia"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/blog/factory-direct-blinds-malaysia"/>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/bidai/jurnal/bidai-terus-dari-kilang-malaysia</loc>
+    <xhtml:link rel="alternate" hreflang="ms" href="https://kovasunshade.com/bidai/jurnal/bidai-terus-dari-kilang-malaysia"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/bidai/jurnal/bidai-terus-dari-kilang-malaysia"/>
+    <lastmod>2026-07-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/blog/zebra-blinds-vs-roller-blinds</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/blog/zebra-blinds-vs-roller-blinds"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/blog/zebra-blinds-vs-roller-blinds"/>
+    <lastmod>2026-08-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://kovasunshade.com/blog/factory-direct-blind-curtain-in-malaysia</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://kovasunshade.com/blog/factory-direct-blind-curtain-in-malaysia"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://kovasunshade.com/blog/factory-direct-blind-curtain-in-malaysia"/>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 

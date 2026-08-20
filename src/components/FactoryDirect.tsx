@@ -3,7 +3,8 @@ import { Reveal } from "./Reveal";
 import { useT } from "@/lib/i18n";
 import { useRoutes } from "@/lib/routes";
 
-export function FactoryDirect() {
+// headingLevel: 在 /process 页面它是页面主标题 (h1)，在首页只是区块标题 (h2)
+export function FactoryDirect({ headingLevel: H = "h2" }: { headingLevel?: "h1" | "h2" } = {}) {
   const t = useT();
   const r = useRoutes();
   const traditional = [
@@ -37,12 +38,12 @@ export function FactoryDirect() {
               <p className="eyebrow">{t.factory.eyebrow}</p>
             </Reveal>
             <Reveal delay={80}>
-              <h2 className="mt-3 lg:mt-5 headline fluid-h2 text-[var(--color-ink)]">
+              <H className="mt-3 lg:mt-5 headline fluid-h2 text-[var(--color-ink)]">
                 {t.factory.titleA}
                 <span className="block italic font-light text-[var(--color-clay-deep)]">
                   {t.factory.titleB}
                 </span>
-              </h2>
+              </H>
             </Reveal>
           </div>
           <div className="lg:col-span-5">

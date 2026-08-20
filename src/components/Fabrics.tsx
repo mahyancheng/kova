@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Reveal } from "./Reveal";
 import { useT } from "@/lib/i18n";
 
@@ -6,16 +6,25 @@ export function Fabrics() {
   const t = useT();
   const swatches = t.fabrics.swatches;
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+  
+  // 🌟 性能终极优化：使用 ref 直接控制进度条 DOM，避免高频滚动触发组件重渲染
+  const progressBarRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
+
     const onScroll = () => {
       const max = el.scrollWidth - el.clientWidth;
-      setProgress(max > 0 ? el.scrollLeft / max : 0);
+      const progress = max > 0 ? el.scrollLeft / max : 0;
+      
+      // 🌟 直接精准操作 DOM 样式，响应速度可达满帧 60fps/120fps
+      if (progressBarRef.current) {
+        progressBarRef.current.style.width = `${Math.max(8, progress * 100)}%`;
+      }
     };
-    onScroll();
+
+    onScroll(); // 初始化计算一次
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
@@ -93,8 +102,9 @@ export function Fabrics() {
       <div className="max-w-[1240px] mx-auto px-6 lg:px-10 mt-8 flex items-center gap-6">
         <div className="flex-1 h-px bg-[var(--color-line)] relative overflow-hidden">
           <span
-            className="absolute inset-y-0 left-0 bg-[var(--color-ink)] transition-[width] duration-200"
-            style={{ width: `${Math.max(8, progress * 100)}%`, height: "2px" }}
+            ref={progressBarRef}
+            className="absolute inset-y-0 left-0 bg-[var(--color-ink)] transition-[width] duration-75"
+            style={{ width: "8%", height: "2px" }} // 默认安全初始值
           />
         </div>
         <div className="flex items-center gap-2">

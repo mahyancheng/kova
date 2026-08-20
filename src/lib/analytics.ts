@@ -14,12 +14,7 @@
  * navigates to WhatsApp exactly as before.
  */
 
-declare global {
-  interface Window {
-    gtag?: (...args: unknown[]) => void;
-    dataLayer?: Record<string, unknown>[];
-  }
-}
+// window.gtag / window.dataLayer are declared globally in vite-env.d.ts.
 
 /**
  * Fire the WhatsApp conversion event.

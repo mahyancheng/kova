@@ -18,6 +18,7 @@ import { useRoutes } from "@/lib/routes";
 export function Hero() {
   const t = useT();
   const r = useRoutes();
+  
   return (
     <section id="top" className="relative pt-[clamp(2.5rem,1.5rem+3vw,5rem)] pb-[clamp(2.5rem,1.5rem+3.5vw,5.5rem)]">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10">

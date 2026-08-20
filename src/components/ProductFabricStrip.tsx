@@ -47,6 +47,8 @@ export function ProductFabricStrip({
                       src={f.image}
                       alt={f.name}
                       loading="lazy"
+                      width={256}
+                      height={256}
                       className="w-full h-full object-cover"
                     />
                   )}

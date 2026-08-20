@@ -1,27 +1,32 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useT } from "@/lib/i18n";
-import { useRoutes } from "@/lib/routes";
 import { LanguageToggle } from "./LanguageToggle";
 import { PROMO_RESIZE_EVENT } from "./PromoBar";
+import kovaLogo from "@/images/KoveraLogo.png";
 
 export function Nav() {
   const t = useT();
   const { pathname } = useLocation();
-  const r = useRoutes();
-  const homePath = r.home;
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
+  // 核心修复：通过检查 URL 是否以 /bidai 开头来判断当前是否是马来文页面
+  const isBm = pathname.startsWith("/bidai");
+
+  // 根据语言动态设置 Home 路径
+  const homePath = isBm ? "/bidai" : "/";
+
   /** Brochure menu items, in display order. */
   const menu: Array<{ href: string; label: string }> = [
-    { href: r.roller, label: t.products.roller.name },
-    { href: r.venetian, label: t.products.venetian.name },
-    { href: r.vertisheer, label: "VertiSheer" },
-    { href: r.process, label: t.process.eyebrow },
-    { href: r.configurator, label: t.configurator.eyebrow },
+    { href: isBm ? "/bidai/roller" : "/roller", label: t.products.roller.name },
+    { href: isBm ? "/bidai/venetian" : "/venetian", label: t.products.venetian.name },
+    { href: isBm ? "/bidai/vertisheer" : "/vertisheer", label: "VertiSheer" },
+    { href: isBm ? "/bidai/proses" : "/process", label: t.process.eyebrow },
+    { href: isBm ? "/bidai/reka" : "/configurator", label: t.configurator.eyebrow },
   ];
+
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   /**
@@ -78,14 +83,15 @@ export function Nav() {
     };
   }, [mobileOpen]);
 
-  const journalHref = r.journal;
-  const onJournalRoute =
-    pathname.startsWith("/blog") || pathname.startsWith("/bidai/jurnal");
+  // 根据语言动态设置 Journal 和 Contact 路径
+  const journalHref = isBm ? "/bidai/jurnal" : "/blog";
+  const contactHref = isBm ? "/bidai/hubungi" : "/contact";
+
+  const onJournalRoute = pathname.startsWith("/blog") || pathname.startsWith("/bidai/jurnal");
 
   return (
     <>
-      {/* Visually hidden until keyboard focus — lets screen-reader and
-          keyboard users jump past the nav directly to the page content. */}
+      {/* 辅助功能：跳过导航直接阅读内容，放在 Header 最前面 */}
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-[var(--color-ink)] focus:text-[var(--color-cream)] focus:px-4 focus:py-2 focus:rounded-full focus:text-[0.85rem] focus:outline-2 focus:outline-[var(--color-clay)]"
@@ -102,28 +108,18 @@ export function Nav() {
             : "bg-transparent border-b border-transparent")
         }
       >
-        <div className="max-w-[1240px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between gap-4">
+        <div className="max-w-[1240px] mx-auto px-6 lg:px-10 h-24 flex items-center justify-between gap-4">
           <Link
             to={homePath}
             onClick={() => setMobileOpen(false)}
             className="flex items-center gap-2.5 group shrink-0"
           >
-            <span className="inline-block h-7 w-7">
-              <svg viewBox="0 0 32 32" className="h-full w-full">
-                <rect
-                  x="6"
-                  y="5"
-                  width="20"
-                  height="22"
-                  rx="1"
-                  fill="none"
-                  stroke="#1A1714"
-                  strokeWidth="1.5"
-                />
-                <line x1="6" y1="11" x2="26" y2="11" stroke="#8B5A3C" strokeWidth="1.4" />
-                <line x1="6" y1="16" x2="26" y2="16" stroke="#8B5A3C" strokeWidth="1.4" />
-                <line x1="6" y1="21" x2="26" y2="21" stroke="#8B5A3C" strokeWidth="1.4" />
-              </svg>
+            <span className="inline-block h-10 w-10 md:h-10 md:w-10 mt-[-4px]">
+              <img
+                src={kovaLogo}
+                alt="Kova Logo"
+                className="h-full w-full object-contain"
+              />
             </span>
             <span className="font-serif text-[1.05rem] tracking-tight text-[var(--color-ink)]">
               Kova<span className="text-[var(--color-clay)]">·</span>Sun Shade
@@ -162,7 +158,7 @@ export function Nav() {
           <div className="flex items-center gap-2 sm:gap-3 shrink-0">
             <LanguageToggle />
             <Link
-              to={r.contact}
+              to={contactHref}
               className="hidden md:inline-flex items-center gap-1.5 text-[0.875rem] font-medium px-4 py-2 rounded-full border border-[var(--color-ink)] text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-cream)] transition-colors whitespace-nowrap"
             >
               {t.nav.quote}
@@ -243,7 +239,7 @@ export function Nav() {
             </Link>
 
             <Link
-              to={r.contact}
+              to={contactHref}
               onClick={() => setMobileOpen(false)}
               className="mt-4 inline-flex items-center justify-center gap-1.5 text-[0.95rem] font-medium px-5 py-3 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] hover:bg-[var(--color-clay-deep)] transition-colors"
             >

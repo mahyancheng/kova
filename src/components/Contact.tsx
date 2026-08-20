@@ -14,6 +14,7 @@ export function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [prefilled, setPrefilled] = useState(false);
   const [lastSummary, setLastSummary] = useState<string | null>(null);
+
   const messageRef = useRef<HTMLTextAreaElement | null>(null);
   const interestRef = useRef<HTMLFieldSetElement | null>(null);
   const { lang } = useLang();
@@ -41,6 +42,52 @@ export function Contact() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [submissionToken]);
 
+  // 提交表单：走统一的 submitLead() 管道（Google Sheet + Supabase 双写），
+  // 外加蜜罐字段和 60 秒冷却期这两个轻量防刷措施。
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (submitting) return;
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    // 蜜罐：机器人才会填这个隐藏字段，人类看不到它。填了就假装成功、直接拦截。
+    if (data.get("website")) {
+      setSent(true);
+      return;
+    }
+
+    // 前端冷却期，避免手滑连点或简单重放（真正的防刷仍需服务端限流）。
+    const lastSubmitTime = localStorage.getItem("lastContactSubmit");
+    if (lastSubmitTime && Date.now() - parseInt(lastSubmitTime, 10) < 60_000) {
+      alert(lang === "ms" ? "Sila tunggu seminit sebelum menghantar lagi." : "Please wait a minute before sending again.");
+      return;
+    }
+
+    const interests = data
+      .getAll("interest")
+      .map((v) => String(v))
+      .join(", ");
+
+    setSubmitting(true);
+    // Fire the lead to the agency Supabase, then always thank the
+    // visitor (submitLead never throws — it stashes on failure).
+    submitLead({
+      name: String(data.get("name") || ""),
+      phone: String(data.get("phone") || ""),
+      email: String(data.get("email") || ""),
+      location: String(data.get("location") || ""),
+      message: String(data.get("message") || ""),
+      interest: interests,
+      configSummary: lastSummary,
+      lang,
+    }).finally(() => {
+      localStorage.setItem("lastContactSubmit", Date.now().toString());
+      setSubmitting(false);
+      setSent(true);
+    });
+  };
+
   return (
     <section
       id="contact"
@@ -49,22 +96,14 @@ export function Contact() {
       <div className="absolute inset-0 grain opacity-[0.12] pointer-events-none" />
 
       <div className="relative max-w-[1240px] mx-auto px-6 lg:px-10">
-        {/*
-          Mobile order (single column):
-            1. Heading  → 2. Form  → 3. Studio info
-          Desktop order (2 cols, explicit row/col placement):
-            Left col, row 1: Heading
-            Left col, row 2: Studio info
-            Right col, spans rows 1–2: Form
-        */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-10 lg:gap-x-16 lg:items-start">
-          {/* HEADING — mobile row 1 / desktop col 1 row 1 */}
+          {/* HEADING */}
           <div className="lg:col-span-6 lg:row-start-1 lg:col-start-1">
             <p className="eyebrow !text-[var(--color-sand)]">{t.contact.eyebrow}</p>
-            <h2 className="mt-4 font-serif text-[2.2rem] sm:text-[2.6rem] lg:text-[3.2rem] leading-[1.04] tracking-tightest text-[var(--color-cream)]">
+            <h1 className="mt-4 font-serif text-[2.2rem] sm:text-[2.6rem] lg:text-[3.2rem] leading-[1.04] tracking-tightest text-[var(--color-cream)]">
               {t.contact.titleA}{" "}
               <span className="italic font-light text-[var(--color-clay-light)]">{t.contact.titleB}</span>
-            </h2>
+            </h1>
             <p className="mt-5 max-w-md text-[0.98rem] sm:text-[1rem] leading-[1.6] text-[var(--color-cream)]/75">
               {t.contact.intro}
             </p>
@@ -77,7 +116,7 @@ export function Contact() {
             </div>
           </div>
 
-          {/* FORM — mobile row 2 / desktop col 2 rows 1–2 */}
+          {/* FORM */}
           <div className="row-start-2 lg:row-start-1 lg:row-span-2 lg:col-start-7 lg:col-span-6 lg:pl-10 lg:border-l lg:border-[var(--color-cream)]/15">
             {sent ? (
               <div className="rounded-md border border-[var(--color-cream)]/20 p-8 bg-[var(--color-cream)]/5">
@@ -87,34 +126,12 @@ export function Contact() {
                 </p>
               </div>
             ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (submitting) return;
-                  const form = e.currentTarget;
-                  const data = new FormData(form);
-                  const interests = data
-                    .getAll("interest")
-                    .map((v) => String(v))
-                    .join(", ");
-                  setSubmitting(true);
-                  // Fire the lead to the agency Supabase, then always thank the
-                  // visitor (submitLead never throws — it stashes on failure).
-                  submitLead({
-                    name: String(data.get("name") || ""),
-                    phone: String(data.get("phone") || ""),
-                    email: String(data.get("email") || ""),
-                    location: String(data.get("location") || ""),
-                    message: String(data.get("message") || ""),
-                    interest: interests,
-                    configSummary: lastSummary,
-                    lang,
-                  }).finally(() => {
-                    setSubmitting(false);
-                    setSent(true);
-                  });
-                }}
-              >
+              <form onSubmit={handleSubmit}>
+                {/* 防垃圾邮件的隐藏蜜罐字段：机器人才会填，人类看不到也摸不到 */}
+                <div style={{ display: "none" }} aria-hidden="true">
+                  <input type="text" name="website" tabIndex={-1} autoComplete="off" />
+                </div>
+
                 {/* Configuration summary chip */}
                 {prefilled && lastSummary && (
                   <div className="mb-5 flex items-start gap-3 rounded-md border border-[var(--color-clay-light)]/40 bg-[var(--color-clay)]/10 p-3.5">
@@ -252,7 +269,7 @@ export function Contact() {
                     className="inline-flex items-center gap-1.5 hover:text-[var(--color-clay-light)] transition-colors"
                   >
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden className="shrink-0">
-                      <path d="M17.47 14.38c-.29-.15-1.7-.84-1.96-.94-.26-.1-.45-.14-.64.14-.19.29-.74.94-.9 1.13-.17.19-.33.21-.62.07-.29-.15-1.22-.45-2.32-1.43-.86-.77-1.44-1.72-1.6-2.01-.17-.29-.02-.45.13-.59.13-.13.29-.34.43-.51.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.14-.64-1.55-.88-2.12-.23-.56-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.14.19 2.01 3.08 4.88 4.32.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.11.55-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34zM12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2z" />
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741 1.031 1.001-3.617-.235-.373a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.438 9.885-9.888 9.885m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413" />
                     </svg>
                     +60 17-977 8289
                   </a>

@@ -25,11 +25,11 @@ export function RollerPage() {
     <div className="min-h-screen bg-[var(--color-cream)]">
       <PromoBar />
       <Nav />
-      <main id="main" className="pt-16">
-        <h1 className="sr-only">{t.seo.pages.roller.title}</h1>
+      <main id="main" className="pt-1">
         <ProductSpotlight
           id="roller"
           tone="cream"
+          priority={true} // 👈 告诉底层：这是首屏核心大图，给我最高优先级加载！
           {...t.products.roller}
           Detail={RollerBlind}
           detailSrc="/showcase/greige-roller.webp"

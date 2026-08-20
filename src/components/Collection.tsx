@@ -12,18 +12,27 @@ const visuals = {
   vertisheer: VertiSheer,
 } as const;
 
-/** Showcase scene photo per product (falls back to the SVG visual if absent). */
-const scenes: Record<string, string> = {
-  roller: "/showcase/greige-roller.webp",
-  venetian: "/showcase/white-venetian.webp",
-  vertisheer: "/showcase/pivot-anchor-vertisheer.webp",
+// 🌟 性能修复：配置多尺寸响应式图片，彻底消灭超大图警告
+const scenes: Record<string, { src: string; srcSet: string }> = {
+  roller: {
+    src: "/showcase/greige-roller.webp",
+    srcSet: "/showcase/greige-roller-400.webp 400w, /showcase/greige-roller-800.webp 800w, /showcase/greige-roller.webp 1200w",
+  },
+  venetian: {
+    src: "/showcase/white-venetian.webp",
+    srcSet: "/showcase/white-venetian-400.webp 400w, /showcase/white-venetian-800.webp 800w, /showcase/white-venetian.webp 1200w",
+  },
+  vertisheer: {
+    src: "/showcase/pivot-anchor-vertisheer.webp",
+    srcSet: "/showcase/pivot-anchor-vertisheer-400.webp 400w, /showcase/pivot-anchor-vertisheer-800.webp 800w, /showcase/pivot-anchor-vertisheer.webp 1200w",
+  },
 };
 
 export function Collection() {
   const t = useT();
   const { pathname } = useLocation();
-  // On the BM landing the cards link to /bidai/<id>; on EN they link to /<id>.
   const langPrefix = pathname.startsWith("/bidai") ? "/bidai" : "";
+
   return (
     <section id="collection" className="relative fluid-section-y">
       <div className="max-w-[1380px] mx-auto px-5 sm:px-6 lg:px-10">
@@ -45,6 +54,8 @@ export function Collection() {
         <div className="grid md:grid-cols-3 gap-4 lg:gap-6">
           {t.collection.items.map((item, i) => {
             const Visual = visuals[item.id as keyof typeof visuals];
+            const scene = scenes[item.id]; // 获取当前产品的图片数据
+
             return (
               <Reveal key={item.id} delay={i * 100}>
                 <Link
@@ -52,7 +63,19 @@ export function Collection() {
                   className="group relative flex flex-col bg-[var(--color-paper)] border border-[var(--color-line)] rounded-md overflow-hidden hover:border-[var(--color-ink)] transition-colors h-full"
                 >
                   <div className="overflow-hidden">
-                    <ImageSlot ratio="4/5" tone="sand" src={scenes[item.id]} alt={item.name}>
+                    <ImageSlot 
+                      ratio="4/5" 
+                      tone="sand" 
+                      // 🌟 传入精确的图片属性
+                      src={scene.src} 
+                      srcSet={scene.srcSet}
+                      // 尺寸逻辑：手机端占满全屏(100vw)，平板一半(50vw)，电脑端约三分之一宽(33vw)
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      alt={item.name}
+                      loading="lazy" 
+                      width={1200}
+                      height={1500}
+                    >
                       <Visual className="w-full h-full transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]" />
                     </ImageSlot>
                   </div>
