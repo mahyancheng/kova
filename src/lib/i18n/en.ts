@@ -9,63 +9,70 @@ export const en = {
       "roller blinds Malaysia, venetian blinds Malaysia, vertisheer, factory direct blinds, motorised blinds, made to measure blinds, KL blinds, Petaling Jaya, Klang Valley, bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian",
     pages: {
       home: {
-        // Leads with the H1's target term; the price angle keeps it distinct
-        // from /roller, which leads on "made to measure".
+        // Broadened from 'Roller Blinds' so the homepage stops competing
+        // with /roller for the same query; the Malay homepage already
+        // targets the broad term.
         title:
-          "Roller Blinds Malaysia · Factory-Direct, Up to 40% Less | Kova",
+          "Window Blinds Malaysia · Factory-Direct, Up to 40% Less | Kova",
         description:
-          "Factory-direct roller blinds in blackout, dim-out and sunscreen — up to 40% less than retail. Venetian and VertiSheer too, made to measure in Klang Valley.",
+          "Made-to-measure roller, Venetian and VertiSheer blinds, factory-direct at up to 40% less than retail. Free on-site measuring across Klang Valley.",
         keywords:
           "roller blinds Malaysia, venetian blinds Malaysia, vertisheer, factory direct blinds, motorised blinds, made to measure blinds, Petaling Jaya, Klang Valley, bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, bidai dan langsir rumah anda",
       },
       roller: {
-        title: "KovaSunShade | Roller Blind",
+        // Now owns 'roller blinds Malaysia'; fabric types are the modifiers
+        // people actually add to the search.
+        title: "Roller Blinds Malaysia · Blackout, Dim-Out & Sunscreen | Kova",
         description:
-          "Shop made-to-measure Roller Blinds in Malaysia. Choose blackout, dim-out, sunscreen or light-filtering fabrics for homes, offices and shoplots.",
+          "Made-to-measure roller blinds in blackout, dim-out, sunscreen and light-filtering fabrics — up to 40% less than retail. Free on-site measure in Klang Valley.",
         keywords:
           "roller blinds Malaysia, made to measure roller blinds, blackout roller blinds, sunscreen blinds, dim-out blinds, bidai Roller, bidai Roller Malaysia, Cenza, Denver, Shiro, Petaling Jaya",
       },
       venetian: {
-        title: "KovaSunShade | Venetian Blind",
+        title: "Venetian Blinds Malaysia · Aluminium & Wood Finishes | Kova",
         description:
-          "Custom Your Venetian Blinds in Malaysia with aluminium, wood and faux-wood finishes. Control light, privacy and airflow with a timeless modern look.",
+          "Venetian blinds in aluminium, wood and faux-wood finishes. Tilt the slats to control light, privacy and airflow. Made to measure, installed in Klang Valley.",
         keywords:
           "venetian blinds Malaysia, aluminium venetian blinds, wood venetian blinds, faux wood blinds, bidai Venetian, W101, W301, W302, W206, Petaling Jaya",
       },
       vertisheer: {
         title:
-          "KovaSunShade | Vertisheer Blind",
+          "VertiSheer Malaysia · Sheer Blinds for Sliding Doors | Kova",
         description:
-          "Upgrade your large windows with VertiSheer blinds. Soft curtain-like fabric with precise light control, privacy and modern elegance.",
+          "VertiSheer vertical sheer blinds for sliding doors and large windows: curtain-soft fabric vanes that rotate for precise light and privacy. Made to measure.",
         keywords:
           "vertisheer Malaysia, vertical sheer blinds, sliding door blinds, glass wall blinds, langsir tingkap besar, Pivot, Klang Valley",
       },
       process: {
+        // This page explains why Kova is cheaper — it should own
+        // 'factory-direct blinds'.
         title:
-          "KovaSunShade | Window Blinds & Shade",
+          "Factory-Direct Blinds Malaysia · No Showroom Mark-Up | Kova",
         description:
-          "See how Kova Sun Shade measures, specifies and installs custom blinds in Klang Valley. Factory-direct pricing with no showroom mark-up or sales pressure.",
+          "Most blinds carry four mark-ups: distributor, wholesaler, retailer and showroom. We measure, make and install our own blinds, so you pay up to 40% less.",
         keywords:
           "factory direct blinds Malaysia, made to measure blinds Klang Valley, blinds installation Petaling Jaya, custom window blinds, on-site measure",
       },
       configurator: {
-        title: "KovaSunShade | Design Your Blinds Today",
+        title: "Design Your Own Blinds Online · Live Fabric Preview | Kova",
         description:
-          "Compare Roller, Venetian and VertiSheer blinds, choose fabrics and preview your design before requesting a custom factory-direct quote.",
+          "Pick roller, Venetian or VertiSheer, choose a fabric and opacity, and preview it live in a room. Send your design for a free factory-direct quote.",
         keywords:
           "blinds configurator, design your blinds, blind fabric chooser, live preview, made to measure blinds, Kova Sun Shade",
       },
       contact: {
-        title: "KovaSunShade | Get Quote Today | Blind Malaysia",
+        // Leads with the two free offers the site already makes, plus the
+        // 48-hour promise.
+        title: "Free Blinds Quote & On-Site Measure · Klang Valley | Kova",
         description:
-          "Request a custom blinds quote from Kova Sun Shade. Send your window details and get factory-direct options for your home, office or shoplot.",
+          "Get a free, no-obligation blinds quote within 48 working hours. Send your window sizes or WhatsApp us, and we'll measure on-site for free in Klang Valley.",
         keywords:
           "blinds quote Malaysia, blinds Klang Valley, measure blinds Petaling Jaya, bidai dibuat ikut ukuran, get a quote, Kova Sun Shade contact",
       },
       blog: {
-        title: "KovaSunShade | Journal",
+        title: "Window Blinds Guides & Ideas for Malaysian Homes | Kova",
         description:
-          "Read Kova's notes on window blinds, fabrics, light control and design ideas for Malaysian homes, offices and commercial spaces.",
+          "Practical guides to window blinds in Malaysia: roller vs zebra blinds, choosing fabrics, motorisation, and planning blinds into your renovation.",
         keywords:
           "Kova journal, window blinds blog Malaysia, fabric notes, install reports, Petaling Jaya workshop",
       },

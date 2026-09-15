@@ -7,6 +7,7 @@ import { Reveal } from "@/components/Reveal";
 import { setArticleJsonLd } from "@/components/JsonLd";
 import { useT } from "@/lib/i18n";
 import { getPost, formatPostDate, type BlogPost } from "@/lib/blog";
+import { blogSeoOverrides } from "@/lib/blogSeoOverrides";
 
 /**
  * Single blog post — fetches by slug from the URL and renders the
@@ -32,6 +33,8 @@ export function BlogPost() {
     loaderPost && loaderPost.slug === slug ? loaderPost : null,
   );
 
+  const seoOverride = slug ? blogSeoOverrides[slug] : undefined;
+
   useEffect(() => {
     if (!slug) {
       setPost("missing");
@@ -41,10 +44,16 @@ export function BlogPost() {
     // helmet 在路由切换时不更新 <title>（React 19 兼容问题），手动同步，
     // 否则从文章 A 跳到文章 B 时标签页还显示 A 的标题
     const syncMeta = (row: BlogPost) => {
-      setArticleJsonLd(row, pathname, lang);
-      if (row.title) document.title = `${row.title} | Kova Sun Shade`;
+      setArticleJsonLd(
+        { ...row, title: seoOverride?.h1 ?? row.title, excerpt: seoOverride?.description ?? row.excerpt },
+        pathname,
+        lang,
+      );
+      const metaTitle = seoOverride?.title ?? (row.title ? `${row.title} | Kova Sun Shade` : undefined);
+      if (metaTitle) document.title = metaTitle;
+      const metaDescription = seoOverride?.description ?? row.excerpt;
       const desc = document.head.querySelector('meta[name="description"]');
-      if (desc && row.excerpt) desc.setAttribute("content", row.excerpt);
+      if (desc && metaDescription) desc.setAttribute("content", metaDescription);
     };
 
     // 已有预渲染数据 → 不用再请求 Supabase
@@ -72,7 +81,7 @@ export function BlogPost() {
     return () => {
       cancelled = true;
     };
-  }, [slug, pathname, lang, loaderPost]);
+  }, [slug, pathname, lang, loaderPost, seoOverride]);
 
   const loading = post === null;
   const missing = post === "missing";
@@ -80,14 +89,20 @@ export function BlogPost() {
   return (
     <div className="min-h-screen bg-[var(--color-cream)]">
       {/* 文章加载后用文章自己的标题/摘要覆盖 SeoHead 的通用 Journal 标题，
-          否则每篇文章在 Google 里都显示同一个 "KovaSunShade | Journal" */}
+          否则每篇文章在 Google 里都显示同一个 "KovaSunShade | Journal"。
+          seoOverride 优先：Supabase 的 anon key 只读，精修过的 SEO 标题/
+          描述维护在 blogSeoOverrides.ts 里，跟正文的 h1/摘要分开。 */}
       {post && post !== "missing" && post.title && (
         <Head>
-          <title>{`${post.title} | Kova Sun Shade`}</title>
-          {post.excerpt && <meta name="description" content={post.excerpt} />}
+          <title>{seoOverride?.title ?? `${post.title} | Kova Sun Shade`}</title>
+          {(seoOverride?.description ?? post.excerpt) && (
+            <meta name="description" content={seoOverride?.description ?? post.excerpt} />
+          )}
           <meta property="og:type" content="article" />
-          <meta property="og:title" content={post.title} />
-          {post.excerpt && <meta property="og:description" content={post.excerpt} />}
+          <meta property="og:title" content={seoOverride?.title ?? post.title} />
+          {(seoOverride?.description ?? post.excerpt) && (
+            <meta property="og:description" content={seoOverride?.description ?? post.excerpt} />
+          )}
           {post.image && <meta property="og:image" content={post.image} />}
         </Head>
       )}
@@ -134,7 +149,7 @@ export function BlogPost() {
                       {post.author ? ` · ${post.author}` : ""}
                     </p>
                     <h1 className="mt-4 lg:mt-5 headline text-[clamp(1.9rem,1.3rem+2.5vw,3rem)] leading-[1.07] tracking-tight text-[var(--color-ink)]">
-                      {post.title}
+                      {seoOverride?.h1 ?? post.title}
                     </h1>
                     {post.excerpt && (
                       <p className="mt-5 lg:mt-6 text-[clamp(1rem,0.9rem+0.3vw,1.15rem)] leading-relaxed text-[var(--color-ink-soft)]">
@@ -149,7 +164,7 @@ export function BlogPost() {
                     <figure className="mt-10 lg:mt-14 -mx-5 sm:mx-0">
                       <img
                         src={post.image}
-                        alt={post.title ?? ""}
+                        alt={seoOverride?.h1 ?? post.title ?? ""}
                         className="w-full aspect-[16/9] object-cover rounded-md border border-[var(--color-line)]"
                       />
                     </figure>

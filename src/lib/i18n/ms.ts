@@ -11,65 +11,67 @@ export const ms: Dict = {
       "bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian, vertisheer, bidai dibuat ikut ukuran, bidai murah, bidai bermotor, bidai motor, bidai Petaling Jaya, bidai Klang Valley, bidai Selangor, roller blinds Malaysia, venetian blinds Malaysia",
     pages: {
       home: {
-        // Kekal pada "bidai" — sepadan dengan H1 BM.
+        // Tajuk kekal — sudah sepadan dengan H1 BM; hanya deskripsi
+        // dikemas kini supaya sebut ketiga-tiga produk + tawaran ukur
+        // percuma, sepadan dengan versi Inggeris.
         title:
           "Bidai & Langsir Tingkap Malaysia · Terus dari Kilang | Kova",
         description:
-          "Bidai dan langsir tingkap dalam kain blackout, dim-out dan sunscreen. Dibuat ikut ukuran, terus dari kilang — sehingga 40% lebih murah dari runcit.",
+          "Bidai dan langsir tingkap ikut ukuran — roller, Venetian dan VertiSheer, terus dari kilang, sehingga 40% lebih murah. Pengukuran percuma di Lembah Klang.",
         keywords:
           "bidai, langsir, bidai tingkap, langsir tingkap, bidai Malaysia, langsir Malaysia, bidai dan langsir rumah anda, bidai roller, bidai venetian, vertisheer, bidai dibuat ikut ukuran, bidai murah, bidai bermotor, Petaling Jaya, Lembah Klang, Selangor",
       },
       roller: {
         title:
-          "KovaSunShade | Bidai Roller",
+          "Bidai Roller Malaysia · Blackout, Dim-Out & Sunscreen | Kova",
         description:
-          "Dapatkan bidai roller custom untuk rumah, pejabat dan kedai. Pilihan blackout, dim-out, sunscreen dan light-filtering dengan kemasan moden.",
+          "Bidai roller ikut ukuran: blackout, dim-out, sunscreen dan penapis cahaya. Terus dari kilang, sehingga 40% lebih murah. Pengukuran percuma di Lembah Klang.",
         keywords:
           "bidai roller, bidai roller Malaysia, bidai blackout, bidai dim-out, bidai sunscreen, bidai dibuat ikut ukuran, Cenza, Denver, Shiro, Petaling Jaya, Lembah Klang",
       },
       venetian: {
         title:
-          "KovaSunShade | Bidai Venetian",
+          "Bidai Venetian Malaysia · Kemasan Aluminium & Kayu | Kova",
         description:
-          "Bidai Venetian dengan mekanisma rantai · miring · angkat yang lancar. Kemasan W101 Alpine White, W301 Pearl River, W302 Agate Grey, W206 Mahogany Teak. Terus dari kilang.",
+          "Bidai Venetian dalam kemasan aluminium, kayu dan kayu tiruan. Miringkan bilah untuk kawal cahaya, privasi dan udara. Ikut ukuran, dipasang di Lembah Klang.",
         keywords:
           "bidai venetian, bidai venetian Malaysia, bidai aluminium, bidai kayu, bidai kayu palsu, W101, W301, W302, W206, Petaling Jaya",
       },
       vertisheer: {
         title:
-          "KovaSunShade | Bidai Vertisheer",
+          "Bidai VertiSheer Malaysia · Untuk Pintu Gelangsar | Kova",
         description:
-          "Cantikkan tingkap besar dan pintu gelangsar dengan VertiSheer. Gaya lembut seperti langsir, dengan kawalan cahaya dan privasi yang kemas.",
+          "VertiSheer untuk tingkap besar dan pintu gelangsar: lembut seperti langsir, dengan bilah kain yang boleh diputar untuk kawal cahaya. Dibuat ikut ukuran.",
         keywords:
           "vertisheer Malaysia, bidai sheer menegak, bidai pintu gelongsor, bidai dinding kaca, langsir tingkap besar, Pivot, Lembah Klang",
       },
       process: {
         title:
-          "KovaSunShade | Bidai Dan Langsir Tingkap Malaysia",
+          "Bidai Terus dari Kilang · Tanpa Caj Bilik Pameran | Kova",
         description:
-          "Lihat cara Kova ukur, cadang dan pasang bidai custom di Klang Valley. Harga terus dari kilang tanpa mark-up showroom atau tekanan jualan.",
+          "Kebanyakan bidai kena empat lapis caj: pengedar, pemborong, peruncit dan bilik pameran. Kami ukur, buat dan pasang sendiri — sehingga 40% lebih murah.",
         keywords:
           "bidai terus dari kilang, bidai dibuat ikut ukuran Lembah Klang, pemasangan bidai Petaling Jaya, bidai khas, ukuran tingkap di lokasi",
       },
       configurator: {
-        title: "KovaSunShade | Reka Bidai Anda Online | Bidai Malaysia",
+        title: "Reka Bidai Sendiri Online · Pratonton Langsung | Kova",
         description:
-          "Bandingkan Roller, Venetian dan VertiSheer, pilih fabrik dan lihat preview sebelum minta sebut harga custom terus dari kilang.",
+          "Pilih bidai roller, Venetian atau VertiSheer, tentukan kain dan kelegapan, lihat pratonton dalam bilik, dan hantar reka bentuk untuk sebut harga percuma.",
         keywords:
           "konfigurator bidai, reka bidai sendiri, pemilih kain bidai, pratonton langsung, bidai dibuat ikut ukuran, Kova Sun Shade",
       },
       contact: {
         title:
-          "KovaSunShade | Minta Sebut Harga Bidai | Dapatkan Harga Anda Hari Ini",
+          "Sebut Harga Bidai Percuma & Ukur di Lokasi · Lembah Klang",
         description:
-          "Hantar maklumat tingkap anda dan dapatkan pilihan bidai custom terus dari kilang untuk rumah, pejabat atau kedai di sekitar Klang Valley.",
+          "Dapatkan sebut harga bidai percuma dalam 48 jam. Hantar ukuran tingkap atau WhatsApp kami, dan kami datang ukur di lokasi secara percuma di Lembah Klang.",
         keywords:
           "sebut harga bidai Malaysia, bidai Lembah Klang, ukur bidai Petaling Jaya, bidai dibuat ikut ukuran, dapatkan sebut harga, hubungi Kova Sun Shade",
       },
       blog: {
-        title: "KovaSunShade | Jurnal Kova ",
+        title: "Panduan Bidai & Idea Tingkap untuk Rumah Malaysia | Kova",
         description:
-          "Baca nota Kova tentang bidai tingkap, pilihan fabrik, kawalan cahaya dan idea reka bentuk untuk rumah, pejabat dan ruang komersial.",
+          "Panduan praktikal memilih bidai di Malaysia: jenis kain, bidai roller berbanding langsir, pilihan bermotor dan cara merancang bidai semasa renovasi.",
         keywords:
           "jurnal Kova, blog bidai Malaysia, nota kain, laporan pemasangan, bengkel Petaling Jaya",
       },
