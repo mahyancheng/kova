@@ -132,10 +132,12 @@ export function Blog() {
 
             {!loading && !empty && (
               <>
-                <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
                   {paginated.map((p, i) => (
-                    <Reveal key={p.slug} delay={i * 80}>
-                      <li>
+                    // as="li" 让 Reveal 自己就是网格项：之前 Reveal 会另外包一层
+                    // <div>，真正被 grid 拉伸等高的是那层 div，里面的 <li>/<Link>
+                    // 仍然只按内容撑高，导致每张卡片高度不一、"Read" 位置对不齐。
+                    <Reveal key={p.slug} delay={i * 80} as="li" className="h-full">
                         <Link
                           to={`${blogBase}/${p.slug}`}
                           className="group flex flex-col h-full bg-[var(--color-paper)] border border-[var(--color-line)] rounded-md overflow-hidden hover:border-[var(--color-ink)] transition-colors relative"
@@ -168,7 +170,7 @@ export function Blog() {
                             <p className="text-[0.7rem] tracking-widest uppercase text-[var(--color-muted)]">
                               {formatPostDate(p.publishedAt)}
                             </p>
-                            <h2 className="mt-2.5 font-serif text-[clamp(1.2rem,0.95rem+0.8vw,1.5rem)] leading-tight tracking-tight text-[var(--color-ink)]">
+                            <h2 className="mt-2.5 font-serif text-[clamp(1.2rem,0.95rem+0.8vw,1.5rem)] leading-tight tracking-tight text-[var(--color-ink)] line-clamp-2">
                               {p.title}
                             </h2>
                             {p.excerpt && (
@@ -182,7 +184,6 @@ export function Blog() {
                             </span>
                           </div>
                         </Link>
-                      </li>
                     </Reveal>
                   ))}
                 </ul>
