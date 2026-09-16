@@ -12,6 +12,17 @@
  * `h1` is optional and only set where the on-page headline itself needed
  * fixing (e.g. it was literally the URL slug) — leave it out to keep the
  * existing Supabase title as the h1 while only the meta tags change.
+ *
+ * IMPORTANT: Supabase's `title` field was since edited directly to hold
+ * the new SEO title verbatim (including the " | Kova" suffix) for several
+ * of these posts, instead of only being read here as a fallback. Since
+ * both the article H1 and the blog-index card heading fall back to
+ * post.title when no `h1` override is set, those posts would otherwise
+ * show "...| Kova" as the visible on-page headline. Every entry below
+ * whose `title` ends in the brand suffix therefore also carries an `h1`
+ * that restores the original, human-facing headline (from the pre-audit
+ * copy) so search snippets and on-page text can keep diverging on
+ * purpose.
  */
 export interface BlogSeoOverride {
   title: string;
@@ -24,11 +35,13 @@ export const blogSeoOverrides: Record<string, BlogSeoOverride> = {
     title: "Zebra Blinds vs Roller Blinds: Which Is Better? | Kova",
     description:
       "Zebra or roller blinds? We compare light control, privacy, blackout, heat, cleaning, price and child safety, then match the right blind to each room.",
+    h1: "Zebra Blinds vs Roller Blinds: Which Blinds Are Most Suitable for Your Lifestyle?",
   },
   "roller-blinds-for-your-house": {
     title: "Roller Blinds for Malaysian Homes: A Complete Guide | Kova",
     description:
       "How roller blinds work, which fabrics suit Malaysia's heat and glare, how to choose for each space, roller blinds vs curtains, and simple care tips.",
+    h1: "Roller Blinds For Your Home: The Smart Window Solution Every Malaysian Home Needs",
   },
   "roller-blinds-you-need": {
     title: "How to Choose Roller Blinds for Every Room | Kova",
@@ -43,6 +56,7 @@ export const blogSeoOverrides: Record<string, BlogSeoOverride> = {
     title: "Renovating? A Guide to Factory-Direct Blinds in Malaysia | Kova",
     description:
       "Planning a renovation? What factory-direct blinds really mean, when to order them, how to compare quotes fairly, and why to plan motorisation early.",
+    h1: "A Smarter Way to Dress Your Windows When Renovating",
   },
   "factory-direct-blind-curtain-in-malaysia": {
     title: "Why Blinds Cost So Much in Malaysia — and How to Pay Less",
@@ -53,6 +67,7 @@ export const blogSeoOverrides: Record<string, BlogSeoOverride> = {
     title: "Panduan Lengkap Bidai Roller untuk Rumah di Malaysia | Kova",
     description:
       "Apa itu bidai roller, kain yang sesuai untuk cuaca panas Malaysia, cara memilih untuk setiap ruang, bidai roller berbanding langsir dan tip penjagaan.",
+    h1: "Penyelesaian Tingkap Bidai Pintar Untuk Setiap Rumah di Malaysia",
   },
   "bidai-terus-dari-kilang-malaysia": {
     title: "Renovasi Rumah? Panduan Bidai Terus dari Kilang di Malaysia",

@@ -6,6 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { useT } from "@/lib/i18n";
 import { listPosts, formatPostDate, type BlogPostSummary } from "@/lib/blog";
 import { isSupabaseConfigured } from "@/lib/supabase";
+import { blogSeoOverrides } from "@/lib/blogSeoOverrides";
 
 /**
  * Blog index — a card grid of published posts. Pulls from Supabase on
@@ -133,7 +134,12 @@ export function Blog() {
             {!loading && !empty && (
               <>
                 <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-                  {paginated.map((p, i) => (
+                  {paginated.map((p, i) => {
+                    // Supabase 的 title 字段现在对部分文章直接存了带 "| Kova" 后缀
+                    // 的 SEO 标题（见 blogSeoOverrides.ts 顶部说明），卡片标题要用
+                    // 跟文章页 H1 一致的干净标题，不能直接显示带品牌后缀的版本。
+                    const displayTitle = blogSeoOverrides[p.slug ?? ""]?.h1 ?? p.title;
+                    return (
                     // as="li" 让 Reveal 自己就是网格项：之前 Reveal 会另外包一层
                     // <div>，真正被 grid 拉伸等高的是那层 div，里面的 <li>/<Link>
                     // 仍然只按内容撑高，导致每张卡片高度不一、"Read" 位置对不齐。
@@ -146,7 +152,7 @@ export function Blog() {
                             <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-cream-dark)]">
                               <img
                                 src={p.image}
-                                alt={p.title ?? ""}
+                                alt={displayTitle ?? ""}
                                 loading="lazy"
                                 className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
                               />
@@ -171,7 +177,7 @@ export function Blog() {
                               {formatPostDate(p.publishedAt)}
                             </p>
                             <h2 className="mt-2.5 font-serif text-[clamp(1.2rem,0.95rem+0.8vw,1.5rem)] leading-tight tracking-tight text-[var(--color-ink)] line-clamp-2">
-                              {p.title}
+                              {displayTitle}
                             </h2>
                             {p.excerpt && (
                               <p className="mt-2.5 text-[0.92rem] leading-relaxed text-[var(--color-muted)] line-clamp-3">
@@ -185,7 +191,8 @@ export function Blog() {
                           </div>
                         </Link>
                     </Reveal>
-                  ))}
+                    );
+                  })}
                 </ul>
 
                 {/* 新增：底部分页器 */}
