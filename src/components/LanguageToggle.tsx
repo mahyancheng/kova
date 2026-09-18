@@ -2,6 +2,7 @@
 import { useLang, useT } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { useNavigate, useLocation } from "react-router-dom"; // ✅ 引入 useLocation
+import { blogTranslationPairs, blogTranslationPairsReverse } from "@/lib/blogTranslationPairs";
 
 export function LanguageToggle({ tone = "light" }: { tone?: "light" | "dark" }) {
   const { lang } = useLang(); 
@@ -13,34 +14,50 @@ export function LanguageToggle({ tone = "light" }: { tone?: "light" | "dark" }) 
   const handleToggle = (code: 'en' | 'ms') => {
     // 如果已经在当前语言，就不做任何操作
     if (lang === code) return;
-    
+
+    // 跟 SeoHead/JsonLd 保持一致：先去掉尾部斜杠再比对，否则 "/blog/x/"
+    // 这种带斜杠的网址会让下面所有 path === 'xxx' 判断和 slug 截取
+    // 全部失效，退回一个错误的兜底网址。
+    const path = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
     let newPath = '/';
 
     if (code === 'ms') {
       // 🔵 英文 (EN) 切换到 马来文 (BM)
-      if (pathname === '/') newPath = '/bidai';
-      else if (pathname === '/roller') newPath = '/bidai/roller';
-      else if (pathname === '/venetian') newPath = '/bidai/venetian';
-      else if (pathname === '/vertisheer') newPath = '/bidai/vertisheer';
-      else if (pathname === '/process') newPath = '/bidai/proses';
-      else if (pathname === '/configurator') newPath = '/bidai/reka';
-      else if (pathname === '/contact') newPath = '/bidai/hubungi';
-      else if (pathname === '/blog') newPath = '/bidai/jurnal';
-      // 处理带 slug 的动态文章路由
-      else if (pathname.startsWith('/blog/')) newPath = pathname.replace('/blog/', '/bidai/jurnal/');
+      if (path === '/') newPath = '/bidai';
+      else if (path === '/roller') newPath = '/bidai/roller';
+      else if (path === '/venetian') newPath = '/bidai/venetian';
+      else if (path === '/vertisheer') newPath = '/bidai/vertisheer';
+      else if (path === '/process') newPath = '/bidai/proses';
+      else if (path === '/configurator') newPath = '/bidai/reka';
+      else if (path === '/contact') newPath = '/bidai/hubungi';
+      else if (path === '/blog') newPath = '/bidai/jurnal';
+      // 处理带 slug 的动态文章路由：英文和马来文文章是各自独立编号的，
+      // 不是同一个 slug 换个语言前缀就对应得上（5 篇英文只有 3 篇有马来文
+      // 对照版本）。直接替换前缀会跳到一个根本不存在的文章网址，显示
+      // "找不到这篇文章"。改成查真正的翻译对照表，没有对照版本就退回
+      // Journal 首页，而不是一个坏掉的文章链接。
+      else if (path.startsWith('/blog/')) {
+        const slug = path.slice('/blog/'.length);
+        const msSlug = blogTranslationPairs[slug];
+        newPath = msSlug ? `/bidai/jurnal/${msSlug}` : '/bidai/jurnal';
+      }
       else newPath = '/bidai'; // 兜底
     } else {
       // 🔵 马来文 (BM) 切换到 英文 (EN)
-      if (pathname === '/bidai') newPath = '/';
-      else if (pathname === '/bidai/roller') newPath = '/roller';
-      else if (pathname === '/bidai/venetian') newPath = '/venetian';
-      else if (pathname === '/bidai/vertisheer') newPath = '/vertisheer';
-      else if (pathname === '/bidai/proses') newPath = '/process';
-      else if (pathname === '/bidai/reka') newPath = '/configurator';
-      else if (pathname === '/bidai/hubungi') newPath = '/contact';
-      else if (pathname === '/bidai/jurnal') newPath = '/blog';
-      // 处理带 slug 的动态文章路由
-      else if (pathname.startsWith('/bidai/jurnal/')) newPath = pathname.replace('/bidai/jurnal/', '/blog/');
+      if (path === '/bidai') newPath = '/';
+      else if (path === '/bidai/roller') newPath = '/roller';
+      else if (path === '/bidai/venetian') newPath = '/venetian';
+      else if (path === '/bidai/vertisheer') newPath = '/vertisheer';
+      else if (path === '/bidai/proses') newPath = '/process';
+      else if (path === '/bidai/reka') newPath = '/configurator';
+      else if (path === '/bidai/hubungi') newPath = '/contact';
+      else if (path === '/bidai/jurnal') newPath = '/blog';
+      // 同上：查翻译对照表，没有对应的英文版本就退回 Journal 首页
+      else if (path.startsWith('/bidai/jurnal/')) {
+        const slug = path.slice('/bidai/jurnal/'.length);
+        const enSlug = blogTranslationPairsReverse[slug];
+        newPath = enSlug ? `/blog/${enSlug}` : '/blog';
+      }
       else newPath = '/'; // 兜底
     }
 
