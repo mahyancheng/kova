@@ -45,10 +45,30 @@ DirectorySlash Off
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # --- Otherwise hand control to index.html so React Router can route ---
-  # (client renders the NotFound page; ErrorDocument 404 below keeps the
-  # real 404 status code so this doesn't count as a soft-404)
+  # --- SPA fallback, but ONLY for paths that are real app routes -------
+  # Rules 2-4 above already handled every path with a physical
+  # dist/*/index.html (all pre-rendered brochure pages + already-built
+  # blog posts) by this point. What's left after this rule is either a
+  # blog post published since the last build (real React Router route,
+  # just not statically rendered yet — BlogPost.tsx fetches it from
+  # Supabase client-side) or a genuinely invalid URL. Restricting the
+  # match to known route shapes means a typo or dead link (/Roller,
+  # /this-page-does-not-exist, /bidai/xyz) falls through unrewritten to
+  # Apache's normal file-not-found handling instead of silently getting
+  # served the homepage with a 200 — that "soft 404" told Google every
+  # broken link on the internet was a duplicate of the homepage, and let
+  # crawlers burn budget on an infinite space of non-existent URLs.
+  RewriteCond %{REQUEST_URI} ^/$ [OR]
+  RewriteCond %{REQUEST_URI} ^/(roller|venetian|vertisheer|process|configurator|contact|404)/?$ [OR]
+  RewriteCond %{REQUEST_URI} ^/blog(/[^/]+)?/?$ [OR]
+  RewriteCond %{REQUEST_URI} ^/bidai(/(roller|venetian|vertisheer|proses|reka|hubungi))?/?$ [OR]
+  RewriteCond %{REQUEST_URI} ^/bidai/jurnal(/[^/]+)?/?$
   RewriteRule ^ index.html [L]
+
+  # Anything reaching this point didn't match a known route. No further
+  # rule applies, so Apache's own 404 handling takes over — ErrorDocument
+  # below serves the real 404 page's content while keeping the actual
+  # HTTP 404 status.
 </IfModule>
 
 # --- Compression -------------------------------------------------
@@ -128,7 +148,11 @@ DirectorySlash Off
 </IfModule>
 
 # --- Custom error fallback --------------------------------------
-ErrorDocument 404 /index.html
+# Points at the real prerendered 404 page (dist/404/index.html — see the
+# '404' route in main.tsx), not the homepage, so a genuine 404 status
+# comes back with actual "page not found" content instead of duplicating
+# the homepage.
+ErrorDocument 404 /404/index.html
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the "ea-php82" package as the default "PHP" programming language.

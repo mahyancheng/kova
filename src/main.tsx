@@ -74,8 +74,15 @@ const routes = [
         getStaticPaths: blogStaticPaths('ms', '/bidai/jurnal'),
       },
       
-      // 2. 核心修改：当以上路由全都匹配不到时，渲染 NotFound 组件而不再是 Home
-      { path: '*', element: <NotFound /> } 
+      // '404' 是一个真实、可枚举的路径，vite-react-ssg 会把它预渲染成
+      // dist/404/index.html —— Apache 用 ErrorDocument 404 指向这个文件，
+      // 这样直接访问一个不存在的网址时，返回的是真正的 HTTP 404 状态码 +
+      // 这个页面的内容，而不是 200 状态码 + 首页内容（软 404，Google 会
+      // 把它当成跟首页重复的内容，白白浪费抓取预算）。
+      { path: '404', element: <NotFound /> },
+      // 通配符仍然保留：处理 JS 已加载后，用户在站内点到坏链接的情况
+      // （这时 Apache 层面已经返回过 200，只能靠客户端路由兜底）。
+      { path: '*', element: <NotFound /> }
     ]
   }
 ];

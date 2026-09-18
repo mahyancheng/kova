@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { Head } from "vite-react-ssg";
 import { useT } from "@/lib/i18n";
 
 /**
@@ -11,36 +11,30 @@ import { useT } from "@/lib/i18n";
  *  - Organization / LocalBusiness with NAP, hours and service area
  *  - WebSite with a SearchAction Google can wire into Sitelinks
  *  - Three Product nodes (Roller / Venetian / VertiSheer)
- *  - BreadcrumbList on blog pages
- *  - Article on a single post (powers Google Discover + AI summaries)
+ *  - BreadcrumbList on product/process/configurator/contact/blog pages
  *
- * One <script type="application/ld+json"> per type, replaced on every
- * route/language change.
+ * IMPORTANT: this renders through vite-react-ssg's <Head> (a Helmet
+ * wrapper), not via useEffect + document.head.appendChild the way this
+ * component used to work. The old imperative version only ever ran in the
+ * browser after hydration — during SSG prerendering there is no `document`,
+ * so none of these <script> tags existed in the actual HTML the server
+ * sent out. Any crawler or tool that reads the raw response (rather than
+ * executing JS and waiting for React to mount) saw zero of this: no
+ * Organization, no LocalBusiness, no Product, no BreadcrumbList — only
+ * whatever SeoHead.tsx separately rendered through <Head> already, which
+ * is how that one WebPage block survived while everything here silently
+ * didn't. <Head> renders synchronously as JSX, so it's part of the
+ * server-rendered output like everything else on the page.
+ *
+ * Article schema for blog posts is NOT emitted here — it needs the actual
+ * post content (title/excerpt/date/author), which isn't available
+ * synchronously from just the route; BlogPost.tsx renders it directly
+ * alongside its own <Head> block, from the same loader/fetch data it
+ * already uses for the <title> tag.
  */
 const SITE_URL = "https://kovasunshade.com";
 const LOGO_URL = `${SITE_URL}/favicon.svg`;
 const SAME_AS: string[] = []; // Add socials when they exist.
-
-/** Upsert a JSON-LD script tag keyed by a stable id. */
-function setJsonLd(id: string, payload: unknown) {
-  let el = document.head.querySelector(`script[type="application/ld+json"][data-jsonld="${id}"]`);
-  if (!payload) {
-    if (el) el.remove();
-    return;
-  }
-  if (!el) {
-    el = document.createElement("script");
-    el.setAttribute("type", "application/ld+json");
-    el.setAttribute("data-jsonld", id);
-    document.head.appendChild(el);
-  }
-  el.textContent = JSON.stringify(payload);
-}
-
-function clearJsonLd(id: string) {
-  const el = document.head.querySelector(`script[type="application/ld+json"][data-jsonld="${id}"]`);
-  if (el) el.remove();
-}
 
 export function JsonLd() {
   const t = useT();
@@ -50,153 +44,143 @@ export function JsonLd() {
   const lang = t.meta.htmlLang;
   const isMalay = lang === "ms";
 
-  useEffect(() => {
-    // --- Always present: Organization / LocalBusiness + WebSite -----
-    const business = {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": `${SITE_URL}/#business`,
-      name: "Kova Sun Shade",
-      alternateName: isMalay ? "Kova — Bidai dan Langsir Tingkap" : undefined,
-      // 修复 1：加上 ?. 并提供默认描述防崩溃
-      description: t.seo?.description || "Premium Window Blinds and Shades",
-      url: SITE_URL,
-      email: "info@kovasunshade.com",
-      telephone: "+60179778289",
-      logo: LOGO_URL,
-      image: `${SITE_URL}/showcase/greige-roller.webp`,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "No 3, Jalan Tpk 1/6, Taman Perindustrian Kinrara",
-        addressLocality: "Puchong",
-        postalCode: "47180",
-        addressRegion: "Selangor",
-        addressCountry: "MY",
+  // --- Always present: Organization / LocalBusiness + WebSite ---------
+  const business = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${SITE_URL}/#business`,
+    name: "Kova Sun Shade",
+    alternateName: isMalay ? "Kova — Bidai dan Langsir Tingkap" : undefined,
+    description: t.seo?.description || "Premium Window Blinds and Shades",
+    url: SITE_URL,
+    email: "info@kovasunshade.com",
+    telephone: "+60179778289",
+    logo: LOGO_URL,
+    image: `${SITE_URL}/showcase/greige-roller.webp`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "No 3, Jalan Tpk 1/6, Taman Perindustrian Kinrara",
+      addressLocality: "Puchong",
+      postalCode: "47180",
+      addressRegion: "Selangor",
+      addressCountry: "MY",
+    },
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "Klang Valley" },
+      { "@type": "AdministrativeArea", name: "Greater Kuala Lumpur" },
+      { "@type": "AdministrativeArea", name: "Selangor" },
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
       },
-      areaServed: [
-        { "@type": "AdministrativeArea", name: "Klang Valley" },
-        { "@type": "AdministrativeArea", name: "Greater Kuala Lumpur" },
-        { "@type": "AdministrativeArea", name: "Selangor" },
-      ],
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          opens: "09:00",
-          closes: "18:00",
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: "Saturday",
-          opens: "10:00",
-          closes: "16:00",
-          description: "By appointment",
-        },
-      ],
-      knowsLanguage: ["en", "ms"],
-      foundingDate: "2014",
-      sameAs: SAME_AS,
-    };
-
-    const website = {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "@id": `${SITE_URL}/#website`,
-      url: SITE_URL,
-      name: "Kova Sun Shade",
-      inLanguage: ["en-MY", "ms-MY"],
-      publisher: { "@id": `${SITE_URL}/#business` },
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
-        },
-        "query-input": "required name=search_term_string",
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "10:00",
+        closes: "16:00",
+        description: "By appointment",
       },
-    };
+    ],
+    knowsLanguage: ["en", "ms"],
+    foundingDate: "2014",
+    sameAs: SAME_AS,
+  };
 
-    // Service — what the business actually offers, with area + language.
-    const service = {
+  const website = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    url: SITE_URL,
+    name: "Kova Sun Shade",
+    inLanguage: ["en-MY", "ms-MY"],
+    publisher: { "@id": `${SITE_URL}/#business` },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${SITE_URL}/blog?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  };
+
+  // Service — what the business actually offers, with area + language.
+  const service = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${SITE_URL}/#service`,
+    name: isMalay
+      ? "Bidai dibuat ikut ukuran — pengukuran, pembuatan dan pemasangan"
+      : "Made-to-measure window blinds — measure, manufacture and install",
+    serviceType: isMalay
+      ? "Pembuatan dan pemasangan bidai tingkap"
+      : "Window blind manufacture and installation",
+    provider: { "@id": `${SITE_URL}/#business` },
+    areaServed: [
+      { "@type": "AdministrativeArea", name: "Klang Valley" },
+      { "@type": "AdministrativeArea", name: "Greater Kuala Lumpur" },
+      { "@type": "AdministrativeArea", name: "Selangor" },
+    ],
+    availableLanguage: ["en", "ms"],
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "MYR",
+      price: "0.00",
+      url: `${SITE_URL}${isMalay ? "/bidai/hubungi" : "/contact"}`,
+    },
+  };
+
+  // --- Per-product schema (dedicated product pages) --------------------
+  const productMatch = pathname.match(/^(?:\/bidai)?\/(roller|venetian|vertisheer)$/);
+  let product: Record<string, unknown> | null = null;
+  if (productMatch) {
+    const key = productMatch[1] as "roller" | "venetian" | "vertisheer";
+    const meta = {
+      roller: {
+        name: isMalay ? "Bidai Roller" : "Roller Blinds",
+        category: "Window Blinds",
+        description: t.products.roller.body[0],
+        image: `${SITE_URL}/showcase/greige-roller.webp`,
+      },
+      venetian: {
+        name: isMalay ? "Bidai Venetian" : "Venetian Blinds",
+        category: "Window Blinds",
+        description: t.products.venetian.body[0],
+        image: `${SITE_URL}/showcase/white-venetian.webp`,
+      },
+      vertisheer: {
+        name: "VertiSheer",
+        category: "Vertical Sheer Blinds",
+        description: t.products?.vertisheer?.body?.[0] || "Modern vertical sheer blinds.",
+        image: `${SITE_URL}/showcase/pivot-silver-vertisheer.webp`,
+      },
+    }[key];
+    product = {
       "@context": "https://schema.org",
-      "@type": "Service",
-      "@id": `${SITE_URL}/#service`,
-      name: isMalay
-        ? "Bidai dibuat ikut ukuran — pengukuran, pembuatan dan pemasangan"
-        : "Made-to-measure window blinds — measure, manufacture and install",
-      serviceType: isMalay
-        ? "Pembuatan dan pemasangan bidai tingkap"
-        : "Window blind manufacture and installation",
-      provider: { "@id": `${SITE_URL}/#business` },
-      areaServed: [
-        { "@type": "AdministrativeArea", name: "Klang Valley" },
-        { "@type": "AdministrativeArea", name: "Greater Kuala Lumpur" },
-        { "@type": "AdministrativeArea", name: "Selangor" },
-      ],
-      availableLanguage: ["en", "ms"],
+      "@type": "Product",
+      ...meta,
+      brand: { "@type": "Brand", name: "Kova Sun Shade" },
+      url: `${SITE_URL}${pathname}`,
+      areaServed: "Klang Valley, Malaysia",
       offers: {
         "@type": "Offer",
+        availability: "https://schema.org/InStock",
         priceCurrency: "MYR",
-        "price": "0.00",
-
+        price: "0.00",
         url: `${SITE_URL}${isMalay ? "/bidai/hubungi" : "/contact"}`,
+        seller: { "@id": `${SITE_URL}/#business` },
       },
     };
+  }
 
-    setJsonLd("business", business);
-    setJsonLd("website", website);
-    setJsonLd("service", service);
-
-    // --- Per-product schema (dedicated product pages) ----------------
-    const productMatch = pathname.match(
-      /^(?:\/bidai)?\/(roller|venetian|vertisheer)$/,
-    );
-    if (productMatch) {
-      const key = productMatch[1] as "roller" | "venetian" | "vertisheer";
-      const meta = {
-        roller: {
-          name: isMalay ? "Bidai Roller" : "Roller Blinds",
-          category: "Window Blinds",
-          description: t.products.roller.body[0],
-          image: `${SITE_URL}/showcase/greige-roller.webp`,
-        },
-        venetian: {
-          name: isMalay ? "Bidai Venetian" : "Venetian Blinds",
-          category: "Window Blinds",
-          description: t.products.venetian.body[0],
-          image: `${SITE_URL}/showcase/white-venetian.webp`,
-        },
-        vertisheer: {
-          name: "VertiSheer",
-          category: "Vertical Sheer Blinds",
-          description: t.products?.vertisheer?.body?.[0] || "Modern vertical sheer blinds.",
-          image: `${SITE_URL}/showcase/pivot-silver-vertisheer.webp`,
-        },
-      }[key];
-      setJsonLd("products", {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        ...meta,
-        brand: { "@type": "Brand", name: "Kova Sun Shade" },
-        url: `${SITE_URL}${pathname}`,
-        areaServed: "Klang Valley, Malaysia",
-        offers: {
-          "@type": "Offer",
-          availability: "https://schema.org/InStock",
-          priceCurrency: "MYR",
-          "price": "0.00",
-          url: `${SITE_URL}${isMalay ? "/bidai/hubungi" : "/contact"}`,
-          seller: { "@id": `${SITE_URL}/#business` },
-        },
-      });
-    } else {
-      clearJsonLd("products");
-    }
-
-    // --- HowTo (process page) --------------------------------------
-    const onProcess = pathname === "/process" || pathname === "/bidai/proses";
-    if (onProcess) {
-      setJsonLd("howto", {
+  // --- HowTo (process page) --------------------------------------------
+  const onProcess = pathname === "/process" || pathname === "/bidai/proses";
+  const howto = onProcess
+    ? {
         "@context": "https://schema.org",
         "@type": "HowTo",
         name: isMalay
@@ -211,102 +195,111 @@ export function JsonLd() {
         })),
         totalTime: "P14D",
         inLanguage: isMalay ? "ms-MY" : "en-MY",
-      });
-    } else {
-      clearJsonLd("howto");
-    }
-
-    // --- Breadcrumbs (every brochure + blog page) ------------------
-    const homeUrl = isMalay ? `${SITE_URL}/bidai` : `${SITE_URL}/`;
-    const blogUrl = isMalay ? `${SITE_URL}/bidai/jurnal` : `${SITE_URL}/blog`;
-    const onBlogIndex = pathname === "/blog" || pathname === "/bidai/jurnal";
-    const onBlogPost =
-      pathname.startsWith("/blog/") || pathname.startsWith("/bidai/jurnal/");
-
-    /** Maps the current pathname to its breadcrumb chain. */
-    const breadcrumbItems: Array<{ "@type": string; position: number; name: string; item: string }> = [];
-    breadcrumbItems.push({ "@type": "ListItem", position: 1, name: "Home", item: homeUrl });
-
-    if (onBlogIndex || onBlogPost) {
-      // 之前这里 push 到一个从未使用的本地 items 数组，导致 Journal 这一层
-      // 从面包屑里消失（文章页出现 position 1 → 3 跳号，属于无效 BreadcrumbList）
-      breadcrumbItems.push({
-        "@type": "ListItem",
-        position: 2,
-        name: t.nav.journal,
-        item: blogUrl,
-      });
-      if (onBlogPost) {
-        const slug = pathname.split("/").pop() || "";
-        breadcrumbItems.push({
-          "@type": "ListItem",
-          position: 3,
-          name: slug.replace(/-/g, " "),
-          item: `${SITE_URL}${pathname}`,
-        });
       }
-    } else if (productMatch) {
+    : null;
+
+  // --- Breadcrumbs (every brochure + blog page) -------------------------
+  const homeUrl = isMalay ? `${SITE_URL}/bidai` : `${SITE_URL}/`;
+  const blogUrl = isMalay ? `${SITE_URL}/bidai/jurnal` : `${SITE_URL}/blog`;
+  const onBlogIndex = pathname === "/blog" || pathname === "/bidai/jurnal";
+  const onBlogPost = pathname.startsWith("/blog/") || pathname.startsWith("/bidai/jurnal/");
+
+  const breadcrumbItems: Array<{ "@type": string; position: number; name: string; item: string }> = [
+    { "@type": "ListItem", position: 1, name: "Home", item: homeUrl },
+  ];
+
+  if (onBlogIndex || onBlogPost) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 2,
+      name: t.nav.journal,
+      item: blogUrl,
+    });
+    if (onBlogPost) {
+      const slug = pathname.split("/").pop() || "";
       breadcrumbItems.push({
         "@type": "ListItem",
-        position: 2,
-        name: productMatch[1] === "roller" ? (isMalay ? "Bidai Roller" : "Roller Blinds")
-          : productMatch[1] === "venetian" ? (isMalay ? "Bidai Venetian" : "Venetian Blinds")
-            : "VertiSheer",
-        item: `${SITE_URL}${pathname}`,
-      });
-    } else if (onProcess) {
-      breadcrumbItems.push({
-        "@type": "ListItem",
-        position: 2,
-        name: isMalay ? "Proses" : "Process",
-        item: `${SITE_URL}${pathname}`,
-      });
-    } else if (pathname === "/configurator" || pathname === "/bidai/reka") {
-      breadcrumbItems.push({
-        "@type": "ListItem",
-        position: 2,
-        name: isMalay ? "Reka sendiri" : "Design yours",
-        item: `${SITE_URL}${pathname}`,
-      });
-    } else if (pathname === "/contact" || pathname === "/bidai/hubungi") {
-      breadcrumbItems.push({
-        "@type": "ListItem",
-        position: 2,
-        name: isMalay ? "Hubungi" : "Contact",
+        position: 3,
+        name: slug.replace(/-/g, " "),
         item: `${SITE_URL}${pathname}`,
       });
     }
+  } else if (productMatch) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 2,
+      name:
+        productMatch[1] === "roller" ? (isMalay ? "Bidai Roller" : "Roller Blinds")
+        : productMatch[1] === "venetian" ? (isMalay ? "Bidai Venetian" : "Venetian Blinds")
+        : "VertiSheer",
+      item: `${SITE_URL}${pathname}`,
+    });
+  } else if (onProcess) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 2,
+      name: isMalay ? "Proses" : "Process",
+      item: `${SITE_URL}${pathname}`,
+    });
+  } else if (pathname === "/configurator" || pathname === "/bidai/reka") {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 2,
+      name: isMalay ? "Reka sendiri" : "Design yours",
+      item: `${SITE_URL}${pathname}`,
+    });
+  } else if (pathname === "/contact" || pathname === "/bidai/hubungi") {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      position: 2,
+      name: isMalay ? "Hubungi" : "Contact",
+      item: `${SITE_URL}${pathname}`,
+    });
+  }
 
-    if (breadcrumbItems.length > 1) {
-      setJsonLd("breadcrumbs", {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: breadcrumbItems,
-      });
-    } else {
-      clearJsonLd("breadcrumbs");
-    }
+  const breadcrumbs =
+    breadcrumbItems.length > 1
+      ? {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: breadcrumbItems,
+        }
+      : null;
 
-    // --- Single blog post Article -----------------------------------
-    if (!onBlogPost) clearJsonLd("article");
-  }, [pathname, lang, isMalay, t]);
-  return null;
+  return (
+    <Head>
+      <script type="application/ld+json">{JSON.stringify(business)}</script>
+      <script type="application/ld+json">{JSON.stringify(website)}</script>
+      <script type="application/ld+json">{JSON.stringify(service)}</script>
+      {product && <script type="application/ld+json">{JSON.stringify(product)}</script>}
+      {howto && <script type="application/ld+json">{JSON.stringify(howto)}</script>}
+      {breadcrumbs && <script type="application/ld+json">{JSON.stringify(breadcrumbs)}</script>}
+    </Head>
+  );
 }
 
 /**
- * Helper for blog post pages — emits the Article schema once a post is
- * loaded. Centralised here so the JSON shape stays consistent.
+ * Article schema for a single blog post — built from the post's real
+ * content (title/excerpt/date/author), unlike everything above which only
+ * needs the route. Called directly from BlogPost.tsx's own render (see
+ * that file), not from JsonLd, so it's available synchronously wherever
+ * the post data already is (loader data during SSR, or the client fetch
+ * fallback for posts published after the last build).
  */
-export function setArticleJsonLd(post: {
-  title?: string;
-  excerpt?: string;
-  content?: string;
-  image?: string;
-  author?: string;
-  publishedAt?: string;
-  slug?: string;
-}, pathname: string, lang: string) {
-  setJsonLd("article", {
+export function buildArticleJsonLd(
+  post: {
+    title?: string;
+    excerpt?: string;
+    content?: string;
+    image?: string;
+    author?: string;
+    publishedAt?: string;
+    slug?: string;
+  },
+  pathname: string,
+  lang: string,
+) {
+  return {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.title,
@@ -321,5 +314,5 @@ export function setArticleJsonLd(post: {
       "@type": "WebPage",
       "@id": `${SITE_URL}${pathname}`,
     },
-  });
+  };
 }

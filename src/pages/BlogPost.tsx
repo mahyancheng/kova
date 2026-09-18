@@ -4,7 +4,7 @@ import { Head } from "vite-react-ssg";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Reveal } from "@/components/Reveal";
-import { setArticleJsonLd } from "@/components/JsonLd";
+import { buildArticleJsonLd } from "@/components/JsonLd";
 import { useT } from "@/lib/i18n";
 import { getPost, formatPostDate, type BlogPost } from "@/lib/blog";
 import { blogSeoOverrides } from "@/lib/blogSeoOverrides";
@@ -42,13 +42,11 @@ export function BlogPost() {
     }
 
     // helmet 在路由切换时不更新 <title>（React 19 兼容问题），手动同步，
-    // 否则从文章 A 跳到文章 B 时标签页还显示 A 的标题
+    // 否则从文章 A 跳到文章 B 时标签页还显示 A 的标题。
+    // Article JSON-LD 不在这里处理——它现在直接在下面的 JSX <Head> 里跟
+    // post state 一起同步渲染（详见 buildArticleJsonLd 的调用），因为
+    // Helmet 对 <script> 标签本来就是按渲染树 diff 的，不需要手动操作 DOM。
     const syncMeta = (row: BlogPost) => {
-      setArticleJsonLd(
-        { ...row, title: seoOverride?.h1 ?? row.title, excerpt: seoOverride?.description ?? row.excerpt },
-        pathname,
-        lang,
-      );
       const metaTitle = seoOverride?.title ?? (row.title ? `${row.title} | Kova Sun Shade` : undefined);
       if (metaTitle) document.title = metaTitle;
       const metaDescription = seoOverride?.description ?? row.excerpt;
@@ -104,6 +102,19 @@ export function BlogPost() {
             <meta property="og:description" content={seoOverride?.description ?? post.excerpt} />
           )}
           {post.image && <meta property="og:image" content={post.image} />}
+          {/* Article schema, built from the same data the h1/excerpt above
+              use (h1/description overrides applied) — rendered synchronously
+              so it's part of the actual server-rendered HTML, not injected
+              client-side after the fact (see JsonLd.tsx's header comment). */}
+          <script type="application/ld+json">
+            {JSON.stringify(
+              buildArticleJsonLd(
+                { ...post, title: seoOverride?.h1 ?? post.title, excerpt: seoOverride?.description ?? post.excerpt },
+                pathname,
+                lang,
+              ),
+            )}
+          </script>
         </Head>
       )}
       {missing && (

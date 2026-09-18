@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 // 直接 import react-helmet-async 会连到另一个实例，标签会被渲染进 <body> 而不是 <head>。
 import { Head } from "vite-react-ssg";
 import { useT } from "@/lib/i18n";
+import { blogTranslationPairs, blogTranslationPairsReverse } from "@/lib/blogTranslationPairs";
 
 /** Map a pathname to a logical page key for SEO lookup. */
 function pathnameToPageKey(pathname: string): keyof typeof PAGE_KEY_FALLBACK {
@@ -88,6 +89,15 @@ export function SeoHead() {
   let enPath = "/";
   let msPath = "/bidai";
   let canonicalPath = pathname;
+  // Blog articles aren't mirrored 1:1 across languages the way the static
+  // brochure pages are — each language has its own independently-slugged
+  // posts, and only some have a translation in the other language (see
+  // blogTranslationPairs.ts). Swapping /blog/X ↔ /bidai/jurnal/X while
+  // keeping the same slug — which is correct for the brochure pages —
+  // pointed every article's hreflang at a URL that doesn't exist. Gate
+  // whether the alternate-language tag renders at all on there being a
+  // real pair; a self-referencing hreflang is what's emitted otherwise.
+  let hasTranslation = true;
 
   if (PAIRS[pathname]) {
     enPath = pathname;
@@ -98,31 +108,45 @@ export function SeoHead() {
   } else if (pathname.startsWith("/blog/")) {
     const slug = pathname.slice("/blog/".length);
     enPath = `/blog/${slug}`;
-    msPath = `/bidai/jurnal/${slug}`;
+    const msSlug = blogTranslationPairs[slug];
+    hasTranslation = Boolean(msSlug);
+    msPath = msSlug ? `/bidai/jurnal/${msSlug}` : enPath;
   } else if (pathname.startsWith("/bidai/jurnal/")) {
     const slug = pathname.slice("/bidai/jurnal/".length);
-    enPath = `/blog/${slug}`;
     msPath = `/bidai/jurnal/${slug}`;
+    const enSlug = blogTranslationPairsReverse[slug];
+    hasTranslation = Boolean(enSlug);
+    enPath = enSlug ? `/blog/${enSlug}` : msPath;
   }
 
   const enHref = `${SITE_ORIGIN}${enPath}`;
   const msHref = `${SITE_ORIGIN}${msPath}`;
   const canonicalHref = `${SITE_ORIGIN}${canonicalPath}`;
+  // Untranslated post: alternate tags both point at the page itself
+  // (self-referencing hreflang), never at a URL that doesn't exist.
+  const selfHref = `${SITE_ORIGIN}${pathname}`;
 
   // 社交分享图必须是本站自己的绝对 URL（之前指向 gpt-engineer 的临时存储）
   const ogImage = `${SITE_ORIGIN}/showcase/hero-living.webp`;
   const htmlLang = t.meta.htmlLang;
 
   // --- JSON-LD Schema ---
+  // Blog posts get their own Article schema (with mainEntityOfPage) from
+  // BlogPost.tsx, built from the actual post content. This generic WebPage
+  // block only knows the per-ROUTE-KEY title/description ("blog" for every
+  // article, since pathnameToPageKey collapses all of /blog/* to the
+  // journal index's copy) — emitting it here too made every article's
+  // structured data claim it was the journal index page.
+  const onBlogPost = pathname.startsWith("/blog/") || pathname.startsWith("/bidai/jurnal/");
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": title,
     "description": description,
     "url": canonicalHref,
-    "publisher": { 
-      "@type": "Organization", 
-      "name": "Kova Sun Shade" 
+    "publisher": {
+      "@type": "Organization",
+      "name": "Kova Sun Shade"
     }
   };
 
@@ -135,9 +159,30 @@ export function SeoHead() {
       const el = document.head.querySelector<HTMLMetaElement>(selector);
       if (el) el.setAttribute("content", content);
     };
-    const setLink = (selector: string, href: string) => {
-      const el = document.head.querySelector<HTMLLinkElement>(selector);
+    // Upsert rather than "update if present": some pages don't render every
+    // alternate tag in their initial SSR HTML (untranslated posts render
+    // only one), so navigating in-app from one of those to a page that does
+    // need the tag has to create it, not just fail to find it.
+    const setLink = (rel: string, hrefLang: string, href: string) => {
+      let el = document.head.querySelector<HTMLLinkElement>(`link[rel="${rel}"][hreflang="${hrefLang}"]`);
+      if (!el) {
+        el = document.createElement("link");
+        el.setAttribute("rel", rel);
+        el.setAttribute("hreflang", hrefLang);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("href", href);
+    };
+    const setCanonical = (href: string) => {
+      const el = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
       if (el) el.setAttribute("href", href);
+    };
+    // Untranslated pages don't render the opposite-language tag at all (see
+    // hasTranslation above) — if a previous, translated page left one
+    // behind in the DOM during an in-app navigation, drop it so it doesn't
+    // keep pointing at that page's now-irrelevant alternate URL.
+    const removeLink = (hrefLang: string) => {
+      document.head.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${hrefLang}"]`)?.remove();
     };
     setMeta('meta[name="description"]', description);
     setMeta('meta[property="og:title"]', title);
@@ -145,11 +190,19 @@ export function SeoHead() {
     setMeta('meta[property="og:url"]', canonicalHref);
     setMeta('meta[name="twitter:title"]', title);
     setMeta('meta[name="twitter:description"]', description);
-    setLink('link[rel="canonical"]', canonicalHref);
-    setLink('link[rel="alternate"][hreflang="en"]', enHref);
-    setLink('link[rel="alternate"][hreflang="ms"]', msHref);
-    setLink('link[rel="alternate"][hreflang="x-default"]', enHref);
-  }, [title, description, canonicalHref, enHref, msHref]);
+    setCanonical(canonicalHref);
+    if (hasTranslation) {
+      setLink("alternate", "en", enHref);
+      setLink("alternate", "ms", msHref);
+      setLink("alternate", "x-default", enHref);
+    } else {
+      // Only the current page's own language gets a (self-referencing) tag;
+      // the other language's tag is removed rather than left stale.
+      setLink("alternate", htmlLang, selfHref);
+      removeLink(htmlLang === "en" ? "ms" : "en");
+      setLink("alternate", "x-default", selfHref);
+    }
+  }, [title, description, canonicalHref, enHref, msHref, hasTranslation, selfHref, htmlLang]);
 
   return (
     // htmlAttributes 让每个页面输出正确的 <html lang="en|ms">（对 hreflang / 搜索引擎语言识别很重要）
@@ -184,16 +237,31 @@ export function SeoHead() {
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage} />
 
-      {/* 4. Canonical + Hreflang */}
+      {/* 4. Canonical + Hreflang
+          NOTE: each tag below is its own `{cond && <link/>}` expression
+          rather than a ternary wrapped in a <>Fragment</> — the Helmet
+          fork vite-react-ssg bundles here doesn't recurse into Fragment
+          children, so a grouped ternary silently drops every tag inside
+          it (confirmed: it built with zero <link rel="alternate"> tags in
+          the output). Individual boolean-gated elements is the pattern
+          already proven safe above (see heroImageToPreload). */}
       <link rel="canonical" href={canonicalHref} />
-      <link rel="alternate" href={enHref} hrefLang="en" />
-      <link rel="alternate" href={msHref} hrefLang="ms" />
-      <link rel="alternate" href={enHref} hrefLang="x-default" />
+      {hasTranslation && <link rel="alternate" href={enHref} hrefLang="en" />}
+      {hasTranslation && <link rel="alternate" href={msHref} hrefLang="ms" />}
+      {/* No translation exists for this post (see hasTranslation above) —
+          a self-referencing tag beats one pointing at a URL that 404s. */}
+      {!hasTranslation && <link rel="alternate" href={selfHref} hrefLang={htmlLang} />}
+      <link rel="alternate" href={hasTranslation ? enHref : selfHref} hrefLang="x-default" />
 
-      {/* 5. Dynamic JSON-LD */}
-      <script type="application/ld+json">
-        {JSON.stringify(jsonLd)}
-      </script>
+      {/* 5. Dynamic JSON-LD — skipped on blog posts, which emit their own
+          Article schema (with the post's real title/description) instead;
+          this generic block only knows the route-key-level copy, which for
+          every /blog/* URL is the journal index's, not the article's. */}
+      {!onBlogPost && (
+        <script type="application/ld+json">
+          {JSON.stringify(jsonLd)}
+        </script>
+      )}
     </Head>
   );
 }

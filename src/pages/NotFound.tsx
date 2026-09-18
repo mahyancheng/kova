@@ -40,6 +40,23 @@ export function NotFound() {
             {isBm ? "Kembali Ke Laman Utama" : "Back to Home"}
           </Link>
         </div>
+
+        {/* 给一个死链落地的访客几个有用的去处，而不是只有回首页一条路 */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.85rem]">
+          {[
+            { to: isBm ? "/bidai/roller" : "/roller", label: isBm ? "Bidai Roller" : "Roller Blinds" },
+            { to: isBm ? "/bidai/venetian" : "/venetian", label: isBm ? "Bidai Venetian" : "Venetian Blinds" },
+            { to: isBm ? "/bidai/vertisheer" : "/vertisheer", label: "VertiSheer" },
+          ].map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className="text-[var(--color-ink-soft)] underline underline-offset-4 hover:text-[var(--color-ink)] transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
       </Reveal>
     </div>
   );
