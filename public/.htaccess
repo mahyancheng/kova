@@ -45,6 +45,11 @@ DirectorySlash Off
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
+  # === BEGIN AUTO-GENERATED: cross-language blog slug guard ===
+  RewriteRule ^bidai/jurnal/(zebra-blinds-vs-roller-blinds|factory-direct-blind-curtain-in-malaysia|factory-direct-blinds-malaysia|roller-blinds-you-need|roller-blinds-for-your-house)/?$ /__no-such-post__ [L]
+  RewriteRule ^blog/(bidai-terus-dari-kilang-malaysia|memilih-bidai-dan-langsir-rumah|bidai-malaysia)/?$ /__no-such-post__ [L]
+# === END AUTO-GENERATED: cross-language blog slug guard ===
+
   # --- SPA fallback, but ONLY for paths that are real app routes -------
   # Rules 2-4 above already handled every path with a physical
   # dist/*/index.html (all pre-rendered brochure pages + already-built
