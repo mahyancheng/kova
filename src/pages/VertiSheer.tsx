@@ -1,80 +1,53 @@
-import { useEffect } from "react";
 import { useT } from "@/lib/i18n";
 import { PromoBar } from "@/components/PromoBar";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { StickyQuote } from "@/components/StickyQuote";
-import { ProductSpotlight } from "@/components/ProductSpotlight";
-import { ProductFabricStrip } from "@/components/ProductFabricStrip";
 import {
-  ProductCare,
-  ProductClosing,
-  ProductFaq,
-  ProductModes,
-  ProductMotorised,
-  ProductPricing,
-  ProductRooms,
-  ProductSteps,
-} from "@/components/product/ProductSections";
-import { Configurator } from "@/components/Configurator";
-import { VertiSheer as VertiSheerVisual } from "@/components/visuals/VertiSheer";
-import { VERTISHEER_FABRICS } from "@/lib/configurator/types";
-import { useConfigurator } from "@/lib/configurator/context";
+  Hero, Why, SwatchLibrary, Rooms, Price, Steps, Motorised, Care, Faq, Closing,
+} from "@/components/brochure/Sections";
+import { VertiSheerModes } from "@/components/brochure/features";
+import { VertiSheerDesigner } from "@/components/brochure/designers";
+import { VertiSheerHeroArt } from "@/components/brochure/svg";
+import { VERTISHEER_SWATCH_GROUPS } from "@/lib/brochure/data";
 
+/**
+ * VertiSheer — laid out to the client's supplied brochure mockup: hero,
+ * why, the vane-rotation demo, three light modes, fabric library, rooms,
+ * price, process, motorisation, care, FAQ, quote.
+ */
 export function VertiSheerPage() {
   const t = useT();
-  const { setProduct } = useConfigurator();
-  const prod = t.products.vertisheer;
   const p = t.productPages.vertisheer;
-
-  useEffect(() => {
-    setProduct("vertisheer");
-  }, [setProduct]);
+  const c = t.productPages.common;
+  const prod = t.products.vertisheer;
 
   return (
     <div className="min-h-screen bg-[var(--color-cream)]">
       <PromoBar />
       <Nav />
-      <main id="main" className="pt-1">
-        <ProductSpotlight
-          id="vertisheer"
-          tone="ink"
-          number={prod.number}
-          name={prod.name}
+      <main id="main" className="brochure">
+        <Hero
+          n="01"
+          eyebrow={c.heroEyebrow}
           h1={p.h1}
-          taglineA={p.subhead}
-          taglineB=""
+          subhead={p.subhead}
           body={p.heroBody}
-          features={p.why.items.map((i) => ({
-            title: i.title,
-            detail: i.body,
-            bullets: i.bullets,
-          }))}
-          whyEyebrow={p.why.eyebrow}
-          whyTitleA={p.why.titleA}
-          whyTitleB={p.why.titleB}
-          whyDek={p.why.dek}
-          perfectFor={prod.perfectFor}
-          detailCaption={prod.detailCaption}
-          Detail={VertiSheerVisual}
-          detailSrc="/showcase/pivot-silver-vertisheer.webp"
+          caption={p.heroCaption}
+          art={<VertiSheerHeroArt label={p.heroCaption} />}
         />
-        <ProductModes n="02" tone="cream" data={p.modes} />
-        <ProductFabricStrip
-          fabrics={VERTISHEER_FABRICS}
-          eyebrow={t.fabrics.eyebrow}
-          title={`VertiSheer · ${t.fabrics.titleA} ${t.fabrics.titleB}`}
-          body={t.fabrics.intro}
-        />
-        <ProductRooms n="03" tone="paper" data={p.rooms} />
-        <ProductPricing n="04" tone="cream" data={p.price} />
-        <ProductSteps n="05" data={p.steps} />
-        <Configurator />
-        <ProductMotorised n="06" tone="paper" data={p.motorised} />
-        <ProductCare n="07" tone="cream" data={p.care} />
-        <ProductFaq n="08" tone="paper" data={p.faq} />
-        <ProductClosing
-          n="09"
+        <Why n="02" tone="paper" data={p.why} />
+        <VertiSheerDesigner n="03" />
+        <VertiSheerModes n="04" data={p.modes} />
+        <SwatchLibrary n="05" tone="ground" data={p.swatches} groups={VERTISHEER_SWATCH_GROUPS} />
+        <Rooms n="06" tone="paper" data={p.rooms} />
+        <Price n="07" tone="ground" data={p.price} />
+        <Steps n="08" data={p.steps} />
+        <Motorised n="09" tone="paper" data={p.motorised} />
+        <Care n="10" tone="ground" data={p.care} />
+        <Faq n="11" tone="paper" data={p.faq} />
+        <Closing
+          n="12"
           data={p.closing}
           waMessage={`Hi KOVA, I would like a quote for ${prod.name}.`}
         />

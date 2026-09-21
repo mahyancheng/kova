@@ -661,6 +661,30 @@ export const ms: Dict = {
         "Bidai roller Kova dibuat ikut ukuran tingkap anda, dengan pilihan kain blackout, dim-out dan sunscreen bergantung pada berapa banyak cahaya matahari, privasi dan kawalan haba yang anda perlukan.",
         "Dari bilik tidur dan ruang tamu sampailah ke pejabat dan dapur, bidai roller beri cara mudah untuk kawal cahaya tanpa buat bilik rasa berat atau bersepah. Kami reka, ukur, buat dan pasang sendiri — penyelesaian terus dari kilang, tanpa caj bilik pameran.",
       ],
+      heroCaption:
+        "Bidai roller, kain dim-out tenunan linen, pemasangan dalam — diturunkan dua pertiga pada tingkap menghadap barat.",
+      designer: {
+        eyebrow: "Reka sendiri",
+        titleA: "Bina bidai anda.",
+        titleB: "Lihat dalam bilik betul.",
+        dek: "Pilih jenis, pilih kain dan tentukan sejauh mana ia turun. Pratonton berubah sambil anda pilih — bila ia nampak betul, hantar konfigurasi itu kepada kami bersama permintaan sebut harga.",
+        livePreview: "Pratonton langsung",
+        caption:
+          "Pratonton adalah ilustrasi. Kain sebenar berbeza mengikut cahaya dan tenunan.",
+        typeLabel: "Jenis",
+        types: { roller: "Roller", venetian: "Venetian", vertisheer: "VertiSheer" },
+        opacityLabel: "Kelegapan",
+        opacities: { sunscreen: "Sunscreen", dimout: "Dim-out", blackout: "Blackout" },
+        fabricLabel: "Kain",
+        dropLabel: "Turun",
+        dropSuffix: "% tertutup",
+      },
+      swatches: {
+        eyebrow: "Perpustakaan kain",
+        titleA: "Palet warna yang",
+        titleB: "tahu menjaga diri.",
+        dek: "Inilah swatch yang kami simpan di studio. Beritahu kami lima yang anda paling berkenan dan kami bawa semuanya masa temu janji pengukuran — warna, tekstur dan kelegapan semuanya nampak lain bawah cahaya rumah anda sendiri.",
+      },
       why: {
         eyebrow: "Kenapa bidai roller",
         titleA: "Satu helai kain",
@@ -998,6 +1022,42 @@ export const ms: Dict = {
         "Bidai Venetian Kova guna bilah mendatar yang boleh dilaras untuk beri anda kawalan tepat ke atas cahaya matahari, silau dan privasi sepanjang hari. Miringkan terbuka untuk cahaya siang, laras sudutnya untuk lembutkan matahari petang yang terik, tutup bila anda mahu privasi.",
         "Dengan garis mendatar yang kemas dan pilihan kemasan aluminium serta kayu, ia sangat sesuai untuk rumah moden Malaysia, dapur, pejabat rumah dan ruang komersial. Setiap bidai dibuat ikut ukuran dan dipasang oleh pasukan kami sendiri.",
       ],
+      heroCaption:
+        "Venetian kayu dalam Mahogany Teak, bilah dimiringkan lebih kurang 40° — cukup untuk potong silau dan biar bilik kekal terang.",
+      designer: {
+        eyebrow: "Miringkan bilah",
+        titleA: "Dua kawalan,",
+        titleB: "bukan satu.",
+        dek: "Bidai roller ada satu kawalan sahaja: sejauh mana ia turun. Venetian ada dua — sejauh mana turun, dan pada sudut apa. Tukar bahan pula ubah lebar bilah, dan itu ubah seluruh perwatakan tingkap. Cubalah.",
+        livePreview: "Pratonton langsung",
+        dragHint: "Seret bidai untuk miringkan",
+        replay: "↻ Main semula gerakan miring",
+        caption:
+          "Bilah dipaparkan dalam 3D sebenar — pertindihan yang anda nampak itu kesan sudut yang sebenar, bukan sekadar lukisan.",
+        materialLabel: "Bahan",
+        materials: { alu: "Aluminium", wood: "Kayu" },
+        materialSubs: { alu: "Bilah nipis", wood: "Bilah lebar" },
+        daylightLabel: "Cahaya siang",
+        daylights: { morning: "Pagi", midday: "Tengah hari", golden: "3 petang", dusk: "Senja" },
+        tiltLabel: "Sudut bilah",
+        dropLabel: "Diturunkan",
+        dropSuffix: "% daripada tingkap",
+        finishLabel: "Kemasan",
+        presets: { open: "Terbuka", filtered: "Ditapis", closed: "Tertutup" },
+        notes: {
+          closed:
+            "Tertutup — bilah bertindih. Privasi maksimum, dan inilah paling gelap yang venetian boleh beri (ia bukan blackout).",
+          filtered:
+            "Ditapis — tetapan harian. Silau pada skrin hilang, bilik masih terang, pemandangan luar masih ada sebahagiannya.",
+          open: "Terbuka — bilah berdiri tepi. Pada dasarnya macam tingkap tak bertutup, walaupun bidai masih di tempatnya.",
+        },
+      },
+      swatches: {
+        eyebrow: "Perpustakaan kemasan",
+        titleA: "Aluminium yang jujur,",
+        titleB: "kayu dan kayu palsu.",
+        dek: "Smoked oak dalam ruang baca, Brushed Alloy dalam studio berdinding kaca. Timbangkan kemasan itu bersama lantai, kabinet, dinding, perabot dan lampu anda — bukan berasingan.",
+      },
       why: {
         eyebrow: "Kenapa pilih bidai venetian",
         titleA: "Ada bidai yang beri anda dua pilihan.",
@@ -1362,6 +1422,36 @@ export const ms: Dict = {
         "Kova VertiSheer gabungkan kain sheer yang lembut dengan bilah menegak yang boleh dilaras, memberi anda kawalan fleksibel ke atas cahaya siang, privasi dan pemandangan luar — semuanya dalam satu sistem tingkap yang kemas.",
         "Direka khas untuk tingkap besar, pintu gelongsor dan dinding kaca, ia beri rupa yang lebih lembut dan anggun berbanding bidai menegak biasa sambil ruang kekal cerah dan senang digunakan. Setiap sistem dibuat ikut ukuran dan dipasang oleh pasukan kami sendiri.",
       ],
+      heroCaption:
+        "VertiSheer dalam Pivot Beige merentas pintu gelongsor balkoni — bilah dipusing lebih kurang 45°, lapisan sheer kelihatan di celahnya.",
+      designer: {
+        eyebrow: "Pusingkan bilah",
+        titleA: "Lebih daripada buka",
+        titleB: "atau tutup.",
+        dek: "Memusingkan bilah mengubah berapa banyak cahaya siang dan pemandangan yang masuk ke bilik — dan menariknya ke tepi membuka semula bukaan itu sepenuhnya. Cuba kedua-duanya di bawah.",
+        livePreview: "Pratonton langsung",
+        caption:
+          "Pratonton adalah ilustrasi. Rupa kain berbeza mengikut cahaya, tenunan dan waktu hari.",
+        angleLabel: "Pusingan bilah",
+        coverLabel: "Ditarik merentas",
+        coverSuffix: "% daripada bukaan",
+        fabricLabel: "Kain — koleksi Pivot",
+        presets: { sheer: "Cahaya sheer", partial: "Separa privasi", privacy: "Mod privasi" },
+        notes: {
+          sheer:
+            "Cahaya sheer — bilah dipusing terbuka. Cahaya menapis menerusi kain sheer dan pemandangan luar masih kekal.",
+          partial:
+            "Separa privasi — pemandangan masuk berkurang, cahaya siang kekal. Inilah tetapan kebanyakan ruang tamu kondo.",
+          privacy:
+            "Mod privasi — bahagian legap bertindih untuk liputan penuh, tapi ia masih nampak macam kain, bukan macam dinding.",
+        },
+      },
+      swatches: {
+        eyebrow: "Perpustakaan kain",
+        titleA: "Palet warna yang",
+        titleB: "tahu menjaga diri.",
+        dek: "Lima warna dalam koleksi Pivot. Timbangkan warnanya bersama lantai, warna dinding, perabot dan lampu anda — warna neutral beri rupa seni bina yang tenang, warna yang lebih hangat buat bilik rasa lebih lembut.",
+      },
       why: {
         eyebrow: "Kenapa pilih VertiSheer",
         titleA: "Di antara",

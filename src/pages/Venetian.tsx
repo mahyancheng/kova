@@ -1,85 +1,54 @@
-import { useEffect } from "react";
 import { useT } from "@/lib/i18n";
 import { PromoBar } from "@/components/PromoBar";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { StickyQuote } from "@/components/StickyQuote";
-import { ProductSpotlight } from "@/components/ProductSpotlight";
-import { ProductFabricStrip } from "@/components/ProductFabricStrip";
-import { VenetianSystem } from "@/components/VenetianSystem";
 import {
-  ProductCare,
-  ProductClock,
-  ProductClosing,
-  ProductFaq,
-  ProductMaterials,
-  ProductMotorised,
-  ProductPricing,
-  ProductRooms,
-  ProductSteps,
-} from "@/components/product/ProductSections";
-import { Configurator } from "@/components/Configurator";
-import { VenetianBlind } from "@/components/visuals/VenetianBlind";
-import { VENETIAN_FABRICS } from "@/lib/configurator/types";
-import { useConfigurator } from "@/lib/configurator/context";
+  Hero, Why, SwatchLibrary, Rooms, Price, Steps, Motorised, Care, Faq, Closing,
+} from "@/components/brochure/Sections";
+import { VenetianClock, VenetianMaterials } from "@/components/brochure/features";
+import { VenetianStage } from "@/components/brochure/designers";
+import { VenetianHeroArt } from "@/components/brochure/svg";
+import { VENETIAN_SWATCH_GROUPS } from "@/lib/brochure/data";
 
+/**
+ * Venetian Blinds — laid out to the client's supplied brochure mockup:
+ * hero, why (+ the four-hour clock strip), the 3D tilt stage, aluminium
+ * vs timber, finish library, rooms, price, process, motorisation, care,
+ * FAQ, quote.
+ */
 export function VenetianPage() {
   const t = useT();
-  const { setProduct } = useConfigurator();
-  const prod = t.products.venetian;
   const p = t.productPages.venetian;
-
-  useEffect(() => {
-    setProduct("venetian");
-  }, [setProduct]);
+  const c = t.productPages.common;
+  const prod = t.products.venetian;
 
   return (
     <div className="min-h-screen bg-[var(--color-cream)]">
       <PromoBar />
       <Nav />
-      <main id="main" className="pt-1">
-        <ProductSpotlight
-          id="venetian"
-          tone="paper"
-          number={prod.number}
-          name={prod.name}
+      <main id="main" className="brochure">
+        <Hero
+          n="01"
+          eyebrow={c.heroEyebrow}
           h1={p.h1}
-          taglineA={p.subhead}
-          taglineB=""
+          subhead={p.subhead}
           body={p.heroBody}
-          features={p.why.items.map((i) => ({
-            title: i.title,
-            detail: i.body,
-            bullets: i.bullets,
-          }))}
-          whyEyebrow={p.why.eyebrow}
-          whyTitleA={p.why.titleA}
-          whyTitleB={p.why.titleB}
-          whyDek={p.why.dek}
-          whyPipeline={p.why.pipeline}
-          perfectFor={prod.perfectFor}
-          detailCaption={prod.detailCaption}
-          Detail={VenetianBlind}
-          detailSrc="/showcase/white-venetian.webp"
+          caption={p.heroCaption}
+          art={<VenetianHeroArt label={p.heroCaption} />}
         />
-        <VenetianSystem />
-        <ProductClock tone="cream" data={p.clock} />
-        <ProductMaterials n="02" tone="paper" data={p.materials} />
-        <ProductFabricStrip
-          fabrics={VENETIAN_FABRICS}
-          eyebrow={t.fabrics.eyebrow}
-          title={`${prod.name} · ${t.fabrics.titleA} ${t.fabrics.titleB}`}
-          body={t.fabrics.intro}
-        />
-        <ProductRooms n="03" tone="paper" data={p.rooms} />
-        <ProductPricing n="04" tone="cream" data={p.price} />
-        <ProductSteps n="05" data={p.steps} />
-        <Configurator />
-        <ProductMotorised n="06" tone="paper" data={p.motorised} />
-        <ProductCare n="07" tone="cream" data={p.care} />
-        <ProductFaq n="08" tone="paper" data={p.faq} />
-        <ProductClosing
-          n="09"
+        <Why n="02" tone="paper" data={p.why} extra={<VenetianClock data={p.clock} />} />
+        <VenetianStage n="03" />
+        <VenetianMaterials n="04" data={p.materials} />
+        <SwatchLibrary n="05" tone="ground" data={p.swatches} groups={VENETIAN_SWATCH_GROUPS} />
+        <Rooms n="06" tone="paper" data={p.rooms} />
+        <Price n="07" tone="ground" data={p.price} />
+        <Steps n="08" data={p.steps} />
+        <Motorised n="09" tone="paper" data={p.motorised} />
+        <Care n="10" tone="ground" data={p.care} />
+        <Faq n="11" tone="paper" data={p.faq} />
+        <Closing
+          n="12"
           data={p.closing}
           waMessage={`Hi KOVA, I would like a quote for ${prod.name}.`}
         />
