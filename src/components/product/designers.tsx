@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/Reveal";
 import { useT } from "@/lib/i18n";
 import { useRoutes } from "@/lib/routes";
 import { useConfigurator } from "@/lib/configurator/context";
@@ -8,24 +10,62 @@ import {
   ROLLER_DEMO_FABRICS, VENETIAN_FINISHES, VERTISHEER_DEMO_FABRICS,
   shade, type RollerOpacityId, type VenetianMaterialId,
 } from "@/lib/brochure/data";
-import { Sec, Eyebrow, Title } from "./Sections";
+import { Sec, Head, type Tone } from "./sections";
 import { RollerDesignerPreview, VertiSheerDesignerPreview } from "./svg";
 
 /**
- * The per-page interactive demos from the client's HTML mockups.
+ * The per-page interactive demos.
  *
  * Roller and VertiSheer draw pure SVG, so their previews are declarative
  * and render server-side. The Venetian stage is real CSS 3D (each slat is
  * a rotateX'd element, with light bloom, shafts and dust derived from the
- * actual slat gap), so it stays imperative inside an effect — the same
- * maths as the mockup, with React owning the control state.
+ * actual slat gap), so it stays imperative inside an effect — the maths
+ * from the supplied mockup, with React owning the control state and
+ * styles/stage.css owning the 3D mechanics.
  *
  * "Quote this" hands the chosen configuration to the existing quote flow
- * (ConfiguratorProvider → Contact prefill) rather than dead-ending, so
- * these demos still produce leads the way the shared Configurator did.
+ * (ConfiguratorProvider → Contact prefill) so these still produce leads.
  */
 
-/** Link a brochure swatch to the photographic catalogue used by the quote flow. */
+/* ---------- shared control chrome, in the site's design system ---------- */
+
+const PANEL = "rounded-md border border-[var(--color-line)] bg-[var(--color-paper)] p-5 lg:p-6";
+const FIELD = "mt-6 first:mt-0";
+const OPT_BASE =
+  "px-3.5 py-2 rounded-md border text-[0.84rem] leading-tight text-left transition-colors cursor-pointer";
+const OPT_ON = "bg-[var(--color-ink)] border-[var(--color-ink)] text-[var(--color-cream)]";
+const OPT_OFF =
+  "bg-[var(--color-cream-light)] border-[var(--color-line)] text-[var(--color-ink-soft)] hover:border-[var(--color-ink)]";
+const SLIDER = "w-full accent-[var(--color-ink)]";
+const READOUT =
+  "mt-6 pt-4 border-t border-[var(--color-line)] flex flex-wrap items-baseline justify-between gap-3";
+const QUOTE_BTN =
+  "inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.86rem] lg:text-[0.9rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors";
+
+function Swatch({
+  hex, name, on, onClick,
+}: {
+  hex: string; name: string; on: boolean; onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      title={name}
+      aria-label={name}
+      aria-pressed={on}
+      onClick={onClick}
+      style={{ background: hex }}
+      className={cn(
+        "h-9 w-9 rounded-full border-2 transition-shadow",
+        on
+          ? "border-[var(--color-ink)] shadow-[0_0_0_3px_var(--color-paper),0_0_0_4px_var(--color-ink)]"
+          : "border-[var(--color-line)] hover:border-[var(--color-ink)]",
+      )}
+    />
+  );
+}
+
+/** Link a brochure swatch to the catalogue entry used by the quote flow. */
 function useQuoteThis() {
   const navigate = useNavigate();
   const r = useRoutes();
@@ -56,7 +96,7 @@ const ROLLER_OPACITY_TO_CONFIGURATOR: Record<RollerOpacityId, OpacityId> = {
   blackout: "blackout",
 };
 
-export function RollerDesigner({ n }: { n: string }) {
+export function RollerDesigner({ n, tone = "cream" }: { n: string; tone?: Tone }) {
   const t = useT();
   const d = t.productPages.roller.designer;
   const c = t.productPages.common;
@@ -69,124 +109,101 @@ export function RollerDesigner({ n }: { n: string }) {
 
   const fabrics = ROLLER_DEMO_FABRICS[op];
   const fab = fabrics[Math.min(fabIndex, fabrics.length - 1)]!;
-
-  const pickOpacity = (next: RollerOpacityId) => {
-    setOp(next);
-    // Mirrors the mockup: dim-out defaults to its second swatch, others to the first.
-    setFabIndex(next === "dimout" ? 1 : 0);
-  };
-
-  const typeLabels: Record<ProductId, string> = d.types;
-  const opLabels: Record<RollerOpacityId, string> = d.opacities;
+  const summary = `${d.types[type]} · ${fab.name} · ${d.opacities[op]}`;
 
   return (
-    <Sec id="design">
-      <Eyebrow n={n}>{d.eyebrow}</Eyebrow>
-      <div className="split" style={{ marginBottom: "clamp(24px,3.5vw,34px)" }}>
-        <div>
-          <Title a={d.titleA} b={d.titleB} />
-        </div>
-        <p className="dek" style={{ marginTop: 0 }}>
-          {d.dek}
-        </p>
-      </div>
+    <Sec id="design" tone={tone}>
+      <Head n={n} eyebrow={d.eyebrow} titleA={d.titleA} titleB={d.titleB} dek={d.dek} />
 
-      <div className="cfg">
-        <div className="panel">
-          <p className="fldlab">{d.livePreview}</p>
-          <div className="win">
-            <RollerDesignerPreview
-              type={type}
-              opacity={op}
-              hex={fab.hex}
-              drop={drop}
-              label={`${typeLabels[type]} · ${fab.name} · ${opLabels[op]}`}
-            />
+      <div className="grid lg:grid-cols-[1.15fr_.85fr] gap-5 lg:gap-8 items-start">
+        <Reveal>
+          <div className={PANEL}>
+            <p className="eyebrow">{d.livePreview}</p>
+            <div className="mt-3 rounded border border-[var(--color-line)] overflow-hidden aspect-[3/2]">
+              <RollerDesignerPreview type={type} opacity={op} hex={fab.hex} drop={drop} label={summary} />
+            </div>
+            <p className="mt-3 text-[0.78rem] text-[var(--color-muted)] leading-relaxed">{d.caption}</p>
           </div>
-          <p className="cap">{d.caption}</p>
-        </div>
+        </Reveal>
 
-        <div className="panel">
-          <div className="fld">
-            <p className="fldlab" id="lab-type">{d.typeLabel}</p>
-            <div className="opts" role="group" aria-labelledby="lab-type">
-              {(["roller", "venetian", "vertisheer"] as ProductId[]).map((id) => (
-                <button
-                  key={id}
-                  className="opt"
-                  type="button"
-                  aria-pressed={type === id}
-                  onClick={() => setType(id)}
-                >
-                  {typeLabels[id]}
-                </button>
-              ))}
+        <Reveal delay={80}>
+          <div className={PANEL}>
+            <div className={FIELD}>
+              <p className="eyebrow" id="lab-type">{d.typeLabel}</p>
+              <div className="mt-2.5 flex flex-wrap gap-2" role="group" aria-labelledby="lab-type">
+                {(["roller", "venetian", "vertisheer"] as ProductId[]).map((id) => (
+                  <button
+                    key={id}
+                    type="button"
+                    aria-pressed={type === id}
+                    onClick={() => setType(id)}
+                    className={cn(OPT_BASE, type === id ? OPT_ON : OPT_OFF)}
+                  >
+                    {d.types[id]}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={FIELD}>
+              <p className="eyebrow" id="lab-op">{d.opacityLabel}</p>
+              <div className="mt-2.5 flex flex-wrap gap-2" role="group" aria-labelledby="lab-op">
+                {(["sunscreen", "dimout", "blackout"] as RollerOpacityId[]).map((id) => (
+                  <button
+                    key={id}
+                    type="button"
+                    aria-pressed={op === id}
+                    onClick={() => {
+                      setOp(id);
+                      // Mirrors the mockup: dim-out defaults to its second swatch.
+                      setFabIndex(id === "dimout" ? 1 : 0);
+                    }}
+                    className={cn(OPT_BASE, op === id ? OPT_ON : OPT_OFF)}
+                  >
+                    {d.opacities[id]}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={FIELD}>
+              <p className="eyebrow" id="lab-fab">{d.fabricLabel}</p>
+              <div className="mt-2.5 flex flex-wrap gap-2.5" role="group" aria-labelledby="lab-fab">
+                {fabrics.map((f, i) => (
+                  <Swatch key={f.name} hex={f.hex} name={f.name} on={f.name === fab.name} onClick={() => setFabIndex(i)} />
+                ))}
+              </div>
+            </div>
+
+            <div className={FIELD}>
+              <label className="eyebrow block" htmlFor="roller-drop">
+                {d.dropLabel} — {drop}
+                {d.dropSuffix}
+              </label>
+              <input
+                className={cn(SLIDER, "mt-2.5")}
+                type="range"
+                id="roller-drop"
+                min={10}
+                max={100}
+                step={5}
+                value={drop}
+                onChange={(e) => setDrop(parseInt(e.target.value, 10))}
+              />
+            </div>
+
+            <div className={READOUT}>
+              <b className="font-serif text-[1.02rem] font-normal tracking-tight text-[var(--color-ink)]">{summary}</b>
+              <button
+                type="button"
+                className={QUOTE_BTN}
+                onClick={() => quoteThis(type, fab.configuratorName, ROLLER_OPACITY_TO_CONFIGURATOR[op])}
+              >
+                {c.quoteThis} <span aria-hidden>→</span>
+              </button>
             </div>
           </div>
-
-          <div className="fld">
-            <p className="fldlab" id="lab-op">{d.opacityLabel}</p>
-            <div className="opts" role="group" aria-labelledby="lab-op">
-              {(["sunscreen", "dimout", "blackout"] as RollerOpacityId[]).map((id) => (
-                <button
-                  key={id}
-                  className="opt"
-                  type="button"
-                  aria-pressed={op === id}
-                  onClick={() => pickOpacity(id)}
-                >
-                  {opLabels[id]}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="fld">
-            <p className="fldlab" id="lab-fab">{d.fabricLabel}</p>
-            <div className="swrow" role="group" aria-labelledby="lab-fab">
-              {fabrics.map((f, i) => (
-                <button
-                  key={f.name}
-                  type="button"
-                  className="swbtn"
-                  style={{ background: f.hex }}
-                  title={f.name}
-                  aria-label={f.name}
-                  aria-pressed={f.name === fab.name}
-                  onClick={() => setFabIndex(i)}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="fld">
-            <label className="fldlab" htmlFor="roller-drop">
-              {d.dropLabel} — <span>{drop}</span>
-              {d.dropSuffix}
-            </label>
-            <input
-              className="slider"
-              type="range"
-              id="roller-drop"
-              min={10}
-              max={100}
-              step={5}
-              value={drop}
-              onChange={(e) => setDrop(parseInt(e.target.value, 10))}
-            />
-          </div>
-
-          <div className="readout">
-            <b>{`${typeLabels[type]} · ${fab.name} · ${opLabels[op]}`}</b>
-            <button
-              type="button"
-              className="btn"
-              onClick={() => quoteThis(type, fab.configuratorName, ROLLER_OPACITY_TO_CONFIGURATOR[op])}
-            >
-              {c.quoteThis} <span className="ar" aria-hidden="true">→</span>
-            </button>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </Sec>
   );
@@ -196,7 +213,7 @@ export function RollerDesigner({ n }: { n: string }) {
  * VertiSheer — vane rotation + draw-across
  * ================================================================== */
 
-export function VertiSheerDesigner({ n }: { n: string }) {
+export function VertiSheerDesigner({ n, tone = "cream" }: { n: string; tone?: Tone }) {
   const t = useT();
   const d = t.productPages.vertisheer.designer;
   const c = t.productPages.common;
@@ -209,111 +226,94 @@ export function VertiSheerDesigner({ n }: { n: string }) {
   const fab = VERTISHEER_DEMO_FABRICS[fabIndex]!;
   const deg = Math.round(8 + (angle / 100) * 82);
   const note = angle <= 25 ? d.notes.sheer : angle <= 70 ? d.notes.partial : d.notes.privacy;
-  const presets: { key: keyof typeof d.presets; a: number; on: boolean }[] = [
-    { key: "sheer", a: 6, on: angle <= 25 },
-    { key: "partial", a: 50, on: angle > 25 && angle <= 70 },
-    { key: "privacy", a: 100, on: angle > 70 },
+  const summary = `VertiSheer · ${fab.name} · ${deg}°`;
+  const presets = [
+    { key: "sheer" as const, a: 6, on: angle <= 25 },
+    { key: "partial" as const, a: 50, on: angle > 25 && angle <= 70 },
+    { key: "privacy" as const, a: 100, on: angle > 70 },
   ];
 
   return (
-    <Sec id="demo">
-      <Eyebrow n={n}>{d.eyebrow}</Eyebrow>
-      <div className="split" style={{ marginBottom: "clamp(24px,3.5vw,36px)" }}>
-        <div>
-          <Title a={d.titleA} b={d.titleB} />
-        </div>
-        <p className="dek" style={{ marginTop: 0 }}>
-          {d.dek}
-        </p>
-      </div>
+    <Sec id="demo" tone={tone}>
+      <Head n={n} eyebrow={d.eyebrow} titleA={d.titleA} titleB={d.titleB} dek={d.dek} />
 
-      <div className="demo">
-        <div className="panel">
-          <p className="fldlab">{d.livePreview}</p>
-          <div className="win">
-            <VertiSheerDesignerPreview
-              hex={fab.hex}
-              angle={angle}
-              cover={cover}
-              label={`VertiSheer · ${fab.name} · ${deg}°`}
-            />
-          </div>
-          <p className="cap">{d.caption}</p>
-        </div>
-
-        <div className="panel">
-          <div className="fld">
-            <label className="fldlab" htmlFor="vs-angle">
-              {d.angleLabel} — <span>{deg}</span>°
-            </label>
-            <input
-              className="slider"
-              type="range"
-              id="vs-angle"
-              min={0}
-              max={100}
-              step={1}
-              value={angle}
-              onChange={(e) => setAngle(parseInt(e.target.value, 10))}
-            />
-            <div className="opts" style={{ marginTop: 12 }}>
-              {presets.map((p) => (
-                <button
-                  key={p.key}
-                  className="opt"
-                  type="button"
-                  aria-pressed={p.on}
-                  onClick={() => setAngle(p.a)}
-                >
-                  {d.presets[p.key]}
-                </button>
-              ))}
+      <div className="grid lg:grid-cols-[1.2fr_.8fr] gap-5 lg:gap-8 items-start">
+        <Reveal>
+          <div className={PANEL}>
+            <p className="eyebrow">{d.livePreview}</p>
+            <div className="mt-3 rounded border border-[var(--color-line)] overflow-hidden aspect-[9/5]">
+              <VertiSheerDesignerPreview hex={fab.hex} angle={angle} cover={cover} label={summary} />
             </div>
-            <p className="modenote">{note}</p>
+            <p className="mt-3 text-[0.78rem] text-[var(--color-muted)] leading-relaxed">{d.caption}</p>
           </div>
+        </Reveal>
 
-          <div className="fld">
-            <label className="fldlab" htmlFor="vs-cover">
-              {d.coverLabel} — <span>{cover}</span>
-              {d.coverSuffix}
-            </label>
-            <input
-              className="slider"
-              type="range"
-              id="vs-cover"
-              min={15}
-              max={100}
-              step={5}
-              value={cover}
-              onChange={(e) => setCover(parseInt(e.target.value, 10))}
-            />
-          </div>
+        <Reveal delay={80}>
+          <div className={PANEL}>
+            <div className={FIELD}>
+              <label className="eyebrow block" htmlFor="vs-angle">
+                {d.angleLabel} — {deg}°
+              </label>
+              <input
+                className={cn(SLIDER, "mt-2.5")}
+                type="range"
+                id="vs-angle"
+                min={0}
+                max={100}
+                step={1}
+                value={angle}
+                onChange={(e) => setAngle(parseInt(e.target.value, 10))}
+              />
+              <div className="mt-3 flex flex-wrap gap-2">
+                {presets.map((p) => (
+                  <button
+                    key={p.key}
+                    type="button"
+                    aria-pressed={p.on}
+                    onClick={() => setAngle(p.a)}
+                    className={cn(OPT_BASE, p.on ? OPT_ON : OPT_OFF)}
+                  >
+                    {d.presets[p.key]}
+                  </button>
+                ))}
+              </div>
+              <p className="mt-3 text-[0.84rem] leading-relaxed text-[var(--color-muted)] min-h-[3.2em]">{note}</p>
+            </div>
 
-          <div className="fld">
-            <p className="fldlab" id="lab-vsfab">{d.fabricLabel}</p>
-            <div className="swrow" role="group" aria-labelledby="lab-vsfab">
-              {VERTISHEER_DEMO_FABRICS.map((f, i) => (
-                <button
-                  key={f.name}
-                  type="button"
-                  className="swbtn"
-                  style={{ background: f.hex }}
-                  title={f.name}
-                  aria-label={f.name}
-                  aria-pressed={i === fabIndex}
-                  onClick={() => setFabIndex(i)}
-                />
-              ))}
+            <div className={FIELD}>
+              <label className="eyebrow block" htmlFor="vs-cover">
+                {d.coverLabel} — {cover}
+                {d.coverSuffix}
+              </label>
+              <input
+                className={cn(SLIDER, "mt-2.5")}
+                type="range"
+                id="vs-cover"
+                min={15}
+                max={100}
+                step={5}
+                value={cover}
+                onChange={(e) => setCover(parseInt(e.target.value, 10))}
+              />
+            </div>
+
+            <div className={FIELD}>
+              <p className="eyebrow" id="lab-vsfab">{d.fabricLabel}</p>
+              <div className="mt-2.5 flex flex-wrap gap-2.5" role="group" aria-labelledby="lab-vsfab">
+                {VERTISHEER_DEMO_FABRICS.map((f, i) => (
+                  <Swatch key={f.name} hex={f.hex} name={f.name} on={i === fabIndex} onClick={() => setFabIndex(i)} />
+                ))}
+              </div>
+            </div>
+
+            <div className={READOUT}>
+              <b className="font-serif text-[1.02rem] font-normal tracking-tight text-[var(--color-ink)]">{summary}</b>
+              <button type="button" className={QUOTE_BTN} onClick={() => quoteThis("vertisheer", fab.configuratorName)}>
+                {c.quoteThis} <span aria-hidden>→</span>
+              </button>
             </div>
           </div>
-
-          <div className="readout">
-            <b>{`VertiSheer · ${fab.name} · ${deg}°`}</b>
-            <button type="button" className="btn" onClick={() => quoteThis("vertisheer", fab.configuratorName)}>
-              {c.quoteThis} <span className="ar" aria-hidden="true">→</span>
-            </button>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </Sec>
   );
@@ -387,7 +387,7 @@ function StageScene() {
   );
 }
 
-export function VenetianStage({ n }: { n: string }) {
+export function VenetianStage({ n, tone = "cream" }: { n: string; tone?: Tone }) {
   const t = useT();
   const d = t.productPages.venetian.designer;
   const c = t.productPages.common;
@@ -420,6 +420,7 @@ export function VenetianStage({ n }: { n: string }) {
 
   const deg = 6 + (tilt / 100) * 78; // 6° closed → 84° edge-on
   const shown = Math.round(90 - deg);
+  const summary = `${d.materials[mat]} · ${fin.name} · ${shown}°`;
 
   /* dust in the light — built once */
   useEffect(() => {
@@ -441,7 +442,6 @@ export function VenetianStage({ n }: { n: string }) {
     }
   }, []);
 
-  /* paint — the mockup's paint(), re-run whenever a control changes */
   const paint = useCallback(() => {
     const st = stage.current, box = slatbox.current;
     if (!st || !box) return;
@@ -488,14 +488,14 @@ export function VenetianStage({ n }: { n: string }) {
     for (let i = 0; i < count; i++) {
       const s = slatEls.current[i];
       if (!s) continue;
-      const stackedSlat = i < stacked;
-      const y = stackedSlat ? top + i * stackPitch : runTop + (i - stacked) * pitch;
+      const isStacked = i < stacked;
+      const y = isStacked ? top + i * stackPitch : runTop + (i - stacked) * pitch;
       s.el.style.height = `${slatH}px`;
       s.el.style.top = `${y}px`;
-      s.el.style.transform = `rotateX(${stackedSlat ? 80 : deg}deg)`;
+      s.el.style.transform = `rotateX(${isStacked ? 80 : deg}deg)`;
       s.el.style.background = wood ? face + grain : face;
       s.el.style.backgroundBlendMode = wood ? "multiply" : "normal";
-      s.lit.style.opacity = (stackedSlat ? 0.12 : litOp).toFixed(3);
+      s.lit.style.opacity = (isStacked ? 0.12 : litOp).toFixed(3);
     }
 
     const railTop = runTop + lowered * pitch;
@@ -537,10 +537,7 @@ export function VenetianStage({ n }: { n: string }) {
         `repeating-linear-gradient(to bottom,rgba(${S.beam},.6) 0px,rgba(${S.beam},.6) ${Math.max(1, gap * 0.8).toFixed(1)}px,` +
         `rgba(${S.beam},0) ${Math.max(1.4, gap * 1.5).toFixed(1)}px,rgba(${S.beam},0) ${pitch.toFixed(1)}px)`;
       shafts.current.style.transform = `rotate(${S.rake}deg)`;
-      shafts.current.style.opacity = Math.max(
-        0,
-        S.strength * 0.6 * Math.sin(Math.min(1, gapFrac * 1.22) * Math.PI),
-      ).toFixed(3);
+      shafts.current.style.opacity = Math.max(0, S.strength * 0.6 * Math.sin(Math.min(1, gapFrac * 1.22) * Math.PI)).toFixed(3);
     }
     if (flare.current) {
       const fp = S.flare.split(",");
@@ -565,7 +562,6 @@ export function VenetianStage({ n }: { n: string }) {
 
   useEffect(() => { paint(); }, [paint]);
 
-  /* re-measure on resize */
   useEffect(() => {
     const st = stage.current;
     if (!st) return;
@@ -579,7 +575,6 @@ export function VenetianStage({ n }: { n: string }) {
     return () => window.removeEventListener("resize", onResize);
   }, [paint]);
 
-  /* autoplay the tilt once the stage scrolls into view */
   const timers = useRef<number[]>([]);
   const stopPlay = useCallback(() => {
     timers.current.forEach((id) => window.clearTimeout(id));
@@ -592,7 +587,6 @@ export function VenetianStage({ n }: { n: string }) {
       timers.current.push(window.setTimeout(() => setTilt(value), delay));
     });
   }, [stopPlay]);
-
   const userTook = useCallback(() => { stopPlay(); setHintGone(true); }, [stopPlay]);
 
   useEffect(() => {
@@ -611,7 +605,6 @@ export function VenetianStage({ n }: { n: string }) {
     return () => { io.disconnect(); stopPlay(); };
   }, [play, stopPlay]);
 
-  /* drag to tilt */
   const dragging = useRef(false);
   const lastY = useRef(0);
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -633,182 +626,182 @@ export function VenetianStage({ n }: { n: string }) {
   };
 
   const note = tilt <= 20 ? d.notes.closed : tilt <= 80 ? d.notes.filtered : d.notes.open;
-  const presets: { key: keyof typeof d.presets; t: number; on: boolean }[] = [
-    { key: "open", t: 100, on: tilt > 80 },
-    { key: "filtered", t: 55, on: tilt > 20 && tilt <= 80 },
-    { key: "closed", t: 0, on: tilt <= 20 },
+  const presets = [
+    { key: "open" as const, t: 100, on: tilt > 80 },
+    { key: "filtered" as const, t: 55, on: tilt > 20 && tilt <= 80 },
+    { key: "closed" as const, t: 0, on: tilt <= 20 },
   ];
 
   return (
-    <Sec id="demo">
-      <Eyebrow n={n}>{d.eyebrow}</Eyebrow>
-      <div className="split" style={{ marginBottom: "clamp(24px,3.5vw,36px)" }}>
-        <div>
-          <Title a={d.titleA} b={d.titleB} />
-        </div>
-        <p className="dek" style={{ marginTop: 0 }}>
-          {d.dek}
-        </p>
-      </div>
+    <Sec id="demo" tone={tone}>
+      <Head n={n} eyebrow={d.eyebrow} titleA={d.titleA} titleB={d.titleB} dek={d.dek} />
 
-      <div className="demo">
-        <div className="panel">
-          <div className="stagehead">
-            <p className="fldlab" style={{ margin: 0 }}>{d.livePreview}</p>
-            <p className={`draghint${hintGone ? " gone" : ""}`}>{d.dragHint}</p>
-          </div>
-
-          <div
-            className="stage"
-            ref={stage}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={endDrag}
-            onPointerCancel={endDrag}
-            onPointerLeave={endDrag}
-          >
-            <StageScene />
-            <div className="flare" ref={flare} />
-            <div className="daylight" ref={daylight} />
-            <div className="blind">
-              <div className="headrail" ref={headrail} />
-              <div className="slatbox" ref={slatbox} />
-              <div className="btmrail" ref={btmrail} />
-              <div className="cord" ref={cordL} />
-              <div className="cord" ref={cordR} />
+      <div className="grid lg:grid-cols-[1.2fr_.8fr] gap-5 lg:gap-8 items-start">
+        <Reveal>
+          <div className={PANEL}>
+            <div className="flex items-baseline justify-between gap-3">
+              <p className="eyebrow">{d.livePreview}</p>
+              <p
+                className={cn(
+                  "text-[0.62rem] tracking-[0.14em] uppercase text-[var(--color-muted)] transition-opacity duration-500",
+                  hintGone && "opacity-0",
+                )}
+              >
+                {d.dragHint}
+              </p>
             </div>
-            <div className="bloom" ref={bloom} />
-            <div className="shafts" ref={shafts} />
-            <div className="motes" ref={motes} />
-            <div className="vig" />
-            <div className="frame" />
-            <div className="warmth" ref={warmth} />
-          </div>
 
-          <div className="stagebar">
-            <button className="ghostbtn" type="button" onClick={() => { setHintGone(true); play(); }}>
-              {d.replay}
-            </button>
-          </div>
-          <p className="cap">{d.caption}</p>
-        </div>
-
-        <div className="panel">
-          <div className="fld">
-            <p className="fldlab" id="lab-mat">{d.materialLabel}</p>
-            <div className="opts" role="group" aria-labelledby="lab-mat">
-              {(["alu", "wood"] as VenetianMaterialId[]).map((id) => (
-                <button
-                  key={id}
-                  className="opt"
-                  type="button"
-                  aria-pressed={mat === id}
-                  onClick={() => {
-                    setMat(id);
-                    setFinIndex(id === "wood" ? 3 : 0);
-                    userTook();
-                  }}
-                >
-                  {d.materials[id]}
-                  <small>{d.materialSubs[id]}</small>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="fld">
-            <p className="fldlab" id="lab-sun">{d.daylightLabel}</p>
-            <div className="opts" role="group" aria-labelledby="lab-sun">
-              {(["morning", "midday", "golden", "dusk"] as SunId[]).map((id) => (
-                <button
-                  key={id}
-                  className="opt"
-                  type="button"
-                  aria-pressed={sun === id}
-                  onClick={() => { setSun(id); userTook(); }}
-                >
-                  {d.daylights[id]}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="fld">
-            <label className="fldlab" htmlFor="ven-tilt">
-              {d.tiltLabel} — <span>{shown}</span>°
-            </label>
-            <input
-              className="slider"
-              type="range"
-              id="ven-tilt"
-              min={0}
-              max={100}
-              step={1}
-              value={tilt}
-              onChange={(e) => { userTook(); setTilt(parseInt(e.target.value, 10)); }}
-            />
-            <div className="opts" style={{ marginTop: 12 }}>
-              {presets.map((p) => (
-                <button
-                  key={p.key}
-                  className="opt"
-                  type="button"
-                  aria-pressed={p.on}
-                  onClick={() => { userTook(); setTilt(p.t); }}
-                >
-                  {d.presets[p.key]}
-                </button>
-              ))}
-            </div>
-            <p className="modenote">{note}</p>
-          </div>
-
-          <div className="fld">
-            <label className="fldlab" htmlFor="ven-drop">
-              {d.dropLabel} — <span>{drop}</span>
-              {d.dropSuffix}
-            </label>
-            <input
-              className="slider"
-              type="range"
-              id="ven-drop"
-              min={15}
-              max={100}
-              step={5}
-              value={drop}
-              onChange={(e) => { userTook(); setDrop(parseInt(e.target.value, 10)); }}
-            />
-          </div>
-
-          <div className="fld">
-            <p className="fldlab" id="lab-fin">{d.finishLabel}</p>
-            <div className="swrow" role="group" aria-labelledby="lab-fin">
-              {finishes.map((f, i) => (
-                <button
-                  key={f.name}
-                  type="button"
-                  className="swbtn"
-                  style={{ background: f.hex }}
-                  title={f.name}
-                  aria-label={f.name}
-                  aria-pressed={i === finIndex}
-                  onClick={() => { setFinIndex(i); userTook(); }}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="readout">
-            <b>{`${d.materials[mat]} · ${fin.name} · ${shown}°`}</b>
-            <button
-              type="button"
-              className="btn"
-              onClick={() => quoteThis("venetian", "configuratorName" in fin ? fin.configuratorName : undefined)}
+            <div
+              className="stage3d mt-3 rounded border border-[var(--color-line)]"
+              ref={stage}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={endDrag}
+              onPointerCancel={endDrag}
+              onPointerLeave={endDrag}
             >
-              {c.quoteThis} <span className="ar" aria-hidden="true">→</span>
-            </button>
+              <StageScene />
+              <div className="flare" ref={flare} />
+              <div className="daylight" ref={daylight} />
+              <div className="blind">
+                <div className="headrail" ref={headrail} />
+                <div className="slatbox" ref={slatbox} />
+                <div className="btmrail" ref={btmrail} />
+                <div className="cord" ref={cordL} />
+                <div className="cord" ref={cordR} />
+              </div>
+              <div className="bloom" ref={bloom} />
+              <div className="shafts" ref={shafts} />
+              <div className="motes" ref={motes} />
+              <div className="vig" />
+              <div className="frame" />
+              <div className="warmth" ref={warmth} />
+            </div>
+
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => { setHintGone(true); play(); }}
+                className="px-3.5 py-1.5 rounded-full border border-[var(--color-line)] text-[0.78rem] text-[var(--color-muted)] hover:border-[var(--color-ink)] hover:text-[var(--color-ink)] transition-colors"
+              >
+                {d.replay}
+              </button>
+            </div>
+            <p className="mt-3 text-[0.78rem] text-[var(--color-muted)] leading-relaxed">{d.caption}</p>
           </div>
-        </div>
+        </Reveal>
+
+        <Reveal delay={80}>
+          <div className={PANEL}>
+            <div className={FIELD}>
+              <p className="eyebrow" id="lab-mat">{d.materialLabel}</p>
+              <div className="mt-2.5 flex flex-wrap gap-2" role="group" aria-labelledby="lab-mat">
+                {(["alu", "wood"] as VenetianMaterialId[]).map((id) => (
+                  <button
+                    key={id}
+                    type="button"
+                    aria-pressed={mat === id}
+                    onClick={() => { setMat(id); setFinIndex(id === "wood" ? 3 : 0); userTook(); }}
+                    className={cn(OPT_BASE, mat === id ? OPT_ON : OPT_OFF)}
+                  >
+                    {d.materials[id]}
+                    <span className="block text-[0.7rem] opacity-65">{d.materialSubs[id]}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={FIELD}>
+              <p className="eyebrow" id="lab-sun">{d.daylightLabel}</p>
+              <div className="mt-2.5 flex flex-wrap gap-2" role="group" aria-labelledby="lab-sun">
+                {(["morning", "midday", "golden", "dusk"] as SunId[]).map((id) => (
+                  <button
+                    key={id}
+                    type="button"
+                    aria-pressed={sun === id}
+                    onClick={() => { setSun(id); userTook(); }}
+                    className={cn(OPT_BASE, sun === id ? OPT_ON : OPT_OFF)}
+                  >
+                    {d.daylights[id]}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className={FIELD}>
+              <label className="eyebrow block" htmlFor="ven-tilt">
+                {d.tiltLabel} — {shown}°
+              </label>
+              <input
+                className={cn(SLIDER, "mt-2.5")}
+                type="range"
+                id="ven-tilt"
+                min={0}
+                max={100}
+                step={1}
+                value={tilt}
+                onChange={(e) => { userTook(); setTilt(parseInt(e.target.value, 10)); }}
+              />
+              <div className="mt-3 flex flex-wrap gap-2">
+                {presets.map((p) => (
+                  <button
+                    key={p.key}
+                    type="button"
+                    aria-pressed={p.on}
+                    onClick={() => { userTook(); setTilt(p.t); }}
+                    className={cn(OPT_BASE, p.on ? OPT_ON : OPT_OFF)}
+                  >
+                    {d.presets[p.key]}
+                  </button>
+                ))}
+              </div>
+              <p className="mt-3 text-[0.84rem] leading-relaxed text-[var(--color-muted)] min-h-[3.2em]">{note}</p>
+            </div>
+
+            <div className={FIELD}>
+              <label className="eyebrow block" htmlFor="ven-drop">
+                {d.dropLabel} — {drop}
+                {d.dropSuffix}
+              </label>
+              <input
+                className={cn(SLIDER, "mt-2.5")}
+                type="range"
+                id="ven-drop"
+                min={15}
+                max={100}
+                step={5}
+                value={drop}
+                onChange={(e) => { userTook(); setDrop(parseInt(e.target.value, 10)); }}
+              />
+            </div>
+
+            <div className={FIELD}>
+              <p className="eyebrow" id="lab-fin">{d.finishLabel}</p>
+              <div className="mt-2.5 flex flex-wrap gap-2.5" role="group" aria-labelledby="lab-fin">
+                {finishes.map((f, i) => (
+                  <Swatch
+                    key={f.name}
+                    hex={f.hex}
+                    name={f.name}
+                    on={i === finIndex}
+                    onClick={() => { setFinIndex(i); userTook(); }}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className={READOUT}>
+              <b className="font-serif text-[1.02rem] font-normal tracking-tight text-[var(--color-ink)]">{summary}</b>
+              <button
+                type="button"
+                className={QUOTE_BTN}
+                onClick={() => quoteThis("venetian", "configuratorName" in fin ? fin.configuratorName : undefined)}
+              >
+                {c.quoteThis} <span aria-hidden>→</span>
+              </button>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </Sec>
   );

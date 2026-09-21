@@ -2,22 +2,17 @@ import type { ReactElement } from "react";
 import { shade } from "@/lib/brochure/data";
 
 /**
- * Drawn artwork for the brochure pages.
+ * Drawn artwork for the product pages.
  *
- * Only the interactive previews are drawn — they have to redraw as the
- * visitor moves a slider, which a photograph cannot do. Every static
- * window on these pages uses real product photography instead (see
- * components/brochure/photo.tsx).
+ * Only the interactive previews are drawn — they redraw as the visitor
+ * moves a slider, which a photograph cannot do. Every static window on
+ * these pages uses real product photography instead.
  *
- * The maths is the mockups' own (`vanes()`, `draw()`), converted from
- * imperative createElementNS into declarative JSX so the preview renders
- * server-side. Geometry constants are deliberately kept verbatim —
- * changing them changes the drawing.
+ * The maths is the supplied mockups' own (`vanes()`, `draw()`), converted
+ * from imperative createElementNS into declarative JSX so the preview
+ * renders server-side. Geometry constants are kept verbatim — changing
+ * them changes the drawing.
  */
-
-/* ------------------------------------------------------------------ *
- * VertiSheer vanes
- * ------------------------------------------------------------------ */
 
 export type VaneOpts = {
   x0: number; y0: number; W: number; H: number;
@@ -131,13 +126,11 @@ export function RollerDesignerPreview({
       x += bandW + bg;
       i++;
     }
-    body.push(
-      <rect key="hem" x={RX} y={RY + cover - 6} width={RW} height={6} fill={shade(hex, 0.75)} fillOpacity=".7" />,
-    );
+    body.push(<rect key="hem" x={RX} y={RY + cover - 6} width={RW} height={6} fill={shade(hex, 0.75)} fillOpacity=".7" />);
   }
 
   return (
-    <svg viewBox="0 0 720 480" role="img" aria-label={label}>
+    <svg viewBox="0 0 720 480" role="img" aria-label={label} className="block w-full h-full">
       <defs>
         <linearGradient id="pvsky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#CFE0E4" /><stop offset=".6" stopColor="#E6E2D3" /><stop offset="1" stopColor="#EFD9B8" />
@@ -178,7 +171,7 @@ export function VertiSheerDesignerPreview({
   hex: string; angle: number; cover: number; label: string;
 }) {
   return (
-    <svg viewBox="0 0 900 520" role="img" aria-label={label}>
+    <svg viewBox="0 0 900 520" role="img" aria-label={label} className="block w-full h-full">
       <defs>
         <linearGradient id="vssky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#CFE0E4" /><stop offset=".6" stopColor="#E6E2D3" /><stop offset="1" stopColor="#EFD9B8" />
@@ -195,11 +188,7 @@ export function VertiSheerDesignerPreview({
         </g>
         <g stroke="#CBC4B2" strokeWidth="5" opacity=".75"><path d="M450 46v420M60 260h780" /></g>
         <rect x="60" y="46" width="780" height="420" fill="#E4DCCB" opacity={(0.2 + (cover / 100) * 0.22).toFixed(3)} />
-        <rect
-          x="60" y="46" width="780" height="420"
-          fill="#2A2622"
-          opacity={((angle / 100) * 0.18 * (cover / 100)).toFixed(3)}
-        />
+        <rect x="60" y="46" width="780" height="420" fill="#2A2622" opacity={((angle / 100) * 0.18 * (cover / 100)).toFixed(3)} />
         <g>{vaneRects({ x0: 60, y0: 46, W: 780, H: 420, col: hex, a: angle, cov: cover, n: 13 })}</g>
       </g>
       <g fill="none" stroke="#D6CFBB" strokeWidth="10"><rect x="55" y="41" width="790" height="430" /></g>

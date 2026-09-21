@@ -5,16 +5,14 @@ import { Footer } from "@/components/Footer";
 import { StickyQuote } from "@/components/StickyQuote";
 import {
   Hero, Why, SwatchLibrary, Rooms, Price, Steps, Motorised, Care, Faq, Closing,
-} from "@/components/brochure/Sections";
-import { RollerFabricGuide } from "@/components/brochure/features";
-import { RollerDesigner } from "@/components/brochure/designers";
-import { WinPhoto } from "@/components/brochure/photo";
+} from "@/components/product/sections";
+import { RollerFabricGuide } from "@/components/product/features";
+import { RollerDesigner } from "@/components/product/designers";
 import { HERO_PHOTOS, ROLLER_SWATCH_GROUPS } from "@/lib/brochure/data";
 
 /**
- * Roller Blinds — laid out to the client's supplied brochure mockup:
- * hero, why, fabric comparison, swatch library, rooms, price, process,
- * designer, motorisation, care, FAQ, quote.
+ * Roller Blinds. Content follows the client's brochure; presentation uses
+ * the site's own design system, the same one the home page uses.
  */
 export function RollerPage() {
   const t = useT();
@@ -26,38 +24,27 @@ export function RollerPage() {
     <div className="min-h-screen bg-[var(--color-cream)]">
       <PromoBar />
       <Nav />
-      <main id="main" className="brochure">
+      <main id="main">
         <Hero
           n="01"
           eyebrow={c.heroEyebrow}
           h1={p.h1}
           subhead={p.subhead}
           body={p.heroBody}
+          photo={HERO_PHOTOS.roller}
           caption={p.heroCaption}
-          art={
-            <WinPhoto
-              src={HERO_PHOTOS.roller.src}
-              srcSet={HERO_PHOTOS.roller.srcSet}
-              alt={p.heroCaption}
-              priority
-            />
-          }
         />
-        <Why n="02" tone="paper" data={p.why} />
-        <RollerFabricGuide n="03" data={p.fabricGuide} />
-        <SwatchLibrary n="04" tone="paper" data={p.swatches} groups={ROLLER_SWATCH_GROUPS} />
-        <Rooms n="05" tone="ground" data={p.rooms} />
-        <Price n="06" tone="paper" data={p.price} />
+        <Why n="02" tone="band" data={p.why} />
+        <RollerFabricGuide n="03" tone="cream" data={p.fabricGuide} />
+        <SwatchLibrary n="04" tone="band" data={p.swatches} groups={ROLLER_SWATCH_GROUPS} />
+        <Rooms n="05" tone="cream" data={p.rooms} />
+        <Price n="06" tone="band" data={p.price} />
         <Steps n="07" data={p.steps} />
-        <RollerDesigner n="08" />
-        <Motorised n="09" tone="paper" data={p.motorised} />
-        <Care n="10" tone="ground" data={p.care} />
-        <Faq n="11" tone="paper" data={p.faq} />
-        <Closing
-          n="12"
-          data={p.closing}
-          waMessage={`Hi KOVA, I would like a quote for ${prod.name}.`}
-        />
+        <RollerDesigner n="08" tone="cream" />
+        <Motorised n="09" tone="band" data={p.motorised} />
+        <Care n="10" tone="cream" data={p.care} />
+        <Faq n="11" tone="band" data={p.faq} />
+        <Closing n="12" data={p.closing} waMessage={`Hi KOVA, I would like a quote for ${prod.name}.`} />
       </main>
       <Footer />
       <StickyQuote />

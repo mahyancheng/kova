@@ -5,17 +5,14 @@ import { Footer } from "@/components/Footer";
 import { StickyQuote } from "@/components/StickyQuote";
 import {
   Hero, Why, SwatchLibrary, Rooms, Price, Steps, Motorised, Care, Faq, Closing,
-} from "@/components/brochure/Sections";
-import { VenetianClock, VenetianMaterials } from "@/components/brochure/features";
-import { VenetianStage } from "@/components/brochure/designers";
-import { WinPhoto } from "@/components/brochure/photo";
+} from "@/components/product/sections";
+import { VenetianClock, VenetianMaterials } from "@/components/product/features";
+import { VenetianStage } from "@/components/product/designers";
 import { HERO_PHOTOS, VENETIAN_SWATCH_GROUPS } from "@/lib/brochure/data";
 
 /**
- * Venetian Blinds — laid out to the client's supplied brochure mockup:
- * hero, why (+ the four-hour clock strip), the 3D tilt stage, aluminium
- * vs timber, finish library, rooms, price, process, motorisation, care,
- * FAQ, quote.
+ * Venetian Blinds. Content follows the client's brochure; presentation
+ * uses the site's own design system, the same one the home page uses.
  */
 export function VenetianPage() {
   const t = useT();
@@ -27,38 +24,27 @@ export function VenetianPage() {
     <div className="min-h-screen bg-[var(--color-cream)]">
       <PromoBar />
       <Nav />
-      <main id="main" className="brochure">
+      <main id="main">
         <Hero
           n="01"
           eyebrow={c.heroEyebrow}
           h1={p.h1}
           subhead={p.subhead}
           body={p.heroBody}
+          photo={HERO_PHOTOS.venetian}
           caption={p.heroCaption}
-          art={
-            <WinPhoto
-              src={HERO_PHOTOS.venetian.src}
-              srcSet={HERO_PHOTOS.venetian.srcSet}
-              alt={p.heroCaption}
-              priority
-            />
-          }
         />
-        <Why n="02" tone="paper" data={p.why} extra={<VenetianClock data={p.clock} />} />
-        <VenetianStage n="03" />
-        <VenetianMaterials n="04" data={p.materials} />
-        <SwatchLibrary n="05" tone="ground" data={p.swatches} groups={VENETIAN_SWATCH_GROUPS} />
-        <Rooms n="06" tone="paper" data={p.rooms} />
-        <Price n="07" tone="ground" data={p.price} />
+        <Why n="02" tone="band" data={p.why} extra={<VenetianClock data={p.clock} />} />
+        <VenetianStage n="03" tone="cream" />
+        <VenetianMaterials n="04" tone="band" data={p.materials} />
+        <SwatchLibrary n="05" tone="cream" data={p.swatches} groups={VENETIAN_SWATCH_GROUPS} />
+        <Rooms n="06" tone="band" data={p.rooms} />
+        <Price n="07" tone="cream" data={p.price} />
         <Steps n="08" data={p.steps} />
-        <Motorised n="09" tone="paper" data={p.motorised} />
-        <Care n="10" tone="ground" data={p.care} />
-        <Faq n="11" tone="paper" data={p.faq} />
-        <Closing
-          n="12"
-          data={p.closing}
-          waMessage={`Hi KOVA, I would like a quote for ${prod.name}.`}
-        />
+        <Motorised n="09" tone="band" data={p.motorised} />
+        <Care n="10" tone="cream" data={p.care} />
+        <Faq n="11" tone="band" data={p.faq} />
+        <Closing n="12" data={p.closing} waMessage={`Hi KOVA, I would like a quote for ${prod.name}.`} />
       </main>
       <Footer />
       <StickyQuote />
