@@ -8,8 +8,8 @@ import {
 } from "@/components/brochure/Sections";
 import { VertiSheerModes } from "@/components/brochure/features";
 import { VertiSheerDesigner } from "@/components/brochure/designers";
-import { VertiSheerHeroArt } from "@/components/brochure/svg";
-import { VERTISHEER_SWATCH_GROUPS } from "@/lib/brochure/data";
+import { WinPhoto } from "@/components/brochure/photo";
+import { HERO_PHOTOS, VERTISHEER_SWATCH_GROUPS } from "@/lib/brochure/data";
 
 /**
  * VertiSheer — laid out to the client's supplied brochure mockup: hero,
@@ -34,7 +34,14 @@ export function VertiSheerPage() {
           subhead={p.subhead}
           body={p.heroBody}
           caption={p.heroCaption}
-          art={<VertiSheerHeroArt label={p.heroCaption} />}
+          art={
+            <WinPhoto
+              src={HERO_PHOTOS.vertisheer.src}
+              srcSet={HERO_PHOTOS.vertisheer.srcSet}
+              alt={p.heroCaption}
+              priority
+            />
+          }
         />
         <Why n="02" tone="paper" data={p.why} />
         <VertiSheerDesigner n="03" />

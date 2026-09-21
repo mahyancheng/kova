@@ -120,6 +120,11 @@
 .brochure .cap { font-size: 12px; color: var(--muted); margin-top: 10px; }
 .brochure .win { position: relative; aspect-ratio: 16 / 10; width: 100%; display: block; }
 .brochure .win svg { display: block; width: 100%; height: 100%; }
+/* Photography fills the same window frame the drawn artwork used. */
+.brochure .win img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.brochure .dot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* A photographed swatch carries its own weave — drop the drawn hint. */
+.brochure .dot.has-photo::after { content: none; }
 
 /* ---------- measured rule (motif) ---------- */
 .brochure .rule { position: relative; height: 1px; background: var(--line); margin-block: clamp(32px, 4.5vw, 48px); }
@@ -368,7 +373,10 @@
 .brochure .clock { display: grid; gap: 14px; grid-template-columns: repeat(2, 1fr); margin-top: 8px; }
 @media (min-width: 760px) { .brochure .clock { grid-template-columns: repeat(4, 1fr); } }
 .brochure .hour { border: 1px solid var(--line); border-radius: 3px; background: var(--paper); overflow: hidden; }
-.brochure .hour svg { display: block; width: 100%; height: auto; aspect-ratio: 5 / 4; border-bottom: 1px solid var(--line); }
+/* The mockup sized the clock thumbnail via `.hour svg`; these are photos
+   now, so the frame carries the 5/4 ratio and the divider instead. */
+.brochure .hour svg,
+.brochure .hour .win { display: block; width: 100%; height: auto; aspect-ratio: 5 / 4; border-bottom: 1px solid var(--line); }
 .brochure .hour .t { padding: 13px 15px 15px; }
 .brochure .hour b { display: block; font-family: var(--display); font-size: 15px; font-weight: 400; letter-spacing: -0.01em; }
 .brochure .hour span { display: block; font-size: 12.5px; color: var(--muted); margin-top: 3px; line-height: 1.45; }

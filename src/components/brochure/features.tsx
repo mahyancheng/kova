@@ -1,10 +1,18 @@
 import { Sec, Eyebrow, Title, Rule } from "./Sections";
-import { RollerFabricPreview, VenetianMiniWindow, VertiSheerModePreview } from "./svg";
+import { WinPhoto } from "./photo";
+import {
+  ROLLER_FABRIC_CARD_PHOTOS, VENETIAN_CLOCK_PHOTOS,
+  VENETIAN_MATERIAL_PHOTOS, VERTISHEER_MODE_PHOTOS,
+} from "@/lib/brochure/data";
 
 /**
  * The one-off sections each product page carries, ported from its mockup:
  * the roller's fabric comparison, the venetian's four-hour clock and
  * material cards, and the vertisheer's three light modes.
+ *
+ * The mockups drew these windows as SVG; here they use the real product
+ * photography from /public, the same library the pages showed before the
+ * brochure rebuild. Only the interactive previews stay drawn.
  */
 
 /* ------------------------------------------------------------------ *
@@ -21,7 +29,11 @@ function Meter({ level }: { level: number }) {
   );
 }
 
-const ROLLER_CARD_VARIANTS = ["blackout", "dimout", "sunscreen"] as const;
+const ROLLER_CARD_PHOTO_ORDER = [
+  ROLLER_FABRIC_CARD_PHOTOS.blackout,
+  ROLLER_FABRIC_CARD_PHOTOS.dimout,
+  ROLLER_FABRIC_CARD_PHOTOS.sunscreen,
+];
 
 export function RollerFabricGuide({
   n, data,
@@ -81,7 +93,7 @@ export function RollerFabricGuide({
         {data.cards.map((card, i) => (
           <article className="fab" key={card.title}>
             <div className="win">
-              <RollerFabricPreview variant={ROLLER_CARD_VARIANTS[i] ?? "dimout"} label={card.title} />
+              <WinPhoto src={ROLLER_CARD_PHOTO_ORDER[i] ?? ROLLER_FABRIC_CARD_PHOTOS.dimout} alt={card.title} />
             </div>
             <div className="body">
               <p className="q">{card.q}</p>
@@ -102,14 +114,6 @@ export function RollerFabricGuide({
  * Venetian — one window, four hours of the day
  * ------------------------------------------------------------------ */
 
-/** Tilt + dim per hour, matching the mockup's four miniWin() calls. */
-const CLOCK_FRAMES = [
-  { tilt: 100, dim: 0 },
-  { tilt: 68, dim: 0.05 },
-  { tilt: 34, dim: 0.11 },
-  { tilt: 0, dim: 0.2 },
-];
-
 export function VenetianClock({
   data,
 }: {
@@ -120,26 +124,20 @@ export function VenetianClock({
       <Rule />
       <p className="eyebrow" style={{ marginBottom: 18 }}>{data.label}</p>
       <div className="clock">
-        {data.items.map((item, i) => {
-          const frame = CLOCK_FRAMES[i] ?? CLOCK_FRAMES[0]!;
-          return (
-            <div className="hour" key={item.time}>
-              <VenetianMiniWindow
-                w={250}
-                h={200}
-                col="#B8BBBD"
-                tilt={frame.tilt}
-                pitch={13}
-                dim={frame.dim}
-                label={`${item.time} — ${item.note}`}
+        {data.items.map((item, i) => (
+          <div className="hour" key={item.time}>
+            <div className="win">
+              <WinPhoto
+                src={VENETIAN_CLOCK_PHOTOS[i] ?? VENETIAN_CLOCK_PHOTOS[0]}
+                alt={`${item.time} — ${item.note}`}
               />
-              <div className="t">
-                <b>{item.time}</b>
-                <span>{item.note}</span>
-              </div>
             </div>
-          );
-        })}
+            <div className="t">
+              <b>{item.time}</b>
+              <span>{item.note}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );
@@ -173,35 +171,26 @@ export function VenetianMaterials({
       </div>
 
       <div className="grid g2">
-        {data.cards.map((card, i) => {
-          const wood = i === 1;
-          return (
-            <article className="mat" key={card.title}>
-              <div className="win">
-                <VenetianMiniWindow
-                  w={400}
-                  h={300}
-                  col={wood ? "#7A4B2C" : "#B8BBBD"}
-                  tilt={60}
-                  pitch={wood ? 26 : 13}
-                  wood={wood}
-                  dim={wood ? 0.06 : 0.04}
-                  label={card.title}
-                />
-              </div>
-              <div className="body">
-                <h3>{card.title}</h3>
-                <p>{card.body}</p>
-                <ul>
-                  {card.bullets.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
-                <p className="tags">{card.tags}</p>
-              </div>
-            </article>
-          );
-        })}
+        {data.cards.map((card, i) => (
+          <article className="mat" key={card.title}>
+            <div className="win">
+              <WinPhoto
+                src={i === 1 ? VENETIAN_MATERIAL_PHOTOS.wood : VENETIAN_MATERIAL_PHOTOS.alu}
+                alt={card.title}
+              />
+            </div>
+            <div className="body">
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+              <ul>
+                {card.bullets.map((b) => (
+                  <li key={b}>{b}</li>
+                ))}
+              </ul>
+              <p className="tags">{card.tags}</p>
+            </div>
+          </article>
+        ))}
       </div>
 
       <div className="pick">
@@ -220,8 +209,6 @@ export function VenetianMaterials({
 /* ------------------------------------------------------------------ *
  * VertiSheer — three settings, one system
  * ------------------------------------------------------------------ */
-
-const MODE_ANGLES = [6, 50, 100];
 
 export function VertiSheerModes({
   n, data,
@@ -249,7 +236,7 @@ export function VertiSheerModes({
         {data.cards.map((card, i) => (
           <article className="mode" key={card.title}>
             <div className="win">
-              <VertiSheerModePreview angle={MODE_ANGLES[i] ?? 50} label={card.title} />
+              <WinPhoto src={VERTISHEER_MODE_PHOTOS[i] ?? VERTISHEER_MODE_PHOTOS[0]} alt={card.title} />
             </div>
             <div className="body">
               <h3>{card.title}</h3>

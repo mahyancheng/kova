@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useRoutes } from "@/lib/routes";
 import { trackWhatsAppClick } from "@/lib/analytics";
 import { useT } from "@/lib/i18n";
+import { DotPhoto } from "./photo";
 import type { SwatchGroup } from "@/lib/brochure/data";
 
 /**
@@ -55,16 +56,22 @@ export function Title({ a, b }: { a: string; b?: string }) {
   );
 }
 
-export function Pipeline({ items }: { items: string[] }) {
+/**
+ * Word → word → word motif. The mockups use a <p> inside the copy columns
+ * and a <div> in the closing band (where a <p>'s bottom margin would add
+ * spacing the design doesn't have), so the element is selectable.
+ */
+export function Pipeline({ items, as = "p" }: { items: string[]; as?: "p" | "div" }) {
+  const Tag = as;
   return (
-    <p className="pipeline">
+    <Tag className="pipeline">
       {items.map((item, i) => (
         <span key={item} style={{ display: "contents" }}>
           {i > 0 && <i aria-hidden="true">→</i>}
           <span>{item}</span>
         </span>
       ))}
-    </p>
+    </Tag>
   );
 }
 
@@ -185,23 +192,30 @@ export function SwatchLibrary({
           {data.dek}
         </p>
       </div>
-      {groups.map((group) => (
-        <div key={group.label}>
-          <p className="collname">{group.label}</p>
-          <ul className="sws">
-            {group.items.map((s) => (
-              <li className="sw" key={`${group.label}-${s.name}`}>
-                <span className={`dot dot--${group.dot}`} style={{ background: s.hex }} />
-                <small>
-                  {s.name}
-                  <br />
-                  <em>{s.sub}</em>
-                </small>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      <div className="coll">
+        {groups.map((group) => (
+          <div key={group.label}>
+            <p className="collname">{group.label}</p>
+            <ul className="sws">
+              {group.items.map((s) => (
+                <li className="sw" key={`${group.label}-${s.name}`}>
+                  <span
+                    className={`dot dot--${group.dot}${s.image ? " has-photo" : ""}`}
+                    style={{ background: s.hex }}
+                  >
+                    {s.image && <DotPhoto src={s.image} alt={`${s.name} — ${s.sub}`} />}
+                  </span>
+                  <small>
+                    {s.name}
+                    <br />
+                    <em>{s.sub}</em>
+                  </small>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </Sec>
   );
 }
@@ -530,7 +544,7 @@ export function Closing({
         <div>
           <Title a={data.titleA} b={data.titleB} />
           <p className="dek">{data.dek}</p>
-          <Pipeline items={data.pipeline} />
+          <Pipeline items={data.pipeline} as="div" />
           <div className="btns">
             <a
               className="btn btn--wa"

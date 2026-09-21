@@ -8,8 +8,8 @@ import {
 } from "@/components/brochure/Sections";
 import { RollerFabricGuide } from "@/components/brochure/features";
 import { RollerDesigner } from "@/components/brochure/designers";
-import { RollerHeroArt } from "@/components/brochure/svg";
-import { ROLLER_SWATCH_GROUPS } from "@/lib/brochure/data";
+import { WinPhoto } from "@/components/brochure/photo";
+import { HERO_PHOTOS, ROLLER_SWATCH_GROUPS } from "@/lib/brochure/data";
 
 /**
  * Roller Blinds — laid out to the client's supplied brochure mockup:
@@ -34,7 +34,14 @@ export function RollerPage() {
           subhead={p.subhead}
           body={p.heroBody}
           caption={p.heroCaption}
-          art={<RollerHeroArt label={p.heroCaption} />}
+          art={
+            <WinPhoto
+              src={HERO_PHOTOS.roller.src}
+              srcSet={HERO_PHOTOS.roller.srcSet}
+              alt={p.heroCaption}
+              priority
+            />
+          }
         />
         <Why n="02" tone="paper" data={p.why} />
         <RollerFabricGuide n="03" data={p.fabricGuide} />

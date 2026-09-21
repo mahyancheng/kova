@@ -8,8 +8,8 @@ import {
 } from "@/components/brochure/Sections";
 import { VenetianClock, VenetianMaterials } from "@/components/brochure/features";
 import { VenetianStage } from "@/components/brochure/designers";
-import { VenetianHeroArt } from "@/components/brochure/svg";
-import { VENETIAN_SWATCH_GROUPS } from "@/lib/brochure/data";
+import { WinPhoto } from "@/components/brochure/photo";
+import { HERO_PHOTOS, VENETIAN_SWATCH_GROUPS } from "@/lib/brochure/data";
 
 /**
  * Venetian Blinds — laid out to the client's supplied brochure mockup:
@@ -35,7 +35,14 @@ export function VenetianPage() {
           subhead={p.subhead}
           body={p.heroBody}
           caption={p.heroCaption}
-          art={<VenetianHeroArt label={p.heroCaption} />}
+          art={
+            <WinPhoto
+              src={HERO_PHOTOS.venetian.src}
+              srcSet={HERO_PHOTOS.venetian.srcSet}
+              alt={p.heroCaption}
+              priority
+            />
+          }
         />
         <Why n="02" tone="paper" data={p.why} extra={<VenetianClock data={p.clock} />} />
         <VenetianStage n="03" />
