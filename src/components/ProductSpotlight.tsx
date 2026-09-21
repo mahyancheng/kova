@@ -10,11 +10,23 @@ export type ProductSpotlightProps = {
   id: string;
   number: string;
   name: string;
+  /**
+   * The page's real H1 — the product's plain name ("Roller Blinds Malaysia").
+   * Set bold and upright; the italic tagline below it is a subhead, not a
+   * heading, so each brochure page has exactly one H1 carrying its term.
+   */
+  h1: string;
   taglineA: string;
   taglineB: string;
   body: string[];
-  features: { title: string; detail: string }[];
+  features: { title: string; detail: string; bullets?: string[] }[];
   perfectFor: string[];
+  /** Optional per-product overrides for the "why people choose it" block. */
+  whyEyebrow?: string;
+  whyTitleA?: string;
+  whyTitleB?: string;
+  whyDek?: string;
+  whyPipeline?: string[];
   detailCaption: string;
   detailSrc?: string;
   Detail?: (props: { className?: string }) => ReactNode;
@@ -28,11 +40,17 @@ export function ProductSpotlight({
   id,
   number,
   name,
+  h1,
   taglineA,
   taglineB,
   body,
   features,
   perfectFor,
+  whyEyebrow,
+  whyTitleA,
+  whyTitleB,
+  whyDek,
+  whyPipeline,
   detailCaption,
   detailSrc,
   Detail,
@@ -50,6 +68,33 @@ export function ProductSpotlight({
       : tone === "paper"
         ? "bg-[var(--color-paper)]"
         : "bg-[var(--color-cream)]";
+
+  /*
+   * H1 = the product name, bold and upright (the term the page ranks for).
+   * The italic line underneath is the tagline, demoted from <h1> to a
+   * subhead so it still reads as display type without competing for the
+   * page's single heading.
+   */
+  const Heading = (
+    <>
+      <h1
+        className={cn(
+          "headline fluid-h2 font-bold not-italic",
+          isInk ? "text-[var(--color-cream)]" : "text-[var(--color-ink)]",
+        )}
+      >
+        {h1}
+      </h1>
+      <p
+        className={cn(
+          "headline mt-2 lg:mt-3 italic font-light text-[clamp(1.25rem,0.95rem+1.6vw,2.4rem)] leading-[1.1]",
+          isInk ? "text-[var(--color-clay-light)]" : "text-[var(--color-clay-deep)]",
+        )}
+      >
+        {taglineB ? `${taglineA} ${taglineB}` : taglineA}
+      </p>
+    </>
+  );
 
   // 🌟 将内部的大图抽离成一个复用的 JSX 块
   const ProductImage = (
@@ -92,21 +137,9 @@ export function ProductSpotlight({
           <div className="lg:col-span-7 -translate-y-1 lg:-translate-y-24">
             {/* 🌟 优化：如果是首屏，标题也使用纯 CSS 动画瞬间显示 */}
             {priority ? (
-              <h1 className={cn("headline fluid-h2 animate-slide-up delay-100", isInk ? "text-[var(--color-cream)]" : "text-[var(--color-ink)]")}>
-                {taglineA}
-                <span className={cn("block italic font-light mt-2", isInk ? "text-[var(--color-clay-light)]" : "text-[var(--color-clay-deep)]")}>
-                  {taglineB}
-                </span>
-              </h1>
+              <div className="animate-slide-up delay-100">{Heading}</div>
             ) : (
-              <Reveal>
-                <h1 className={cn("headline fluid-h2", isInk ? "text-[var(--color-cream)]" : "text-[var(--color-ink)]")}>
-                  {taglineA}
-                  <span className={cn("block italic font-light mt-2", isInk ? "text-[var(--color-clay-light)]" : "text-[var(--color-clay-deep)]")}>
-                    {taglineB}
-                  </span>
-                </h1>
-              </Reveal>
+              <Reveal>{Heading}</Reveal>
             )}
           </div>
 
@@ -200,10 +233,53 @@ export function ProductSpotlight({
 
           <div className="lg:col-span-7">
             <Reveal>
-              <p className={cn("eyebrow", isInk && "!text-[var(--color-sand)]")}>{c.whyEyebrow}</p>
-              <h3 className={cn("mt-3 lg:mt-4 headline fluid-h4", isInk ? "text-[var(--color-cream)]" : "text-[var(--color-ink)]")}>
-                {c.whyTitle}
-              </h3>
+              <p className={cn("eyebrow", isInk && "!text-[var(--color-sand)]")}>
+                {whyEyebrow ?? c.whyEyebrow}
+              </p>
+              <h2 className={cn("mt-3 lg:mt-4 headline fluid-h4", isInk ? "text-[var(--color-cream)]" : "text-[var(--color-ink)]")}>
+                {whyTitleA ?? c.whyTitle}
+                {whyTitleB && (
+                  <span
+                    className={cn(
+                      "italic font-light",
+                      isInk ? "text-[var(--color-clay-light)]" : "text-[var(--color-clay-deep)]",
+                    )}
+                  >
+                    {" "}
+                    {whyTitleB}
+                  </span>
+                )}
+              </h2>
+              {whyDek && (
+                <p
+                  className={cn(
+                    "mt-4 fluid-body max-w-[62ch]",
+                    isInk ? "text-[var(--color-cream)]/70" : "text-[var(--color-muted)]",
+                  )}
+                >
+                  {whyDek}
+                </p>
+              )}
+              {whyPipeline && (
+                <p className="mt-4 flex flex-wrap items-center gap-x-2.5 gap-y-2 font-serif text-[clamp(0.95rem,0.88rem+0.5vw,1.15rem)] tracking-tighter">
+                  {whyPipeline.map((part, i) => (
+                    <span key={part} className="inline-flex items-center gap-2.5">
+                      {i > 0 && (
+                        <span
+                          aria-hidden
+                          className={cn(
+                            "font-sans text-[0.8rem]",
+                            isInk ? "text-[var(--color-clay-light)]" : "text-[var(--color-clay)]",
+                          )}
+                        >
+                          →
+                        </span>
+                      )}
+                      {part}
+                    </span>
+                  ))}
+                </p>
+              )}
             </Reveal>
 
             <ol className="mt-7 lg:mt-10 space-y-6 lg:space-y-10">
@@ -225,6 +301,23 @@ export function ProductSpotlight({
                     <p className={cn("mt-2 text-[0.9rem] lg:text-[1rem] leading-[1.55] lg:leading-[1.7] max-w-prose", isInk ? "text-[var(--color-cream)]/70" : "text-[var(--color-muted)]")}>
                       {f.detail}
                     </p>
+                    {f.bullets && f.bullets.length > 0 && (
+                      <ul className="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-1.5">
+                        {f.bullets.map((b) => (
+                          <li
+                            key={b}
+                            className={cn(
+                              "pl-4 relative text-[0.86rem] before:absolute before:left-0 before:top-[0.62em] before:h-[3px] before:w-[3px] before:rounded-full",
+                              isInk
+                                ? "text-[var(--color-cream)]/65 before:bg-[var(--color-clay-light)]"
+                                : "text-[var(--color-ink-soft)] before:bg-[var(--color-clay)]",
+                            )}
+                          >
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 </Reveal>
               ))}
