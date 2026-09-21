@@ -72,6 +72,32 @@ function isoDate(row) {
   return Number.isNaN(d.getTime()) ? null : d.toISOString().slice(0, 10);
 }
 
+/**
+ * Supabase 不可用时，从现有 sitemap 里捞回文章 URL。
+ *
+ * 顶部注释承诺「Supabase 不可用时保留现有 sitemap」，但之前无论抓没抓到文章
+ * 都会照写一份只有静态页面的 sitemap —— 没有凭证的构建机（例如部署主机）
+ * 会把已收录的文章 URL 全部抹掉。静态页面那半边上面已经重新生成，所以这里
+ * 只需要把文章的 <url> 块原样搬过来。
+ *
+ * 只匹配 /blog/<slug> 和 /bidai/jurnal/<slug>：/blog 与 /bidai/jurnal 这两个
+ * 索引页没有结尾斜杠和 slug，已经由 STATIC_PAGES 生成，不会被重复捞进来。
+ */
+function existingPostEntries() {
+  const p = resolve(root, "public/sitemap.xml");
+  if (!existsSync(p)) return [];
+  try {
+    const xml = readFileSync(p, "utf8");
+    const blocks = xml.match(/ {2}<url>[\s\S]*?<\/url>/g) || [];
+    return blocks.filter((b) =>
+      /<loc>[^<]*\/(blog|bidai\/jurnal)\/[^<]+<\/loc>/.test(b),
+    );
+  } catch (e) {
+    console.warn("[sitemap] 读取现有 sitemap 失败:", e.message);
+    return [];
+  }
+}
+
 async function main() {
   const env = loadEnv();
 
@@ -112,6 +138,13 @@ async function main() {
       }
     }
     console.log(`[sitemap] 已加入 ${bySlug.size} 篇文章 (${posts.length} 个语言版本)`);
+  } else {
+    // 抓不到文章就沿用现有的文章 URL，别让这次构建把它们从 sitemap 里删掉。
+    const kept = existingPostEntries();
+    if (kept.length) entries.push(...kept);
+    console.warn(
+      `[sitemap] Supabase 不可用，保留现有 ${kept.length} 个文章 URL`,
+    );
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
