@@ -97,22 +97,27 @@ export const ms: Dict = {
     dismiss: "Tutup pengumuman",
   },
   hero: {
-    eyebrow: "Kova Sun Shade · Koleksi 2026",
+    /** Kicker desktop, duduk sebelah garis pendek. */
+    eyebrow: "Dibuat di bengkel kami di Petaling Jaya",
+    /** Mobile guna barisan produk, bukan baris bengkel. */
+    eyebrowMobile: "Roller · Venetian · VertiSheer",
+    // H1 dipecah dua: `titleA` bawa istilah utama, `titleB` ekor condong.
     // H1 kekal pada "bidai" — istilah itu yang membawa trafik carian BM.
-    titleA: "Bidai dan langsir tingkap",
-    titleB: "dalam kain blackout, dim-out dan sunscreen",
-    body: "Satu helai kain yang dipilih teliti. Tiada bilah, tiada lipatan, tiada gangguan mata — hanya warna pilihan anda, betul-betul di tempat yang anda mahu. Diukur, dibuat dan dipasang sendiri oleh kami, dari bengkel kami.",
+    titleA: "Bidai Tingkap Malaysia,",
+    titleB: "Terus Dari Kilang Kami",
+    body: "Bidai Roller, Venetian dan VertiSheer dibuat ikut ukuran — diukur, dibuat dan dipasang sendiri oleh Kova. Harga terus dari kilang, tanpa caj tambahan bilik pameran.",
     ctaA: "Dapatkan sebut harga terus dari kilang",
     ctaB: "Tempah pengukuran percuma",
-    figureLabel: "Bidai roller sunscreen dalam linen greige — ruang kerja",
+    figureLabel: "Roller, VertiSheer dan Venetian dalam satu ruang tamu — Klang Valley",
     figureAlt:
-      "Bidai roller sunscreen linen greige diturunkan di tingkap ruang kerja, dengan meja dan kerusi di bawahnya",
+      "Ruang tamu dengan bidai roller, bilah VertiSheer pada pintu gelangsar dan bidai Venetian pada tingkap sisi",
     photoHint: "Letakkan foto hero anda di sini ✺",
+    /** Tiga bukti ringkas: baris ikon di desktop, satu baris bertitik di mobile. */
     trust: [
-      ["Sehingga 40%", "lebih murah dari harga runcit"],
-      ["13", "kain bidai roller"],
-      ["Percuma", "pengukuran di rumah"],
-    ] as [string, string][],
+      "Sampai 40% lebih murah dari bilik pameran",
+      "Pengukuran percuma",
+      "Dibuat ikut ukuran",
+    ],
   },
   factory: {
     eyebrow: "Mengapa harga kami begitu rendah",

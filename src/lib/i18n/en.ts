@@ -98,22 +98,26 @@ export const en = {
     dismiss: "Dismiss announcement",
   },
   hero: {
-    eyebrow: "Kova Sun Shade · 2026 Collection",
-    // Split H1: `titleA` is the target term, set large; `titleB` qualifies it.
-    titleA: "Roller blinds",
-    titleB: "in blackout, dim-out and sunscreen fabrics",
-    body: "A single, considered sheet of fabric. No slats, no folds, no visual noise — just the colour you chose, sitting where you want it. Measured, made and installed by us, from our own workshop.",
-    ctaA: "Get a factory-direct quote",
-    ctaB: "Book a free measure",
-    figureLabel: "Sunscreen roller blind in greige linen — home office",
+    /** Desktop kicker, sat beside a short rule. */
+    eyebrow: "Made in our Petaling Jaya workshop",
+    /** Mobile runs the product line-up instead of the workshop line. */
+    eyebrowMobile: "Roller · Venetian · VertiSheer",
+    // Split H1: `titleA` carries the head term, `titleB` is the italic tail.
+    titleA: "Window Blinds Malaysia,",
+    titleB: "Direct From Our Factory",
+    body: "Custom-made Roller, Venetian and VertiSheer blinds, measured, made and installed by Kova. Factory-direct pricing without showroom mark-ups.",
+    ctaA: "Get a Factory-Direct Quote",
+    ctaB: "Book a Free Measurement",
+    figureLabel: "Roller, VertiSheer and Venetian in one living room — Klang Valley",
     figureAlt:
-      "Greige linen sunscreen roller blind lowered over a home-office window, desk and chair below",
+      "Living room with a roller blind, VertiSheer vanes on the sliding door and Venetian blinds on the side window",
     photoHint: "Drop your hero photo here ✺",
+    /** Three proof points: an icon row on desktop, one dotted line on mobile. */
     trust: [
-      ["Up to 40%", "below retail pricing"],
-      ["13", "roller blind fabrics"],
-      ["Free", "on-site measure"],
-    ] as [string, string][],
+      "Up to 40% below showroom pricing",
+      "Free measurement",
+      "Made to measure",
+    ],
   },
   factory: {
     eyebrow: "Why our prices are this low",

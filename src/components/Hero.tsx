@@ -1,94 +1,162 @@
 import { Link } from "react-router-dom";
-import { HeroVisual } from "./visuals/HeroVisual";
-import { ImageSlot } from "./ImageSlot";
 import { Reveal } from "./Reveal";
 import { useT } from "@/lib/i18n";
 import { useRoutes } from "@/lib/routes";
 
 /**
- * Landing hero — two-column: copy left, framed blind right.
+ * Landing hero — split layout.
  *
- * The H1 is deliberately split into a large keyword lead (`titleA`) and a
- * smaller qualifying tail (`titleB`) inside a *single* h1, so the target term
- * dominates visually while the modifiers still count as heading text.
+ * Follows the supplied "A · Split layout" and "A · Mobile" design
+ * references, rebuilt in the site's own tokens rather than copied: copy
+ * left, photograph right carrying the three product chips, and a trust row
+ * under the buttons. Mobile reorders to a full-bleed photo band above the
+ * copy, stacked full-width buttons, and the trust points collapsed onto one
+ * dotted line.
  *
- * The dark factory-direct strip from the design is already on the page as
- * <PromoBar />, so there's no chip here repeating it a third time.
+ * The H1 is one element split into a head term (`titleA`) and an italic
+ * tail (`titleB`), so the term reads large while the modifier still counts
+ * as heading text.
  */
+
+const ICONS = [
+  // tag — pricing
+  <>
+    <path d="M20 12V8H6a2 2 0 0 1 0-4h12v4" />
+    <path d="M4 6v12a2 2 0 0 0 2 2h14v-4" />
+    <circle cx="17" cy="14" r="1.5" />
+  </>,
+  // rule — measurement
+  <>
+    <path d="M21.3 15.3 8.7 2.7a1 1 0 0 0-1.4 0L2.7 7.3a1 1 0 0 0 0 1.4l12.6 12.6a1 1 0 0 0 1.4 0l4.6-4.6a1 1 0 0 0 0-1.4Z" />
+    <path d="m7.5 10.5 2 2" />
+    <path d="m10.5 7.5 2 2" />
+    <path d="m13.5 13.5 2 2" />
+  </>,
+  // check — made to measure
+  <path d="M20 6 9 17l-5-5" />,
+];
+
 export function Hero() {
   const t = useT();
   const r = useRoutes();
-  
+  const chips = t.collection.items;
+
   return (
-    <section id="top" className="relative pt-[clamp(2.5rem,1.5rem+3vw,5rem)] pb-[clamp(2.5rem,1.5rem+3.5vw,5.5rem)]">
+    <section id="top" className="relative pt-[clamp(1.75rem,1rem+2.5vw,3.5rem)] pb-[clamp(2.5rem,1.5rem+3.5vw,5.5rem)]">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_.95fr] gap-[clamp(2rem,1rem+3vw,4.5rem)] items-center">
-          {/* Copy — second on mobile so the product leads on small screens */}
-          <div className="order-2 lg:order-1">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(1.5rem,1rem+3vw,4rem)] items-stretch">
+          {/* Copy — second on mobile, where the photograph leads */}
+          <div className="order-2 lg:order-1 flex flex-col justify-center gap-[clamp(1rem,0.7rem+1vw,1.75rem)]">
             <Reveal>
-              <p className="eyebrow">{t.hero.eyebrow}</p>
+              {/* Desktop: workshop line with a rule. Mobile: the line-up. */}
+              <p className="hidden lg:flex items-center gap-2.5 text-[0.8rem] font-semibold tracking-[0.12em] uppercase text-[var(--color-clay-deep)]">
+                <span aria-hidden className="inline-block w-7 h-px bg-[var(--color-clay-deep)]" />
+                {t.hero.eyebrow}
+              </p>
+              <p className="lg:hidden text-[0.69rem] font-semibold tracking-[0.12em] uppercase text-[var(--color-clay-deep)]">
+                {t.hero.eyebrowMobile}
+              </p>
             </Reveal>
+
             <Reveal delay={80}>
-              <h1 className="mt-3 lg:mt-4 headline text-[var(--color-ink)]">
-                <span className="block text-[clamp(2.4rem,1.4rem+3.8vw,4.6rem)] leading-[0.95]">
-                  {t.hero.titleA}
-                </span>
-                <span className="block mt-2 lg:mt-3 text-[clamp(1.2rem,0.95rem+1.25vw,2rem)] leading-[1.15] font-light text-[var(--color-ink-soft)]">
-                  {t.hero.titleB}
-                </span>
+              <h1 className="headline font-medium text-[clamp(2.25rem,1.2rem+3.4vw,4.25rem)] leading-[1.04] tracking-[-0.025em] text-[var(--color-ink)]">
+                {t.hero.titleA}
+                <br className="hidden lg:inline" />{" "}
+                <span className="italic font-normal text-[var(--color-clay-deep)]">{t.hero.titleB}</span>
               </h1>
             </Reveal>
+
             <Reveal delay={150}>
-              <p className="mt-5 lg:mt-6 max-w-[58ch] fluid-body text-[var(--color-ink-soft)]">
+              <p className="max-w-[520px] text-[clamp(1rem,0.95rem+0.25vw,1.19rem)] leading-[1.6] text-[var(--color-ink-soft)]">
                 {t.hero.body}
               </p>
             </Reveal>
+
             <Reveal delay={220}>
-              <div className="mt-6 lg:mt-8 flex flex-wrap items-center gap-2 lg:gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-3">
                 <Link
-                  to={r.configurator}
-                  className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.9rem] lg:text-[0.95rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors"
+                  to={r.contact}
+                  className="inline-flex items-center justify-center sm:justify-start gap-2.5 h-13 sm:h-14 px-7 rounded-full bg-[var(--color-clay)] text-[var(--color-cream)] text-[1rem] font-semibold hover:bg-[var(--color-clay-deep)] transition-colors"
                 >
                   {t.hero.ctaA}
                   <span aria-hidden>→</span>
                 </Link>
                 <Link
                   to={r.contact}
-                  className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full border border-[var(--color-ink)] text-[0.9rem] lg:text-[0.95rem] font-medium text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-cream)] transition-colors"
+                  className="inline-flex items-center justify-center sm:justify-start h-13 sm:h-14 px-6 rounded-full border-[1.5px] border-[var(--color-ink)] text-[1rem] font-semibold text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-cream)] transition-colors"
                 >
                   {t.hero.ctaB}
                 </Link>
               </div>
             </Reveal>
+
             <Reveal delay={300}>
-              <dl className="mt-8 lg:mt-10 pt-5 lg:pt-6 border-t border-[var(--color-line)] flex flex-wrap gap-x-[clamp(1.25rem,0.5rem+2vw,2.75rem)] gap-y-4">
-                {t.hero.trust.map(([n, body]) => (
-                  <div key={n}>
-                    <dt className="headline text-[clamp(1.05rem,0.95rem+0.4vw,1.3rem)] font-medium text-[var(--color-ink)]">
-                      {n}
-                    </dt>
-                    <dd className="mt-0.5 text-[0.85rem] leading-snug text-[var(--color-muted)]">
-                      {body}
-                    </dd>
-                  </div>
+              {/* Desktop: icon row. Mobile: one centred dotted line. */}
+              <ul className="hidden lg:flex flex-wrap gap-x-7 gap-y-3 pt-5 border-t border-[var(--color-line)] text-[0.875rem] font-medium text-[var(--color-ink-soft)]">
+                {t.hero.trust.map((item, i) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="var(--color-clay-deep)"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden
+                      className="shrink-0"
+                    >
+                      {ICONS[i] ?? ICONS[2]}
+                    </svg>
+                    {item}
+                  </li>
                 ))}
-              </dl>
+              </ul>
+              <p className="lg:hidden pt-3.5 border-t border-[var(--color-line)] text-center text-[0.82rem] font-medium leading-[1.6] text-[var(--color-ink-soft)]">
+                {t.hero.trust.map((item, i) => (
+                  <span key={item}>
+                    {i > 0 && <span className="text-[var(--color-clay)]"> · </span>}
+                    {item}
+                  </span>
+                ))}
+              </p>
             </Reveal>
           </div>
 
-          {/* Product — first on mobile */}
+          {/* Photograph — first on mobile, full-bleed there */}
           <Reveal delay={120} className="order-1 lg:order-2">
-            <figure className="m-0 bg-[var(--color-paper)] border border-[var(--color-line)] rounded-lg p-3.5 pb-0 shadow-[0_1px_2px_rgba(34,32,28,.04),0_12px_28px_-18px_rgba(34,32,28,.28)]">
-              <ImageSlot
-                ratio="5/4"
-                tone="sand"
-                priority
-                src="/showcase/hero-roller.webp"
-                alt={t.hero.figureAlt}
-              >
-                <HeroVisual className="w-full h-full" />
-              </ImageSlot>
-              <figcaption className="px-0.5 pt-3 pb-3.5 text-[0.68rem] tracking-[0.12em] uppercase text-[var(--color-muted)]">
+            <figure className="m-0 h-full flex flex-col gap-3.5">
+              <div className="relative -mx-5 sm:-mx-6 lg:mx-0 h-[250px] lg:h-auto lg:grow overflow-hidden rounded-none lg:rounded-md bg-[var(--color-cream-dark)]">
+                <img
+                  src="/showcase/hero-living.webp"
+                  srcSet="/showcase/hero-living-640.webp 640w, /showcase/hero-living-800.webp 800w, /showcase/hero-living-1024.webp 1024w, /showcase/hero-living.webp 1400w"
+                  sizes="(min-width: 1024px) 560px, 100vw"
+                  alt={t.hero.figureAlt}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="sync"
+                  width={1400}
+                  height={1050}
+                  className="absolute inset-0 w-full h-full object-cover object-[58%_50%] lg:object-[58%_50%]"
+                />
+                {/* Product chips — desktop only, as in the reference */}
+                <div className="hidden lg:flex absolute left-5 bottom-5 gap-2">
+                  {chips.map((chip, i) => (
+                    <Link
+                      key={chip.id}
+                      to={`${r.home === "/bidai" ? "/bidai" : ""}/${chip.id}`}
+                      className="inline-flex items-center gap-2 h-11 px-4 rounded-full bg-[var(--color-cream)]/95 backdrop-blur-sm text-[0.875rem] font-medium text-[var(--color-ink)] hover:bg-[var(--color-cream)] transition-colors"
+                    >
+                      <span className="font-serif italic text-[var(--color-clay-deep)]">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {chip.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              <figcaption className="hidden lg:block font-serif italic text-[0.82rem] text-[var(--color-muted)]">
                 {t.hero.figureLabel}
               </figcaption>
             </figure>
