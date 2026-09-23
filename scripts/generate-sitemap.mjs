@@ -200,6 +200,13 @@ async function main() {
       }
     }
     console.log(`[sitemap] 已加入 ${bySlug.size} 篇文章 (${posts.length} 个语言版本)`);
+  } else {
+    // 抓不到文章就沿用现有的文章 URL，别让这次构建把它们从 sitemap 里删掉。
+    const kept = existingPostEntries();
+    if (kept.length) entries.push(...kept);
+    console.warn(
+      `[sitemap] Supabase 不可用，保留现有 ${kept.length} 个文章 URL`,
+    );
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

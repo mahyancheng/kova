@@ -1,43 +1,50 @@
-import { useEffect } from "react";
 import { useT } from "@/lib/i18n";
 import { PromoBar } from "@/components/PromoBar";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { StickyQuote } from "@/components/StickyQuote";
-import { ProductSpotlight } from "@/components/ProductSpotlight";
-import { ProductFabricStrip } from "@/components/ProductFabricStrip";
-import { Configurator } from "@/components/Configurator";
-import { VertiSheer as VertiSheerVisual } from "@/components/visuals/VertiSheer";
-import { VERTISHEER_FABRICS } from "@/lib/configurator/types";
-import { useConfigurator } from "@/lib/configurator/context";
+import {
+  Hero, Why, SwatchLibrary, Rooms, Price, Steps, Motorised, Care, Faq, Closing,
+} from "@/components/product/sections";
+import { VertiSheerModes } from "@/components/product/features";
+import { VertiSheerDesigner } from "@/components/product/designers";
+import { HERO_PHOTOS, VERTISHEER_SWATCH_GROUPS } from "@/lib/brochure/data";
 
+/**
+ * VertiSheer. Content follows the client's brochure; presentation uses
+ * the site's own design system, the same one the home page uses.
+ */
 export function VertiSheerPage() {
   const t = useT();
-  const { setProduct } = useConfigurator();
-
-  useEffect(() => {
-    setProduct("vertisheer");
-  }, [setProduct]);
+  const p = t.productPages.vertisheer;
+  const c = t.productPages.common;
+  const prod = t.products.vertisheer;
 
   return (
     <div className="min-h-screen bg-[var(--color-cream)]">
       <PromoBar />
       <Nav />
-      <main id="main" className="pt-1">
-        <ProductSpotlight
-          id="vertisheer"
-          tone="ink"
-          {...t.products.vertisheer}
-          Detail={VertiSheerVisual}
-          detailSrc="/showcase/pivot-silver-vertisheer.webp"
+      <main id="main">
+        <Hero
+          n="01"
+          eyebrow={c.heroEyebrow}
+          h1={p.h1}
+          subhead={p.subhead}
+          body={p.heroBody}
+          photo={HERO_PHOTOS.vertisheer}
+          caption={p.heroCaption}
         />
-        <ProductFabricStrip
-          fabrics={VERTISHEER_FABRICS}
-          eyebrow={t.fabrics.eyebrow}
-          title={`VertiSheer · ${t.fabrics.titleA} ${t.fabrics.titleB}`}
-          body={t.fabrics.intro}
-        />
-        <Configurator />
+        <Why n="02" tone="band" data={p.why} />
+        <VertiSheerDesigner n="03" tone="cream" />
+        <VertiSheerModes n="04" tone="band" data={p.modes} />
+        <SwatchLibrary n="05" tone="cream" data={p.swatches} groups={VERTISHEER_SWATCH_GROUPS} />
+        <Rooms n="06" tone="band" data={p.rooms} />
+        <Price n="07" tone="cream" data={p.price} />
+        <Steps n="08" data={p.steps} />
+        <Motorised n="09" tone="band" data={p.motorised} />
+        <Care n="10" tone="cream" data={p.care} />
+        <Faq n="11" tone="band" data={p.faq} />
+        <Closing n="12" data={p.closing} waMessage={`Hi KOVA, I would like a quote for ${prod.name}.`} />
       </main>
       <Footer />
       <StickyQuote />

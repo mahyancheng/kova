@@ -1,4 +1,13 @@
 @import "tailwindcss";
+/* The venetian 3D stage's mechanics — the one thing on the product pages
+   that Tailwind utilities cannot express (perspective, preserve-3d,
+   per-slat rotateX, mask-image shafts, keyframe dust). Everything else on
+   those pages uses the same design system as the home page.
+   Imported from the main stylesheet rather than from the page modules on
+   purpose: the product pages are lazy route chunks, so a page-level import
+   became a separate chunk stylesheet that vite-react-ssg never links from
+   the prerendered HTML — leaving the static page unstyled until hydration. */
+@import "./styles/stage.css";
 
 @theme {
   /* Neutral palette: warm white (cream), black (ink), brown (clay). No coral, no green. */

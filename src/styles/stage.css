@@ -1,0 +1,118 @@
+/* ------------------------------------------------------------------
+   Venetian 3D stage — the only hand-written CSS the product pages need.
+
+   Everything else on those pages is expressed in the site's Tailwind
+   design system, the same one the home page uses. This file survives
+   because Tailwind utilities cannot express what the stage actually
+   does: a real 3D scene with `perspective` and `preserve-3d`, slats
+   rotated per-element on the X axis, light shafts shaped by a
+   `mask-image` gradient, and dust drifting on a keyframe animation.
+
+   Scoped under `.stage3d` so nothing here can leak into the rest of
+   the site, and imported from index.css rather than from the page
+   module — these pages are lazy route chunks, and a page-level CSS
+   import becomes a chunk stylesheet that vite-react-ssg never links
+   from the prerendered HTML.
+------------------------------------------------------------------ */
+
+.stage3d {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #0f0e0c;
+  perspective: 1500px;
+  perspective-origin: 50% 44%;
+  touch-action: none;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.stage3d.dragging { cursor: grabbing; }
+
+.stage3d .scene { position: absolute; inset: 0; width: 100%; height: 100%; transition: filter 0.75s ease; }
+.stage3d .scene svg,
+.stage3d .scene img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.stage3d .daylight {
+  position: absolute; inset: 0; pointer-events: none; transition: opacity 0.55s ease;
+  background: radial-gradient(125% 95% at 52% 16%, rgba(255, 245, 224, 0.62), rgba(255, 236, 198, 0) 62%);
+}
+.stage3d .vig { position: absolute; inset: 0; pointer-events: none; box-shadow: inset 0 0 100px 10px rgba(18, 14, 10, 0.5); }
+
+.stage3d .blind { position: absolute; inset: 0; transform-style: preserve-3d; pointer-events: none; }
+.stage3d .headrail {
+  position: absolute; left: 0; right: 0; top: 0; z-index: 6; border-radius: 0 0 1px 1px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); transition: background 0.3s ease;
+}
+.stage3d .slatbox { position: absolute; left: 0; right: 0; top: 0; bottom: 0; transform-style: preserve-3d; }
+.stage3d .slat {
+  position: absolute; left: 0; right: 0; transform-origin: 50% 50%; will-change: transform;
+  box-shadow: 0 4px 7px -3px rgba(0, 0, 0, 0.42);
+  transition: transform 0.55s cubic-bezier(0.34, 0.08, 0.18, 1),
+              top 0.5s cubic-bezier(0.34, 0.08, 0.18, 1),
+              height 0.35s ease;
+}
+.stage3d .slat i {
+  position: absolute; inset: 0; display: block; transition: opacity 0.55s ease;
+  background: linear-gradient(to bottom, rgba(255, 248, 231, 0.9) 0%, rgba(255, 248, 231, 0.15) 34%, rgba(255, 248, 231, 0) 62%);
+}
+.stage3d.dragging .slat,
+.stage3d.dragging .slat i { transition: none; }
+.stage3d .btmrail {
+  position: absolute; left: 0; right: 0; z-index: 5; box-shadow: 0 5px 12px rgba(0, 0, 0, 0.45);
+  transition: top 0.5s cubic-bezier(0.34, 0.08, 0.18, 1), background 0.3s ease;
+}
+.stage3d .cord {
+  position: absolute; top: 0; width: 1.5px; z-index: 7; background: rgba(0, 0, 0, 0.3);
+  transition: height 0.5s cubic-bezier(0.34, 0.08, 0.18, 1);
+}
+.stage3d .frame {
+  position: absolute; inset: 0; z-index: 8; pointer-events: none;
+  border: clamp(9px, 1.7vw, 15px) solid #e8e2d2;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.09), inset 0 0 22px rgba(40, 32, 22, 0.14);
+}
+
+/* ---------- sunlight ---------- */
+.stage3d .flare {
+  position: absolute; pointer-events: none; mix-blend-mode: screen; border-radius: 50%;
+  transition: opacity 0.75s ease, background 0.75s ease, left 0.75s ease, top 0.75s ease; z-index: 2;
+}
+.stage3d .bloom {
+  position: absolute; left: 0; right: 0; pointer-events: none; mix-blend-mode: screen;
+  filter: blur(5px); z-index: 7;
+  transition: opacity 0.55s ease, top 0.5s cubic-bezier(0.34, 0.08, 0.18, 1);
+}
+.stage3d.dragging .bloom { transition: none; }
+.stage3d .shafts {
+  position: absolute; left: -18%; right: -18%; pointer-events: none; mix-blend-mode: screen;
+  filter: blur(9px); z-index: 7; transform: rotate(-7deg); transform-origin: 50% 0;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.35) 62%, transparent 94%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.35) 62%, transparent 94%);
+  transition: opacity 0.6s ease, top 0.5s cubic-bezier(0.34, 0.08, 0.18, 1);
+}
+.stage3d.dragging .shafts { transition: none; }
+.stage3d .motes {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+  z-index: 7; opacity: 0; transition: opacity 0.7s ease;
+}
+.stage3d .mote {
+  position: absolute; border-radius: 50%; background: rgba(255, 246, 224, 0.95);
+  animation-name: stage-drift; animation-timing-function: linear; animation-iteration-count: infinite;
+}
+@keyframes stage-drift {
+  0% { transform: translate3d(0, 14px, 0); opacity: 0; }
+  14% { opacity: 0.85; }
+  84% { opacity: 0.5; }
+  100% { transform: translate3d(-22px, -118px, 0); opacity: 0; }
+}
+.stage3d .warmth {
+  position: absolute; inset: 0; pointer-events: none; z-index: 9;
+  box-shadow: inset 0 0 44px 6px rgba(255, 208, 140, 0); transition: box-shadow 0.75s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage3d *,
+  .stage3d *::before,
+  .stage3d *::after { animation: none !important; transition: none !important; }
+}
