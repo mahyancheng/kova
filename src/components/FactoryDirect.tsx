@@ -38,7 +38,15 @@ export function FactoryDirect({ headingLevel: H = "h2" }: { headingLevel?: "h1" 
               <p className="eyebrow">{t.factory.eyebrow}</p>
             </Reveal>
             <Reveal delay={80}>
-              <H className="mt-3 lg:mt-5 headline fluid-h2 text-[var(--color-ink)]">
+              {/* Same rule as everywhere else: an h1 is bold and upright at
+                  fluid-h2; as a section h2 on the home page it drops to the
+                  fluid-h3 section scale. */}
+              <H
+                className={
+                  "mt-3 lg:mt-5 headline text-[var(--color-ink)] " +
+                  (H === "h1" ? "fluid-h2 font-bold not-italic" : "fluid-h3")
+                }
+              >
                 {t.factory.titleA}
                 <span className="block italic font-light text-[var(--color-clay-deep)]">
                   {t.factory.titleB}

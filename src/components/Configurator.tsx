@@ -85,7 +85,14 @@ export function Configurator({ headingLevel: H = "h2" }: { headingLevel?: "h1" |
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-3 lg:gap-5 mb-[clamp(1rem,0.5rem+1.5vw,2.5rem)]">
             <div>
               <p className="eyebrow">{t.configurator.eyebrow}</p>
-              <H className="mt-1.5 lg:mt-3 headline fluid-h3 text-[var(--color-ink)] max-w-2xl">
+              {/* As the page's h1 on /configurator it takes the bold upright
+                  h1 treatment; as a section h2 elsewhere it stays fluid-h3. */}
+              <H
+                className={
+                  "mt-1.5 lg:mt-3 headline text-[var(--color-ink)] max-w-2xl " +
+                  (H === "h1" ? "fluid-h2 font-bold not-italic" : "fluid-h3")
+                }
+              >
                 {t.configurator.titleA}
                 <span className="italic font-light text-[var(--color-clay-deep)]"> {t.configurator.titleB}</span>
               </H>
