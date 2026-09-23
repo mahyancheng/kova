@@ -163,7 +163,10 @@ export function Hero({
   const r = useRoutes();
   const c = t.productPages.common;
   return (
-    <section className="relative pt-[clamp(2.5rem,1.5rem+3vw,5rem)] pb-[clamp(2.5rem,1.5rem+3.5vw,5.5rem)]">
+    // Same fix as the homepage Hero (components/Hero.tsx): Nav is fixed at
+    // h-24 (96px) and doesn't reserve space in normal flow, so this
+    // section's own top padding is what keeps its content clear of it.
+    <section className="relative pt-[clamp(7rem,6rem+3vw,9rem)] pb-[clamp(2.5rem,1.5rem+3.5vw,5.5rem)]">
       <div className={SHELL}>
         <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_.95fr] gap-[clamp(2rem,1rem+3vw,4.5rem)] items-center">
           <div className="order-2 lg:order-1">

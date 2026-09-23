@@ -42,7 +42,12 @@ export function Hero() {
   const chips = t.collection.items;
 
   return (
-    <section id="top" className="relative pt-[clamp(1.75rem,1rem+2.5vw,3.5rem)] pb-[clamp(2.5rem,1.5rem+3.5vw,5.5rem)]">
+    // Nav is `fixed` and h-24 (96px) at every breakpoint, so it doesn't push
+    // <main> down on its own — the first section on the page has to clear
+    // it with its own top padding. This used to bottom out at 28px, well
+    // under the header's height, so the eyebrow line sat almost flush
+    // against the nav bar.
+    <section id="top" className="relative pt-[clamp(7rem,6rem+3vw,9rem)] pb-[clamp(2.5rem,1.5rem+3.5vw,5.5rem)]">
       <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(1.5rem,1rem+3vw,4rem)] items-stretch">
           {/* Copy — second on mobile, where the photograph leads */}
