@@ -51,7 +51,7 @@ export function FaqSection() {
           <div className="lg:col-span-4">
             <Reveal>
               <p className="eyebrow">{faq.eyebrow}</p>
-              <h2 className="mt-3 lg:mt-4 font-serif text-[clamp(1.55rem,1.1rem+1.8vw,2.4rem)] leading-[1.08] tracking-tighter text-[var(--color-ink)]">
+              <h2 className="mt-3 lg:mt-4 headline fluid-h3 text-[var(--color-ink)]">
                 {faq.titleA}{" "}
                 <span className="italic font-light text-[var(--color-clay-deep)]">
                   {faq.titleB}

@@ -249,6 +249,14 @@ export function Nav() {
           </nav>
         </div>
       </header>
+      {/*
+       * The header is fixed, so it sits outside normal flow and paints over
+       * whatever follows. Reserve its height here — once, for every page —
+       * instead of each page guessing its own top padding (only the two blog
+       * pages did, with pt-28; everything else started underneath the header).
+       * Matches the h-24 bar above.
+       */}
+      <div aria-hidden className="h-24 shrink-0" />
     </>
   );
 }

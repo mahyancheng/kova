@@ -10,7 +10,7 @@ export function ContactPage() {
     <div className="min-h-screen bg-[var(--color-cream)]">
       <PromoBar />
       <Nav />
-      <main id="main" className="pt-1">
+      <main id="main">
         <Contact />
         {/*
           Configurator sits below the form so visitors who land on

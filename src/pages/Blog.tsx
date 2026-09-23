@@ -71,11 +71,11 @@ export function Blog() {
     <div className="min-h-screen bg-[var(--color-cream)]">
       <Nav />
 
-      <main id="main" className="pt-28 pb-24">
+      <main id="main" className="pt-6 pb-24">
         <div className="max-w-[1240px] mx-auto px-5 sm:px-6 lg:px-10">
           <Reveal>
             <p className="eyebrow">{t.blog.eyebrow}</p>
-            <h1 className="mt-3 lg:mt-4 headline text-[clamp(2rem,1.4rem+3vw,3.5rem)] leading-[1.05] text-[var(--color-ink)] max-w-3xl">
+            <h1 className="mt-3 lg:mt-4 headline fluid-h2 font-bold not-italic text-[var(--color-ink)] max-w-3xl">
               {t.blog.titleA}
               <span className="italic font-light text-[var(--color-clay-deep)]"> {t.blog.titleB}</span>
             </h1>
@@ -90,7 +90,7 @@ export function Blog() {
               <div className="mt-10 flex flex-wrap gap-2">
                 <button
                   onClick={() => setSelectedCategory(null)}
-                  className={`px-5 py-2 rounded-full text-[0.85rem] tracking-wide uppercase font-medium transition-all duration-300 ${
+                  className={`px-5 py-2 rounded-full text-[0.88rem] tracking-wide uppercase font-medium transition-all duration-300 ${
                     selectedCategory === null
                       ? "bg-[var(--color-ink)] text-[var(--color-cream)]"
                       : "bg-[var(--color-paper)] border border-[var(--color-line)] text-[var(--color-ink-soft)] hover:border-[var(--color-ink)]"
@@ -102,7 +102,7 @@ export function Blog() {
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-5 py-2 rounded-full text-[0.85rem] tracking-wide uppercase font-medium transition-all duration-300 ${
+                    className={`px-5 py-2 rounded-full text-[0.88rem] tracking-wide uppercase font-medium transition-all duration-300 ${
                       selectedCategory === category
                         ? "bg-[var(--color-ink)] text-[var(--color-cream)]"
                         : "bg-[var(--color-paper)] border border-[var(--color-line)] text-[var(--color-ink-soft)] hover:border-[var(--color-ink)]"
@@ -117,7 +117,7 @@ export function Blog() {
 
           <div className="mt-10 lg:mt-12 border-t border-[var(--color-line)] pt-10 lg:pt-14">
             {loading && (
-              <p className="text-[0.92rem] text-[var(--color-muted)]">{t.blog.loading}</p>
+              <p className="text-[0.88rem] text-[var(--color-muted)]">{t.blog.loading}</p>
             )}
 
             {empty && (
@@ -125,7 +125,7 @@ export function Blog() {
                 <p className="font-serif text-[1.3rem] lg:text-[1.5rem] leading-snug text-[var(--color-ink)]">
                   {t.blog.emptyTitle}
                 </p>
-                <p className="mt-3 text-[0.92rem] leading-relaxed text-[var(--color-muted)]">
+                <p className="mt-3 text-[0.88rem] leading-relaxed text-[var(--color-muted)]">
                   {isSupabaseConfigured ? t.blog.emptyBody : t.blog.emptyUnconfigured}
                 </p>
               </div>
@@ -173,18 +173,18 @@ export function Blog() {
                             </div>
                           )}
                           <div className="p-5 lg:p-7 flex flex-col grow">
-                            <p className="text-[0.7rem] tracking-widest uppercase text-[var(--color-muted)]">
+                            <p className="text-[0.68rem] tracking-widest uppercase text-[var(--color-muted)]">
                               {formatPostDate(p.publishedAt)}
                             </p>
-                            <h2 className="mt-2.5 font-serif text-[clamp(1.2rem,0.95rem+0.8vw,1.5rem)] leading-tight tracking-tight text-[var(--color-ink)] line-clamp-2">
+                            <h2 className="mt-2.5 font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)] line-clamp-2">
                               {displayTitle}
                             </h2>
                             {p.excerpt && (
-                              <p className="mt-2.5 text-[0.92rem] leading-relaxed text-[var(--color-muted)] line-clamp-3">
+                              <p className="mt-2.5 text-[0.88rem] leading-relaxed text-[var(--color-muted)] line-clamp-3">
                                 {p.excerpt}
                               </p>
                             )}
-                            <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-[0.86rem] font-medium text-[var(--color-ink)] group-hover:text-[var(--color-clay-deep)] transition-colors">
+                            <span className="mt-auto pt-5 inline-flex items-center gap-1.5 text-[0.88rem] font-medium text-[var(--color-ink)] group-hover:text-[var(--color-clay-deep)] transition-colors">
                               {t.blog.readMore}
                               <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
                             </span>

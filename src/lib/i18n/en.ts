@@ -598,7 +598,7 @@ export const en = {
     emptyBody:
       "We're drafting the first set. Check back shortly — or sign up for a quote and we'll let you know when it's live.",
     emptyUnconfigured:
-      "The journal is wired to Supabase but the project isn't connected yet. Once VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY are set, posts appear here automatically.",
+      "The journal is wired to Supabase but the project isn't connected yet. Set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY in the build environment and posts appear here automatically.",
     notFoundTitle: "We couldn't find that entry.",
     notFoundBody:
       "It might have been moved or unpublished. Head back to the journal index to see what's there.",

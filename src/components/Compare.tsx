@@ -55,7 +55,7 @@ export function Compare() {
                       (i % 2 === 0 ? "bg-[var(--color-paper)]" : "bg-[var(--color-cream-light)]")
                     }
                   >
-                    <div className="px-5 lg:px-7 py-5 text-[0.86rem] sm:text-[0.9rem] text-[var(--color-muted)]">
+                    <div className="px-5 lg:px-7 py-5 text-[0.88rem] sm:text-[0.88rem] text-[var(--color-muted)]">
                       {row.label}
                     </div>
                     {row.values.map((v, j) => {
@@ -64,7 +64,7 @@ export function Compare() {
                         <div
                           key={j}
                           className={
-                            "px-5 lg:px-7 py-5 text-[0.92rem] sm:text-[0.95rem] leading-snug border-l border-[var(--color-line)] break-words hyphens-auto " +
+                            "px-5 lg:px-7 py-5 text-[0.88rem] sm:text-[0.88rem] leading-snug border-l border-[var(--color-line)] break-words hyphens-auto " +
                             (accent ? "text-[var(--color-clay-deep)] font-medium" : "text-[var(--color-ink)]")
                           }
                         >
@@ -76,14 +76,14 @@ export function Compare() {
                 ))}
               </div>
             </div>
-            <p className="lg:hidden mt-3 text-[0.74rem] tracking-widest uppercase text-[var(--color-muted)] text-right">
+            <p className="lg:hidden mt-3 text-[0.68rem] tracking-widest uppercase text-[var(--color-muted)] text-right">
               {t.compare.swipeHint}
             </p>
           </div>
         </Reveal>
 
         <Reveal>
-          <p className="mt-6 text-[0.86rem] text-[var(--color-muted)] max-w-2xl">
+          <p className="mt-6 text-[0.88rem] text-[var(--color-muted)] max-w-2xl">
             {t.compare.footer}
           </p>
         </Reveal>

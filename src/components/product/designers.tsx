@@ -32,7 +32,7 @@ import { RollerDesignerPreview, VertiSheerDesignerPreview } from "./svg";
 const PANEL = "rounded-md border border-[var(--color-line)] bg-[var(--color-paper)] p-5 lg:p-6";
 const FIELD = "mt-6 first:mt-0";
 const OPT_BASE =
-  "px-3.5 py-2 rounded-md border text-[0.84rem] leading-tight text-left transition-colors cursor-pointer";
+  "px-3.5 py-2 rounded-md border text-[0.88rem] leading-tight text-left transition-colors cursor-pointer";
 const OPT_ON = "bg-[var(--color-ink)] border-[var(--color-ink)] text-[var(--color-cream)]";
 const OPT_OFF =
   "bg-[var(--color-cream-light)] border-[var(--color-line)] text-[var(--color-ink-soft)] hover:border-[var(--color-ink)]";
@@ -40,7 +40,7 @@ const SLIDER = "w-full accent-[var(--color-ink)]";
 const READOUT =
   "mt-6 pt-4 border-t border-[var(--color-line)] flex flex-wrap items-baseline justify-between gap-3";
 const QUOTE_BTN =
-  "inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.86rem] lg:text-[0.9rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors";
+  "inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.88rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors";
 
 function Swatch({
   hex, name, on, onClick,
@@ -277,7 +277,7 @@ export function VertiSheerDesigner({ n, tone = "cream" }: { n: string; tone?: To
                   </button>
                 ))}
               </div>
-              <p className="mt-3 text-[0.84rem] leading-relaxed text-[var(--color-muted)] min-h-[3.2em]">{note}</p>
+              <p className="mt-3 text-[0.88rem] leading-relaxed text-[var(--color-muted)] min-h-[3.2em]">{note}</p>
             </div>
 
             <div className={FIELD}>
@@ -643,7 +643,7 @@ export function VenetianStage({ n, tone = "cream" }: { n: string; tone?: Tone })
               <p className="eyebrow">{d.livePreview}</p>
               <p
                 className={cn(
-                  "text-[0.62rem] tracking-[0.14em] uppercase text-[var(--color-muted)] transition-opacity duration-500",
+                  "text-[0.68rem] tracking-[0.14em] uppercase text-[var(--color-muted)] transition-opacity duration-500",
                   hintGone && "opacity-0",
                 )}
               >
@@ -705,7 +705,7 @@ export function VenetianStage({ n, tone = "cream" }: { n: string; tone?: Tone })
                     className={cn(OPT_BASE, mat === id ? OPT_ON : OPT_OFF)}
                   >
                     {d.materials[id]}
-                    <span className="block text-[0.7rem] opacity-65">{d.materialSubs[id]}</span>
+                    <span className="block text-[0.68rem] opacity-65">{d.materialSubs[id]}</span>
                   </button>
                 ))}
               </div>
@@ -755,7 +755,7 @@ export function VenetianStage({ n, tone = "cream" }: { n: string; tone?: Tone })
                   </button>
                 ))}
               </div>
-              <p className="mt-3 text-[0.84rem] leading-relaxed text-[var(--color-muted)] min-h-[3.2em]">{note}</p>
+              <p className="mt-3 text-[0.88rem] leading-relaxed text-[var(--color-muted)] min-h-[3.2em]">{note}</p>
             </div>
 
             <div className={FIELD}>

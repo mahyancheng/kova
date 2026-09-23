@@ -69,7 +69,7 @@ export function RollerFabricGuide({
 
       <Reveal>
         <div className="overflow-x-auto rounded-md border border-[var(--color-line)] bg-[var(--color-paper)]">
-          <table className="w-full min-w-[560px] border-collapse text-[0.9rem]">
+          <table className="w-full min-w-[560px] border-collapse text-[0.88rem]">
             <caption className="sr-only">{data.tableCaption}</caption>
             <thead>
               <tr>
@@ -111,8 +111,8 @@ export function RollerFabricGuide({
             <article className={CARD}>
               <ImageSlot ratio="4/3" tone="sand" src={ROLLER_CARD_PHOTOS[i] ?? ROLLER_CARD_PHOTOS[1]} alt={card.title} />
               <div className="p-5 lg:p-6 flex flex-col grow">
-                <p className="font-serif italic text-[0.95rem] text-[var(--color-clay-deep)]">{card.q}</p>
-                <h3 className="mt-2 font-serif text-[clamp(1.15rem,1rem+0.5vw,1.35rem)] leading-tight tracking-tight text-[var(--color-ink)]">
+                <p className="font-serif italic text-[0.88rem] text-[var(--color-clay-deep)]">{card.q}</p>
+                <h3 className="mt-2 font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">
                   {card.title}
                 </h3>
                 <div className="mt-2.5 space-y-2.5 text-[0.88rem] leading-relaxed text-[var(--color-muted)]">
@@ -158,7 +158,7 @@ export function VenetianClock({
                 <b className="block font-serif text-[0.98rem] font-normal tracking-tight text-[var(--color-ink)]">
                   {item.time}
                 </b>
-                <span className="mt-0.5 block text-[0.8rem] leading-snug text-[var(--color-muted)]">{item.note}</span>
+                <span className="mt-0.5 block text-[0.78rem] leading-snug text-[var(--color-muted)]">{item.note}</span>
               </figcaption>
             </figure>
           </Reveal>
@@ -199,15 +199,15 @@ export function VenetianMaterials({
                 alt={card.title}
               />
               <div className="p-5 lg:p-7 flex flex-col grow">
-                <h3 className="font-serif text-[clamp(1.2rem,1rem+0.6vw,1.45rem)] leading-tight tracking-tight text-[var(--color-ink)]">
+                <h3 className="font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">
                   {card.title}
                 </h3>
-                <p className="mt-2.5 text-[0.9rem] leading-relaxed text-[var(--color-muted)]">{card.body}</p>
+                <p className="mt-2.5 text-[0.88rem] leading-relaxed text-[var(--color-muted)]">{card.body}</p>
                 <ul className="mt-3.5 space-y-1.5">
                   {card.bullets.map((b) => (
                     <li
                       key={b}
-                      className="pl-4 relative text-[0.86rem] text-[var(--color-ink-soft)] before:absolute before:left-0 before:top-[0.62em] before:h-[3px] before:w-[3px] before:rounded-full before:bg-[var(--color-clay)]"
+                      className="pl-4 relative text-[0.88rem] text-[var(--color-ink-soft)] before:absolute before:left-0 before:top-[0.62em] before:h-[3px] before:w-[3px] before:rounded-full before:bg-[var(--color-clay)]"
                     >
                       {b}
                     </li>
@@ -224,7 +224,7 @@ export function VenetianMaterials({
         {data.picks.map((p, i) => (
           <Reveal key={p.title} delay={i * 80}>
             <div className="h-full rounded-md border border-[var(--color-line)] border-l-2 border-l-[var(--color-clay)] bg-[var(--color-paper)] p-5 lg:p-6">
-              <h3 className="font-serif text-[1.08rem] tracking-tight text-[var(--color-ink)]">{p.title}</h3>
+              <h3 className="font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">{p.title}</h3>
               <p className="mt-2 font-serif text-[1.02rem] leading-snug tracking-tight text-[var(--color-ink-soft)]">
                 {p.body}
               </p>
@@ -270,7 +270,7 @@ export function VertiSheerModes({
                 alt={card.title}
               />
               <div className="p-5 lg:p-6 flex flex-col grow">
-                <h3 className="font-serif text-[clamp(1.15rem,1rem+0.5vw,1.35rem)] leading-tight tracking-tight text-[var(--color-ink)]">
+                <h3 className="font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">
                   {card.title}
                 </h3>
                 <div className="mt-2.5 space-y-2.5 text-[0.88rem] leading-relaxed text-[var(--color-muted)]">
@@ -287,7 +287,7 @@ export function VertiSheerModes({
 
       <Reveal>
         <div className="mt-8 lg:mt-12 rounded-md border border-[var(--color-line)] border-l-2 border-l-[var(--color-clay)] bg-[var(--color-paper)] p-6 lg:p-8">
-          <h3 className="font-serif text-[clamp(1.2rem,1rem+0.6vw,1.45rem)] tracking-tight text-[var(--color-ink)]">
+          <h3 className="font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">
             {data.callout.title}
           </h3>
           <p className="mt-2.5 fluid-body text-[var(--color-muted)] max-w-[62ch] leading-relaxed">
@@ -296,7 +296,7 @@ export function VertiSheerModes({
           <p className="mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-2 font-serif text-[clamp(1rem,0.9rem+0.6vw,1.3rem)] tracking-tight text-[var(--color-ink)]">
             {data.callout.formula.map((part, i) => (
               <span key={part} className="inline-flex items-center gap-2.5">
-                {i > 0 && <span aria-hidden className="font-sans text-[0.8rem] text-[var(--color-clay)]">+</span>}
+                {i > 0 && <span aria-hidden className="font-sans text-[0.78rem] text-[var(--color-clay)]">+</span>}
                 {part}
               </span>
             ))}

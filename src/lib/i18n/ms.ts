@@ -570,7 +570,7 @@ export const ms: Dict = {
     emptyBody:
       "Kami sedang menyiapkan siri pertama. Singgah semula sebentar lagi — atau minta sebut harga dan kami akan beritahu apabila ia tersedia.",
     emptyUnconfigured:
-      "Jurnal ini disambungkan ke Supabase, tetapi projek belum bersambung. Setelah VITE_SUPABASE_URL dan VITE_SUPABASE_PUBLISHABLE_KEY ditetapkan, catatan akan muncul di sini secara automatik.",
+      "Jurnal ini disambungkan ke Supabase, tetapi projek belum bersambung. Tetapkan VITE_SUPABASE_URL dan VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY dalam persekitaran build, catatan akan muncul di sini secara automatik.",
     notFoundTitle: "Catatan ini tidak dijumpai.",
     notFoundBody:
       "Ia mungkin telah dipindahkan atau dinyahterbit. Kembali ke indeks jurnal untuk lihat yang lain.",

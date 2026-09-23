@@ -21,11 +21,11 @@ export function NotFound() {
           404
         </span>
         
-        <h1 className="mt-4 font-serif text-[clamp(1.5rem,1.2rem+2vw,2.5rem)] text-[var(--color-ink)] leading-tight">
+        <h1 className="mt-4 headline fluid-h2 font-bold not-italic text-[var(--color-ink)]">
           {isBm ? "Halaman Tidak Ditemui" : "Page Not Found"}
         </h1>
         
-        <p className="mt-4 max-w-md mx-auto text-[0.95rem] leading-relaxed text-[var(--color-ink-soft)]">
+        <p className="mt-4 max-w-md mx-auto text-[0.88rem] leading-relaxed text-[var(--color-ink-soft)]">
           {isBm 
             ? "Maaf, halaman yang anda cari tidak wujud atau telah dialihkan." 
             : "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
@@ -42,7 +42,7 @@ export function NotFound() {
         </div>
 
         {/* 给一个死链落地的访客几个有用的去处，而不是只有回首页一条路 */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.85rem]">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.88rem]">
           {[
             { to: isBm ? "/bidai/roller" : "/roller", label: isBm ? "Bidai Roller" : "Roller Blinds" },
             { to: isBm ? "/bidai/venetian" : "/venetian", label: isBm ? "Bidai Venetian" : "Venetian Blinds" },

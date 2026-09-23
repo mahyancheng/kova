@@ -12,7 +12,7 @@ export function ConfiguratorPage() {
     <div className="min-h-screen bg-[var(--color-cream)]">
       <PromoBar />
       <Nav />
-      <main id="main" className="pt-1">
+      <main id="main">
         <Configurator headingLevel="h1" />
         <Compare />
         <Fabrics />

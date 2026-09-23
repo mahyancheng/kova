@@ -38,7 +38,15 @@ export function FactoryDirect({ headingLevel: H = "h2" }: { headingLevel?: "h1" 
               <p className="eyebrow">{t.factory.eyebrow}</p>
             </Reveal>
             <Reveal delay={80}>
-              <H className="mt-3 lg:mt-5 headline fluid-h2 text-[var(--color-ink)]">
+              {/* Same rule as everywhere else: an h1 is bold and upright at
+                  fluid-h2; as a section h2 on the home page it drops to the
+                  fluid-h3 section scale. */}
+              <H
+                className={
+                  "mt-3 lg:mt-5 headline text-[var(--color-ink)] " +
+                  (H === "h1" ? "fluid-h2 font-bold not-italic" : "fluid-h3")
+                }
+              >
                 {t.factory.titleA}
                 <span className="block italic font-light text-[var(--color-clay-deep)]">
                   {t.factory.titleB}
@@ -54,14 +62,14 @@ export function FactoryDirect({ headingLevel: H = "h2" }: { headingLevel?: "h1" 
               <div className="mt-5 lg:mt-7 flex flex-wrap items-center gap-2 lg:gap-3">
                 <Link
                   to={r.contact}
-                  className="inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.86rem] lg:text-[0.9rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.88rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors"
                 >
                   {t.factory.ctaA}
                   <span aria-hidden>→</span>
                 </Link>
                 <Link
                   to={r.configurator}
-                  className="inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full text-[0.86rem] lg:text-[0.9rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors"
+                  className="inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full text-[0.88rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors"
                 >
                   {t.factory.ctaB}
                 </Link>
@@ -75,7 +83,7 @@ export function FactoryDirect({ headingLevel: H = "h2" }: { headingLevel?: "h1" 
             <div className="px-4 lg:px-10 py-5 lg:py-10 border-b border-[var(--color-line)]">
               <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
                 <div className="lg:w-56 shrink-0">
-                  <p className="text-[0.7rem] lg:text-[0.74rem] tracking-widest uppercase text-[var(--color-muted)]">
+                  <p className="text-[0.68rem] tracking-widest uppercase text-[var(--color-muted)]">
                     {t.factory.chain1Label}
                   </p>
                   <p className="mt-0.5 lg:mt-1 font-serif text-[1.2rem] lg:text-[1.7rem] text-[var(--color-ink)] leading-tight">
@@ -89,7 +97,7 @@ export function FactoryDirect({ headingLevel: H = "h2" }: { headingLevel?: "h1" 
             <div className="px-4 lg:px-10 py-5 lg:py-10 bg-[var(--color-cream-light)]">
               <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6">
                 <div className="lg:w-56 shrink-0">
-                  <p className="text-[0.7rem] lg:text-[0.74rem] tracking-widest uppercase text-[var(--color-clay)]">
+                  <p className="text-[0.68rem] tracking-widest uppercase text-[var(--color-clay)]">
                     {t.factory.chain2Label}
                   </p>
                   <p className="mt-0.5 lg:mt-1 font-serif text-[1.2rem] lg:text-[1.7rem] text-[var(--color-ink)] leading-tight">
@@ -125,7 +133,7 @@ export function FactoryDirect({ headingLevel: H = "h2" }: { headingLevel?: "h1" 
             </p>
             <Link
               to={r.contact}
-              className="inline-flex items-center gap-2 text-[0.88rem] lg:text-[0.92rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors shrink-0"
+              className="inline-flex items-center gap-2 text-[0.88rem] font-medium text-[var(--color-ink)] hover:text-[var(--color-clay-deep)] transition-colors shrink-0"
             >
               {t.factory.closerCta}
               <span aria-hidden>→</span>
@@ -156,7 +164,7 @@ function Chain({
             <div key={node + i} className="flex items-center gap-1.5 sm:gap-3">
               <div
                 className={
-                  "px-2.5 sm:px-3.5 py-1 sm:py-2 rounded-full border text-[0.74rem] sm:text-[0.86rem] whitespace-nowrap transition-colors " +
+                  "px-2.5 sm:px-3.5 py-1 sm:py-2 rounded-full border text-[0.68rem] sm:text-[0.88rem] whitespace-nowrap transition-colors " +
                   (isOurs
                     ? isFirst || isLast
                       ? "bg-[var(--color-cream)] border-[var(--color-line)] text-[var(--color-ink)]"
@@ -172,7 +180,7 @@ function Chain({
                 <span
                   aria-hidden
                   className={
-                    "text-[0.85rem] sm:text-[0.95rem] " +
+                    "text-[0.88rem] sm:text-[0.88rem] " +
                     (isOurs ? "text-[var(--color-clay)]" : "text-[var(--color-line)]")
                   }
                 >
