@@ -83,7 +83,7 @@ export function Fabrics() {
                 />
               </div>
               <div className="mt-2">
-                <h3 className="font-serif text-[0.74rem] leading-tight tracking-tight text-[var(--color-ink)] truncate">
+                <h3 className="font-serif text-[0.68rem] leading-tight tracking-tight text-[var(--color-ink)] truncate">
                   {s.name}
                 </h3>
                 <div className="mt-0.5 flex items-center justify-between gap-1">

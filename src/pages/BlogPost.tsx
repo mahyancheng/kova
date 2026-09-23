@@ -137,7 +137,7 @@ export function BlogPost() {
             </Link>
 
             {loading && (
-              <p className="mt-10 text-[0.92rem] text-[var(--color-muted)]">{t.blog.loading}</p>
+              <p className="mt-10 text-[0.88rem] text-[var(--color-muted)]">{t.blog.loading}</p>
             )}
 
             {missing && (
@@ -145,7 +145,7 @@ export function BlogPost() {
                 <p className="font-serif text-[1.5rem] lg:text-[1.9rem] leading-snug text-[var(--color-ink)]">
                   {t.blog.notFoundTitle}
                 </p>
-                <p className="mt-3 text-[0.92rem] leading-relaxed text-[var(--color-muted)]">
+                <p className="mt-3 text-[0.88rem] leading-relaxed text-[var(--color-muted)]">
                   {t.blog.notFoundBody}
                 </p>
               </div>
@@ -155,11 +155,11 @@ export function BlogPost() {
               <article>
                 <Reveal>
                   <header className="mt-8 lg:mt-12 pb-8 lg:pb-12 border-b border-[var(--color-line)]">
-                    <p className="text-[0.74rem] tracking-widest uppercase text-[var(--color-muted)]">
+                    <p className="text-[0.68rem] tracking-widest uppercase text-[var(--color-muted)]">
                       {formatPostDate(post.publishedAt)}
                       {post.author ? ` · ${post.author}` : ""}
                     </p>
-                    <h1 className="mt-4 lg:mt-5 headline text-[clamp(1.9rem,1.3rem+2.5vw,3rem)] leading-[1.07] tracking-tight text-[var(--color-ink)]">
+                    <h1 className="mt-4 lg:mt-5 headline fluid-h2 font-bold not-italic text-[var(--color-ink)]">
                       {seoOverride?.h1 ?? post.title}
                     </h1>
                     {post.excerpt && (

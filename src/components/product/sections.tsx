@@ -113,7 +113,7 @@ export function Btn({
   to: string; children: ReactNode; variant?: "solid" | "ghost"; isInk?: boolean;
 }) {
   const base =
-    "inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full text-[0.9rem] lg:text-[0.95rem] font-medium transition-colors";
+    "inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full text-[0.88rem] font-medium transition-colors";
   const solid = isInk
     ? "bg-[var(--color-cream)] text-[var(--color-ink)] hover:bg-[var(--color-clay-light)]"
     : "bg-[var(--color-ink)] text-[var(--color-cream)] hover:bg-[var(--color-clay-deep)]";
@@ -136,7 +136,7 @@ export function Pipeline({ items, isInk = false }: { items: string[]; isInk?: bo
           {i > 0 && (
             <span
               aria-hidden
-              className={cn("font-sans text-[0.8rem]", isInk ? "text-[var(--color-clay-light)]" : "text-[var(--color-clay)]")}
+              className={cn("font-sans text-[0.78rem]", isInk ? "text-[var(--color-clay-light)]" : "text-[var(--color-clay)]")}
             >
               →
             </span>
@@ -194,7 +194,7 @@ export function Hero({
                 </Btn>
                 <a
                   href="#price"
-                  className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full border border-[var(--color-ink)] text-[0.9rem] lg:text-[0.95rem] font-medium text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-cream)] transition-colors"
+                  className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full border border-[var(--color-ink)] text-[0.88rem] font-medium text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-cream)] transition-colors"
                 >
                   {c.heroCtaB}
                 </a>
@@ -263,7 +263,7 @@ export function Why({
                   {item.bullets.map((b) => (
                     <li
                       key={b}
-                      className="pl-4 relative text-[0.86rem] text-[var(--color-ink-soft)] before:absolute before:left-0 before:top-[0.62em] before:h-[3px] before:w-[3px] before:rounded-full before:bg-[var(--color-clay)]"
+                      className="pl-4 relative text-[0.88rem] text-[var(--color-ink-soft)] before:absolute before:left-0 before:top-[0.62em] before:h-[3px] before:w-[3px] before:rounded-full before:bg-[var(--color-clay)]"
                     >
                       {b}
                     </li>
@@ -369,7 +369,7 @@ export function Rooms({
         {data.items.map((room, i) => (
           <Reveal key={room.title} delay={i * 50}>
             <div className="grid lg:grid-cols-12 gap-3 lg:gap-8 py-6 lg:py-7 border-t border-[var(--color-line)] last:border-b">
-              <h3 className="lg:col-span-3 font-serif text-[clamp(1.1rem,1rem+0.5vw,1.35rem)] leading-tight tracking-tight text-[var(--color-ink)]">
+              <h3 className="lg:col-span-3 font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">
                 {room.title}
               </h3>
               <div className="lg:col-span-6 space-y-2.5 text-[clamp(0.88rem,0.84rem+0.2vw,0.98rem)] leading-relaxed text-[var(--color-muted)]">
@@ -377,7 +377,7 @@ export function Rooms({
                   <p key={p}>{p}</p>
                 ))}
               </div>
-              <div className="lg:col-span-3 text-[0.86rem] text-[var(--color-ink)]">
+              <div className="lg:col-span-3 text-[0.88rem] text-[var(--color-ink)]">
                 <p className="eyebrow">{c.recommendedLabel}</p>
                 <p className="mt-1">{room.rec}</p>
                 {room.best && (
@@ -437,7 +437,7 @@ export function Price({
           {data.factors.map((f, i) => (
             <Reveal key={f.title} delay={i * 40}>
               <div className="pt-4 border-t border-[var(--color-line)]">
-                <h3 className="font-serif text-[1.05rem] tracking-tight text-[var(--color-ink)]">{f.title}</h3>
+                <h3 className="font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">{f.title}</h3>
                 <p className="mt-1.5 text-[0.88rem] leading-relaxed text-[var(--color-muted)]">{f.body}</p>
               </div>
             </Reveal>
@@ -447,7 +447,7 @@ export function Price({
 
       <Reveal>
         <div className="mt-10 lg:mt-14 pt-8 lg:pt-10 border-t border-[var(--color-line)] grid lg:grid-cols-12 gap-5 lg:gap-16 items-start">
-          <h3 className="lg:col-span-5 font-serif text-[clamp(1.2rem,1rem+1vw,1.65rem)] leading-tight tracking-tight text-[var(--color-ink)]">
+          <h3 className="lg:col-span-5 font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">
             {data.closerTitle}
           </h3>
           <div className="lg:col-span-7">
@@ -482,10 +482,10 @@ export function Steps({
         {data.items.map((step, i) => (
           <Reveal key={step.title} delay={i * 50}>
             <div className="grid lg:grid-cols-12 gap-3 lg:gap-8 py-6 lg:py-7 border-t border-white/10 last:border-b">
-              <p className="lg:col-span-1 font-serif text-[0.82rem] text-[var(--color-clay-light)] pt-1">
+              <p className="lg:col-span-1 font-serif text-[0.78rem] text-[var(--color-clay-light)] pt-1">
                 {String(i + 1).padStart(2, "0")}
               </p>
-              <h3 className="lg:col-span-4 font-serif text-[clamp(1.1rem,1rem+0.5vw,1.35rem)] leading-tight tracking-tight text-[var(--color-cream)]">
+              <h3 className="lg:col-span-4 font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-cream)]">
                 {step.title}
               </h3>
               <div className="lg:col-span-7">
@@ -497,7 +497,7 @@ export function Steps({
                     {step.bullets.map((b) => (
                       <li
                         key={b}
-                        className="pl-4 relative text-[0.86rem] text-[var(--color-cream)]/65 before:absolute before:left-0 before:top-[0.62em] before:h-[3px] before:w-[3px] before:rounded-full before:bg-[var(--color-clay-light)]"
+                        className="pl-4 relative text-[0.88rem] text-[var(--color-cream)]/65 before:absolute before:left-0 before:top-[0.62em] before:h-[3px] before:w-[3px] before:rounded-full before:bg-[var(--color-clay-light)]"
                       >
                         {b}
                       </li>
@@ -570,7 +570,7 @@ export function Motorised({
             {data.items.map((item, i) => (
               <Reveal key={item.title} delay={i * 40}>
                 <div className="grid sm:grid-cols-12 gap-1 sm:gap-6 py-4 border-t border-[var(--color-line)] last:border-b">
-                  <h3 className="sm:col-span-5 font-serif text-[1.02rem] leading-snug tracking-tight text-[var(--color-ink)]">
+                  <h3 className="sm:col-span-5 font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">
                     {item.title}
                   </h3>
                   <p className="sm:col-span-7 text-[0.88rem] leading-relaxed text-[var(--color-muted)]">{item.body}</p>
@@ -605,7 +605,7 @@ export function Care({
         {data.items.map((item, i) => (
           <Reveal key={item.title} delay={i * 50}>
             <div className="pl-5 border-l-2 border-[var(--color-line)]">
-              <h3 className="font-serif text-[1.02rem] leading-snug tracking-tight text-[var(--color-ink)]">
+              <h3 className="font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">
                 {item.title}
               </h3>
               <p className="mt-2 text-[0.88rem] leading-relaxed text-[var(--color-muted)]">{item.body}</p>
@@ -614,7 +614,7 @@ export function Care({
                   {item.bullets.map((b) => (
                     <li
                       key={b}
-                      className="pl-4 relative text-[0.84rem] text-[var(--color-ink-soft)] before:absolute before:left-0 before:top-[0.62em] before:h-[3px] before:w-[3px] before:rounded-full before:bg-[var(--color-clay)]"
+                      className="pl-4 relative text-[0.88rem] text-[var(--color-ink-soft)] before:absolute before:left-0 before:top-[0.62em] before:h-[3px] before:w-[3px] before:rounded-full before:bg-[var(--color-clay)]"
                     >
                       {b}
                     </li>
@@ -751,13 +751,13 @@ export function Closing({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={trackWhatsAppClick}
-                className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full bg-[#25D366] text-[#08301A] text-[0.9rem] lg:text-[0.95rem] font-medium hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full bg-[#25D366] text-[#08301A] text-[0.88rem] font-medium hover:opacity-90 transition-opacity"
               >
                 {c.ctaWhatsApp}
               </a>
               <a
                 href="mailto:info@kovasunshade.com"
-                className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full border border-white/25 text-[var(--color-cream)] text-[0.9rem] lg:text-[0.95rem] font-medium hover:bg-[var(--color-cream)] hover:text-[var(--color-ink)] transition-colors"
+                className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full border border-white/25 text-[var(--color-cream)] text-[0.88rem] font-medium hover:bg-[var(--color-cream)] hover:text-[var(--color-ink)] transition-colors"
               >
                 {c.ctaEmail}
               </a>

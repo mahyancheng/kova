@@ -87,13 +87,13 @@ export function Collection() {
                         {t.collection.badge}
                       </span>
                     </div>
-                    <h3 className="mt-2.5 font-serif text-[clamp(1.3rem,1rem+1vw,1.65rem)] leading-tight tracking-tight text-[var(--color-ink)]">
+                    <h3 className="mt-2.5 font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">
                       {item.name}
                     </h3>
                     <p className="mt-2 lg:mt-3 text-[clamp(0.86rem,0.82rem+0.2vw,0.94rem)] leading-relaxed text-[var(--color-muted)]">
                       {item.blurb}
                     </p>
-                    <span className="mt-4 lg:mt-6 inline-flex items-center gap-1.5 text-[0.84rem] lg:text-[0.88rem] font-medium text-[var(--color-ink)] group-hover:text-[var(--color-clay-deep)] transition-colors">
+                    <span className="mt-4 lg:mt-6 inline-flex items-center gap-1.5 text-[0.88rem] font-medium text-[var(--color-ink)] group-hover:text-[var(--color-clay-deep)] transition-colors">
                       {t.collection.learnMore}
                       <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
                     </span>

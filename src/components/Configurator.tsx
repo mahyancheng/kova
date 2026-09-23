@@ -99,7 +99,7 @@ export function Configurator({ headingLevel: H = "h2" }: { headingLevel?: "h1" |
         <div className="grid lg:grid-cols-12 gap-3 lg:gap-10 lg:items-start">
           <Reveal className="lg:col-span-7 lg:sticky lg:top-24">
             <div className="relative rounded-lg border border-[var(--color-line)] overflow-hidden bg-[var(--color-cream-light)]">
-              <span className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10 inline-flex items-center gap-1 sm:gap-1.5 bg-[var(--color-cream)]/90 backdrop-blur-sm text-[var(--color-ink)] text-[0.58rem] sm:text-[0.7rem] tracking-widest uppercase px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-full border border-[var(--color-line)]">
+              <span className="absolute top-2 left-2 sm:top-4 sm:left-4 z-10 inline-flex items-center gap-1 sm:gap-1.5 bg-[var(--color-cream)]/90 backdrop-blur-sm text-[var(--color-ink)] text-[0.58rem] sm:text-[0.68rem] tracking-widest uppercase px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-full border border-[var(--color-line)]">
                 <span className="h-1 w-1 sm:h-1.5 sm:w-1.5 rounded-full bg-[var(--color-clay)] animate-pulse" />
                 {t.configurator.badge}
               </span>
@@ -126,7 +126,7 @@ export function Configurator({ headingLevel: H = "h2" }: { headingLevel?: "h1" |
                 />
               )}
             </div>
-            <p className="hidden sm:block mt-2 lg:mt-3 text-[0.74rem] lg:text-[0.78rem] text-[var(--color-muted)]">
+            <p className="hidden sm:block mt-2 lg:mt-3 text-[0.68rem] lg:text-[0.78rem] text-[var(--color-muted)]">
               {t.configurator.figureCaption}
             </p>
           </Reveal>
@@ -135,7 +135,7 @@ export function Configurator({ headingLevel: H = "h2" }: { headingLevel?: "h1" |
           <Reveal className="lg:col-span-5 flex flex-col gap-3 lg:gap-5" delay={120}>
             {/* Product tabs */}
             <div>
-              <p className="eyebrow text-[0.66rem] sm:text-[0.72rem]">{t.configurator.productLabel}</p>
+              <p className="eyebrow text-[0.68rem] sm:text-[0.68rem]">{t.configurator.productLabel}</p>
               <div className="mt-1.5 lg:mt-2.5 grid grid-cols-3 gap-1.5 lg:gap-2">
                 {PRODUCT_IDS.map((id) => {
                   const active = product === id;
@@ -146,7 +146,7 @@ export function Configurator({ headingLevel: H = "h2" }: { headingLevel?: "h1" |
                       onClick={() => setProduct(id)}
                       aria-pressed={active}
                       className={cn(
-                        "min-h-[40px] lg:min-h-[48px] px-2 lg:px-4 py-2 lg:py-2.5 rounded-md border text-[0.84rem] lg:text-[0.92rem] font-medium transition-colors",
+                        "min-h-[40px] lg:min-h-[48px] px-2 lg:px-4 py-2 lg:py-2.5 rounded-md border text-[0.88rem] font-medium transition-colors",
                         active
                           ? "bg-[var(--color-ink)] border-[var(--color-ink)] text-[var(--color-cream)]"
                           : "bg-[var(--color-paper)] border-[var(--color-line)] text-[var(--color-ink-soft)] hover:border-[var(--color-ink)] hover:text-[var(--color-ink)] active:bg-[var(--color-cream)]",
@@ -162,8 +162,8 @@ export function Configurator({ headingLevel: H = "h2" }: { headingLevel?: "h1" |
             {/* Fabric */}
             <div>
               <div className="flex items-baseline justify-between gap-2">
-                <p className="eyebrow text-[0.66rem] sm:text-[0.72rem]">{t.configurator.fabricLabel}</p>
-                <p className="text-[0.74rem] sm:text-[0.82rem] text-[var(--color-muted)] truncate">
+                <p className="eyebrow text-[0.68rem] sm:text-[0.68rem]">{t.configurator.fabricLabel}</p>
+                <p className="text-[0.68rem] sm:text-[0.78rem] text-[var(--color-muted)] truncate">
                   <span className="font-serif text-[var(--color-ink)]">{fabric.name}</span>
                   <span className="ml-1.5 text-[var(--color-muted)]">{fabric.hex.toUpperCase()}</span>
                 </p>
@@ -218,13 +218,13 @@ export function Configurator({ headingLevel: H = "h2" }: { headingLevel?: "h1" |
             <div className="relative mt-2 lg:mt-4">
               {/* Mobile CTA */}
               <div className="lg:hidden flex items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-cream-light)] pl-3 pr-1 py-1">
-                <span className="flex-1 min-w-0 truncate font-serif text-[0.86rem] text-[var(--color-ink)]">
+                <span className="flex-1 min-w-0 truncate font-serif text-[0.88rem] text-[var(--color-ink)]">
                   {t.configurator.products[product]} · {fabric.name}
                 </span>
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="shrink-0 inline-flex items-center justify-center gap-1 px-3.5 py-2 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.82rem] font-medium hover:bg-[var(--color-clay-deep)] active:bg-[var(--color-clay-deep)] transition-colors"
+                  className="shrink-0 inline-flex items-center justify-center gap-1 px-3.5 py-2 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.78rem] font-medium hover:bg-[var(--color-clay-deep)] active:bg-[var(--color-clay-deep)] transition-colors"
                   aria-label={t.configurator.cta}
                 >
                   Quote
@@ -245,7 +245,7 @@ export function Configurator({ headingLevel: H = "h2" }: { headingLevel?: "h1" |
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="mt-4 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.92rem] font-medium hover:bg-[var(--color-clay-deep)] active:bg-[var(--color-clay-deep)] transition-colors shadow-sm"
+                  className="mt-4 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.88rem] font-medium hover:bg-[var(--color-clay-deep)] active:bg-[var(--color-clay-deep)] transition-colors shadow-sm"
                 >
                   {t.configurator.cta}
                   <span aria-hidden>→</span>

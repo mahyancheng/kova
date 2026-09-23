@@ -38,7 +38,9 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={80}>
-              <h1 className="mt-3 lg:mt-4 headline fluid-h2 text-[var(--color-ink)]">
+              {/* Same H1 treatment as the product pages: bold and upright,
+                  with the italic tail on the line below. */}
+              <h1 className="mt-3 lg:mt-4 headline fluid-h2 font-bold not-italic text-[var(--color-ink)]">
                 {t.hero.titleA}
                 <span className="block mt-1 lg:mt-2 italic font-light text-[var(--color-clay-deep)]">
                   {t.hero.titleB}
@@ -56,14 +58,14 @@ export function Hero() {
               <div className="mt-6 lg:mt-8 flex flex-wrap items-center gap-2 lg:gap-3">
                 <Link
                   to={r.contact}
-                  className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.9rem] lg:text-[0.95rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors"
+                  className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full bg-[var(--color-ink)] text-[var(--color-cream)] text-[0.88rem] font-medium hover:bg-[var(--color-clay-deep)] transition-colors"
                 >
                   {t.hero.ctaA}
                   <span aria-hidden>→</span>
                 </Link>
                 <Link
                   to={r.contact}
-                  className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full border border-[var(--color-ink)] text-[0.9rem] lg:text-[0.95rem] font-medium text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-cream)] transition-colors"
+                  className="inline-flex items-center gap-2 px-5 lg:px-6 py-2.5 lg:py-3 rounded-full border border-[var(--color-ink)] text-[0.88rem] font-medium text-[var(--color-ink)] hover:bg-[var(--color-ink)] hover:text-[var(--color-cream)] transition-colors"
                 >
                   {t.hero.ctaB}
                 </Link>
@@ -71,7 +73,7 @@ export function Hero() {
             </Reveal>
 
             <Reveal delay={300}>
-              <ul className="mt-8 lg:mt-10 pt-5 lg:pt-6 border-t border-[var(--color-line)] flex flex-wrap gap-x-[clamp(1.25rem,0.5rem+2vw,2.75rem)] gap-y-2.5 text-[0.85rem] leading-snug text-[var(--color-muted)]">
+              <ul className="mt-8 lg:mt-10 pt-5 lg:pt-6 border-t border-[var(--color-line)] flex flex-wrap gap-x-[clamp(1.25rem,0.5rem+2vw,2.75rem)] gap-y-2.5 text-[0.88rem] leading-snug text-[var(--color-muted)]">
                 {t.hero.trust.map((item) => (
                   <li key={item} className="flex items-center gap-2">
                     <span aria-hidden className="h-1 w-1 rounded-full bg-[var(--color-clay)] shrink-0" />

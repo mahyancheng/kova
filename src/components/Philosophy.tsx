@@ -31,9 +31,9 @@ export function Philosophy() {
             <div className="mt-[clamp(1.5rem,1rem+1.5vw,2.5rem)] grid sm:grid-cols-3 gap-5 lg:gap-8">
               {t.philosophy.points.map((p) => (
                 <div key={p.n}>
-                  <span className="font-serif text-[0.85rem] text-[var(--color-clay)]">{p.n}</span>
-                  <h3 className="mt-1.5 font-serif text-[clamp(0.98rem,0.92rem+0.3vw,1.15rem)] text-[var(--color-ink)]">{p.title}</h3>
-                  <p className="mt-1.5 text-[clamp(0.84rem,0.8rem+0.2vw,0.95rem)] leading-relaxed text-[var(--color-muted)]">
+                  <span className="font-serif text-[0.88rem] text-[var(--color-clay)]">{p.n}</span>
+                  <h3 className="mt-1.5 font-serif text-[clamp(1.05rem,0.95rem+0.5vw,1.3rem)] leading-snug tracking-tight text-[var(--color-ink)]">{p.title}</h3>
+                  <p className="mt-1.5 text-[0.88rem] leading-relaxed text-[var(--color-muted)]">
                     {p.body}
                   </p>
                 </div>
