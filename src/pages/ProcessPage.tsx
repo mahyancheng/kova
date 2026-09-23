@@ -12,7 +12,7 @@ export function ProcessPage() {
     <div className="min-h-screen bg-[var(--color-cream)]">
       <PromoBar />
       <Nav />
-      <main id="main" className="pt-1">
+      <main id="main">
         <FactoryDirect headingLevel="h1" />
         <Philosophy />
         <div id="process">

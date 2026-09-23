@@ -124,7 +124,7 @@ export function BlogPost() {
       )}
       <Nav />
 
-      <main id="main" className="pt-28 pb-24">
+      <main id="main" className="pt-6 pb-24">
         {/* 文章正文现在会在构建期预渲染进 HTML（对 SEO 很关键）。
             日期格式已改为确定性输出（blog.ts），不会再触发 418 hydration 错误 */}
         <div className="max-w-[760px] mx-auto px-5 sm:px-6 lg:px-10">
