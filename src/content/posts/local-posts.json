@@ -63,5 +63,18 @@
     "createdAt": "2026-10-29T18:02:00.000Z",
     "publishedAt": "2026-10-29T18:02:00.000Z",
     "updatedAt": "2026-10-29T18:02:00.000Z"
+  },
+  {
+    "id": "local-blinds-for-living-room",
+    "slug": "blinds-for-living-room",
+    "lang": "en",
+    "title": "Blinds for Living Room: How to Choose by Window",
+    "excerpt": "Sunscreen or dim-out roller, VertiSheer for sliding doors or Venetian to angle the light: how to choose living-room blinds window by window, plus child safety.",
+    "image": "https://kovasunshade.com/showcase/hero-living-800.webp",
+    "author": "Kova Sun Shade",
+    "tags": "Blind guides",
+    "createdAt": "2026-11-01T18:37:00.000Z",
+    "publishedAt": "2026-11-01T18:37:00.000Z",
+    "updatedAt": "2026-11-01T18:37:00.000Z"
   }
 ]

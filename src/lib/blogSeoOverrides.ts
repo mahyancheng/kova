@@ -46,6 +46,14 @@ export const blogSeoOverrides: Record<string, BlogSeoOverride> = {
     h1: "Cara Pasang Bidai Tingkap: Apa yang Perlu Tahu Sebelum Pasang",
     imageAlt: "Bidai Venetian aluminium putih dipasang di dalam ceruk tingkap dapur, di atas singki dan kaunter",
   },
+  "blinds-for-living-room": {
+    title: "Blinds for Living Room: Roller, VertiSheer or Venetian? | Kova",
+    description:
+      "How to choose blinds for a living room: sunscreen or dim-out roller, VertiSheer for sliding doors, Venetian to angle the light, mounts and child safety.",
+    h1: "Blinds for Living Room: How to Choose the Right Blind for Each Window",
+    imageAlt:
+      "Living room with a roller blind, VertiSheer vanes on the sliding door and Venetian blinds on the side window",
+  },
   "motorised-blinds-guide": {
     title: "Motorised Blinds: Battery, Wired & When It's Worth It | Kova",
     description:
